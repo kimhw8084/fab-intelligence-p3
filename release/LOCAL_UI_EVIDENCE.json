@@ -1,0 +1,25 @@
+{
+  "state": "CANDIDATE",
+  "environment": "Codex in-app browser on macOS",
+  "url": "http://127.0.0.1:18765/",
+  "company_data_used": false,
+  "workflow": "Loaded fixtures/p3_integrated_synthetic.json through the local example control and ran Analyze measured sites.",
+  "investigation_id": "SYN-p3-1f91bae3981a",
+  "observed_status": "VALID",
+  "observed_capabilities": {
+    "C01_fingerprint": "VALID",
+    "C04_anomalies": "VALID",
+    "C05_similarity": "VALID",
+    "C02_evolution": "VALID",
+    "C03_quality_association": "VALID"
+  },
+  "observed_checks": [
+    "Local synthetic-only banner visible.",
+    "Measured-site map and tabular coordinates visible.",
+    "Claim source identifiers and input source hashes visible.",
+    "All five capability cards showed VALID after the action.",
+    "Quality association text explicitly stated it was not causal evidence.",
+    "Download evidence control enabled after completion."
+  ],
+  "limitation": "This is one synthetic browser walkthrough, not an engineer usability study. No screenshot or console log was retained."
+}

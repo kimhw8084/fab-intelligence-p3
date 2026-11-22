@@ -1,0 +1,36 @@
+{
+  "checks": {
+    "internal_preflight": {
+      "command": "/opt/anaconda3/bin/python -m fabintel qualify-internal",
+      "internal_ready": false,
+      "status": "PENDING_INTERNAL"
+    },
+    "javascript_syntax": {
+      "command": "/opt/homebrew/bin/node --check ui/app.js",
+      "status": "PASS"
+    },
+    "synthetic_demo": {
+      "command": "/opt/anaconda3/bin/python -m fabintel demo",
+      "input_sha256": "7b4bcb396ed7f6e23ca3dccffc59b11efadfc0031c68f3ac9ac7a2bd23e2f6ff",
+      "investigation_id": "SYN-p3-7b4bcb396ed7",
+      "status": "PASS"
+    },
+    "unit_suite": {
+      "command": "/opt/anaconda3/bin/python -m unittest discover -s tests -v",
+      "status": "PASS",
+      "tests": 52
+    }
+  },
+  "company_data_used": false,
+  "created_utc": "2026-11-22T22:54:32Z",
+  "environment": {
+    "architecture": "arm64",
+    "node": "v26.13.0",
+    "os": "macOS-26.6.2-arm64-arm-64bit",
+    "python": "3.11.7 (main, Dec 15 2023, 12:09:56) [Clang 14.0.6 ]"
+  },
+  "external_status": "CANDIDATE; target OS/network isolation, supply chain, license, company MCP and user-study gates are not established by this local run.",
+  "git_commit": null,
+  "source_tree_sha256": "512208504d58cd83e7fd6cb6ab264315a5ca652ec7faf2c97f7a670953011009",
+  "state": "CANDIDATE"
+}

@@ -1,0 +1,34 @@
+{
+  "capture_version": "p3-site-capture-v1",
+  "captured_at": "",
+  "system": {
+    "os": "",
+    "architecture": "",
+    "python_version": "",
+    "public_egress_blocked": false
+  },
+  "logical_operation_bindings": {
+    "discover": {"supported": false, "discovered_name": "", "version": "", "read_only": false},
+    "semantics": {"supported": false, "discovered_name": "", "version": ""},
+    "relationships": {"supported": false, "discovered_name": "", "version": ""},
+    "read_bounded": {"supported": false, "discovered_name": "", "version": ""},
+    "cancel": {"supported": false, "discovered_name": "", "version": ""},
+    "audit": {"supported": false, "discovered_name": "", "version": ""}
+  },
+  "approved_sources": [],
+  "relationships": [],
+  "security_checks": {
+    "read_only_enforced": false,
+    "bounded_query_limits": false,
+    "audit_redaction": false,
+    "cancellation_verified": false
+  },
+  "site_test_results": {
+    "permission_denial": "NOT_RUN",
+    "bounded_read": "NOT_RUN",
+    "audit_trace": "NOT_RUN",
+    "cancel": "NOT_RUN",
+    "empty_data": "NOT_RUN"
+  },
+  "approval_record": {"reference": ""}
+}

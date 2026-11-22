@@ -1,0 +1,53 @@
+{
+  "coordinates_verified": true,
+  "radius": 1,
+  "unit": "nm",
+  "geometry": {
+    "radius": 1,
+    "origin": {"x": 0, "y": 0},
+    "orientation_deg": 0,
+    "coordinate_system": "wafer_xy_v1",
+    "coordinate_unit": "mm"
+  },
+  "measurement": {
+    "metric": "film_thickness",
+    "unit": "nm",
+    "modality": "continuous",
+    "definition_id": "SYN-THICKNESS-1",
+    "layer": "L1"
+  },
+  "wafer_id": "SYN-WAFER-001",
+  "lot_id": "SYN-LOT-001",
+  "measured_at": "2026-11-01T00:00:00Z",
+  "product_id": "SYN-PRODUCT-001",
+  "sampling_mask_id": "SYN-MASK-CARDINAL-5",
+  "population_signature": "SYN-POP-THICKNESS-L1-001",
+  "source_id": "SYN-MAP-001",
+  "points": [
+    {
+      "x": 0,
+      "y": 0,
+      "value": 10
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "value": 12
+    },
+    {
+      "x": -1,
+      "y": 0,
+      "value": 12
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "value": 12
+    },
+    {
+      "x": 0,
+      "y": -1,
+      "value": 12
+    }
+  ]
+}

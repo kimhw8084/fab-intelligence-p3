@@ -1,0 +1,159 @@
+{
+  "cases": [
+    {
+      "checks": [
+        {
+          "status": "PASS",
+          "test": "test_edge_center_fixed"
+        },
+        {
+          "status": "PASS",
+          "test": "test_ring_and_uniform_maps_with_same_mean_have_different_signature"
+        }
+      ],
+      "id": "P3-01",
+      "required_result": "edge-center=+2 nm; no interpolated fill",
+      "status": "PASS"
+    },
+    {
+      "checks": [
+        {
+          "status": "PASS",
+          "test": "test_unverified_coordinates_refuse_spatial_claim"
+        }
+      ],
+      "id": "P3-02",
+      "required_result": "REFUSED on spatial conclusion",
+      "status": "PASS"
+    },
+    {
+      "checks": [
+        {
+          "status": "PASS",
+          "test": "test_missing_center_is_inconclusive_without_fill"
+        }
+      ],
+      "id": "P3-03",
+      "required_result": "INCONCLUSIVE for center-edge metric",
+      "status": "PASS"
+    },
+    {
+      "checks": [
+        {
+          "status": "PASS",
+          "test": "test_ring_and_uniform_maps_with_same_mean_have_different_signature"
+        }
+      ],
+      "id": "P3-04",
+      "required_result": "distinguish spatial signatures",
+      "status": "PASS"
+    },
+    {
+      "checks": [
+        {
+          "status": "PASS",
+          "test": "test_cross_step_rotation_aligns_exact_observed_sites"
+        }
+      ],
+      "id": "P3-05",
+      "required_result": "validate orientation and align only exact observed sites",
+      "status": "PASS"
+    },
+    {
+      "checks": [
+        {
+          "status": "PASS",
+          "test": "test_sparse_fingerprint_reports_only_observed_counts"
+        },
+        {
+          "status": "PASS",
+          "test": "test_ui_and_example_are_local_and_no_store"
+        }
+      ],
+      "id": "P3-06",
+      "required_result": "show observed sites only; leave unmeasured space blank",
+      "status": "PASS"
+    },
+    {
+      "checks": [
+        {
+          "status": "PASS",
+          "test": "test_die_bin_or_categorical_map_is_not_treated_as_continuous_nm"
+        }
+      ],
+      "id": "P3-07",
+      "required_result": "reject direct continuous arithmetic on categorical map",
+      "status": "PASS"
+    },
+    {
+      "checks": [
+        {
+          "status": "PASS",
+          "test": "test_reticle_periodicity_is_not_inferred_from_sampling_grid"
+        }
+      ],
+      "id": "P3-08",
+      "required_result": "no unsupported periodicity inference",
+      "status": "PASS"
+    },
+    {
+      "checks": [
+        {
+          "status": "PASS",
+          "test": "test_similarity_ranks_shape_and_does_not_infer_cause"
+        }
+      ],
+      "id": "P3-09",
+      "required_result": "similarity does not assert a shared mechanism",
+      "status": "PASS"
+    },
+    {
+      "checks": [
+        {
+          "status": "PASS",
+          "test": "test_evolution_rejects_definition_mismatch_and_unobserved_sites"
+        }
+      ],
+      "id": "P3-10",
+      "required_result": "no meaningless subtraction",
+      "status": "PASS"
+    },
+    {
+      "checks": [
+        {
+          "status": "PASS",
+          "test": "test_quality_link_requires_approved_wafer_grain_and_time_order"
+        }
+      ],
+      "id": "P3-11",
+      "required_result": "disable downstream association",
+      "status": "PASS"
+    },
+    {
+      "checks": [
+        {
+          "status": "PASS",
+          "test": "test_anomaly_holdout_rejects_lot_leakage_and_future_baseline"
+        }
+      ],
+      "id": "P3-12",
+      "required_result": "holdout grouped by wafer/lot/time",
+      "status": "PASS"
+    }
+  ],
+  "catalog_sha256": "2626117be7caeb5e1344bc4ba9f52857eccddedb8258348d0ca6e4c311efd667",
+  "command": "/opt/anaconda3/bin/python -m unittest discover -s tests -v",
+  "company_data_used": false,
+  "created_utc": "2026-11-22T22:54:26Z",
+  "environment": {
+    "architecture": "arm64",
+    "os": "macOS-26.6.2-arm64-arm-64bit",
+    "python": "3.11.7 (main, Dec 15 2023, 12:09:56) [Clang 14.0.6 ]"
+  },
+  "exit_code": 0,
+  "overall": "PASS",
+  "scope": "synthetic candidate tests only; not an internal Samsung qualification",
+  "source_tree_sha256": "c057ba0818a0f9923c3581b3a6dee508f37bd04bfb6230fa43077ce6669b1452",
+  "state": "CANDIDATE",
+  "test_output_sha256": "0743c404426c15da5eb960a425019c08ff27cfe1170c9fae1acd70376fa9ae75"
+}

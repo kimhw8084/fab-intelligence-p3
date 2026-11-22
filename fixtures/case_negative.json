@@ -1,0 +1,22 @@
+{
+  "coordinates_verified": false,
+  "radius": 1,
+  "unit": "nm",
+  "points": [
+    {
+      "x": 0,
+      "y": 0,
+      "value": 10
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "value": 12
+    },
+    {
+      "x": -1,
+      "y": 0,
+      "value": 12
+    }
+  ]
+}

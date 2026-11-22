@@ -1,0 +1,90 @@
+{
+  "product": "p3",
+  "state": "CANDIDATE",
+  "external_transfer_ready": false,
+  "internal": {
+    "state": "PENDING_INTERNAL",
+    "verified": false,
+    "unverified": [
+      "Actual read-only Samsung MCP permissions and discovered tool bindings",
+      "Approved production semantic definitions, effective times and relationships",
+      "Authorized company model and authentication configuration, if any",
+      "Approved target OS and network-isolation evidence",
+      "Company security/engineering approval and first true-data engineer investigation",
+      "Literal R01-R53 and Golden Standard reconciliation, unavailable in this folder"
+    ]
+  },
+  "external_gates": {
+    "E01": {
+      "status": "PASS",
+      "scope": "Synthetic candidate workflow",
+      "evidence": ["release/CRITICAL_CASE_EVIDENCE.json", "release/LOCAL_UI_EVIDENCE.json", "release/LOCAL_TEST_EVIDENCE.json"],
+      "result": "C01-C05 completed in a single deterministic workflow and local UI."
+    },
+    "E02": {
+      "status": "PARTIAL",
+      "evidence": ["release/SCIENTIFIC_PERFORMANCE_BENCHMARK.json", "release/CRITICAL_CASE_EVIDENCE.json", "release/LOCAL_TEST_LOG.txt"],
+      "result": "100 seeded edge-center numeric oracles, fixed plane/periodicity/block-adjustment cases and all 12 catalog tests passed. Historical retrieval relevance and real-data holdout performance remain unqualified."
+    },
+    "E03": {
+      "status": "PASS",
+      "scope": "Frozen P3-01 to P3-12 candidate catalog",
+      "evidence": ["release/CRITICAL_CASE_EVIDENCE.json", "release/LOCAL_TEST_LOG.txt"],
+      "result": "All listed negative/refusal and positive cases mapped to passing automated tests."
+    },
+    "E04": {
+      "status": "PASS",
+      "evidence": ["contracts/evidence.v1.schema.json", "contracts/product-manifest.v1.schema.json", "tests/test_contracts.py", "tests/test_schema_and_ui.py"],
+      "result": "Shared v1 contract files remain unchanged; candidate evidence validates against the frozen envelope."
+    },
+    "E05": {
+      "status": "PENDING_INTERNAL",
+      "evidence": ["release/LOCAL_TEST_LOG.txt", "tests/test_p3_integrated.py"],
+      "result": "Synthetic denial, provenance and lineage checks exist. No real adapter, source authorization, audit host or production permission evidence is present."
+    },
+    "E06": {
+      "status": "PASS",
+      "evidence": ["tests/test_p3_integrated.py", "release/SUPPLY_CHAIN_AUDIT.json"],
+      "result": "No model path is included; deterministic analysis works with model use disabled, and injected instruction text does not change claims."
+    },
+    "E07": {
+      "status": "PARTIAL",
+      "evidence": ["release/LOCAL_UI_EVIDENCE.json", "tests/test_p3_web.py", "ui/index.html", "ui/app.js"],
+      "result": "Local keyboard/accessibility-oriented UI and one full synthetic walkthrough were checked. No engineer usability study or task-time baseline exists."
+    },
+    "E08": {
+      "status": "PARTIAL",
+      "evidence": ["release/PACKAGE_QUALIFICATION.json", "release/OFFLINE_RUNTIME_EVIDENCE.json", "release/TARGET_OFFLINE_QUALIFICATION_TEMPLATE.md"],
+      "result": "Fresh extraction and Python standard-library-only execution pass; a macOS sandbox blocks outbound sockets while the synthetic CLI succeeds. The intended company target OS and egress policy are not established."
+    },
+    "E09": {
+      "status": "PENDING_EXTERNAL",
+      "evidence": ["release/SBOM.spdx.json", "release/SUPPLY_CHAIN_AUDIT.json"],
+      "result": "Local inventory found zero third-party Python imports and no remote UI assets. No root source license or current vulnerability database/scanner is available; redistribution rights are not granted by this candidate."
+    },
+    "E10": {
+      "status": "PASS",
+      "evidence": ["release/RUNBOOK_ROLLBACK_KILL_SWITCH.md", "tests/test_p3_web.py", "release/PACKAGE_QUALIFICATION.json", "release/p3-candidate-20261122.zip.sha256"],
+      "result": "Cancellation and operator stop instructions are tested/documented. Two deterministic archive builds matched; the extracted archive passed the full test suite and synthetic demo with Python site packages disabled."
+    },
+    "E11": {
+      "status": "PARTIAL",
+      "evidence": ["release/SCIENTIFIC_PERFORMANCE_BENCHMARK.json"],
+      "result": "Local timing and memory measurements exist for 100 small maps and a 13,000-site map. No precommitted target-hardware thresholds, real-task baseline or user-effort study exists."
+    },
+    "E12": {
+      "status": "PENDING_INTERNAL",
+      "evidence": ["fabintel/preflight.py", "release/INTERNAL_QUALIFICATION_REPORT_TEMPLATE.json", "docs/INTERNAL_COMPANY_FIRST_RUN.md"],
+      "result": "File-based site discovery and qualification tooling is packaged; no authorized site-generated capture or first true-data result exists."
+    }
+  },
+  "known_critical_defects": [],
+  "qualification_notes": [
+    "All reported scientific outputs are synthetic candidate evidence; they do not establish Samsung process facts or effects.",
+    "The reproducible archive and fresh-extraction checks passed on macOS arm64/Python 3.11.7; this does not establish the approved deployment OS or blocked-egress behavior.",
+    "Reticle periodicity and local-cell clusters are exploratory and not calibrated for production alerting.",
+    "C02 repeatability uncertainty is NOT_SUPPLIED when source measurements provide no repeatability estimates.",
+    "C03 is observational and spatial-block-adjusted; residual confounding and selection effects remain possible.",
+    "This candidate must not be used with company data until authorized internal qualification is complete."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "contract_version": "1.0.0",
+  "product_id": "p3",
+  "title": "FAB Spatial & Yield Intelligence",
+  "entrypoints": {
+    "cli": "python -m fabintel",
+    "local_ui": "python -m fabintel serve",
+    "ui_route": "/fab-intelligence/p3",
+    "analysis": "products.p3.engine:analyze"
+  },
+  "capabilities": [
+    "C01",
+    "C04",
+    "C05",
+    "C02",
+    "C03"
+  ],
+  "dependencies": [
+    "python-stdlib-3.10+",
+    "bundled-ui-assets"
+  ],
+  "release_state": "CANDIDATE"
+}

@@ -1,0 +1,6 @@
+{
+  "positive_status": "VALID",
+  "claim_contains": "edge-center difference for film_thickness = 2 nm",
+  "negative_status": "REFUSED",
+  "pattern": "edge_ring"
+}
