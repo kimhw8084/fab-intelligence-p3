@@ -1,7 +1,7 @@
 {
   "SPDXID": "SPDXRef-DOCUMENT",
   "creationInfo": {
-    "created": "2026-11-23T04:11:09Z",
+    "created": "2026-11-23T04:15:47Z",
     "creators": [
       "Tool: local-standard-library-supply-chain-audit"
     ]
@@ -344,7 +344,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "36be599de3e05dc001d146b21acb80795a678925dd241c04d375edea110c8fe0"
+          "checksumValue": "bb268773dcb756f498eaa598618518848fda6dbd3628a611bbe49e43debab327"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -554,7 +554,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "8a0dbd3e43767ca1a68533ef15fdf7af5d199bd3c77c01fe39a78dffc1b8e467"
+          "checksumValue": "a2ee00eed53f0798efba76e6e52dd4a694b3287f22feb5b540d620e73230b059"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -914,7 +914,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "ae469902c7038bc54f3cea5453b2310766dafdfa7ecef8bdacbaa9aea0723dbd"
+          "checksumValue": "36a66e366c5e9158ea9134eb4f3d0ab46396cf09bca9a0897b2c4815a1c111af"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1139,7 +1139,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "4a6d8d05cc7fc8ab01e64b528f8b6bb4b8ac2f934dfb0efdc38240d71b0f49a6"
+          "checksumValue": "f40d1effc8f50a9ee83af7557d542770f36c74fb1610665163e123c76ddf7dfd"
         }
       ],
       "copyrightText": "NOASSERTION",

@@ -1,6 +1,6 @@
 {
   "schema": "golden-evidence/v0.1",
-  "generated_at_utc": "2026-11-23T04:11:10.751475+00:00",
+  "generated_at_utc": "2026-11-23T04:15:48.149664+00:00",
   "golden_version": "0.1.0-dev",
   "rules_sha256": "ce47462f54550bc60b9d30989bd56825257bd21f6b8721d1b28855dd58e61449",
   "project_manifest_sha256": "04f122e8f82f5d7cc1b94853a1bdfa827744a323bf8a410e96d488c55c24211e",
@@ -41,7 +41,7 @@
       "mandatory": true,
       "stage": "full",
       "evidence": "README.md exists.",
-      "duration_ms": 0.01
+      "duration_ms": 0.02
     },
     {
       "rule_id": "GOLD-003",
@@ -50,7 +50,7 @@
       "mandatory": true,
       "stage": "full",
       "evidence": "Git worktree detected.",
-      "duration_ms": 14.37
+      "duration_ms": 27.67
     },
     {
       "rule_id": "PY-001",
@@ -59,7 +59,7 @@
       "mandatory": true,
       "stage": "fast",
       "evidence": "AST-parsed 40 Python source files.",
-      "duration_ms": 33.99
+      "duration_ms": 43.27
     },
     {
       "rule_id": "PY-002",
@@ -68,7 +68,7 @@
       "mandatory": true,
       "stage": "full",
       "evidence": "Exit=0; python test runner allowlist; argv_sha256=d268bb2f6a9981218caa602a101cea3c8842dd41f4ad768ac0fd16575ce068a9; executable_sha256=8fe8443218a147c3d426ab700346cc390331b815355ee9bdc8e3da2b2c0b22b0; output_bytes=130; output_sha256=f63271119cac8ed7c09c5247327a27517060221e8fa780bb199a0aecc8810e73; runner_sha256=50a6be283e579114ac629808ba6a2f73f8f9f590ac84c25a4bbdaf4a838dc0bd; tests_run=77; tests_passed=63; tests_skipped=14; test_result_sha256=5d4a962ea896cbd0d5cdbf04b73a9a406eaa7b9f9e141d30c56beff658a513af",
-      "duration_ms": 807.26
+      "duration_ms": 858.69
     },
     {
       "rule_id": "PY-003",
@@ -77,7 +77,7 @@
       "mandatory": true,
       "stage": "full",
       "evidence": "No approved command configured for 'python_lint'; a PASS is not claimed.",
-      "duration_ms": 0.01
+      "duration_ms": 0.02
     },
     {
       "rule_id": "WEB-001",

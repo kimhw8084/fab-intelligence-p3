@@ -1,6 +1,6 @@
 {
   "schema": "golden-evidence/v0.1",
-  "generated_at_utc": "2026-11-23T04:11:09.928826+00:00",
+  "generated_at_utc": "2026-11-23T04:15:47.266507+00:00",
   "golden_version": "0.1.0-dev",
   "rules_sha256": "ce47462f54550bc60b9d30989bd56825257bd21f6b8721d1b28855dd58e61449",
   "project_manifest_sha256": "04f122e8f82f5d7cc1b94853a1bdfa827744a323bf8a410e96d488c55c24211e",
@@ -44,7 +44,7 @@
       "mandatory": true,
       "stage": "fast",
       "evidence": "AST-parsed 40 Python source files.",
-      "duration_ms": 33.02
+      "duration_ms": 46.84
     },
     {
       "rule_id": "PY-002",

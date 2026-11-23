@@ -1,12 +1,12 @@
 {
   "c05_history_index_benchmark": {
     "direct_query_ms": {
-      "p50": 145.616583,
-      "p95": 147.175875,
+      "p50": 149.469833,
+      "p95": 150.955042,
       "samples": 5
     },
     "historical_maps": 1000,
-    "index_build_ms": 1070.545833,
+    "index_build_ms": 1069.101166,
     "index_build_peak_traced_bytes_incremental": 13420324,
     "index_stats": {
       "excluded_maps": 0,
@@ -15,8 +15,8 @@
       "indexed_sites": 13000
     },
     "indexed_query_ms": {
-      "p50": 63.596875,
-      "p95": 65.040208,
+      "p50": 65.411417,
+      "p95": 66.104375,
       "samples": 5
     },
     "measured_sites_per_map": 13,
@@ -25,13 +25,13 @@
     "status": "PASS"
   },
   "company_data_used": false,
-  "created_utc": "2026-11-23T04:10:11Z",
+  "created_utc": "2026-11-23T04:16:06Z",
   "dense_wafer_measurement": {
     "actual_edge_minus_center": 1.3481522848870888,
     "expected_edge_minus_center": 1.3481522848870497,
     "measured_sites": 13000,
-    "p50_ms": 68.5356875,
-    "p95_ms": 70.491333,
+    "p50_ms": 68.58906250000001,
+    "p95_ms": 72.781125,
     "peak_traced_bytes": 6018508,
     "status": "PASS"
   },
@@ -44,8 +44,8 @@
   },
   "fixed_cases": 100,
   "latency_ms": {
-    "p50": 0.21722950000000002,
-    "p95": 0.231375,
+    "p50": 0.21975,
+    "p95": 0.235084,
     "samples": 100
   },
   "numeric_oracle": {
@@ -759,8 +759,8 @@
   "scope": "synthetic external baseline only",
   "seed": 20261122,
   "sites_per_case": 13,
-  "source_commit": "7c1f2ee1d096c1095546b22ce0da69c3592ebb1b",
-  "source_tree_sha256": "f9cecd6be0571a9ce104f0c66adb75375667d34e0002469bfe906a03e7652c16",
+  "source_commit": "ecab7f430c23b0f58aa2558ed22d8bb987689c3d",
+  "source_tree_sha256": "d215497a411815b8548ba0e71c46048082deca8d4820f8da3506e17d202b7d29",
   "synthetic_catalog": {
     "actual_tables": 13000,
     "peak_traced_bytes": 6526675,

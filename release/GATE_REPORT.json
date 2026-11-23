@@ -3,10 +3,10 @@
     "archive_build_evidence": "release/PACKAGE_QUALIFICATION.json",
     "archive_checksum_sidecar": "release/p3-candidate-20261122.zip.sha256",
     "candidate_archive": "release/p3-candidate-20261122.zip",
-    "source_commit": "784b87439dd2805880cac79daa7c3712fe60ca81",
-    "source_tree_sha256": "f9cecd6be0571a9ce104f0c66adb75375667d34e0002469bfe906a03e7652c16"
+    "source_commit": "ecab7f430c23b0f58aa2558ed22d8bb987689c3d",
+    "source_tree_sha256": "d215497a411815b8548ba0e71c46048082deca8d4820f8da3506e17d202b7d29"
   },
-  "created_utc": "2026-11-23T04:11:40Z",
+  "created_utc": "2026-11-23T04:16:19Z",
   "external_gates": {
     "E01": {
       "evidence": [
