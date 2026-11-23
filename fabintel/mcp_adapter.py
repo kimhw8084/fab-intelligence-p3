@@ -17,7 +17,7 @@ from math import isfinite
 from pathlib import Path
 from typing import Any, Mapping
 
-from fabintel.mcp_client import MCPClient, MCPToolError, StdioTransport, StreamableHTTPTransport
+from fabintel.mcp_client import MCPClient, MCPToolError
 
 MAX_CONFIG_BYTES = 256 * 1024
 DEFAULT_LIMITS = {"max_rows": 1000, "max_bytes": 4 * 1024 * 1024, "max_seconds": 30}
@@ -261,15 +261,16 @@ class ReadOnlyMCPAdapter:
             cwd = transport_cfg.get("cwd")
             if cwd is not None and (not isinstance(cwd, str) or not Path(cwd).is_absolute()):
                 raise ValueError("stdio server cwd must be an absolute path")
-            transport = StdioTransport(transport_cfg.get("command"), cwd=cwd, env=auth.stdio_environment())
+            client_transport = {"type": "stdio", "command": transport_cfg.get("command"), "cwd": cwd}
         else:
-            endpoint = transport_cfg.get("endpoint")
-            transport = StreamableHTTPTransport(endpoint, headers=auth.http_headers())
+            client_transport = {"type": "streamable_http", "endpoint": transport_cfg.get("endpoint")}
+        timeout = float(request_timeout) if request_timeout is not None else float(min(30, config["limits"]["max_seconds"]))
+        client = MCPClient(client_transport, stdio_env=auth.stdio_environment(),
+                           http_headers=auth.http_headers(), request_timeout=timeout)
         try:
-            timeout = float(request_timeout) if request_timeout is not None else float(min(30, config["limits"]["max_seconds"]))
-            return cls(MCPClient(transport, request_timeout=timeout), config)
+            return cls(client, config)
         except BaseException:
-            transport.close()
+            client.close()
             raise
 
     def _tools(self) -> dict[str, dict[str, Any]]:

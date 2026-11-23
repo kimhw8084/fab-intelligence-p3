@@ -1,8 +1,8 @@
 # P3 implementation decisions
 
-## D-001 · Keep the first qualified path standard-library only
+## D-001 · Keep scientific analysis standard-library only
 
-Use Python's standard library for the deterministic P3 baseline, JSON interface and loopback UI. The current methods operate on measured points and exact coordinate matches; they do not need image interpolation, model training, a database, or a service framework. A third-party library would add offline packaging, maintenance and license work without a demonstrated result-quality gain. Reopen the choice only if the frozen challenge suite identifies a concrete capability or performance gap.
+Use Python's standard library for the deterministic P3 scientific baseline and JSON CLI. The former loopback API is test-fixture-only; the product UI is a headless P1-hosted React module. The current scientific methods operate on measured points and exact coordinate matches; they do not need image interpolation, model training, a database, or a service framework. MCP protocol behavior is supplied by an optional, pinned official SDK candidate; it does not enter the scientific runtime by default. Reopen scientific dependencies only if the frozen challenge suite identifies a concrete capability or performance gap.
 
 ## D-002 · Treat the measured-site mask as part of the data
 
@@ -24,9 +24,9 @@ C02 requires same wafer and lot, distinct step instances, increasing timezone-aw
 
 C03 pairs the feature and later outcome at the selected map's exact observed die coordinates, applies fixed spatial-block centering within each wafer, then summarizes wafer-level correlations across holdout wafers with an equal-wafer Fisher-z interval. It requires at least 20 holdout wafers from distinct lots and five matched die sites per wafer, including at least two observations in each of two predeclared spatial blocks. The relation, block mapping, time ordering and out-of-time split grouped by both wafer and lot must be verified at the site. Where the selected map carries recipe, tool, chamber, or route identifiers, the downstream context and rows must match those identifiers. Leave-one-lot-out estimates are exposed as a sensitivity range. It reports association only; product mix, selection and other confounding remain.
 
-## D-007 · MCP transport is real; company authority remains site-side
+## D-007 · Use official SDK transport; company authority remains site-side
 
-The configurable client implements MCP stdio and Streamable HTTP transports and is tested against a local synthetic server. The read-only adapter discovers tool descriptors and requires site-provided source grants, exact descriptor hashes, semantic versions and registered query-plan approvals before bounded reads. No company endpoint, tool mapping, credential, source grant or real semantics are included. Analysis has no model path. JSON inputs that request `INTERNAL_AUTHORIZED` are refused. The internal preflight consumes a site-generated logical-operation capture using the packaged contract names, lists missing evidence, and always retains `PENDING_INTERNAL`; it cannot authenticate company authority or grant approval.
+The configurable client delegates MCP stdio and Streamable HTTP protocol behavior to the official Python SDK `mcp==2.3.0`; the product contains no custom JSON-RPC transport. Synthetic protocol peers and HTTP fixtures are test-only. The read-only adapter discovers tool descriptors and requires site-provided source grants, exact descriptor hashes, semantic versions and registered query-plan approvals before bounded reads. No company endpoint, tool mapping, credential, source grant or real semantics are included. Analysis has no model path. JSON inputs that request `INTERNAL_AUTHORIZED` are refused. The internal preflight consumes a site-generated logical-operation capture using the packaged contract names, lists missing evidence, and always retains `PENDING_INTERNAL`; it cannot authenticate company authority or grant approval.
 
 ## Known work still open
 

@@ -4,7 +4,6 @@
   "title": "FAB Spatial & Yield Intelligence",
   "entrypoints": {
     "cli": "python -m fabintel",
-    "local_ui": "python -m fabintel serve",
     "ui_route": "/fab-intelligence/p3",
     "analysis": "products.p3.engine:analyze"
   },
@@ -17,7 +16,9 @@
   ],
   "dependencies": [
     "python-stdlib-3.10+",
-    "bundled-ui-assets"
+    "suite-ui-module.v1",
+    "react-peer-host-supplied==19.2.0",
+    "optional-mcp-sdk==2.3.0-macos-arm64-cp311-candidate"
   ],
   "release_state": "CANDIDATE"
 }

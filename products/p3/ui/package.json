@@ -1,0 +1,14 @@
+{
+  "name": "@fab-intelligence/p3-panel",
+  "private": true,
+  "version": "0.2.0",
+  "type": "module",
+  "exports": {
+    "./panel": "./P3Panel.tsx"
+  },
+  "types": "./P3Panel.tsx",
+  "peerDependencies": {
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  }
+}

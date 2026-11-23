@@ -5,12 +5,12 @@ from pathlib import Path
 import threading
 import unittest
 
-from fabintel.web import _Handler
+from tests.fixtures.headless_api import _Handler
 
 ROOT = Path(__file__).resolve().parent.parent
 
 
-class LocalWorkspaceTests(unittest.TestCase):
+class HeadlessApiContractFixtureTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.server = ThreadingHTTPServer(("127.0.0.1", 0), _Handler)
@@ -35,15 +35,13 @@ class LocalWorkspaceTests(unittest.TestCase):
         connection.close()
         return result
 
-    def test_ui_and_example_are_local_and_no_store(self):
+    def test_headless_api_has_no_competing_product_shell(self):
         status, body, headers = self.request("GET", "/")
-        self.assertEqual(status, 200)
-        self.assertIn(b"SYNTHETIC INPUT ONLY", body)
+        self.assertEqual(status, 404)
+        self.assertIn(b"not found", body)
         self.assertIn("no-store", headers["Cache-Control"])
-        self.assertIn("script-src 'self'", headers["Content-Security-Policy"])
         status, js, _ = self.request("GET", "/app.js")
-        self.assertEqual(status, 200)
-        self.assertNotIn(b"innerHTML", js)
+        self.assertEqual(status, 404)
         status, example, _ = self.request("GET", "/api/example")
         self.assertEqual(status, 200)
         example_data = json.loads(example)

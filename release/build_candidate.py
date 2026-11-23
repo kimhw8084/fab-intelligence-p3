@@ -16,6 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from qualification.tree_hash import current_git_commit, source_tree_sha256
+from qualification.mcp_sdk_offline import qualify_offline_mcp_sdk
 
 ARCHIVE_NAME = "p3-candidate-20261122.zip"
 GENERATED = {ARCHIVE_NAME, ARCHIVE_NAME + ".sha256", "PACKAGE_QUALIFICATION.json"}
@@ -35,7 +36,7 @@ def package_files():
             continue
         if rel.startswith("release/") and Path(rel).name in GENERATED:
             continue
-        if path.suffix in (".zip", ".dmg", ".exe", ".whl"):
+        if path.suffix in (".zip", ".dmg", ".exe"):
             continue
         files.append((rel, path))
     return sorted(files)
@@ -58,7 +59,11 @@ def verify_archive(archive_path: Path) -> dict:
             raise ValueError("archive contains duplicate paths")
         if any(name.startswith("/") or ".." in Path(name).parts for name in names):
             raise ValueError("archive contains an unsafe path")
-        for required in ("bootstrap_check.py", "product.json", "products/p3/engine.py", "ui/index.html", "release/GATE_REPORT.json"):
+        for required in ("bootstrap_check.py", "product.json", "products/p3/engine.py",
+                         "products/p3/ui/P3Panel.tsx", "integration/p3-suite-ui-module.v1.json",
+                         "vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock",
+                         "vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/mcp-2.3.0-py3-none-any.whl",
+                         "release/GATE_REPORT.json"):
             if required not in names:
                 raise ValueError("archive is missing " + required)
     with tempfile.TemporaryDirectory(prefix="p3-fresh-extract-") as temp:
@@ -72,9 +77,11 @@ def verify_archive(archive_path: Path) -> dict:
                               cwd=extracted, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=120)
         demo = subprocess.run([sys.executable, "-S", "-m", "fabintel", "demo"], cwd=extracted, env=env,
                               stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=20)
+        mcp_sdk = qualify_offline_mcp_sdk(extracted)
         report = {"fresh_extraction_test_exit": test.returncode, "fresh_extraction_demo_exit": demo.returncode,
-                  "fresh_extraction_tests": test.stdout[-8000:], "fresh_extraction_demo": demo.stdout[-3000:]}
-        if test.returncode or demo.returncode:
+                  "fresh_extraction_tests": test.stdout[-8000:], "fresh_extraction_demo": demo.stdout[-3000:],
+                  "fresh_extraction_offline_mcp_sdk": mcp_sdk}
+        if test.returncode or demo.returncode or mcp_sdk["status"] == "FAIL":
             raise RuntimeError(json.dumps(report, indent=2))
         return report
 
@@ -107,6 +114,7 @@ def main():
         "repeated_build_sha256_equal": first_hash == second_hash,
         "fresh_extraction_tests": {"command": "python -S -m unittest discover -s tests -v", "exit_code": fresh["fresh_extraction_test_exit"]},
         "fresh_extraction_demo": {"command": "python -S -m fabintel demo", "exit_code": fresh["fresh_extraction_demo_exit"]},
+        "fresh_extraction_offline_mcp_sdk": fresh["fresh_extraction_offline_mcp_sdk"],
         "environment": {"os": platform.platform(), "architecture": platform.machine(), "python": sys.version},
         "network_isolation": "Not established by this host build; this tests standard-library-only execution with site packages disabled.",
         "fresh_extraction_test_log_tail": fresh["fresh_extraction_tests"],

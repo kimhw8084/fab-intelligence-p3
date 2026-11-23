@@ -14,6 +14,11 @@ class SourceContractTests(unittest.TestCase):
   self.assertIn('python-stdlib-3.10+',manifest['dependencies'])
  def test_no_remote_frontend_assets(self):
   root=Path(__file__).resolve().parent.parent
-  html=(root/'ui'/'index.html').read_text()
-  for forbidden in ('src="http://','src="https://','href="http://','href="https://','@import url(http'):
-   self.assertNotIn(forbidden,html)
+  self.assertFalse((root/'ui'/'index.html').exists())
+  self.assertFalse((root/'fabintel'/'web.py').exists())
+  panel=(root/'products'/'p3'/'ui'/'P3Panel.tsx').read_text()
+  self.assertIn('data-product-id="p3"',panel)
+  self.assertIn('renderWaferMap',panel)
+  self.assertIn('No analysis result is available',panel)
+  manifest=json.loads((root/'product.json').read_text())
+  self.assertNotIn('local_ui',manifest['entrypoints'])

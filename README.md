@@ -1,25 +1,24 @@
 # FAB Spatial & Yield Intelligence · P3
 
-P3 is an offline, standard-library candidate for inspecting measured wafer maps. It implements observed-site radial/sector summaries, a directional plane, exploratory spatial cell clusters, a matched-population wafer-level anomaly screen, multiscale historical search across compatible measured profiles, same-wafer cross-step deltas, and spatial-block-adjusted wafer/die quality association. The local UI and deterministic analysis operate on supplied JSON; the separately configured MCP tool supports bounded read-only discovery and data access.
+P3's analysis core is a standard-library candidate for inspecting measured wafer maps. It implements observed-site radial/sector summaries, a directional plane, exploratory spatial cell clusters, a matched-population wafer-level anomaly screen, multiscale historical search across compatible measured profiles, same-wafer cross-step deltas, and spatial-block-adjusted wafer/die quality association. The deterministic analysis entrypoint operates on supplied JSON. P3 contributes a headless React panel to P1's single shared workspace; it does not include a standalone UI shell or HTTP server.
 
 **Release state: CANDIDATE.** The product has not passed target-OS offline installation, independent full qualification, licensing/security review, or authorized internal MCP/data/engineer checks. It is not approved for Samsung data or production use. The provided example is synthetic.
 
 ## Run locally
 
-Use Python 3.10 or later; there are no third-party Python or browser dependencies.
+Use Python 3.10 or later for the analysis core. The optional MCP integration uses the local, hash-locked SDK candidate described under `vendor/mcp-sdk-2.3.0/`.
 
 ```sh
 python bootstrap_check.py
 python -m fabintel demo
 python -m fabintel analyze fixtures/case_positive.json --output evidence.json
-python -m fabintel serve
 ```
 
-The UI listens on `127.0.0.1:8765`; stop it with Ctrl-C. It rejects internal-authorized mode and makes no network calls. Do not paste company data into this candidate build.
+The suite host mounts the headless product panel and calls `products.p3.engine:analyze`. The loopback HTTP workflow is retained only as a test fixture; P3 has no local route or server. Do not paste company data into this candidate build.
 
 `python -m fabintel qualify-internal --capture <site-capture.json>` checks the shape and coverage of a site-generated qualification report. It never authenticates a report or changes `PENDING_INTERNAL` to ready. Use the local template at `release/INTERNAL_QUALIFICATION_REPORT_TEMPLATE.json` only through an authorized site-side adapter.
 
-The optional `mcp-discover` command uses configured stdio or Streamable HTTP transport to inspect a site-approved read-only MCP server. Exact source scopes, tool descriptor hashes, and pre-registered query plans are required before bounded reads; no production names, endpoints, mappings, or credentials are supplied here. See [the MCP adapter guide](docs/MCP_ADAPTER.md) and [the placeholder config](requirements/mcp-adapter.template.json).
+The optional `mcp-discover` command uses the official Python MCP SDK 2.3.0 through the logical read-only adapter to inspect an explicitly approved server. The local hash-locked macOS CPython 3.11 wheelhouse is a candidate, not company-cleared; target OS and internal protocol compatibility are pending. Exact source scopes, tool descriptor hashes, and pre-registered query plans are required before bounded reads; no production names, endpoints, mappings, or credentials are supplied here. See [the MCP adapter guide](docs/MCP_ADAPTER.md) and [the placeholder config](requirements/mcp-adapter.template.json).
 
 ## Scientific boundaries
 

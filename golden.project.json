@@ -1,0 +1,18 @@
+{
+  "name": "fab-intelligence-p3",
+  "profile": "python",
+  "criticality": "workflow",
+  "golden_version": "0.1.0-dev",
+  "golden_source_commit": "dc2ece864b2d744e47dfe8c7d9ad78aadbed369e",
+  "capabilities": {
+    "ui": true,
+    "api": false,
+    "database": false,
+    "jobs": false,
+    "observability": false,
+    "mcp": true,
+    "ai": false,
+    "manufacturing_data": true
+  },
+  "commands": {}
+}

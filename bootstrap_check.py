@@ -3,7 +3,7 @@ from pathlib import Path
 import hashlib, subprocess, sys
 ROOT=Path(__file__).resolve().parent
 GENERATED={"release/BOOTSTRAP_MANIFEST.sha256","release/PACKAGE_QUALIFICATION.json"}
-ARCHIVE_SUFFIXES={".zip",".dmg",".exe",".whl",".pyc",".sha256"}
+ARCHIVE_SUFFIXES={".zip",".dmg",".exe",".pyc",".sha256"}
 
 def package_files():
     rows=set()

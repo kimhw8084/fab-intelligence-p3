@@ -1,6 +1,6 @@
 # Concrete engineer experience and acceptance walkthrough — FAB Spatial & Yield Intelligence
 
-The UI in `ui/index.html` is a *noninteractive bootstrap layout reference*, not the finished app. Build one working product panel in the shared authenticated workspace and qualify the actual approved UI host. No duplicate standalone site without justification.
+P3 contributes `products/p3/ui/P3Panel.tsx` to the P1-owned shared workspace. The panel renders source preview, evidence, capability status, provenance, and an optional verified wafer-map model. The host owns authentication, shell, design tokens, requests, cancellation, export, and shared rendering. P3 has no standalone site.
 
 ## Minimum user journey
 1. One wafer-centric workspace with actual measured points, wafer geometry/orientation and visible sampling mask. Legend separates observed vs inferred/unobserved values.

@@ -1,4 +1,4 @@
-"""Loopback-only local UI and JSON API for synthetic P3 investigations."""
+"""Test-only loopback API fixture for exercising the shared headless contract."""
 from __future__ import annotations
 
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -11,7 +11,7 @@ from fabintel.project import analyze
 from products.p3.engine import AnalysisCancelled
 from fabintel.contracts import validate_envelope
 
-BASE = Path(__file__).resolve().parent.parent
+BASE = Path(__file__).resolve().parents[2]
 MAX_REQUEST_BYTES = 10 * 1024 * 1024
 CANCEL_LOCK = threading.Lock()
 ACTIVE_ANALYSES = {}
@@ -44,12 +44,6 @@ class _Handler(BaseHTTPRequestHandler):
             pass
 
     def do_GET(self):
-        if self.path in ("/", "/index.html"):
-            self._send(200, (BASE / "ui" / "index.html").read_bytes(), "text/html; charset=utf-8")
-            return
-        if self.path == "/app.js":
-            self._send(200, (BASE / "ui" / "app.js").read_bytes(), "text/javascript; charset=utf-8")
-            return
         if self.path == "/api/example":
             body = (BASE / "fixtures" / "p3_integrated_synthetic.json").read_bytes()
             self._send(200, body, "application/json; charset=utf-8")
@@ -152,7 +146,7 @@ def serve(port=8765):
     server = ThreadingHTTPServer(("127.0.0.1", port), _Handler)
     server.daemon_threads = True
     try:
-        print(f"P3 synthetic workspace: http://127.0.0.1:{port}/ (Ctrl-C to stop)")
+        print(f"P3 synthetic headless API: http://127.0.0.1:{port}/api/health (Ctrl-C to stop)")
         server.serve_forever(poll_interval=0.25)
     except KeyboardInterrupt:
         pass

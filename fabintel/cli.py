@@ -19,8 +19,6 @@ def main():
     a=cmd.add_parser('analyze',help='analyze one local JSON wafer map')
     a.add_argument('input',help='path to a JSON investigation file')
     a.add_argument('--output',default='',help='write the evidence envelope to this path')
-    w=cmd.add_parser('serve',help='start the loopback-only synthetic engineer workspace')
-    w.add_argument('--port',type=int,default=8765)
     a=p.parse_args()
     if a.command=='doctor':
         obj={'state':'CANDIDATE','external_transfer_ready':False,'internal_qualified':False,
@@ -69,10 +67,6 @@ def main():
             Path(a.output).write_text(json.dumps(obj,indent=2,sort_keys=True)+'\n',encoding='utf8')
             print('WROTE evidence envelope:',a.output,file=sys.stderr)
             return
-    elif a.command=='serve':
-        from fabintel.web import serve
-        serve(a.port)
-        return
     else:
         data=json.loads((BASE/'fixtures'/'p3_integrated_synthetic.json').read_text(encoding='utf8'))
         obj=analyze(data)

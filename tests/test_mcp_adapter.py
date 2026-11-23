@@ -1,4 +1,5 @@
 import copy
+import importlib.util
 import json
 import os
 import subprocess
@@ -14,11 +15,11 @@ from unittest.mock import patch
 from fabintel.mcp_adapter import (EnvironmentCredentialProvider, MCPPolicyError,
                                   ReadOnlyMCPAdapter, approved_query_plan_sha256,
                                   tool_definition_sha256)
-from fabintel.mcp_client import MCPClient, MCPCancelled, StdioTransport
+from fabintel.mcp_client import MCPClient, MCPCancelled
 from tests.test_mcp_client import _HTTPMockHandler
 
 ROOT = Path(__file__).resolve().parent.parent
-SERVER = [sys.executable, "-S", "-m", "fabintel.mcp_mock_server", "--protocol", "dual"]
+SERVER = [sys.executable, "-S", "-m", "tests.fixtures.mcp_mock_server", "--protocol", "dual"]
 
 
 def adapter_config(client):
@@ -57,11 +58,11 @@ def adapter_config(client):
         "operations": operations}
 
 
+@unittest.skipUnless(importlib.util.find_spec("mcp"), "install the local hash-locked MCP SDK candidate to run adapter integration checks")
 class MCPReadOnlyAdapterTests(unittest.TestCase):
     def open_adapter(self):
-        transport = StdioTransport(SERVER, cwd=str(ROOT))
-        self.addCleanup(transport.close)
-        client = MCPClient(transport, request_timeout=3)
+        client = MCPClient({"type": "stdio", "command": SERVER, "cwd": str(ROOT)}, request_timeout=3)
+        self.addCleanup(client.close)
         config = adapter_config(client)
         return ReadOnlyMCPAdapter(client, config), client, config
 
@@ -209,7 +210,7 @@ class MCPReadOnlyAdapterTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "approved-mock.json"
             path.write_text(json.dumps(config), encoding="utf-8")
-            result = subprocess.run([sys.executable, "-S", "-m", "fabintel", "mcp-discover", "--config", str(path)],
+            result = subprocess.run([sys.executable, "-m", "fabintel", "mcp-discover", "--config", str(path)],
                                     cwd=ROOT, capture_output=True, text=True, timeout=10)
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(json.loads(result.stdout)["status"], "CONFIGURED_READ_ONLY_UNQUALIFIED")

@@ -13,9 +13,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SKIP_DIRS = {"__pycache__", ".git"}
 OUTPUTS = {"release/SBOM.spdx.json", "release/SUPPLY_CHAIN_AUDIT.json", "release/GATE_REPORT.json",
+           "release/GOLDEN_PILOT_FAST_EVIDENCE.json",
            "release/BOOTSTRAP_MANIFEST.sha256", "release/SCIENTIFIC_PERFORMANCE_BENCHMARK.json",
            "release/PACKAGE_QUALIFICATION.json", "release/LOCAL_TEST_EVIDENCE.json",
-           "release/LOCAL_TEST_LOG.txt", "release/CRITICAL_CASE_EVIDENCE.json"}
+           "release/LOCAL_TEST_LOG.txt", "release/LOCAL_UI_EVIDENCE.json",
+           "release/CRITICAL_CASE_EVIDENCE.json"}
 
 
 def sha256(path: Path) -> str:
@@ -45,7 +47,9 @@ def imported_modules(path: Path) -> set[str]:
 def main():
     files = source_files()
     runtime_roots = set()
-    for path in files:
+    runtime_sources = [path for path in files if path.suffix == ".py"
+                       and path.relative_to(ROOT).parts[0] in {"fabintel", "products"}]
+    for path in runtime_sources:
         runtime_roots.update(imported_modules(path))
     stdlib = set(getattr(sys, "stdlib_module_names", ()))
     first_party = {"fabintel", "products", "qualification", "tests", "cli", "tree_hash"}
@@ -86,6 +90,33 @@ def main():
         "copyrightText": "NOASSERTION",
         "primaryPackagePurpose": "APPLICATION",
     }
+    inventory_path = ROOT / "vendor" / "mcp-sdk-2.3.0" / "macos-arm64-cp311" / "license-inventory.json"
+    inventory = json.loads(inventory_path.read_text(encoding="utf-8")) if inventory_path.is_file() else {"packages": []}
+    dependency_packages = []
+    dependency_relationships = []
+    for dependency in inventory.get("packages", []):
+        safe_name = re.sub(r"[^A-Za-z0-9.-]", "-", dependency["name"])
+        dependency_id = "SPDXRef-Python-" + safe_name + "-" + dependency["version"]
+        source = next((item["url"] for item in dependency.get("source_references", [])
+                       if "source" in item.get("label", "").lower() or "homepage" in item.get("label", "").lower()),
+                      "NOASSERTION")
+        license_expression = dependency.get("license_expression") or "NOASSERTION"
+        dependency_packages.append({
+            "name": dependency["name"],
+            "SPDXID": dependency_id,
+            "versionInfo": dependency["version"],
+            "downloadLocation": source,
+            "filesAnalyzed": False,
+            "checksums": [{"algorithm": "SHA256", "checksumValue": dependency["wheel_sha256"]}],
+            "licenseConcluded": "NOASSERTION",
+            "licenseDeclared": license_expression,
+            "copyrightText": "NOASSERTION",
+            "primaryPackagePurpose": "LIBRARY",
+            "externalRefs": [{"referenceCategory": "PACKAGE-MANAGER", "referenceType": "purl",
+                              "referenceLocator": f"pkg:pypi/{dependency['normalized_name']}@{dependency['version']}"}],
+        })
+        dependency_relationships.append({"spdxElementId": "SPDXRef-Package-P3", "relationshipType": "CONTAINS",
+                                         "relatedSpdxElement": dependency_id})
     document = {
         "spdxVersion": "SPDX-2.3",
         "dataLicense": "CC0-1.0",
@@ -94,21 +125,31 @@ def main():
         "documentNamespace": "https://spdx.org/spdxdocs/fabintel-p3-" + sha256(ROOT / "product.json"),
         "creationInfo": {"creators": ["Tool: local-standard-library-supply-chain-audit"],
                          "created": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")},
-        "packages": [package],
+        "packages": [package, *dependency_packages],
         "files": spdx_files,
-        "relationships": [{"spdxElementId": "SPDXRef-DOCUMENT", "relationshipType": "DESCRIBES", "relatedSpdxElement": "SPDXRef-Package-P3"}],
+        "relationships": [{"spdxElementId": "SPDXRef-DOCUMENT", "relationshipType": "DESCRIBES", "relatedSpdxElement": "SPDXRef-Package-P3"},
+                           *dependency_relationships],
     }
     audit = {
         "state": "CANDIDATE",
         "scan_scope": "local source tree only; no network access",
         "created_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
-        "runtime": {"minimum_python": "3.10", "third_party_imports": third_party,
-                    "external_python_dependencies": 0 if not third_party else None,
-                    "bundled_ui_assets": True, "remote_asset_findings": local_assets},
+        "runtime": {"minimum_python": "3.10", "base_dependencies": "Python standard library",
+                    "runtime_import_roots_not_in_stdlib": third_party,
+                    "optional_mcp_dependency": {"package": "mcp==2.3.0", "activated_by": "mcp-discover",
+                                                 "target": "macOS arm64 CPython 3.11 candidate only",
+                                                 "bundled_hash_locked_wheelhouse":
+                                                     (ROOT / "vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock").is_file(),
+                                                 "wheel_count": len(inventory.get("packages", [])),
+                                                 "license_inventory": "vendor/mcp-sdk-2.3.0/macos-arm64-cp311/license-inventory.json"},
+                    "ui_runtime": "React peer supplied by the P1 suite host; no UI shell or chart engine is bundled",
+                    "bundled_ui_assets": False, "remote_asset_findings": local_assets},
         "files_in_sbom": len(spdx_files),
+        "package_components_in_sbom": len(dependency_packages),
         "file_sha256": {item["fileName"][2:]: item["checksums"][0]["checksumValue"] for item in spdx_files},
         "license_review": {"root_license_files": licenses, "first_party_license": "NOASSERTION",
-                            "third_party_runtime_dependencies": third_party,
+                            "third_party_runtime_dependencies": ["mcp==2.3.0 optional candidate; hash-locked wheel closure"] if third_party else [],
+                            "bundled_optional_package_count": len(dependency_packages),
                             "status": "PENDING_RIGHTS_REVIEW" if not licenses else "PENDING_SCOPE_REVIEW"},
         "vulnerability_review": {"syft_available": shutil.which("syft") is not None,
                                  "grype_available": shutil.which("grype") is not None,

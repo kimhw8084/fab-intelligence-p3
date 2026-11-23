@@ -164,7 +164,7 @@ def _handle(message: dict, protocol: str, request_cancel: threading.Event | None
         _response(request_id, error={"code": -32002, "message": "server has not been initialized"})
         return
     if method == "tools/list":
-        result = {"tools": _tool_descriptors()}
+        result = {"tools": _tool_descriptors(), "ttlMs": 0, "cacheScope": "private"}
         if protocol != "legacy":
             result["resultType"] = "complete"
         _response(request_id, result=result)

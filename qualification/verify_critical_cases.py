@@ -38,7 +38,7 @@ def main():
     report = {
         "state": "CANDIDATE",
         "created_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
-        "command": " ".join(command),
+        "command": "python -m unittest discover -s tests -v",
         "exit_code": result.returncode,
         "catalog_sha256": hash_file(CATALOG),
         "test_output_sha256": hashlib.sha256(result.stdout.encode()).hexdigest(),

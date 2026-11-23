@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = Path("release/BOOTSTRAP_MANIFEST.sha256")
 GENERATED = {MANIFEST.as_posix(), "release/PACKAGE_QUALIFICATION.json"}
-ARCHIVE_SUFFIXES = {".zip", ".dmg", ".exe", ".whl", ".pyc", ".sha256"}
+ARCHIVE_SUFFIXES = {".zip", ".dmg", ".exe", ".pyc", ".sha256"}
 
 
 def package_files():

@@ -4,32 +4,29 @@ State: **CANDIDATE**. `EXTERNAL_TRANSFER_READY` and `READY_INTERNAL` are not ass
 
 ## Implemented product
 
-- One deterministic, model-free workflow supports C01–C05 through the local UI and CLI, with typed evidence, source lineage, local JSON/bundle selection, export, cancellation, and refusal/abstention paths.
-- C01 covers observed radial/sector summaries, numeric edge-center with uncertainty when supplied, direction and exploratory local clusters, categorical die/bin counts, and defect-coordinate counts. Unobserved sites are never filled.
-- C02 aligns exact same-wafer/lot observations; a pair with different masks can use a predeclared exact-common-site policy only when declared overlap and coverage limits pass. C03 uses exact context, spatial blocks, wafer-level uncertainty, and leave-one-lot-out sensitivity. C04 uses a leave-one-wafer-out spatial max-T rank screen; localized sites are not individually significant. C05 supports exact-site or adequately covered radial/sector profile comparisons across masks, and its bounded index holds a validated snapshot.
-- Configurable MCP stdio and Streamable HTTP clients, exact tool and approved-plan checks, bounded read-only access, semantic/relationship validation, source lineage, cancellation, and a synthetic mock are included. Production endpoint, mappings, credentials, source grants, and approvals are not included.
-- `INTERNAL_AUTHORIZED` analysis remains refused; company mappings and model endpoints are pending internal qualification.
+- C01–C05 deterministic, model-free analysis is preserved in `products/p3/engine.py`; CLI inputs/outputs remain synthetic or caller-supplied and carry provenance. Refusal and abstention rules prevent unsupported geometry, joins, comparisons, or causal claims.
+- P3 contributes a headless React panel and module metadata through P1's shared UI contract. P1 owns the suite shell, route, token system, request lifecycle, and shared chart renderer. P3 has no standalone page, route server, or chart dependency.
+- The official MCP Python SDK 2.3.0 supplies protocol/transport behavior. `ReadOnlyMCPAdapter` retains product authorization, semantic binding, bounded reads, provenance, audit, and refusal policy. The complete local macOS arm64 CPython 3.11 candidate wheelhouse is hash-locked; internal MCP authority is not configured.
+- Five Golden skills were adapted into `.agents/skills/` and preserved under `.opencode/skills/`. Golden's 0.1.0-dev pilot check was run in fast mode; its output is explicitly not release qualification.
 
 ## Evidence recorded
 
-- Source commit: `ef5550c553ce8405437d08393b133c2b2e63ea4a`; canonical source-tree SHA-256: `b9caccc7d066bb2a005ed8c0ed059c00baad6ac333d125e87d5f17407ddde23a`.
-- `python bootstrap_check.py`: PASS with an 89-file integrity manifest and all 78 tests passing.
-- `python -m unittest discover -s tests`: 78 tests pass. `node --check ui/app.js`: PASS.
-- `qualification/verify_critical_cases.py`: 12/12 frozen P3 cases pass.
-- `qualification/run_scientific_benchmark.py`: 100/100 independent numeric oracles pass; the 13,000-site fingerprint p95 was 73.1 ms with 6.0 MB traced peak allocation. On 1,000 compatible synthetic 13-site maps, direct-search p50 was 146.3 ms and indexed-search p50 was 64.2 ms with result parity; index build was 1.06 s with 13.4 MB incremental traced allocation. These are build-host synthetic timings, not target thresholds.
-- `qualification/run_local_qualification.py`: 78-test suite, synthetic demo, and JS syntax pass; internal preflight reports `PENDING_INTERNAL`.
-- `qualification/run_blocked_egress_check.py`: host OS sandbox denied outbound sockets while the synthetic CLI completed. This does not establish company target OS or egress policy.
-- `qualification/supply_chain_audit.py`: 82 inventoried files, zero third-party Python imports, and no remote UI assets. Rights review and a current vulnerability database/scanner remain pending.
-- `release/LOCAL_UI_EVIDENCE.json`: one in-browser synthetic C01–C05 walkthrough completed with all five capability cards `VALID`; this is not an engineer usability study.
-- `python release/build_candidate.py`: two deterministic builds matched; the fresh-extracted archive passed all 78 tests and the synthetic demo using Python without site packages on macOS arm64/Python 3.11.7. The ZIP SHA-256 and full log are recorded in `release/PACKAGE_QUALIFICATION.json` and its sidecar.
+- Product Python suite: 75 tests pass. The P1-hosted React panel checks pass all five tests and strict TypeScript checking under Node 26.13.0, matching the P1 engine declaration.
+- Scientific catalog: all 12 frozen P3 critical cases pass. The independent numeric benchmark passes 100/100 cases. In the latest isolated run, a synthetic 13,000-site fingerprint had p50 72.1 ms and p95 75.3 ms; for 1,000 compatible historical maps, direct-query p50 was 154.8 ms versus indexed p50 68.0 ms, with result parity. Index build was 1.09 s with 13.4 MB incremental traced allocation. These measurements describe synthetic local workloads, not company thresholds.
+- Official SDK candidate: offline `--no-index --require-hashes` install and `pip check` pass from 28 bundled wheels; 15 SDK and logical-adapter tests pass for stdio and Streamable HTTP fixtures.
+- Host egress evidence: the macOS sandbox denied the outbound socket probe while the synthetic workflow completed all five capabilities. This is not company target/network-policy qualification.
+- NiceGUI Base candidate evaluation is in `release/REUSE_COMPARISON_EVIDENCE.json`. A fixed 100 mm geometry with observations only through 60 mm makes P3 correctly report no physical edge sample; the candidate helper normalized to observed radius and reported two outer samples with a 7-unit difference. The alpha framework is not a P1 React module, and its installed distribution had no license metadata.
+- `release/SBOM.spdx.json` lists source files and the 28 candidate wheel packages. Only the macOS arm64 CPython 3.11 candidate wheelhouse is present. The source license, company redistribution rights, vulnerability scanner/database, Windows/Linux MCP installs, P1 suite host, company source mappings/approvals, and engineer study remain unqualified.
+- Golden fast evidence: 2 pilot rules pass, 11 full-only rules are deferred, and 6 applicability/criticality decisions remain `NOT_RUN`. The report says `qualifies_release: false`; see `docs/GOLDEN_REUSE_MAPPING.md`.
 
 ## Remaining gates
 
-- `PENDING_INTERNAL`: actual authorized Samsung MCP permissions/bindings, source grants, semantic and relationship mappings, endpoint/auth configuration, target OS/network policy, security and engineering approvals, and the first true-data engineer investigation.
-- `NOT_VERIFIED`: literal R01–R53 and Golden Standard reconciliation. Their authoritative source text is absent from this folder; no requirement text has been invented.
-- `PARTIAL`: target-OS/company-egress qualification, real-data scientific calibration, retrieval relevance, engineer usability/task-time study, and precommitted production thresholds.
-- `PENDING_EXTERNAL`: source redistribution rights and current vulnerability scanning/database review. No root source license or scanner database is supplied locally.
+- P1 must approve C01–C05 capability IDs and a versioned spatial-map renderer contract before actual suite-host integration. The requested changes are recorded in `proposals/CHANGE-002-p3-spatial-map-and-capability-extension.md`.
+- Company-side gates remain `PENDING_INTERNAL`: actual Samsung MCP permissions/tool bindings, data-source grants and semantics, endpoint/auth config, target OS/network policy, approvals, and first true-data engineer investigation.
+- Target-OS/offline and full release security remain partial/pending: only local macOS arm64/Python 3.11.7 evidence exists; public source licensing and current vulnerability review are incomplete.
+- Scientific calibration, retrieval relevance, target thresholds, and engineer usability/task-time studies require approved data and participants.
+- Literal R01–R53 and Golden Standard reconciliation remains `NOT_VERIFIED`; authoritative text is absent from this folder and no requirement text has been fabricated.
 
 ## Evidence paths
 
-The machine-readable gate ledger is `release/GATE_REPORT.json`; per-gate statuses also appear in `qualification/external_gates.csv`. Rebuild and offline test output is recorded in `release/PACKAGE_QUALIFICATION.json`, with the ZIP SHA-256 sidecar in `release/p3-candidate-20261122.zip.sha256`. Host-only egress evidence is `release/OFFLINE_RUNTIME_EVIDENCE.json`.
+Machine-readable gates: `release/GATE_REPORT.json` and `qualification/external_gates.csv`. Local test records: `release/LOCAL_TEST_EVIDENCE.json`, `release/LOCAL_TEST_LOG.txt`, and `release/LOCAL_UI_EVIDENCE.json`. Scientific records: `release/CRITICAL_CASE_EVIDENCE.json`, `release/SCIENTIFIC_PERFORMANCE_BENCHMARK.json`, and `release/REUSE_COMPARISON_EVIDENCE.json`. Offline SDK and host-egress records: `release/PACKAGE_QUALIFICATION.json` and `release/OFFLINE_RUNTIME_EVIDENCE.json`.
