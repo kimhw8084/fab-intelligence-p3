@@ -1,0 +1,201 @@
+{
+  "schema": "golden-evidence/v0.1",
+  "generated_at_utc": "2026-11-23T04:11:10.751475+00:00",
+  "golden_version": "0.1.0-dev",
+  "rules_sha256": "ce47462f54550bc60b9d30989bd56825257bd21f6b8721d1b28855dd58e61449",
+  "project_manifest_sha256": "04f122e8f82f5d7cc1b94853a1bdfa827744a323bf8a410e96d488c55c24211e",
+  "project": "local-project",
+  "mode": "FULL",
+  "qualifies_release": false,
+  "blocking_rule_ids": [
+    "AI-001",
+    "API-001",
+    "DATA-001",
+    "DB-001",
+    "JOBS-001",
+    "MCP-001",
+    "OPS-001",
+    "PY-003",
+    "REL-001",
+    "SEC-001",
+    "UI-001",
+    "UI-002",
+    "WEB-001",
+    "WEB-002"
+  ],
+  "rules_count": 19,
+  "results": [
+    {
+      "rule_id": "GOLD-001",
+      "title": "Project manifest and Golden release pin",
+      "status": "PASS",
+      "mandatory": true,
+      "stage": "fast",
+      "evidence": "Manifest schema and release pin validated.",
+      "duration_ms": 0.0
+    },
+    {
+      "rule_id": "GOLD-002",
+      "title": "Project instructions and usage README",
+      "status": "PASS",
+      "mandatory": true,
+      "stage": "full",
+      "evidence": "README.md exists.",
+      "duration_ms": 0.01
+    },
+    {
+      "rule_id": "GOLD-003",
+      "title": "Version-controlled project worktree",
+      "status": "PASS",
+      "mandatory": true,
+      "stage": "full",
+      "evidence": "Git worktree detected.",
+      "duration_ms": 14.37
+    },
+    {
+      "rule_id": "PY-001",
+      "title": "Python syntax validation (AST)",
+      "status": "PASS",
+      "mandatory": true,
+      "stage": "fast",
+      "evidence": "AST-parsed 40 Python source files.",
+      "duration_ms": 33.99
+    },
+    {
+      "rule_id": "PY-002",
+      "title": "Python tests (real command)",
+      "status": "PASS",
+      "mandatory": true,
+      "stage": "full",
+      "evidence": "Exit=0; python test runner allowlist; argv_sha256=d268bb2f6a9981218caa602a101cea3c8842dd41f4ad768ac0fd16575ce068a9; executable_sha256=8fe8443218a147c3d426ab700346cc390331b815355ee9bdc8e3da2b2c0b22b0; output_bytes=130; output_sha256=f63271119cac8ed7c09c5247327a27517060221e8fa780bb199a0aecc8810e73; runner_sha256=50a6be283e579114ac629808ba6a2f73f8f9f590ac84c25a4bbdaf4a838dc0bd; tests_run=77; tests_passed=63; tests_skipped=14; test_result_sha256=5d4a962ea896cbd0d5cdbf04b73a9a406eaa7b9f9e141d30c56beff658a513af",
+      "duration_ms": 807.26
+    },
+    {
+      "rule_id": "PY-003",
+      "title": "Python lint (approved Ruff)",
+      "status": "NOT_RUN",
+      "mandatory": true,
+      "stage": "full",
+      "evidence": "No approved command configured for 'python_lint'; a PASS is not claimed.",
+      "duration_ms": 0.01
+    },
+    {
+      "rule_id": "WEB-001",
+      "title": "TypeScript static validation",
+      "status": "NOT_RUN",
+      "mandatory": true,
+      "stage": "full",
+      "evidence": "No approved command configured for 'ts_typecheck'; a PASS is not claimed.",
+      "duration_ms": 0.0
+    },
+    {
+      "rule_id": "WEB-002",
+      "title": "TypeScript/component tests",
+      "status": "NOT_RUN",
+      "mandatory": true,
+      "stage": "full",
+      "evidence": "No approved command configured for 'web_tests'; a PASS is not claimed.",
+      "duration_ms": 0.0
+    },
+    {
+      "rule_id": "UI-001",
+      "title": "UI contract and interaction tests",
+      "status": "NOT_RUN",
+      "mandatory": true,
+      "stage": "full",
+      "evidence": "No approved command configured for 'ui_contracts'; a PASS is not claimed.",
+      "duration_ms": 0.0
+    },
+    {
+      "rule_id": "UI-002",
+      "title": "Real-browser UX and accessibility evaluation",
+      "status": "NOT_RUN",
+      "mandatory": true,
+      "stage": "full",
+      "evidence": "No approved command configured for 'browser_tests'; a PASS is not claimed.",
+      "duration_ms": 0.0
+    },
+    {
+      "rule_id": "API-001",
+      "title": "API contracts and error behavior",
+      "status": "NOT_RUN",
+      "mandatory": true,
+      "stage": "full",
+      "evidence": "Applicability evidence missing for capabilities ['api']; false declarations alone do not prove non-applicability.",
+      "duration_ms": 0.0
+    },
+    {
+      "rule_id": "DB-001",
+      "title": "Database integrity and migration tests",
+      "status": "NOT_RUN",
+      "mandatory": true,
+      "stage": "full",
+      "evidence": "Applicability evidence missing for capabilities ['database']; false declarations alone do not prove non-applicability.",
+      "duration_ms": 0.0
+    },
+    {
+      "rule_id": "SEC-001",
+      "title": "Secrets and security audit",
+      "status": "NOT_RUN",
+      "mandatory": true,
+      "stage": "full",
+      "evidence": "No approved command configured for 'security_scan'; a PASS is not claimed.",
+      "duration_ms": 0.0
+    },
+    {
+      "rule_id": "OPS-001",
+      "title": "Telemetry/logging/alerting validation",
+      "status": "NOT_RUN",
+      "mandatory": true,
+      "stage": "full",
+      "evidence": "Applicability evidence missing for capabilities ['observability']; false declarations alone do not prove non-applicability.",
+      "duration_ms": 0.0
+    },
+    {
+      "rule_id": "JOBS-001",
+      "title": "Queue and job/idempotency evaluation",
+      "status": "NOT_RUN",
+      "mandatory": true,
+      "stage": "full",
+      "evidence": "Applicability evidence missing for capabilities ['jobs']; false declarations alone do not prove non-applicability.",
+      "duration_ms": 0.0
+    },
+    {
+      "rule_id": "MCP-001",
+      "title": "MCP permission and protocol checks",
+      "status": "NOT_RUN",
+      "mandatory": true,
+      "stage": "full",
+      "evidence": "No approved command configured for 'mcp_tests'; a PASS is not claimed.",
+      "duration_ms": 0.0
+    },
+    {
+      "rule_id": "AI-001",
+      "title": "Agentic/tool-use evaluation",
+      "status": "NOT_RUN",
+      "mandatory": true,
+      "stage": "full",
+      "evidence": "Applicability evidence missing for capabilities ['ai']; false declarations alone do not prove non-applicability.",
+      "duration_ms": 0.0
+    },
+    {
+      "rule_id": "DATA-001",
+      "title": "Scientific/analytics correctness tests",
+      "status": "NOT_RUN",
+      "mandatory": true,
+      "stage": "full",
+      "evidence": "No approved command configured for 'data_tests'; a PASS is not claimed.",
+      "duration_ms": 0.0
+    },
+    {
+      "rule_id": "REL-001",
+      "title": "Production criticality recovery drill",
+      "status": "NOT_RUN",
+      "mandatory": true,
+      "stage": "full",
+      "evidence": "Criticality is below this rule scope; independent owner applicability evidence is missing.",
+      "duration_ms": 0.0
+    }
+  ],
+  "disclaimer": "Local deterministic evidence only. No human/company sign-off implied."
+}

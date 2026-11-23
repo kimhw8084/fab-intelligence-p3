@@ -1,4 +1,4 @@
-$ /opt/anaconda3/bin/python -m unittest discover -s tests -v
+$ python -m unittest discover -s tests -v
 exit=0
 test_bootstrap_cannot_fake_internal (test_contracts.ContractTests.test_bootstrap_cannot_fake_internal) ... ok
 test_bounded_reads (test_contracts.ContractTests.test_bounded_reads) ... ok
@@ -10,24 +10,21 @@ test_deterministic (test_engine.EngineCase.test_deterministic) ... ok
 test_fixed_negative_oracle (test_engine.EngineCase.test_fixed_negative_oracle) ... ok
 test_fixed_positive_oracle (test_engine.EngineCase.test_fixed_positive_oracle) ... ok
 test_never_claim_caused_or_control (test_engine.EngineCase.test_never_claim_caused_or_control) ... ok
-test_adapter_cancellation_is_cooperative_and_does_not_fake_acknowledgement (test_mcp_adapter.MCPReadOnlyAdapterTests.test_adapter_cancellation_is_cooperative_and_does_not_fake_acknowledgement) ... ok
-test_cli_can_discover_a_configured_mock_server (test_mcp_adapter.MCPReadOnlyAdapterTests.test_cli_can_discover_a_configured_mock_server) ... ok
-test_discovery_semantics_relationship_read_and_audit_use_exact_bindings (test_mcp_adapter.MCPReadOnlyAdapterTests.test_discovery_semantics_relationship_read_and_audit_use_exact_bindings) ... ok
-test_environment_auth_is_resolved_without_configuring_secret_values (test_mcp_adapter.MCPReadOnlyAdapterTests.test_environment_auth_is_resolved_without_configuring_secret_values) ... ok
-test_invalid_limits_are_rejected_before_stdio_process_launch (test_mcp_adapter.MCPReadOnlyAdapterTests.test_invalid_limits_are_rejected_before_stdio_process_launch) ... ok
-test_raw_sql_and_broader_permission_context_are_rejected (test_mcp_adapter.MCPReadOnlyAdapterTests.test_raw_sql_and_broader_permission_context_are_rejected) ... ok
-test_site_config_can_run_read_only_discovery_over_streamable_http (test_mcp_adapter.MCPReadOnlyAdapterTests.test_site_config_can_run_read_only_discovery_over_streamable_http) ... ok
-test_template_is_rejected_before_server_process_launch (test_mcp_adapter.MCPReadOnlyAdapterTests.test_template_is_rejected_before_server_process_launch) ... ok
-test_tool_schema_change_after_review_fails_closed (test_mcp_adapter.MCPReadOnlyAdapterTests.test_tool_schema_change_after_review_fails_closed) ... ok
-test_unapproved_sources_and_non_read_only_tools_are_denied (test_mcp_adapter.MCPReadOnlyAdapterTests.test_unapproved_sources_and_non_read_only_tools_are_denied) ... ok
-test_legacy_server_is_detected_and_initialized (test_mcp_client.MCPStdioClientTests.test_legacy_server_is_detected_and_initialized) ... ok
-test_mock_server_uses_utf8_json_lines_only (test_mcp_client.MCPStdioClientTests.test_mock_server_uses_utf8_json_lines_only) ... ok
-test_modern_protocol_discovery_and_typed_mock_tools (test_mcp_client.MCPStdioClientTests.test_modern_protocol_discovery_and_typed_mock_tools) ... ok
-test_stdio_cancel_sends_notification_and_discards_late_response (test_mcp_client.MCPStdioClientTests.test_stdio_cancel_sends_notification_and_discards_late_response) ... ok
-test_transport_bounds_outbound_frames (test_mcp_client.MCPStdioClientTests.test_transport_bounds_outbound_frames) ... ok
-test_http_transport_negotiates_session_auth_and_matches_sse_request_id (test_mcp_client.MCPStreamableHTTPClientTests.test_http_transport_negotiates_session_auth_and_matches_sse_request_id) ... ok
-test_http_transport_rejects_cleartext_non_loopback_and_redirects (test_mcp_client.MCPStreamableHTTPClientTests.test_http_transport_rejects_cleartext_non_loopback_and_redirects) ... ok
-test_http_transport_rejects_mismatched_response_id (test_mcp_client.MCPStreamableHTTPClientTests.test_http_transport_rejects_mismatched_response_id) ... ok
+test_adapter_cancellation_is_cooperative_and_does_not_fake_acknowledgement (test_mcp_adapter.MCPReadOnlyAdapterTests.test_adapter_cancellation_is_cooperative_and_does_not_fake_acknowledgement) ... skipped 'install the local hash-locked MCP SDK candidate to run adapter integration checks'
+test_cli_can_discover_a_configured_mock_server (test_mcp_adapter.MCPReadOnlyAdapterTests.test_cli_can_discover_a_configured_mock_server) ... skipped 'install the local hash-locked MCP SDK candidate to run adapter integration checks'
+test_discovery_semantics_relationship_read_and_audit_use_exact_bindings (test_mcp_adapter.MCPReadOnlyAdapterTests.test_discovery_semantics_relationship_read_and_audit_use_exact_bindings) ... skipped 'install the local hash-locked MCP SDK candidate to run adapter integration checks'
+test_environment_auth_is_resolved_without_configuring_secret_values (test_mcp_adapter.MCPReadOnlyAdapterTests.test_environment_auth_is_resolved_without_configuring_secret_values) ... skipped 'install the local hash-locked MCP SDK candidate to run adapter integration checks'
+test_invalid_limits_are_rejected_before_stdio_process_launch (test_mcp_adapter.MCPReadOnlyAdapterTests.test_invalid_limits_are_rejected_before_stdio_process_launch) ... skipped 'install the local hash-locked MCP SDK candidate to run adapter integration checks'
+test_raw_sql_and_broader_permission_context_are_rejected (test_mcp_adapter.MCPReadOnlyAdapterTests.test_raw_sql_and_broader_permission_context_are_rejected) ... skipped 'install the local hash-locked MCP SDK candidate to run adapter integration checks'
+test_site_config_can_run_read_only_discovery_over_streamable_http (test_mcp_adapter.MCPReadOnlyAdapterTests.test_site_config_can_run_read_only_discovery_over_streamable_http) ... skipped 'install the local hash-locked MCP SDK candidate to run adapter integration checks'
+test_template_is_rejected_before_server_process_launch (test_mcp_adapter.MCPReadOnlyAdapterTests.test_template_is_rejected_before_server_process_launch) ... skipped 'install the local hash-locked MCP SDK candidate to run adapter integration checks'
+test_tool_schema_change_after_review_fails_closed (test_mcp_adapter.MCPReadOnlyAdapterTests.test_tool_schema_change_after_review_fails_closed) ... skipped 'install the local hash-locked MCP SDK candidate to run adapter integration checks'
+test_unapproved_sources_and_non_read_only_tools_are_denied (test_mcp_adapter.MCPReadOnlyAdapterTests.test_unapproved_sources_and_non_read_only_tools_are_denied) ... skipped 'install the local hash-locked MCP SDK candidate to run adapter integration checks'
+test_cleartext_mcp_http_is_loopback_only (test_mcp_client.MCPClientSDKTests.test_cleartext_mcp_http_is_loopback_only) ... ok
+test_official_sdk_cancellation_stops_waiting_without_claiming_remote_ack (test_mcp_client.MCPClientSDKTests.test_official_sdk_cancellation_stops_waiting_without_claiming_remote_ack) ... skipped 'install the local hash-locked MCP SDK candidate to run transport integration checks'
+test_official_sdk_stdio_discovery_tool_listing_and_read_only_call (test_mcp_client.MCPClientSDKTests.test_official_sdk_stdio_discovery_tool_listing_and_read_only_call) ... skipped 'install the local hash-locked MCP SDK candidate to run transport integration checks'
+test_official_sdk_uses_legacy_negotiation_when_server_requires_it (test_mcp_client.MCPClientSDKTests.test_official_sdk_uses_legacy_negotiation_when_server_requires_it) ... skipped 'install the local hash-locked MCP SDK candidate to run transport integration checks'
+test_official_sdk_streamable_http_uses_scoped_auth (test_mcp_client.MCPStreamableHTTPSDKTests.test_official_sdk_streamable_http_uses_scoped_auth) ... skipped 'install the local hash-locked MCP SDK candidate to run transport integration checks'
 test_anomaly_holdout_rejects_lot_leakage_and_future_baseline (test_p3_integrated.AnomalyAndAssociationTests.test_anomaly_holdout_rejects_lot_leakage_and_future_baseline) ... ok
 test_anomaly_refuses_incompatible_sampling_mask (test_p3_integrated.AnomalyAndAssociationTests.test_anomaly_refuses_incompatible_sampling_mask) ... ok
 test_anomaly_requires_holdout_and_corrects_for_multiple_sites (test_p3_integrated.AnomalyAndAssociationTests.test_anomaly_requires_holdout_and_corrects_for_multiple_sites) ... ok
@@ -63,12 +60,12 @@ test_unknown_orientation_preserves_orientation_independent_features (test_p3_int
 test_unverified_coordinates_refuse_spatial_claim (test_p3_integrated.SpatialFingerprintTests.test_unverified_coordinates_refuse_spatial_claim) ... ok
 test_one_hundred_seeded_fingerprints_match_independent_arithmetic (test_p3_seeded_oracles.SeededOracleTests.test_one_hundred_seeded_fingerprints_match_independent_arithmetic) ... ok
 test_uniform_value_shift_does_not_change_spatial_difference (test_p3_seeded_oracles.SeededOracleTests.test_uniform_value_shift_does_not_change_spatial_difference) ... ok
-test_api_rejects_bad_json_shape_and_missing_route (test_p3_web.LocalWorkspaceTests.test_api_rejects_bad_json_shape_and_missing_route) ... ok
-test_api_rejects_cross_origin_posts (test_p3_web.LocalWorkspaceTests.test_api_rejects_cross_origin_posts) ... ok
-test_api_requires_utf8_json (test_p3_web.LocalWorkspaceTests.test_api_requires_utf8_json) ... ok
-test_api_returns_deterministic_evidence_and_refuses_internal_mode (test_p3_web.LocalWorkspaceTests.test_api_returns_deterministic_evidence_and_refuses_internal_mode) ... ok
-test_cancel_request_is_bounded_and_stops_matching_analysis (test_p3_web.LocalWorkspaceTests.test_cancel_request_is_bounded_and_stops_matching_analysis) ... ok
-test_ui_and_example_are_local_and_no_store (test_p3_web.LocalWorkspaceTests.test_ui_and_example_are_local_and_no_store) ... ok
+test_api_rejects_bad_json_shape_and_missing_route (test_p3_web.HeadlessApiContractFixtureTests.test_api_rejects_bad_json_shape_and_missing_route) ... ok
+test_api_rejects_cross_origin_posts (test_p3_web.HeadlessApiContractFixtureTests.test_api_rejects_cross_origin_posts) ... ok
+test_api_requires_utf8_json (test_p3_web.HeadlessApiContractFixtureTests.test_api_requires_utf8_json) ... ok
+test_api_returns_deterministic_evidence_and_refuses_internal_mode (test_p3_web.HeadlessApiContractFixtureTests.test_api_returns_deterministic_evidence_and_refuses_internal_mode) ... ok
+test_cancel_request_is_bounded_and_stops_matching_analysis (test_p3_web.HeadlessApiContractFixtureTests.test_cancel_request_is_bounded_and_stops_matching_analysis) ... ok
+test_headless_api_has_no_competing_product_shell (test_p3_web.HeadlessApiContractFixtureTests.test_headless_api_has_no_competing_product_shell) ... ok
 test_empty_capture_stays_pending_internal (test_preflight.InternalPreflightTests.test_empty_capture_stays_pending_internal) ... ok
 test_even_complete_capture_is_only_ready_for_review (test_preflight.InternalPreflightTests.test_even_complete_capture_is_only_ready_for_review) ... ok
 test_template_lists_gaps_without_faking_readiness (test_preflight.InternalPreflightTests.test_template_lists_gaps_without_faking_readiness) ... ok
@@ -77,15 +74,17 @@ test_no_remote_frontend_assets (test_schema_and_ui.SourceContractTests.test_no_r
 test_schema_files_identify_version (test_schema_and_ui.SourceContractTests.test_schema_files_identify_version) ... ok
 test_edge_center_fixed (test_scientific_baseline.SpecializedTests.test_edge_center_fixed) ... ok
 test_no_fabricated_unobserved_region (test_scientific_baseline.SpecializedTests.test_no_fabricated_unobserved_region) ... ok
+test_all_bundled_wheel_and_license_hashes_verify (test_supply_chain_audit.VendorLicenseAuditTests.test_all_bundled_wheel_and_license_hashes_verify) ... ok
+test_wheel_hash_mismatch_fails_closed (test_supply_chain_audit.VendorLicenseAuditTests.test_wheel_hash_mismatch_fails_closed) ... ok
 test_bundled_full_workflow_matches_generator_and_runs_all_capabilities (test_synthetic_workflow.SyntheticWorkflowTests.test_bundled_full_workflow_matches_generator_and_runs_all_capabilities) ... ok
 
 ----------------------------------------------------------------------
-Ran 78 tests in 3.340s
+Ran 77 tests in 0.748s
 
-OK
+OK (skipped=14)
 
 
-$ /opt/anaconda3/bin/python -m fabintel demo
+$ python -m fabintel demo
 exit=0
 {
   "artifacts": [
@@ -809,7 +808,7 @@ exit=0
 }
 
 
-$ /opt/anaconda3/bin/python -m fabintel qualify-internal
+$ python -m fabintel qualify-internal
 exit=0
 {
   "checks": [],
@@ -822,5 +821,86 @@ exit=0
 }
 
 
-$ /opt/homebrew/bin/node --check ui/app.js
+$ node <P1_TOOLCHAIN>/node_modules/vitest/vitest.mjs run --config <P1_TOOLCHAIN>/vite.config.ts <P3>/products/p3/ui/P3Panel.test.tsx
 exit=0
+
+ RUN  v5.1.1 <P3>
+
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  22:11:10
+   Duration  323ms (environment 60%, import 24%, tests 13%, transform 2%, worker 1%)
+
+
+
+$ node <P1_TOOLCHAIN>/node_modules/typescript/bin/tsc --noEmit --strict --esModuleInterop --jsx react-jsx --moduleResolution bundler --module esnext --target es2022 --lib es2022,dom --skipLibCheck products/p3/ui/P3Panel.tsx products/p3/ui/P3Panel.test.tsx
+exit=0
+
+
+$ python -m venv <MCP_TEMP>/venv
+exit=0
+
+
+$ python -m pip install --no-index --disable-pip-version-check --find-links <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse --require-hashes -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock
+exit=0
+Looking in links: <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/annotated_types-0.8.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 1))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/anyio-4.16.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 2))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/attrs-26.1.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 3))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/cffi-2.1.1-cp311-cp311-macosx_11_0_arm64.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 4))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/click-8.5.1-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 5))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/cryptography-50.0.2-cp311-abi3-macosx_11_0_arm64.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 6))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/h11-0.16.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 7))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/httpcore2-2.16.2-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 8))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/httpx2-2.16.2-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 9))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/idna-3.20-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 10))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/jsonschema-4.26.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 11))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/jsonschema_specifications-2025.9.1-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 12))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/mcp-2.3.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 13))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/mcp_types-2.3.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 14))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/opentelemetry_api-1.45.2-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 15))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/pycparser-3.12-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 16))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/pydantic-2.14.4-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 17))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/pydantic_core-2.50.5-cp311-cp311-macosx_11_0_arm64.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 18))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/pyjwt-2.15.1-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 19))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/python_multipart-0.0.34-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 20))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/referencing-0.37.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 21))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/rpds_py-2026.9.1-cp311-cp311-macosx_11_0_arm64.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 22))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/sse_starlette-3.7.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 23))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/starlette-1.10.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 24))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/truststore-0.10.5-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 25))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/typing_extensions-4.16.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 26))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/typing_inspection-0.4.5-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 27))
+Processing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/uvicorn-0.54.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 28))
+Installing collected packages: typing_extensions, truststore, rpds-py, python-multipart, PyJWT, pycparser, idna, h11, click, attrs, annotated-types, uvicorn, typing-inspection, referencing, pydantic_core, opentelemetry-api, httpcore2, cffi, anyio, starlette, pydantic, jsonschema-specifications, httpx2, cryptography, sse-starlette, mcp-types, jsonschema, mcp
+Successfully installed PyJWT-2.15.1 annotated-types-0.8.0 anyio-4.16.0 attrs-26.1.0 cffi-2.1.1 click-8.5.1 cryptography-50.0.2 h11-0.16.0 httpcore2-2.16.2 httpx2-2.16.2 idna-3.20 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 mcp-2.3.0 mcp-types-2.3.0 opentelemetry-api-1.45.2 pycparser-3.12 pydantic-2.14.4 pydantic_core-2.50.5 python-multipart-0.0.34 referencing-0.37.0 rpds-py-2026.9.1 sse-starlette-3.7.0 starlette-1.10.0 truststore-0.10.5 typing-inspection-0.4.5 typing_extensions-4.16.0 uvicorn-0.54.0
+
+
+$ python -m pip check
+exit=0
+No broken requirements found.
+
+
+$ python -m unittest tests.test_mcp_client tests.test_mcp_adapter -v
+exit=0
+test_cleartext_mcp_http_is_loopback_only (tests.test_mcp_client.MCPClientSDKTests.test_cleartext_mcp_http_is_loopback_only) ... ok
+test_official_sdk_cancellation_stops_waiting_without_claiming_remote_ack (tests.test_mcp_client.MCPClientSDKTests.test_official_sdk_cancellation_stops_waiting_without_claiming_remote_ack) ... ok
+test_official_sdk_stdio_discovery_tool_listing_and_read_only_call (tests.test_mcp_client.MCPClientSDKTests.test_official_sdk_stdio_discovery_tool_listing_and_read_only_call) ... ok
+test_official_sdk_uses_legacy_negotiation_when_server_requires_it (tests.test_mcp_client.MCPClientSDKTests.test_official_sdk_uses_legacy_negotiation_when_server_requires_it) ... ok
+test_official_sdk_streamable_http_uses_scoped_auth (tests.test_mcp_client.MCPStreamableHTTPSDKTests.test_official_sdk_streamable_http_uses_scoped_auth) ... ok
+test_adapter_cancellation_is_cooperative_and_does_not_fake_acknowledgement (tests.test_mcp_adapter.MCPReadOnlyAdapterTests.test_adapter_cancellation_is_cooperative_and_does_not_fake_acknowledgement) ... ok
+test_cli_can_discover_a_configured_mock_server (tests.test_mcp_adapter.MCPReadOnlyAdapterTests.test_cli_can_discover_a_configured_mock_server) ... ok
+test_discovery_semantics_relationship_read_and_audit_use_exact_bindings (tests.test_mcp_adapter.MCPReadOnlyAdapterTests.test_discovery_semantics_relationship_read_and_audit_use_exact_bindings) ... ok
+test_environment_auth_is_resolved_without_configuring_secret_values (tests.test_mcp_adapter.MCPReadOnlyAdapterTests.test_environment_auth_is_resolved_without_configuring_secret_values) ... ok
+test_invalid_limits_are_rejected_before_stdio_process_launch (tests.test_mcp_adapter.MCPReadOnlyAdapterTests.test_invalid_limits_are_rejected_before_stdio_process_launch) ... ok
+test_raw_sql_and_broader_permission_context_are_rejected (tests.test_mcp_adapter.MCPReadOnlyAdapterTests.test_raw_sql_and_broader_permission_context_are_rejected) ... ok
+test_site_config_can_run_read_only_discovery_over_streamable_http (tests.test_mcp_adapter.MCPReadOnlyAdapterTests.test_site_config_can_run_read_only_discovery_over_streamable_http) ... ok
+test_template_is_rejected_before_server_process_launch (tests.test_mcp_adapter.MCPReadOnlyAdapterTests.test_template_is_rejected_before_server_process_launch) ... ok
+test_tool_schema_change_after_review_fails_closed (tests.test_mcp_adapter.MCPReadOnlyAdapterTests.test_tool_schema_change_after_review_fails_closed) ... ok
+test_unapproved_sources_and_non_read_only_tools_are_denied (tests.test_mcp_adapter.MCPReadOnlyAdapterTests.test_unapproved_sources_and_non_read_only_tools_are_denied) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 2.703s
+
+OK

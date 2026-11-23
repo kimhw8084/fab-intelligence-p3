@@ -1,16 +1,91 @@
 {
   "SPDXID": "SPDXRef-DOCUMENT",
   "creationInfo": {
-    "created": "2026-11-23T01:50:54Z",
+    "created": "2026-11-23T04:11:09Z",
     "creators": [
       "Tool: local-standard-library-supply-chain-audit"
     ]
   },
   "dataLicense": "CC0-1.0",
-  "documentNamespace": "https://spdx.org/spdxdocs/fabintel-p3-15d3237caa3b18b31111b1e26ea4b2033b7f3400ef77d8a50285d2fb1c96fff0",
+  "documentNamespace": "https://spdx.org/spdxdocs/fabintel-p3-7c7dd16872fb19600ca3e42d03d69f2b78e6b82e53d4c11bb852399ae67dc2c5",
   "files": [
     {
       "SPDXID": "SPDXRef-File-1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "8f0e46234aaa5c95a2cc88048e2f6a551fadb466eee474cc99fb4db9f0f72d3c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./.agents/skills/golden-manufacturing-data/SKILL.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-2",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "becd0e2d4403b99e40ddd9fc8e0469efcc66c3b9341d8aad18b3d4474992c35c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./.agents/skills/golden-mcp/SKILL.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-3",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "1cab74af2bdd18c1d42e1f75ee9679c1d73ea940c0ad610fb56d40fabff78954"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./.agents/skills/golden-offline-toolchain/SKILL.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-4",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f1edeaf3c350833a54c0c870c2962ea0a6fdc4427d7862790abe309aa16c1f6f"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./.agents/skills/golden-react/SKILL.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-5",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "2ca9aee3a2c84811e142ce49f0b37ae7a04479ae8e8958121ca84f78cdf65cfd"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./.agents/skills/golden-release/SKILL.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-6",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -25,7 +100,82 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-2",
+      "SPDXID": "SPDXRef-File-7",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "3028c9cd075335bd6fabfe17681dcfa9d9b0d97aa054e0aa86c6465f9c91de51"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./.opencode/skills/golden-manufacturing-data/SKILL.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-8",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "4f9fc1214060bc868722e56104e63730ef4129352d9d7ced09b22f109f8f72b0"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./.opencode/skills/golden-mcp/SKILL.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-9",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "7748789803f326d9e9df67f117035485737ff570b1a57c32b2fb5ab146056ca3"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./.opencode/skills/golden-offline-toolchain/SKILL.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-10",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "be88e909bd41b55712d3372cfe2c5d0a7a9212c6aa2909e70431a0cb768a8336"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./.opencode/skills/golden-react/SKILL.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-11",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "54e09768743cb119ad0dfa3a92b614489ce144e3c3f614fc53067b305b72e11a"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./.opencode/skills/golden-release/SKILL.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-12",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -40,7 +190,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-3",
+      "SPDXID": "SPDXRef-File-13",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -55,7 +205,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-4",
+      "SPDXID": "SPDXRef-File-14",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -70,11 +220,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-5",
+      "SPDXID": "SPDXRef-File-15",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "eb9e37305b958496a2cf6e78bc3dc12b75e80193e2527a700f0a75f12fed5f59"
+          "checksumValue": "a1948efdf2ceb20d0e27e171f0c9c5cec318017f5bfaecb6f0753c5d54b5e7ac"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -85,11 +235,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-6",
+      "SPDXID": "SPDXRef-File-16",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "cd4e48f64bfab39b51c4d12fb1b24583ae9a232b433cea16678c5454ba3cabd9"
+          "checksumValue": "d8ae7f01259c0f672ddd4989a81f0e434ded217d79ae86f9251aa1fb9932c10b"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -100,11 +250,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-7",
+      "SPDXID": "SPDXRef-File-17",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "5fc6ec792be3dc9cd22f1d5c414f478a156b4b81650b92308fc3e6e984d82a3d"
+          "checksumValue": "7ef7da77461d89393565ccd40f2335a399bf48ed076a700d80e3c9cff8333809"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -115,7 +265,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-8",
+      "SPDXID": "SPDXRef-File-18",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -130,7 +280,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-9",
+      "SPDXID": "SPDXRef-File-19",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -145,7 +295,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-10",
+      "SPDXID": "SPDXRef-File-20",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -160,7 +310,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-11",
+      "SPDXID": "SPDXRef-File-21",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -175,7 +325,22 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-12",
+      "SPDXID": "SPDXRef-File-22",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "44bcfbe5bb7693486d6d39868e5a85c137279a8d2a599101385e4db2658fa36d"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./docs/ARCHITECTURE_REUSE_DECISIONS.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-23",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -190,7 +355,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-13",
+      "SPDXID": "SPDXRef-File-24",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -205,7 +370,22 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-14",
+      "SPDXID": "SPDXRef-File-25",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "1c5f88ad698ef502d76a97dc54b8a50e4753577e158c19c57a8a35efeee97eab"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./docs/GOLDEN_REUSE_MAPPING.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-26",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -220,11 +400,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-15",
+      "SPDXID": "SPDXRef-File-27",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "249846aad0becb5b4995ed31b1540c420f5f2224a7460239f2a2d1260c1c606e"
+          "checksumValue": "0cfe8dda4c37bfdcadb5fc0cc72891328d3995b87ac50d2bac25b317fa5de50f"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -235,7 +415,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-16",
+      "SPDXID": "SPDXRef-File-28",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -250,11 +430,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-17",
+      "SPDXID": "SPDXRef-File-29",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "aa60163be0aa94c68c46001ad66a912986a7336da9b58152b857bdf202716009"
+          "checksumValue": "410a8b8808bdc46499349cd8c6f096b23e749800d0b9529cca936fc86ff34cfb"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -265,7 +445,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-18",
+      "SPDXID": "SPDXRef-File-30",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -280,7 +460,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-19",
+      "SPDXID": "SPDXRef-File-31",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -295,7 +475,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-20",
+      "SPDXID": "SPDXRef-File-32",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -310,7 +490,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-21",
+      "SPDXID": "SPDXRef-File-33",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -325,7 +505,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-22",
+      "SPDXID": "SPDXRef-File-34",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -340,7 +520,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-23",
+      "SPDXID": "SPDXRef-File-35",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -355,7 +535,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-24",
+      "SPDXID": "SPDXRef-File-36",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -370,11 +550,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-25",
+      "SPDXID": "SPDXRef-File-37",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "ed1879c5641d3b5bd022b369bbd0e44696c8b0de21ca886de5c9eb1dd831930c"
+          "checksumValue": "8a0dbd3e43767ca1a68533ef15fdf7af5d199bd3c77c01fe39a78dffc1b8e467"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -385,7 +565,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-26",
+      "SPDXID": "SPDXRef-File-38",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -400,7 +580,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-27",
+      "SPDXID": "SPDXRef-File-39",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -415,7 +595,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-28",
+      "SPDXID": "SPDXRef-File-40",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -430,11 +610,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-29",
+      "SPDXID": "SPDXRef-File-41",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "29f11424ee483bf465bc1c9ee10cd4e226c392453330eb8788d3bbe306e5d9fa"
+          "checksumValue": "fa5b6dff3acc2d2649104b92173eb11d960e580a6718f6470665b4277f832812"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -445,7 +625,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-30",
+      "SPDXID": "SPDXRef-File-42",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -460,11 +640,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-31",
+      "SPDXID": "SPDXRef-File-43",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "4a2cdec5d0cc2bacef7dd95784917f6ef7cbef4cb0f487332b6966790486c769"
+          "checksumValue": "1c5127156c4244951d1679fb68ba61188f8db8723cbbdfb24261bd7fa018693f"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -475,11 +655,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-32",
+      "SPDXID": "SPDXRef-File-44",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "6c28231bb12d462e786814768adecd93d6885f778a44961d458d577a5023ed38"
+          "checksumValue": "113de33f0bd7aab868e8502cebedca9cb3af85c8a7e3d786fccc33114a7c05a7"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -490,37 +670,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-33",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "0ad8d87bd0c07002fdebfe8f2fcd3c31494035b5d7727ff88da3e3c7201c913d"
-        }
-      ],
-      "copyrightText": "NOASSERTION",
-      "fileName": "./fabintel/mcp_mock_server.py",
-      "licenseConcluded": "NOASSERTION",
-      "licenseInfoInFiles": [
-        "NOASSERTION"
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-File-34",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "e72fe85913b9f87d138f5fe0b480b6eaff1d289b099a9600c4f823eed2d46f2e"
-        }
-      ],
-      "copyrightText": "NOASSERTION",
-      "fileName": "./fabintel/mock_mcp.py",
-      "licenseConcluded": "NOASSERTION",
-      "licenseInfoInFiles": [
-        "NOASSERTION"
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-File-35",
+      "SPDXID": "SPDXRef-File-45",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -535,7 +685,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-36",
+      "SPDXID": "SPDXRef-File-46",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -550,22 +700,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-37",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "d1b75483b20bc5e392b7586cd587752e47087e0a73228255e9c5846ce772b0c5"
-        }
-      ],
-      "copyrightText": "NOASSERTION",
-      "fileName": "./fabintel/web.py",
-      "licenseConcluded": "NOASSERTION",
-      "licenseInfoInFiles": [
-        "NOASSERTION"
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-File-38",
+      "SPDXID": "SPDXRef-File-47",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -580,7 +715,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-39",
+      "SPDXID": "SPDXRef-File-48",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -595,7 +730,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-40",
+      "SPDXID": "SPDXRef-File-49",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -610,7 +745,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-41",
+      "SPDXID": "SPDXRef-File-50",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -625,7 +760,22 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-42",
+      "SPDXID": "SPDXRef-File-51",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "04f122e8f82f5d7cc1b94853a1bdfa827744a323bf8a410e96d488c55c24211e"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./golden.project.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-52",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -640,11 +790,26 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-43",
+      "SPDXID": "SPDXRef-File-53",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "15d3237caa3b18b31111b1e26ea4b2033b7f3400ef77d8a50285d2fb1c96fff0"
+          "checksumValue": "ffb94213d705db3986229b45a4cd93479e3f44551bbbd81d726bace8b9b165ab"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./integration/p3-suite-ui-module.v1.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-54",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "7c7dd16872fb19600ca3e42d03d69f2b78e6b82e53d4c11bb852399ae67dc2c5"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -655,7 +820,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-44",
+      "SPDXID": "SPDXRef-File-55",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -670,7 +835,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-45",
+      "SPDXID": "SPDXRef-File-56",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -685,7 +850,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-46",
+      "SPDXID": "SPDXRef-File-57",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -700,11 +865,56 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-47",
+      "SPDXID": "SPDXRef-File-58",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "935c8e53b69155a6f983c2397a419e483ea2408f83164e7e561eb7055abf15f8"
+          "checksumValue": "51b2330cf14e869ede0ce1f769b15e076287df168c3783396bdce50ea3d7a890"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./products/p3/ui/P3Panel.test.tsx",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-59",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "cbf1369303c26a96bdfc27c31d15d070bfd02766e90b9265762ee855e11f309f"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./products/p3/ui/P3Panel.tsx",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-60",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "294ececca35fb51dcd651c836c046702309b682ea11ae743a760aa988d82294e"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./products/p3/ui/package.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-61",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "ae469902c7038bc54f3cea5453b2310766dafdfa7ecef8bdacbaa9aea0723dbd"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -715,7 +925,22 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-48",
+      "SPDXID": "SPDXRef-File-62",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "89181e0ff220a6cceab05759b37f9f657e0d350e0f90a393b372711f85ae12c4"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./proposals/CHANGE-002-p3-spatial-map-and-capability-extension.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-63",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -730,11 +955,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-49",
+      "SPDXID": "SPDXRef-File-64",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "2626117be7caeb5e1344bc4ba9f52857eccddedb8258348d0ca6e4c311efd667"
+          "checksumValue": "b84c09f4fcfe542fe1ba0950a5eb4113a07d7948507cb0396cd81ec6a1726c3c"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -745,11 +970,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-50",
+      "SPDXID": "SPDXRef-File-65",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "ad43ba2ffa851eec0d80349ac31bb81c4fbdbb1d5d89830cdb97ad927ec4800f"
+          "checksumValue": "ec78dde8d9fdc1b464ec594ba1deb3d7da13f1bdcc2c226dc3e0b2093c48e5ea"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -760,7 +985,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-51",
+      "SPDXID": "SPDXRef-File-66",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -775,7 +1000,22 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-52",
+      "SPDXID": "SPDXRef-File-67",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "afb58e0a73dd2b828a32622846db953cf8dd4a7f673148286eadf82b6e87a29e"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/mcp_sdk_offline.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-68",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -790,11 +1030,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-53",
+      "SPDXID": "SPDXRef-File-69",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "f25dda31da7e1db25424ecc6d776e4de885f012641da734ebc0ea104cb765075"
+          "checksumValue": "23e113469144258f0dbfb4a365d6adf90fa96dcc0e870d415c4765244c58e9a1"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -805,7 +1045,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-54",
+      "SPDXID": "SPDXRef-File-70",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -820,11 +1060,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-55",
+      "SPDXID": "SPDXRef-File-71",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "a47c340650b40c81d85ec20c3feed94a8751e454e833c1f8cd0e586dcb6da8df"
+          "checksumValue": "e30f2086f8bef67936b9292237698e2eef0f73c4b65dc0a51358f2d2fb632e8b"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -835,11 +1075,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-56",
+      "SPDXID": "SPDXRef-File-72",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "43915ab36ee473b923b9ff92bf33a04436ce2ac41b20e5896f5d91bee3119755"
+          "checksumValue": "94dee33822a7e69e6a3cf30470baf5586b5320c8abc4a76a73cc1b756266cee8"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -850,11 +1090,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-57",
+      "SPDXID": "SPDXRef-File-73",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "87d07e0c9d1f4fcf558822e82c131b0ed6c6ffc951dd5b2201d561dfe60a9376"
+          "checksumValue": "c60f45c75548d819edf6bc48ce6e10c69984bab8a09dc23b8da359102ad6fd66"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -865,11 +1105,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-58",
+      "SPDXID": "SPDXRef-File-74",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "616799223b57c9953b29ef0f3ebf1580fe9734e168d598a86862026c15483279"
+          "checksumValue": "1c7a78399c7514e36bd0e9cb0d18a2d8abea6b9a04236bf4eb9e64c975c26f9b"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -880,7 +1120,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-59",
+      "SPDXID": "SPDXRef-File-75",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -895,26 +1135,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-60",
+      "SPDXID": "SPDXRef-File-76",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "4a621ec5f977ded106ccff2e3e024f695e79a7ebc990f74495449b1c99ac46be"
-        }
-      ],
-      "copyrightText": "NOASSERTION",
-      "fileName": "./release/LOCAL_UI_EVIDENCE.json",
-      "licenseConcluded": "NOASSERTION",
-      "licenseInfoInFiles": [
-        "NOASSERTION"
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-File-61",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "13886b08477f86b1a7e61776b7176356d7386bc908a01d7ca1e5e82aacf367a8"
+          "checksumValue": "4a6d8d05cc7fc8ab01e64b528f8b6bb4b8ac2f934dfb0efdc38240d71b0f49a6"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -925,11 +1150,26 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-62",
+      "SPDXID": "SPDXRef-File-77",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "6aee2d9edc14cbb36e968323d6b74a31ab80bf3b0d2009efa55f256390aebce3"
+          "checksumValue": "578e88e5ac39273893f9020bdd6e855c94058e388a81dd33bcecbbfc6d686c8c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./release/REUSE_COMPARISON_EVIDENCE.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-78",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "2ee89c4ef6e564e760bc2247c0d7e7400f5518615992b06de8265cf60ead9448"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -940,7 +1180,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-63",
+      "SPDXID": "SPDXRef-File-79",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -955,11 +1195,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-64",
+      "SPDXID": "SPDXRef-File-80",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "b0c593296c0aadb488eb12495a5444769b84effae68da444b7896728d4b34504"
+          "checksumValue": "68f61f4df73e71ea65c6525da5bf14bd6a510cf3d11d07da30ff2c2003461149"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -970,7 +1210,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-65",
+      "SPDXID": "SPDXRef-File-81",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -985,7 +1225,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-66",
+      "SPDXID": "SPDXRef-File-82",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1000,7 +1240,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-67",
+      "SPDXID": "SPDXRef-File-83",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1015,7 +1255,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-68",
+      "SPDXID": "SPDXRef-File-84",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1030,7 +1270,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-69",
+      "SPDXID": "SPDXRef-File-85",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1045,11 +1285,71 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-70",
+      "SPDXID": "SPDXRef-File-86",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "af1430571f12f31fdddf94e98556656568d638fa2e27b33312df6070b9632acf"
+          "checksumValue": "69e15656aa67c4979e9e96d9fdc703dc3f5fcc9fe934f655201e195a9bc63436"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./tests/fixtures/__init__.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-87",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "84d5a6a9245a75761efce34296b592a5e45d409b7d8e1b3f2e4d011db0cfe585"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./tests/fixtures/headless_api.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-88",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "e231ff59e5b3bfe9cc8164a05c9c4c34ca54e06ca5e3545fa8797612f997fe57"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./tests/fixtures/mcp_mock_server.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-89",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "e72fe85913b9f87d138f5fe0b480b6eaff1d289b099a9600c4f823eed2d46f2e"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./tests/fixtures/mock_mcp.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-90",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c8a195bc0ff702b62daddf9a6b1d0c8ccb25ce3c493309741032b971de1a3783"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1060,7 +1360,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-71",
+      "SPDXID": "SPDXRef-File-91",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1075,11 +1375,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-72",
+      "SPDXID": "SPDXRef-File-92",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "54a953ffd817c16a38af95a142ab688fdf059d6c576c3d97186a573f233e6a81"
+          "checksumValue": "78cd583d30052e95a32c62aa980fba06cfc2b4a4bffbb79f2c190840428d98d9"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1090,11 +1390,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-73",
+      "SPDXID": "SPDXRef-File-93",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "128e1b0f11e8ce91336b701bad6dd9aa3250e47f3be9224ce19c63be6b0b16ce"
+          "checksumValue": "927813b64c8309f17d4011074a97997f2c1ac5c83933e9004d80b0d9ec846ce9"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1105,7 +1405,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-74",
+      "SPDXID": "SPDXRef-File-94",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1120,7 +1420,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-75",
+      "SPDXID": "SPDXRef-File-95",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1135,11 +1435,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-76",
+      "SPDXID": "SPDXRef-File-96",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "f26e1a9892022fce0cdb6fa14f58ce7cc05cc7cc92c763df4e13f924a9e8a2f2"
+          "checksumValue": "575347d1cdfe35d133fb9cf764119a891bfa769b304ccf90ae1eeab3e4bebc18"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1150,7 +1450,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-77",
+      "SPDXID": "SPDXRef-File-97",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1165,11 +1465,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-78",
+      "SPDXID": "SPDXRef-File-98",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "36773aabd1b25ef6db4ce3a202c0685840a8ed22a0c217ab26793e13e0b0f65c"
+          "checksumValue": "b8c7508d3b36b0a65dd4b2bb7130ab5b331347f5b92884daac9a652ee45c7b71"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1180,7 +1480,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-79",
+      "SPDXID": "SPDXRef-File-99",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1195,7 +1495,22 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-80",
+      "SPDXID": "SPDXRef-File-100",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "8616a4bf782b079a47670babb2fcc36123a0bc7a4cc67b5ef0b414f094897e4f"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./tests/test_supply_chain_audit.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-101",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1210,30 +1525,495 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-81",
+      "SPDXID": "SPDXRef-File-102",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "b930979d38f0adf3b93c6755c321a12eaf155e5a85072abd162d50ff6a2fcd0a"
+          "checksumValue": "13c474050cf968e5620737d54b807e923eeaac58f0c32ec54d0419c302aad178"
         }
       ],
       "copyrightText": "NOASSERTION",
-      "fileName": "./ui/app.js",
+      "fileName": "./vendor/mcp-sdk-2.3.0/README.md",
       "licenseConcluded": "NOASSERTION",
       "licenseInfoInFiles": [
         "NOASSERTION"
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-82",
+      "SPDXID": "SPDXRef-File-103",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "d2f87af0b1a914e632793bf98041d2f09c6b906597b142400f30512af8608a4c"
+          "checksumValue": "fb480e6acada5ef4eaad00874dcf4db90495376ee45b170a0c628a1d77590cd7"
         }
       ],
       "copyrightText": "NOASSERTION",
-      "fileName": "./ui/index.html",
+      "fileName": "./vendor/mcp-sdk-2.3.0/candidate-manifest.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-104",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "690db79fe6e457b7decf668287b6532e253425479b72d5688de814e0fdd6ed3b"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/cyclonedx.cdx.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-105",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f1c827911f14f02f9eedc662e90360f709bd68ec12c6c42de1f73623c23c050f"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/license-inventory.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-106",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "91bb6e70d813a23f630db5b3956e2755558dbd5c1b25ca6a17dcc5382fd84de7"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-107",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f072f4d804ea359e4eaf198b1af7a8b0943881a87f31bb764f8bf219bb9419e0"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/annotated_types-0.8.0-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-108",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c66ae634e0b8228396b801741beb3294326d4b6102f7bba4041c0dfb58c29026"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/anyio-4.16.0-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-109",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c647aa4a12dfbad9333ca4e71fe62ddc36f4e63b2d260a37a8b83d2f043ac309"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/attrs-26.1.0-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-110",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "398aff33cee2767e3e781d2554c54bd0dff386bb437581e0d8011fde1a942ec1"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/cffi-2.1.1-cp311-cp311-macosx_11_0_arm64.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-111",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "8bb5376d2006950386f8c6427613334a2acadc5f559cb80e638d00b4df957e37"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/click-8.5.1-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-112",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "fa8f5efb344d6908a1ce62f4a24e2e5780f825d6f53f5f50ec5ffacac72936cb"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/cryptography-50.0.2-cp311-abi3-macosx_11_0_arm64.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-113",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "63cf8bbe7522de3bf65932fda1d9c2772064ffb3dae62d55932da54b31cb6c86"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/h11-0.16.0-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-114",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "16051ae2a42f776007543f32de9349a317b23d2cbb4e1456b4bac0e88b87419a"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/httpcore2-2.16.2-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-115",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f05c13aade4c45dbf1c9060647a1058f0acad62398fad96e741269edb33d46f5"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/httpx2-2.16.2-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-116",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/idna-3.20-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-117",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "d489f15263b8d200f8387e64b4c3a75f06629559fb73deb8fdfb525f2dab50ce"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/jsonschema-4.26.0-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-118",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "98802fee3a11ee76ecaca44429fda8a41bff98b00a0f2838151b113f210cc6fe"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/jsonschema_specifications-2025.9.1-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-119",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "dd0c44c089d16453e8ae31a3877a0054d7a2314caaa81f5e0541b9b1734b2377"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/mcp-2.3.0-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-120",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "968efdbdaedfab06adae40d378a34395f1090c5921d4be3c9cde283aaf76d91d"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/mcp_types-2.3.0-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-121",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "2cbd737377e710ee740d261c94e93fa0f08e6d037c18f17513cc0a2d94479a34"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/opentelemetry_api-1.45.2-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-122",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "a076f3f489b39b43ed13563a1dafe42447445bec2e294154ec5c57fcdda4c85e"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/pycparser-3.12-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-123",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "653a2ad9f6d8858529c77c72717d0ea991d6c6837fe683246b2f4b2bbfc3fadc"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/pydantic-2.14.4-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-124",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "40d5da89a632e6c6c938f93fdf54c534882d258a80f51ccfe1650cdedc12e82c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/pydantic_core-2.50.5-cp311-cp311-macosx_11_0_arm64.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-125",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "42d59d631f7768a1028a64c7ff581a9bf7519804daf91fc5b6c56e30eec5e193"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/pyjwt-2.15.1-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-126",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "ebacd224bd686eee2f9aa1066a657affe07435a185834e05e5235e2e59173e91"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/python_multipart-0.0.34-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-127",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/referencing-0.37.0-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-128",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "3231c4c0e521dafa5be0c9f114ee2c2ad46650836f2d72caa86801950c3e7044"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/rpds_py-2026.9.1-cp311-cp311-macosx_11_0_arm64.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-129",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f1d3136caa12d129284fca3d2ded79bc9af943320b6472712955fea52a6d3eea"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/sse_starlette-3.7.0-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-130",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "478c0ab3b4ced6e82719849c118fa406f0278a3499c1a898cd15cd31bdc38ce4"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/starlette-1.10.0-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-131",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "9aaaedaefaf06d8b206278cf8b5012bc897f485a874503501e12d776df78951c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/truststore-0.10.5-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-132",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/typing_extensions-4.16.0-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-133",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "bc210535442b39e1bf2805e0c7a17dfd6a4ace760c84c7f7d16245d23a6b1c39"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/typing_inspection-0.4.5-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-134",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "505bdb0f318731d45f1f712071fc781a8981f6847a31c902c9f5e652d4f67faf"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/uvicorn-0.54.0-py3-none-any.whl",
       "licenseConcluded": "NOASSERTION",
       "licenseInfoInFiles": [
         "NOASSERTION"
@@ -1252,6 +2032,678 @@
       "name": "fab-spatial-yield-intelligence-p3",
       "primaryPackagePurpose": "APPLICATION",
       "versionInfo": "0.2.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-annotated-types-0.8.0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f072f4d804ea359e4eaf198b1af7a8b0943881a87f31bb764f8bf219bb9419e0"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/annotated-types/annotated-types",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/annotated-types@0.8.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "annotated-types",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "0.8.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-anyio-4.16.0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c66ae634e0b8228396b801741beb3294326d4b6102f7bba4041c0dfb58c29026"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/agronholm/anyio",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/anyio@4.16.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "anyio",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "4.16.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-attrs-26.1.0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c647aa4a12dfbad9333ca4e71fe62ddc36f4e63b2d260a37a8b83d2f043ac309"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/attrs@26.1.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "attrs",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "26.1.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-cffi-2.1.1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "398aff33cee2767e3e781d2554c54bd0dff386bb437581e0d8011fde1a942ec1"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/python-cffi/cffi",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/cffi@2.1.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT-0",
+      "name": "cffi",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "2.1.1"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-click-8.5.1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "8bb5376d2006950386f8c6427613334a2acadc5f559cb80e638d00b4df957e37"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/pallets/click/",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/click@8.5.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "BSD-3-Clause",
+      "name": "click",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "8.5.1"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-cryptography-50.0.2",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "fa8f5efb344d6908a1ce62f4a24e2e5780f825d6f53f5f50ec5ffacac72936cb"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/pyca/cryptography",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/cryptography@50.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "Apache-2.0 OR BSD-3-Clause",
+      "name": "cryptography",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "50.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-h11-0.16.0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "63cf8bbe7522de3bf65932fda1d9c2772064ffb3dae62d55932da54b31cb6c86"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/h11@0.16.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "h11",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "0.16.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-httpcore2-2.16.2",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "16051ae2a42f776007543f32de9349a317b23d2cbb4e1456b4bac0e88b87419a"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/pydantic/httpx2",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/httpcore2@2.16.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "BSD-3-Clause",
+      "name": "httpcore2",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "2.16.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-httpx2-2.16.2",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f05c13aade4c45dbf1c9060647a1058f0acad62398fad96e741269edb33d46f5"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/pydantic/httpx2",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/httpx2@2.16.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "BSD-3-Clause",
+      "name": "httpx2",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "2.16.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-idna-3.20",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/kjd/idna",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/idna@3.20",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "BSD-3-Clause",
+      "name": "idna",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "3.20"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-jsonschema-4.26.0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "d489f15263b8d200f8387e64b4c3a75f06629559fb73deb8fdfb525f2dab50ce"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/python-jsonschema/jsonschema",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/jsonschema@4.26.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "jsonschema",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "4.26.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-jsonschema-specifications-2025.9.1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "98802fee3a11ee76ecaca44429fda8a41bff98b00a0f2838151b113f210cc6fe"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/python-jsonschema/jsonschema-specifications",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/jsonschema-specifications@2025.9.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "jsonschema-specifications",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "2025.9.1"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-mcp-2.3.0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "dd0c44c089d16453e8ae31a3877a0054d7a2314caaa81f5e0541b9b1734b2377"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://modelcontextprotocol.io",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/mcp@2.3.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "mcp",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "2.3.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-mcp-types-2.3.0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "968efdbdaedfab06adae40d378a34395f1090c5921d4be3c9cde283aaf76d91d"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://modelcontextprotocol.io",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/mcp-types@2.3.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "mcp-types",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "2.3.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-opentelemetry-api-1.45.2",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "2cbd737377e710ee740d261c94e93fa0f08e6d037c18f17513cc0a2d94479a34"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/open-telemetry/opentelemetry-python/tree/main/opentelemetry-api",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/opentelemetry-api@1.45.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "Apache-2.0",
+      "name": "opentelemetry-api",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "1.45.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-pycparser-3.12",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "a076f3f489b39b43ed13563a1dafe42447445bec2e294154ec5c57fcdda4c85e"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/eliben/pycparser",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/pycparser@3.12",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "BSD-3-Clause",
+      "name": "pycparser",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "3.12"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-pydantic-2.14.4",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "653a2ad9f6d8858529c77c72717d0ea991d6c6837fe683246b2f4b2bbfc3fadc"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/pydantic/pydantic",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/pydantic@2.14.4",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "pydantic",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "2.14.4"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-pydantic-core-2.50.5",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "40d5da89a632e6c6c938f93fdf54c534882d258a80f51ccfe1650cdedc12e82c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/pydantic",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/pydantic-core@2.50.5",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "pydantic_core",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "2.50.5"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-PyJWT-2.15.1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "42d59d631f7768a1028a64c7ff581a9bf7519804daf91fc5b6c56e30eec5e193"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/jpadilla/pyjwt",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/pyjwt@2.15.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "PyJWT",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "2.15.1"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-python-multipart-0.0.34",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "ebacd224bd686eee2f9aa1066a657affe07435a185834e05e5235e2e59173e91"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/Kludex/python-multipart",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/python-multipart@0.0.34",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "Apache-2.0",
+      "name": "python-multipart",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "0.0.34"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-referencing-0.37.0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/python-jsonschema/referencing",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/referencing@0.37.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "referencing",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "0.37.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-rpds-py-2026.9.1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "3231c4c0e521dafa5be0c9f114ee2c2ad46650836f2d72caa86801950c3e7044"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/crate-py/rpds",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/rpds-py@2026.9.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "rpds-py",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "2026.9.1"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-sse-starlette-3.7.0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f1d3136caa12d129284fca3d2ded79bc9af943320b6472712955fea52a6d3eea"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/sysid/sse-starlette",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/sse-starlette@3.7.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "BSD-3-Clause",
+      "name": "sse-starlette",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "3.7.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-starlette-1.10.0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "478c0ab3b4ced6e82719849c118fa406f0278a3499c1a898cd15cd31bdc38ce4"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/Kludex/starlette",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/starlette@1.10.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "BSD-3-Clause",
+      "name": "starlette",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "1.10.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-truststore-0.10.5",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "9aaaedaefaf06d8b206278cf8b5012bc897f485a874503501e12d776df78951c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/sethmlarson/truststore",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/truststore@0.10.5",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "truststore",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "0.10.5"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-typing-extensions-4.16.0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/typing-extensions@4.16.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "PSF-2.0",
+      "name": "typing_extensions",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "4.16.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-typing-inspection-0.4.5",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "bc210535442b39e1bf2805e0c7a17dfd6a4ace760c84c7f7d16245d23a6b1c39"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/pydantic/typing-inspection",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/typing-inspection@0.4.5",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "typing-inspection",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "0.4.5"
+    },
+    {
+      "SPDXID": "SPDXRef-Python-uvicorn-0.54.0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "505bdb0f318731d45f1f712071fc781a8981f6847a31c902c9f5e652d4f67faf"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://uvicorn.dev/",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:pypi/uvicorn@0.54.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "BSD-3-Clause",
+      "name": "uvicorn",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "0.54.0"
     }
   ],
   "relationships": [
@@ -1259,6 +2711,146 @@
       "relatedSpdxElement": "SPDXRef-Package-P3",
       "relationshipType": "DESCRIBES",
       "spdxElementId": "SPDXRef-DOCUMENT"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-annotated-types-0.8.0",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-anyio-4.16.0",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-attrs-26.1.0",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-cffi-2.1.1",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-click-8.5.1",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-cryptography-50.0.2",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-h11-0.16.0",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-httpcore2-2.16.2",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-httpx2-2.16.2",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-idna-3.20",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-jsonschema-4.26.0",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-jsonschema-specifications-2025.9.1",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-mcp-2.3.0",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-mcp-types-2.3.0",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-opentelemetry-api-1.45.2",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-pycparser-3.12",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-pydantic-2.14.4",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-pydantic-core-2.50.5",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-PyJWT-2.15.1",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-python-multipart-0.0.34",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-referencing-0.37.0",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-rpds-py-2026.9.1",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-sse-starlette-3.7.0",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-starlette-1.10.0",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-truststore-0.10.5",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-typing-extensions-4.16.0",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-typing-inspection-0.4.5",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Python-uvicorn-0.54.0",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
     }
   ],
   "spdxVersion": "SPDX-2.3"

@@ -1,0 +1,156 @@
+{
+  "candidate": {
+    "declared_dependencies": [
+      "nicegui==3.15.0",
+      "playwright==1.62.0; extra == \"live-cert\"",
+      "Pillow==12.3.0; extra == \"live-cert\"",
+      "playwright==1.62.0; extra == \"mac-cert\"",
+      "Pillow==12.3.0; extra == \"mac-cert\"",
+      "pytest<9,>=8; extra == \"test\"",
+      "pytest-asyncio<1,>=0.25; extra == \"test\""
+    ],
+    "distribution": "nicegui-base",
+    "installed_bytes_excluding_bytecode": 6186154,
+    "installed_files_excluding_bytecode": 688,
+    "license_classifiers": [],
+    "license_metadata": null,
+    "source_commit": "000298562d6bcbf6df304edbd41b98b30fe4bfcf",
+    "spatial_source_sha256": "3cec43d534d453a38258a9d74f8d729c0a670fae800c425987a8c42ed9acfc03",
+    "version": "3.0.0a8"
+  },
+  "decision": "NOT_SELECTED_FOR_P3_SCIENCE_OR_PRODUCT_RUNTIME",
+  "equivalent_for_p3_edge_center": false,
+  "fixture": {
+    "geometry_radius": 100.0,
+    "points": [
+      {
+        "site_id": "center-a",
+        "value": 1.0,
+        "x": 5.0,
+        "y": 0.0
+      },
+      {
+        "site_id": "center-b",
+        "value": 2.0,
+        "x": 0.0,
+        "y": 15.0
+      },
+      {
+        "site_id": "mid-a",
+        "value": 8.0,
+        "x": -45.0,
+        "y": 0.0
+      },
+      {
+        "site_id": "mid-b",
+        "value": 9.0,
+        "x": 0.0,
+        "y": -60.0
+      }
+    ],
+    "purpose": "distinguish fixed physical wafer radius from normalization to maximum sampled radius"
+  },
+  "independent_oracle": {
+    "center_count": 2,
+    "edge_center_status": "INCONCLUSIVE",
+    "edge_count": 0,
+    "edge_threshold_radius": 80.0,
+    "observed_max_radius": 60.0,
+    "physical_radius": 100.0
+  },
+  "nicegui_base_center_edge": {
+    "center_count": 2,
+    "center_mean": 1.5,
+    "delta": 7.0,
+    "edge_count": 2,
+    "edge_mean": 8.5
+  },
+  "nicegui_base_radial_bins": [
+    {
+      "count": 1,
+      "mean": 1.0,
+      "r0": 0.0,
+      "r1": 6.0,
+      "ring": 0
+    },
+    {
+      "count": 0,
+      "mean": null,
+      "r0": 6.0,
+      "r1": 12.0,
+      "ring": 1
+    },
+    {
+      "count": 1,
+      "mean": 2.0,
+      "r0": 12.0,
+      "r1": 18.0,
+      "ring": 2
+    },
+    {
+      "count": 0,
+      "mean": null,
+      "r0": 18.0,
+      "r1": 24.0,
+      "ring": 3
+    },
+    {
+      "count": 0,
+      "mean": null,
+      "r0": 24.0,
+      "r1": 30.0,
+      "ring": 4
+    },
+    {
+      "count": 0,
+      "mean": null,
+      "r0": 30.0,
+      "r1": 36.0,
+      "ring": 5
+    },
+    {
+      "count": 0,
+      "mean": null,
+      "r0": 36.0,
+      "r1": 42.0,
+      "ring": 6
+    },
+    {
+      "count": 1,
+      "mean": 8.0,
+      "r0": 42.0,
+      "r1": 48.0,
+      "ring": 7
+    },
+    {
+      "count": 0,
+      "mean": null,
+      "r0": 48.0,
+      "r1": 54.0,
+      "ring": 8
+    },
+    {
+      "count": 1,
+      "mean": 9.0,
+      "r0": 54.0,
+      "r1": 60.0,
+      "ring": 9
+    }
+  ],
+  "p3_fixed_geometry": {
+    "center_count": 2,
+    "difference": null,
+    "edge_count": 0,
+    "reason": "both center and edge measurements are required for this feature",
+    "standard_uncertainty": null,
+    "status": "INCONCLUSIVE",
+    "uncertainty_status": "NOT_SUPPLIED"
+  },
+  "reason": "The helper normalizes by the maximum observed radius and does not accept verified wafer radius; it reports a populated outer group where the fixed-geometry oracle correctly has no measured edge sites. Its release is alpha, is incompatible with P1's React module interface, and its installed distribution lacks license metadata.",
+  "scope_limits": [
+    "One synthetic equivalence fixture; not a full capability benchmark.",
+    "No product methods or NiceGUI Base source were copied.",
+    "No matched engineer usability, target-runtime, or full performance comparison was run."
+  ],
+  "state": "CANDIDATE_REUSE_EVALUATION"
+}

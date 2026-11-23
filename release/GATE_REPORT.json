@@ -1,17 +1,123 @@
 {
-  "product": "p3",
-  "state": "CANDIDATE",
-  "external_transfer_ready": false,
   "build_provenance": {
-    "source_commit": "ef5550c553ce8405437d08393b133c2b2e63ea4a",
-    "source_tree_sha256": "b9caccc7d066bb2a005ed8c0ed059c00baad6ac333d125e87d5f17407ddde23a",
-    "candidate_archive": "release/p3-candidate-20261122.zip",
+    "archive_build_evidence": "release/PACKAGE_QUALIFICATION.json",
     "archive_checksum_sidecar": "release/p3-candidate-20261122.zip.sha256",
-    "archive_build_evidence": "release/PACKAGE_QUALIFICATION.json"
+    "candidate_archive": "release/p3-candidate-20261122.zip",
+    "source_commit": "784b87439dd2805880cac79daa7c3712fe60ca81",
+    "source_tree_sha256": "f9cecd6be0571a9ce104f0c66adb75375667d34e0002469bfe906a03e7652c16"
   },
+  "created_utc": "2026-11-23T04:11:40Z",
+  "external_gates": {
+    "E01": {
+      "evidence": [
+        "release/CRITICAL_CASE_EVIDENCE.json",
+        "release/LOCAL_UI_EVIDENCE.json",
+        "products/p3/ui/P3Panel.tsx"
+      ],
+      "result": "Synthetic C01-C05 methods and headless module are verified; P1 suite-host integration remains pending",
+      "scope": "Synthetic candidate workflow",
+      "status": "PARTIAL"
+    },
+    "E02": {
+      "evidence": [
+        "release/SCIENTIFIC_PERFORMANCE_BENCHMARK.json",
+        "release/CRITICAL_CASE_EVIDENCE.json",
+        "release/LOCAL_TEST_LOG.txt"
+      ],
+      "result": "Synthetic arithmetic, correlated-null, and 1,000-map index parity checks pass; no real-data holdout/retrieval relevance study",
+      "status": "PARTIAL"
+    },
+    "E03": {
+      "evidence": [
+        "release/CRITICAL_CASE_EVIDENCE.json"
+      ],
+      "result": "Frozen P3-01 to P3-12 catalog",
+      "scope": "Frozen P3-01 to P3-12 candidate catalog",
+      "status": "PASS"
+    },
+    "E04": {
+      "evidence": [
+        "contracts/*.schema.json",
+        "tests/test_contracts.py"
+      ],
+      "result": "Shared v1 schemas unchanged",
+      "status": "PASS"
+    },
+    "E05": {
+      "evidence": [
+        "docs/MCP_ADAPTER.md",
+        "fabintel/mcp_adapter.py",
+        "fabintel/mcp_client.py",
+        "tests/fixtures/mcp_mock_server.py",
+        "tests/test_mcp_adapter.py",
+        "tests/test_mcp_client.py"
+      ],
+      "result": "Official SDK transport and logical adapter pass synthetic permission/lineage tests; actual company mappings, source grants and approvals remain pending",
+      "status": "PENDING_INTERNAL"
+    },
+    "E06": {
+      "evidence": [
+        "tests/test_p3_integrated.py"
+      ],
+      "result": "No model path; prompt text inert",
+      "status": "PASS"
+    },
+    "E07": {
+      "evidence": [
+        "release/LOCAL_UI_EVIDENCE.json",
+        "products/p3/ui/P3Panel.test.tsx",
+        "tests/test_p3_web.py"
+      ],
+      "result": "Headless component tests pass on the P1-declared Node engine; suite-host/browser walkthrough and engineer usability study remain pending",
+      "status": "PARTIAL"
+    },
+    "E08": {
+      "evidence": [
+        "release/PACKAGE_QUALIFICATION.json",
+        "release/OFFLINE_RUNTIME_EVIDENCE.json",
+        "release/TARGET_OFFLINE_QUALIFICATION_TEMPLATE.md"
+      ],
+      "result": "Fresh extraction and local blocked-socket test pass; approved company target OS and egress policy not established",
+      "status": "PARTIAL"
+    },
+    "E09": {
+      "evidence": [
+        "release/SBOM.spdx.json",
+        "release/SUPPLY_CHAIN_AUDIT.json",
+        "vendor/mcp-sdk-2.3.0/macos-arm64-cp311/license-inventory.json"
+      ],
+      "result": "All 28 wheel hashes and embedded license-file hashes verify locally; company rights/security approval, first-party license, and current vulnerability database remain pending",
+      "status": "PENDING_EXTERNAL"
+    },
+    "E10": {
+      "evidence": [
+        "release/RUNBOOK_ROLLBACK_KILL_SWITCH.md",
+        "tests/test_p3_web.py",
+        "release/PACKAGE_QUALIFICATION.json",
+        "release/p3-candidate-20261122.zip.sha256"
+      ],
+      "result": "Two builds match; fresh extraction passes 77 Python tests, synthetic demo, and the 28-wheel hash-locked offline MCP install with 15 adapter tests on macOS arm64 CPython 3.11",
+      "status": "PASS"
+    },
+    "E11": {
+      "evidence": [
+        "release/SCIENTIFIC_PERFORMANCE_BENCHMARK.json"
+      ],
+      "result": "Local synthetic arithmetic, 13,000-site and 1,000-map retrieval measurements only; no target thresholds/user study",
+      "status": "PARTIAL"
+    },
+    "E12": {
+      "evidence": [
+        "fabintel/preflight.py",
+        "docs/INTERNAL_COMPANY_FIRST_RUN.md"
+      ],
+      "result": "No authorized site capture or true-data first result",
+      "status": "PENDING_INTERNAL"
+    }
+  },
+  "external_transfer_ready": false,
   "internal": {
     "state": "PENDING_INTERNAL",
-    "verified": false,
     "unverified": [
       "Actual read-only Samsung MCP permissions and discovered tool bindings",
       "Approved production semantic definitions, effective times and relationships",
@@ -19,73 +125,11 @@
       "Approved target OS and network-isolation evidence",
       "Company security/engineering approval and first true-data engineer investigation",
       "Literal R01-R53 and Golden Standard reconciliation, unavailable in this folder"
-    ]
-  },
-  "external_gates": {
-    "E01": {
-      "status": "PASS",
-      "scope": "Synthetic candidate workflow",
-      "evidence": ["release/CRITICAL_CASE_EVIDENCE.json", "release/LOCAL_UI_EVIDENCE.json", "release/LOCAL_TEST_EVIDENCE.json"],
-      "result": "C01-C05 completed in a single deterministic workflow and local UI."
-    },
-    "E02": {
-      "status": "PARTIAL",
-      "evidence": ["release/SCIENTIFIC_PERFORMANCE_BENCHMARK.json", "release/CRITICAL_CASE_EVIDENCE.json", "release/LOCAL_TEST_LOG.txt"],
-      "result": "100 seeded edge-center numeric oracles, correlated spatial-null checks, 13,000-site analysis, and direct-versus-indexed 1,000-map retrieval parity passed. All measurements use synthetic data on the build host; historical relevance and real-data holdout performance remain unqualified."
-    },
-    "E03": {
-      "status": "PASS",
-      "scope": "Frozen P3-01 to P3-12 candidate catalog",
-      "evidence": ["release/CRITICAL_CASE_EVIDENCE.json", "release/LOCAL_TEST_LOG.txt"],
-      "result": "All listed negative/refusal and positive cases mapped to passing automated tests."
-    },
-    "E04": {
-      "status": "PASS",
-      "evidence": ["contracts/evidence.v1.schema.json", "contracts/product-manifest.v1.schema.json", "tests/test_contracts.py", "tests/test_schema_and_ui.py"],
-      "result": "Shared v1 contract files remain unchanged; candidate evidence validates against the frozen envelope."
-    },
-    "E05": {
-      "status": "PENDING_INTERNAL",
-      "evidence": ["docs/MCP_ADAPTER.md", "fabintel/mcp_adapter.py", "fabintel/mcp_client.py", "fabintel/mcp_mock_server.py", "tests/test_mcp_adapter.py", "tests/test_mcp_client.py", "release/LOCAL_TEST_LOG.txt"],
-      "result": "Configurable stdio and Streamable HTTP client, exact tool/plan checks, bounded reads, lineage, cancellation, and synthetic denial paths are implemented and tested. Actual site authority, source permissions, production semantics and audit-host evidence remain pending."
-    },
-    "E06": {
-      "status": "PASS",
-      "evidence": ["tests/test_p3_integrated.py", "release/SUPPLY_CHAIN_AUDIT.json"],
-      "result": "No model path is included; deterministic analysis works with model use disabled, and injected instruction text does not change claims."
-    },
-    "E07": {
-      "status": "PARTIAL",
-      "evidence": ["release/LOCAL_UI_EVIDENCE.json", "tests/test_p3_web.py", "ui/index.html", "ui/app.js"],
-      "result": "Local keyboard/accessibility-oriented UI and one full synthetic walkthrough were checked. No engineer usability study or task-time baseline exists."
-    },
-    "E08": {
-      "status": "PARTIAL",
-      "evidence": ["release/PACKAGE_QUALIFICATION.json", "release/OFFLINE_RUNTIME_EVIDENCE.json", "release/TARGET_OFFLINE_QUALIFICATION_TEMPLATE.md"],
-      "result": "Fresh extraction and Python standard-library-only execution pass; a macOS sandbox blocks outbound sockets while the synthetic CLI succeeds. The intended company target OS and egress policy are not established."
-    },
-    "E09": {
-      "status": "PENDING_EXTERNAL",
-      "evidence": ["release/SBOM.spdx.json", "release/SUPPLY_CHAIN_AUDIT.json"],
-      "result": "Local inventory found zero third-party Python imports and no remote UI assets. No root source license or current vulnerability database/scanner is available; redistribution rights are not granted by this candidate."
-    },
-    "E10": {
-      "status": "PASS",
-      "evidence": ["release/RUNBOOK_ROLLBACK_KILL_SWITCH.md", "tests/test_p3_web.py", "release/PACKAGE_QUALIFICATION.json", "release/p3-candidate-20261122.zip.sha256"],
-      "result": "Cancellation and operator stop instructions are tested/documented. Two deterministic archive builds matched; the extracted archive passed the full test suite and synthetic demo with Python site packages disabled."
-    },
-    "E11": {
-      "status": "PARTIAL",
-      "evidence": ["release/SCIENTIFIC_PERFORMANCE_BENCHMARK.json"],
-      "result": "On this macOS arm64 host, 13,000-site fingerprint p95 was 73.1 ms. For 1,000 synthetic 13-site historical maps, direct query p50 was 146.3 ms versus 64.2 ms indexed, with result parity; index build was 1.06 s and 13.4 MB incremental traced allocation. No precommitted target-hardware thresholds, real-task baseline or user-effort study exists."
-    },
-    "E12": {
-      "status": "PENDING_INTERNAL",
-      "evidence": ["fabintel/preflight.py", "release/INTERNAL_QUALIFICATION_REPORT_TEMPLATE.json", "docs/INTERNAL_COMPANY_FIRST_RUN.md"],
-      "result": "File-based site discovery and qualification tooling is packaged; no authorized site-generated capture or first true-data result exists."
-    }
+    ],
+    "verified": false
   },
   "known_critical_defects": [],
+  "product": "p3",
   "qualification_notes": [
     "All reported scientific outputs are synthetic candidate evidence; they do not establish Samsung process facts or effects.",
     "The reproducible archive and fresh-extraction checks passed on macOS arm64/Python 3.11.7; this does not establish the approved deployment OS or blocked-egress behavior.",
@@ -95,5 +139,6 @@
     "C02 repeatability uncertainty is NOT_SUPPLIED when source measurements provide no repeatability estimates.",
     "C03 is observational and spatial-block-adjusted; residual confounding and selection effects remain possible.",
     "This candidate must not be used with company data until authorized internal qualification is complete."
-  ]
+  ],
+  "state": "CANDIDATE"
 }

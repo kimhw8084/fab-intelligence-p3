@@ -1,29 +1,22 @@
 {
-  "state": "CANDIDATE",
-  "environment": "Codex in-app browser on macOS",
-  "url": "http://127.0.0.1:8799/",
-  "company_data_used": false,
-  "workflow": "Loaded the bundled synthetic investigation using the local example control and ran Analyze measured sites.",
-  "investigation_id": "SYN-p3-9a14961e50b3",
-  "input_sha256": "9a14961e50b399f3ace63928fe7669f491a57f7366345016dbadfe50ce249251",
-  "observed_status": "VALID",
-  "observed_capabilities": {
-    "C01_fingerprint": "VALID",
-    "C04_anomalies": "VALID",
-    "C05_similarity": "VALID",
-    "C02_evolution": "VALID",
-    "C03_quality_association": "VALID"
+  "component_tests": {
+    "node_engine_qualified": true,
+    "node_version": "v26.13.0",
+    "p1_declared_node_engine": "^22.12.0 || ^24.0.0 || >=26.0.0",
+    "passed": 5,
+    "status": "PASS"
   },
+  "contract": "suite-ui-module.v1",
+  "integration_status": "PENDING_P1_SUITE_HOST_AND_SPATIAL_CHART_EXTENSION",
+  "limitation": "No integrated suite host, production token package, real browser task walkthrough, formal accessibility audit, or engineer usability study was available.",
+  "module": "products/p3/ui/P3Panel.tsx",
   "observed_checks": [
-    "Synthetic-only banner and no-network input notice were visible.",
-    "Observed-site map and measured-site table rendered without interpolated values.",
-    "All five capability cards showed VALID after analysis.",
-    "Source identifiers, source hashes, coordinate/measurement units, coverage, and caller-asserted verification assumption were visible.",
-    "Historical-neighbor table showed profile alignment and no-reconstruction limitation.",
-    "Cross-step table showed matched-site deltas, coverage, coordinate residual, and repeatability uncertainty status.",
-    "Downstream association view stated observational status, wafer/lot counts, leave-one-lot-out range, and residual-confounding limits.",
-    "C04 showed a no-alert result with global empirical p=1; site localization was explicitly not individually significant.",
-    "Download evidence control became enabled after completion."
+    "Source preview and synthetic-only mode render from host supplied props.",
+    "C01-C05 status and evidence provenance are visible.",
+    "Verified wafer sites delegate drawing to the injected shared renderer and remain available in a semantic table.",
+    "Unverified coordinates and refused or inconclusive results withhold spatial rendering.",
+    "Empty evidence remains pending without synthetic result fabrication."
   ],
-  "limitation": "One synthetic browser walkthrough only; the synthetic association is not evidence about a real process. No screenshot or console log was retained, and no engineer usability study was conducted."
+  "state": "CANDIDATE",
+  "toolchain_owner": "P1 suite host"
 }

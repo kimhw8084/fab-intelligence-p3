@@ -1,36 +1,109 @@
 {
   "checks": {
     "internal_preflight": {
-      "command": "/opt/anaconda3/bin/python -m fabintel qualify-internal",
+      "command": "python -m fabintel qualify-internal",
       "internal_ready": false,
       "status": "PENDING_INTERNAL"
     },
-    "javascript_syntax": {
-      "command": "/opt/homebrew/bin/node --check ui/app.js",
-      "status": "PASS"
+    "mcp_sdk_candidate": {
+      "company_approval": "PENDING_INTERNAL",
+      "qualification_scope": "offline install, pip dependency consistency, synthetic official-SDK stdio and Streamable HTTP fixtures",
+      "status": "PASS",
+      "steps": [
+        {
+          "command": [
+            "python",
+            "-m",
+            "venv",
+            "<MCP_TEMP>/venv"
+          ],
+          "exit_code": 0,
+          "output": ""
+        },
+        {
+          "command": [
+            "python",
+            "-m",
+            "pip",
+            "install",
+            "--no-index",
+            "--disable-pip-version-check",
+            "--find-links",
+            "<P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse",
+            "--require-hashes",
+            "-r",
+            "<P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock"
+          ],
+          "exit_code": 0,
+          "output": "Looking in links: <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/annotated_types-0.8.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 1))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/anyio-4.16.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 2))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/attrs-26.1.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 3))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/cffi-2.1.1-cp311-cp311-macosx_11_0_arm64.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 4))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/click-8.5.1-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 5))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/cryptography-50.0.2-cp311-abi3-macosx_11_0_arm64.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 6))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/h11-0.16.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 7))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/httpcore2-2.16.2-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 8))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/httpx2-2.16.2-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 9))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/idna-3.20-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 10))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/jsonschema-4.26.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 11))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/jsonschema_specifications-2025.9.1-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 12))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/mcp-2.3.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 13))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/mcp_types-2.3.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 14))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/opentelemetry_api-1.45.2-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 15))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/pycparser-3.12-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 16))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/pydantic-2.14.4-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 17))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/pydantic_core-2.50.5-cp311-cp311-macosx_11_0_arm64.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 18))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/pyjwt-2.15.1-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 19))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/python_multipart-0.0.34-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 20))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/referencing-0.37.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 21))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/rpds_py-2026.9.1-cp311-cp311-macosx_11_0_arm64.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 22))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/sse_starlette-3.7.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 23))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/starlette-1.10.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 24))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/truststore-0.10.5-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 25))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/typing_extensions-4.16.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 26))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/typing_inspection-0.4.5-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 27))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/uvicorn-0.54.0-py3-none-any.whl (from -r <P3>/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 28))\nInstalling collected packages: typing_extensions, truststore, rpds-py, python-multipart, PyJWT, pycparser, idna, h11, click, attrs, annotated-types, uvicorn, typing-inspection, referencing, pydantic_core, opentelemetry-api, httpcore2, cffi, anyio, starlette, pydantic, jsonschema-specifications, httpx2, cryptography, sse-starlette, mcp-types, jsonschema, mcp\nSuccessfully installed PyJWT-2.15.1 annotated-types-0.8.0 anyio-4.16.0 attrs-26.1.0 cffi-2.1.1 click-8.5.1 cryptography-50.0.2 h11-0.16.0 httpcore2-2.16.2 httpx2-2.16.2 idna-3.20 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 mcp-2.3.0 mcp-types-2.3.0 opentelemetry-api-1.45.2 pycparser-3.12 pydantic-2.14.4 pydantic_core-2.50.5 python-multipart-0.0.34 referencing-0.37.0 rpds-py-2026.9.1 sse-starlette-3.7.0 starlette-1.10.0 truststore-0.10.5 typing-inspection-0.4.5 typing_extensions-4.16.0 uvicorn-0.54.0\n"
+        },
+        {
+          "command": [
+            "python",
+            "-m",
+            "pip",
+            "check"
+          ],
+          "exit_code": 0,
+          "output": "No broken requirements found.\n"
+        },
+        {
+          "command": [
+            "python",
+            "-m",
+            "unittest",
+            "tests.test_mcp_client",
+            "tests.test_mcp_adapter",
+            "-v"
+          ],
+          "exit_code": 0,
+          "output": "test_cleartext_mcp_http_is_loopback_only (tests.test_mcp_client.MCPClientSDKTests.test_cleartext_mcp_http_is_loopback_only) ... ok\ntest_official_sdk_cancellation_stops_waiting_without_claiming_remote_ack (tests.test_mcp_client.MCPClientSDKTests.test_official_sdk_cancellation_stops_waiting_without_claiming_remote_ack) ... ok\ntest_official_sdk_stdio_discovery_tool_listing_and_read_only_call (tests.test_mcp_client.MCPClientSDKTests.test_official_sdk_stdio_discovery_tool_listing_and_read_only_call) ... ok\ntest_official_sdk_uses_legacy_negotiation_when_server_requires_it (tests.test_mcp_client.MCPClientSDKTests.test_official_sdk_uses_legacy_negotiation_when_server_requires_it) ... ok\ntest_official_sdk_streamable_http_uses_scoped_auth (tests.test_mcp_client.MCPStreamableHTTPSDKTests.test_official_sdk_streamable_http_uses_scoped_auth) ... ok\ntest_adapter_cancellation_is_cooperative_and_does_not_fake_acknowledgement (tests.test_mcp_adapter.MCPReadOnlyAdapterTests.test_adapter_cancellation_is_cooperative_and_does_not_fake_acknowledgement) ... ok\ntest_cli_can_discover_a_configured_mock_server (tests.test_mcp_adapter.MCPReadOnlyAdapterTests.test_cli_can_discover_a_configured_mock_server) ... ok\ntest_discovery_semantics_relationship_read_and_audit_use_exact_bindings (tests.test_mcp_adapter.MCPReadOnlyAdapterTests.test_discovery_semantics_relationship_read_and_audit_use_exact_bindings) ... ok\ntest_environment_auth_is_resolved_without_configuring_secret_values (tests.test_mcp_adapter.MCPReadOnlyAdapterTests.test_environment_auth_is_resolved_without_configuring_secret_values) ... ok\ntest_invalid_limits_are_rejected_before_stdio_process_launch (tests.test_mcp_adapter.MCPReadOnlyAdapterTests.test_invalid_limits_are_rejected_before_stdio_process_launch) ... ok\ntest_raw_sql_and_broader_permission_context_are_rejected (tests.test_mcp_adapter.MCPReadOnlyAdapterTests.test_raw_sql_and_broader_permission_context_are_rejected) ... ok\ntest_site_config_can_run_read_only_discovery_over_streamable_http (tests.test_mcp_adapter.MCPReadOnlyAdapterTests.test_site_config_can_run_read_only_discovery_over_streamable_http) ... ok\ntest_template_is_rejected_before_server_process_launch (tests.test_mcp_adapter.MCPReadOnlyAdapterTests.test_template_is_rejected_before_server_process_launch) ... ok\ntest_tool_schema_change_after_review_fails_closed (tests.test_mcp_adapter.MCPReadOnlyAdapterTests.test_tool_schema_change_after_review_fails_closed) ... ok\ntest_unapproved_sources_and_non_read_only_tools_are_denied (tests.test_mcp_adapter.MCPReadOnlyAdapterTests.test_unapproved_sources_and_non_read_only_tools_are_denied) ... ok\n\n----------------------------------------------------------------------\nRan 15 tests in 2.703s\n\nOK\n"
+        }
+      ],
+      "target": "macos-arm64-cp311",
+      "windows_linux_native_install": "NOT_RUN"
+    },
+    "suite_panel": {
+      "node_engine_qualified": true,
+      "node_version": "v26.13.0",
+      "p1_declared_node_engine": "^22.12.0 || ^24.0.0 || >=26.0.0",
+      "panel_test": {
+        "command": "node <P1_TOOLCHAIN>/node_modules/vitest/vitest.mjs run --config <P1_TOOLCHAIN>/vite.config.ts <P3>/products/p3/ui/P3Panel.test.tsx",
+        "exit_code": 0,
+        "output": "\n RUN  v5.1.1 <P3>\n\n\n Test Files  1 passed (1)\n      Tests  5 passed (5)\n   Start at  22:11:10\n   Duration  323ms (environment 60%, import 24%, tests 13%, transform 2%, worker 1%)\n\n"
+      },
+      "status": "PASS",
+      "test_execution_status": "PASS",
+      "tests": 5,
+      "toolchain_owner": "P1 suite host; dependencies were not copied into P3",
+      "typecheck": {
+        "command": "node <P1_TOOLCHAIN>/node_modules/typescript/bin/tsc --noEmit --strict --esModuleInterop --jsx react-jsx --moduleResolution bundler --module esnext --target es2022 --lib es2022,dom --skipLibCheck products/p3/ui/P3Panel.tsx products/p3/ui/P3Panel.test.tsx",
+        "exit_code": 0,
+        "output": ""
+      }
     },
     "synthetic_demo": {
-      "command": "/opt/anaconda3/bin/python -m fabintel demo",
+      "command": "python -m fabintel demo",
       "input_sha256": "7b4bcb396ed7f6e23ca3dccffc59b11efadfc0031c68f3ac9ac7a2bd23e2f6ff",
       "investigation_id": "SYN-p3-7b4bcb396ed7",
       "status": "PASS"
     },
     "unit_suite": {
-      "command": "/opt/anaconda3/bin/python -m unittest discover -s tests -v",
+      "command": "python -m unittest discover -s tests -v",
       "status": "PASS",
-      "tests": 78
+      "tests": 77
     }
   },
   "company_data_used": false,
-  "created_utc": "2026-11-23T01:50:54Z",
+  "created_utc": "2026-11-23T04:11:17Z",
   "environment": {
     "architecture": "arm64",
     "node": "v26.13.0",
     "os": "macOS-26.6.2-arm64-arm-64bit",
     "python": "3.11.7 (main, Dec 15 2023, 12:09:56) [Clang 14.0.6 ]"
   },
-  "external_status": "CANDIDATE; target OS/network isolation, supply chain, license, company MCP and user-study gates are not established by this local run.",
-  "source_commit": "ef5550c553ce8405437d08393b133c2b2e63ea4a",
-  "source_tree_sha256": "b9caccc7d066bb2a005ed8c0ed059c00baad6ac333d125e87d5f17407ddde23a",
+  "external_status": "CANDIDATE; suite host integration, target OS/network isolation, company supply-chain clearance, company MCP and engineer-study gates remain open.",
+  "source_commit": "784b87439dd2805880cac79daa7c3712fe60ca81",
+  "source_tree_sha256": "f9cecd6be0571a9ce104f0c66adb75375667d34e0002469bfe906a03e7652c16",
   "state": "CANDIDATE"
 }
