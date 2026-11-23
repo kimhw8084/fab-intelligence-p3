@@ -85,7 +85,7 @@ test_wheel_hash_mismatch_fails_closed (test_supply_chain_audit.VendorLicenseAudi
 test_bundled_full_workflow_matches_generator_and_runs_all_capabilities (test_synthetic_workflow.SyntheticWorkflowTests.test_bundled_full_workflow_matches_generator_and_runs_all_capabilities) ... ok
 
 ----------------------------------------------------------------------
-Ran 83 tests in 0.734s
+Ran 83 tests in 0.741s
 
 OK (skipped=20)
 
@@ -835,8 +835,8 @@ exit=0
 
  Test Files  1 passed (1)
       Tests  5 passed (5)
-   Start at  23:14:59
-   Duration  263ms (environment 52%, import 18%, tests 16%, transform 13%, worker 1%)
+   Start at  23:18:36
+   Duration  363ms (environment 61%, import 23%, tests 12%, transform 2%, worker 1%)
 
 
 
@@ -913,6 +913,6 @@ test_tool_schema_change_after_review_fails_closed (tests.test_mcp_adapter.MCPRea
 test_unapproved_sources_and_non_read_only_tools_are_denied (tests.test_mcp_adapter.MCPReadOnlyAdapterTests.test_unapproved_sources_and_non_read_only_tools_are_denied) ... ok
 
 ----------------------------------------------------------------------
-Ran 21 tests in 3.495s
+Ran 21 tests in 3.248s
 
 OK

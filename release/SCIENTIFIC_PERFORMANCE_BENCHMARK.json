@@ -66,12 +66,12 @@
   },
   "c05_history_index_benchmark": {
     "direct_query_ms": {
-      "p50": 185.375417,
-      "p95": 195.461084,
+      "p50": 189.52224999999999,
+      "p95": 202.518417,
       "samples": 50
     },
     "historical_maps": 1000,
-    "index_build_ms": 1873.36475,
+    "index_build_ms": 1938.672458,
     "index_build_peak_traced_bytes_incremental": 21652780,
     "index_stats": {
       "excluded_maps": 0,
@@ -82,8 +82,8 @@
       "invalidated": false
     },
     "indexed_query_ms": {
-      "p50": 68.067458,
-      "p95": 73.553667,
+      "p50": 69.0402085,
+      "p95": 75.865083,
       "samples": 50
     },
     "measured_sites_per_map": 25,
@@ -161,13 +161,13 @@
     "within_memory_cap": true
   },
   "company_data_used": false,
-  "created_utc": "2026-11-23T05:14:55Z",
+  "created_utc": "2026-11-23T05:19:01Z",
   "dense_wafer_measurement": {
     "actual_edge_minus_center": 1.3481522848870888,
     "expected_edge_minus_center": 1.3481522848870497,
     "measured_sites": 13000,
-    "p50_ms": 66.41137499999999,
-    "p95_ms": 69.951666,
+    "p50_ms": 71.243062,
+    "p95_ms": 75.486,
     "peak_traced_bytes": 6018508,
     "status": "PASS"
   },
@@ -180,8 +180,8 @@
   },
   "fixed_cases": 100,
   "latency_ms": {
-    "p50": 0.2038755,
-    "p95": 0.223625,
+    "p50": 0.2279585,
+    "p95": 0.240459,
     "samples": 100
   },
   "numeric_oracle": {
@@ -895,8 +895,8 @@
   "scope": "synthetic external baseline only",
   "seed": 20261122,
   "sites_per_case": 13,
-  "source_commit": "7cc4b21c840c8c5e65d3813bab67422e059bdd67",
-  "source_tree_sha256": "1ec8844aac102576e4a6bafabb6a59c8c0e48beeb30b0d054239f60fca5523b3",
+  "source_commit": "c214bfa9cf2b1b42495f23dde10748cfd1121f53",
+  "source_tree_sha256": "d1591a7572c853fcec2c1f379982f0bd2d87418f9183cd9ecc9106e254db7eb6",
   "synthetic_catalog": {
     "actual_tables": 13000,
     "peak_traced_bytes": 6526675,

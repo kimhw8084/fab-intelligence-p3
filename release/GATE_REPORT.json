@@ -3,8 +3,8 @@
     "archive_build_evidence": "release/PACKAGE_QUALIFICATION.json",
     "archive_checksum_sidecar": "release/p3-candidate-20261122.zip.sha256",
     "candidate_archive": "release/p3-candidate-20261122.zip",
-    "source_commit": "7cc4b21c840c8c5e65d3813bab67422e059bdd67",
-    "source_tree_sha256": "1ec8844aac102576e4a6bafabb6a59c8c0e48beeb30b0d054239f60fca5523b3"
+    "source_commit": "c214bfa9cf2b1b42495f23dde10748cfd1121f53",
+    "source_tree_sha256": "d1591a7572c853fcec2c1f379982f0bd2d87418f9183cd9ecc9106e254db7eb6"
   },
   "completion_states": {
     "EXTERNAL_PRODUCT_COMPLETE": {
@@ -30,7 +30,7 @@
       "value": true
     }
   },
-  "created_utc": "2026-11-23T05:15:52Z",
+  "created_utc": "2026-11-23T05:20:00Z",
   "external_gates": {
     "E01": {
       "evidence": [
