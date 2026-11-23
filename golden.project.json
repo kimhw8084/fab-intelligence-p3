@@ -12,7 +12,11 @@
     "observability": false,
     "mcp": true,
     "ai": false,
-    "manufacturing_data": true
+    "manufacturing_data": true,
+    "internal_company_sources_configured": false,
+    "target_host_qualified": false
   },
-  "commands": {}
+  "commands": {
+    "python_tests": ["${PYTHON}", "-m", "unittest", "discover", "-s", "tests", "-v"]
+  }
 }

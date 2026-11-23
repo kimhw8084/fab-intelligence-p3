@@ -11,6 +11,7 @@ GENERATED_EVIDENCE_FILES = {
     "release/CRITICAL_CASE_EVIDENCE.json",
     "release/GATE_REPORT.json",
     "release/GOLDEN_PILOT_FAST_EVIDENCE.json",
+    "release/GOLDEN_PILOT_FULL_EVIDENCE.json",
     "release/LOCAL_TEST_EVIDENCE.json",
     "release/LOCAL_TEST_LOG.txt",
     "release/LOCAL_UI_EVIDENCE.json",

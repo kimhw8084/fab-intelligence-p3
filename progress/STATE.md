@@ -7,7 +7,7 @@ State: **CANDIDATE**. `EXTERNAL_TRANSFER_READY` and `READY_INTERNAL` are not ass
 - C01–C05 deterministic, model-free analysis is preserved in `products/p3/engine.py`; CLI inputs/outputs remain synthetic or caller-supplied and carry provenance. Refusal and abstention rules prevent unsupported geometry, joins, comparisons, or causal claims.
 - P3 contributes a headless React panel and module metadata through P1's shared UI contract. P1 owns the suite shell, route, token system, request lifecycle, and shared chart renderer. P3 has no standalone page, route server, or chart dependency.
 - The official MCP Python SDK 2.3.0 supplies protocol/transport behavior. `ReadOnlyMCPAdapter` retains product authorization, semantic binding, bounded reads, provenance, audit, and refusal policy. The complete local macOS arm64 CPython 3.11 candidate wheelhouse is hash-locked; internal MCP authority is not configured.
-- Five Golden skills were adapted into `.agents/skills/` and preserved under `.opencode/skills/`. Golden's 0.1.0-dev pilot check was run in fast mode; its output is explicitly not release qualification.
+- Five Golden skills were adapted into `.agents/skills/`; their `.opencode/skills/` copies match the pinned source. Golden's 0.1.0-dev fast and full checks were run; the full report passes five rules and leaves 14 mandatory rules `NOT_RUN`, so it is not release qualification.
 
 ## Evidence recorded
 
@@ -17,7 +17,7 @@ State: **CANDIDATE**. `EXTERNAL_TRANSFER_READY` and `READY_INTERNAL` are not ass
 - Host egress evidence: the macOS sandbox denied the outbound socket probe while the synthetic workflow completed all five capabilities. This is not company target/network-policy qualification.
 - NiceGUI Base candidate evaluation is in `release/REUSE_COMPARISON_EVIDENCE.json`. A fixed 100 mm geometry with observations only through 60 mm makes P3 correctly report no physical edge sample; the candidate helper normalized to observed radius and reported two outer samples with a 7-unit difference. The alpha framework is not a P1 React module, and its installed distribution had no license metadata.
 - `release/SBOM.spdx.json` lists source files and the 28 candidate wheel packages. Only the macOS arm64 CPython 3.11 candidate wheelhouse is present. The source license, company redistribution rights, vulnerability scanner/database, Windows/Linux MCP installs, P1 suite host, company source mappings/approvals, and engineer study remain unqualified.
-- Golden fast evidence: 2 pilot rules pass, 11 full-only rules are deferred, and 6 applicability/criticality decisions remain `NOT_RUN`. The report says `qualifies_release: false`; see `docs/GOLDEN_REUSE_MAPPING.md`.
+- Golden evidence: fast mode passes 2 rules, defers 11, and leaves 6 applicability/criticality decisions `NOT_RUN`; full mode passes 5 rules and leaves 14 mandatory rules `NOT_RUN`. Both reports say `qualifies_release: false`; see `docs/GOLDEN_REUSE_MAPPING.md`.
 
 ## Remaining gates
 

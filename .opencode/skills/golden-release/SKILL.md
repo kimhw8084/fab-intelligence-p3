@@ -3,6 +3,8 @@ name: golden-release
 description: Prepare repeatable offline qualification and team rollout with evidence not AI self-grading
 ---
 
+# Qualification and release
+
 1. Golden source changes require lead approval. Owner must approve affected-repository full CI evaluation after approved Golden standards change.
 2. Preserve immutable release ID, hashes, dependency/license evidence, OS qualification reports, rollback plan and last approved offline local release.
 3. Execute all applicable independent full checks; do not hide NOT_RUN/FAIL. Company risk exceptions require documented authority and evidence.

@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SKIP_DIRS = {"__pycache__", ".git"}
 OUTPUTS = {"release/SBOM.spdx.json", "release/SUPPLY_CHAIN_AUDIT.json", "release/GATE_REPORT.json",
            "release/GOLDEN_PILOT_FAST_EVIDENCE.json",
+           "release/GOLDEN_PILOT_FULL_EVIDENCE.json",
            "release/BOOTSTRAP_MANIFEST.sha256", "release/SCIENTIFIC_PERFORMANCE_BENCHMARK.json",
            "release/PACKAGE_QUALIFICATION.json", "release/LOCAL_TEST_EVIDENCE.json",
            "release/LOCAL_TEST_LOG.txt", "release/LOCAL_UI_EVIDENCE.json",
