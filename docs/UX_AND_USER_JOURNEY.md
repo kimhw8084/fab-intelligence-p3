@@ -2,6 +2,8 @@
 
 P3 contributes `products/p3/ui/P3Panel.tsx` to the P1-owned shared workspace. The panel renders source preview, evidence, capability status, provenance, and an optional verified wafer-map model. The host owns authentication, shell, design tokens, requests, cancellation, export, and shared rendering. P3 has no standalone site.
 
+**Current integration state:** P3 supplies a headless panel and tested host props. It does not include a P3-owned selection/upload form or route. P1 suite-host integration and the additive spatial-map/C01–C05 capability contract remain pending, so the end-to-end interaction requirements below describe acceptance criteria rather than a completed host walkthrough.
+
 ## Minimum user journey
 1. One wafer-centric workspace with actual measured points, wafer geometry/orientation and visible sampling mask. Legend separates observed vs inferred/unobserved values.
 2. Overlay spatial features (ring, edge, gradient, localized cluster); inspect per-region counts and uncertainty.

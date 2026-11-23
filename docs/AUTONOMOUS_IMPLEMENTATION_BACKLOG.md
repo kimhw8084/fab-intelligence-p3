@@ -6,7 +6,7 @@ This ordered backlog is suitable for an empty Codex repository. Maintain `progre
 - [x] Run integrity check, basic tests and seeded 13,000-table generator; classify the result as a candidate, not a release.
 - [x] Read the supplied contracts, specs, policies and critical tests. Record the gap inventory; preserve the frozen shared v1 schema and folder/API boundaries.
 - [x] Check the supplied folder for the authoritative R01–R53/Golden source; the literal text is absent and remains unverified. Do not invent requirement text.
-- [x] Establish a product vertical-slice E2E harness with local selection/upload, deterministic calculation, typed evidence, refusal and export.
+- [~] Establish a product vertical-slice E2E harness with deterministic calculation, typed evidence and refusal fixtures. The former local selection/upload UI was removed so P3 does not compete with the shared host; actual selection, cancel and export integration remains with P1.
 
 ## Stage 1 — Full integrated product behavior
 - [x] Implement C01: Spatial Fingerprint; independently validate result and negative path.
@@ -15,7 +15,7 @@ This ordered backlog is suitable for an empty Codex repository. Maintain `progre
 - [x] Implement C02: Spatial Evolution; independently validate result and negative path.
 - [x] Implement C03: Downstream Association; independently validate result and negative path.
 - [~] Implement source/relationship permission checks and rigorous provenance; synthetic denial, approved-relationship checks, lineage and refusal exist, while real source grants and mappings remain internal.
-- [x] Build the local interactive UI with empty/error/permission/cancel/recovery paths and source-to-claim evidence drilldown; one synthetic walkthrough is recorded.
+- [~] Build the headless P1-hosted React evidence panel with empty/result/refusal states, provenance and an accessible measured-site table. P1-host request controls, spatial renderer integration, browser accessibility walkthrough and engineer usability study remain pending.
 - [x] Implement safe deterministic operation with model use disabled; no model path showed an objective benefit for this candidate.
 
 ## Stage 2 — Independent qualification and simplification
