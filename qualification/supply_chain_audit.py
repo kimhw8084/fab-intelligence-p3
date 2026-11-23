@@ -48,7 +48,7 @@ def main():
     for path in files:
         runtime_roots.update(imported_modules(path))
     stdlib = set(getattr(sys, "stdlib_module_names", ()))
-    first_party = {"fabintel", "products", "qualification", "cli"}
+    first_party = {"fabintel", "products", "qualification", "tests", "cli", "tree_hash"}
     third_party = sorted(name for name in runtime_roots if name not in stdlib and name not in first_party)
     local_assets = {"remote_script_or_style_reference": False, "remote_font_or_image_reference": False,
                     "remote_runtime_api_reference": False}

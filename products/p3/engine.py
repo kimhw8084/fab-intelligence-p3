@@ -5,7 +5,9 @@ must have been authorized, bounded and semantically verified by a future host.
 """
 from __future__ import annotations
 
+from copy import deepcopy
 from datetime import datetime
+import heapq
 from math import atan2, cos, floor, hypot, isfinite, log, pi, sin, sqrt, tanh
 from statistics import mean, median
 from typing import Any
@@ -75,6 +77,11 @@ def _prepare_map(data: dict, cancel=None) -> dict:
     orientation = geometry.get("orientation_deg", data.get("orientation_deg"))
     if orientation is not None and (not _number(orientation) or not 0 <= orientation < 360):
         raise ValueError("orientation_deg must be in [0, 360)")
+    measurement = _measurement(data)
+    modality = measurement.get("modality") or "continuous"
+    if modality not in ("continuous", "sparse_continuous", "die_bin_categorical", "defect_coordinates"):
+        raise ValueError(f"unsupported measurement modality {modality!r}")
+    categorical = modality in ("die_bin_categorical", "defect_coordinates")
     points = data.get("points")
     if not isinstance(points, list) or len(points) < 3:
         raise ValueError("at least three measured sites are required")
@@ -86,12 +93,13 @@ def _prepare_map(data: dict, cancel=None) -> dict:
     for index, p in enumerate(points):
         if index % 1024 == 0:
             _check_cancel(cancel)
-        if not isinstance(p, dict) or not all(_number(p.get(k)) for k in ("x", "y", "value")):
+        required = ("x", "y") if categorical else ("x", "y", "value")
+        if not isinstance(p, dict) or not all(_number(p.get(k)) for k in required):
             raise ValueError(f"point {index} has a missing or invalid coordinate/value")
-        if any(abs(p[k]) > MAX_ABS_NUMERIC for k in ("x", "y", "value")):
+        if any(abs(p[k]) > MAX_ABS_NUMERIC for k in required):
             raise ValueError(f"point {index} exceeds the numeric range limit")
         x, y = float(p["x"]) - float(ox), float(p["y"]) - float(oy)
-        value = float(p["value"])
+        value = None if categorical else float(p["value"])
         r = hypot(x, y)
         if r > radius + max(float(radius) * 1e-9, 1e-12):
             raise ValueError(f"point {index} is outside wafer geometry")
@@ -99,13 +107,24 @@ def _prepare_map(data: dict, cancel=None) -> dict:
         if key in seen:
             raise ValueError("duplicate measured coordinate")
         seen.add(key)
-        row = {"x": x, "y": y, "value": value, "radius_fraction": r / float(radius)}
+        row = {"x": x, "y": y, "radius_fraction": r / float(radius)}
+        if not categorical:
+            row["value"] = value
+            uncertainty = p.get("standard_uncertainty")
+            if uncertainty is not None:
+                if not _number(uncertainty) or uncertainty < 0 or uncertainty > MAX_ABS_NUMERIC:
+                    raise ValueError(f"point {index} standard_uncertainty must be finite and nonnegative")
+                uncertainty_unit = p.get("standard_uncertainty_unit")
+                if uncertainty_unit is not None and uncertainty_unit != measurement.get("unit"):
+                    raise ValueError(f"point {index} uncertainty unit must match the measurement unit")
+                row["standard_uncertainty"] = float(uncertainty)
+        elif modality == "die_bin_categorical":
+            category = p.get("category", p.get("bin"))
+            if not isinstance(category, (str, int)) or isinstance(category, bool) or not str(category).strip():
+                raise ValueError(f"point {index} requires a nonempty categorical bin/category")
+            row["category"] = str(category)
         row["site_id"] = str(p.get("site_id", f"site-{index + 1}"))
         normalized.append(row)
-    measurement = _measurement(data)
-    modality = measurement.get("modality") or "continuous"
-    if modality not in ("continuous", "sparse_continuous"):
-        raise ValueError(f"arithmetic is unsupported for modality {modality!r}")
     return {
         "raw": data,
         "radius": float(radius),
@@ -158,7 +177,9 @@ def _summary(values: list[float]) -> dict:
             "minimum": min(values), "maximum": max(values)}
 
 
-def _plane_gradient(points: list[dict], radius: float, orientation: float) -> dict:
+def _plane_gradient(points: list[dict], radius: float, orientation: float | None) -> dict:
+    if orientation is None:
+        return {"status": "INCONCLUSIVE", "reason": "verified wafer orientation is required for a physical directional gradient"}
     if len(points) < 3:
         return {"status": "INCONCLUSIVE", "reason": "at least three non-collinear observed sites are required"}
     rotated = [_rotate(p["x"], p["y"], orientation) for p in points]
@@ -183,8 +204,10 @@ def _plane_gradient(points: list[dict], radius: float, orientation: float) -> di
             "method": "ordinary_least_squares_plane_on_observed_sites"}
 
 
-def _local_clusters(points: list[dict], radius: float, orientation: float, *, grid_size=32) -> dict:
+def _local_clusters(points: list[dict], radius: float, orientation: float | None, *, grid_size=32) -> dict:
     """Describe contiguous occupied grid cells with large median shifts; not calibrated alerts."""
+    if orientation is None:
+        return {"status": "INCONCLUSIVE", "reason": "verified wafer orientation is required for physical cluster locations"}
     buckets: dict[tuple[int, int], list[float]] = {}
     for point in points:
         x, y = _rotate(point["x"], point["y"], orientation)
@@ -282,20 +305,75 @@ def _reticle_periodicity(data: dict, prepared: dict) -> dict:
 def fingerprint(data: dict, cancel=None) -> dict:
     """Describe only measured sites; regions with no measurements stay absent."""
     m = _prepare_map(data, cancel)
-    if m["orientation_deg"] is None:
-        raise PermissionError("verified wafer orientation is required for spatial fingerprints")
     if not m["coordinate_system"] or not m["coordinate_unit"] or m["coordinate_unit"] == "[coordinate unit unknown]":
         raise PermissionError("wafer coordinate system and units are not verified")
     if not m["measurement"].get("metric") or not m["measurement"].get("unit"):
         raise ValueError("measurement metric and unit are required")
-    if not m["coordinate_unit"] or m["coordinate_unit"] == "[coordinate unit unknown]":
-        raise ValueError("coordinate units are required")
     points = m["points"]
+    modality = m["measurement"].get("modality") or "continuous"
+    if modality in ("die_bin_categorical", "defect_coordinates"):
+        regions = {"center": [], "middle": [], "edge": []}
+        radial_bins = ((0.0, 0.2, "center"), (0.2, 0.5, "inner_middle"),
+                       (0.5, 0.8, "outer_middle"), (0.8, 1.0 + 1e-9, "edge"))
+        radial_profile = []
+        for point in points:
+            label = "center" if point["radius_fraction"] <= 0.2 else "edge" if point["radius_fraction"] >= 0.8 else "middle"
+            regions[label].append(point)
+        for low, high, label in radial_bins:
+            selected = [point for point in points if (point["radius_fraction"] <= high if label == "center"
+                                                       else low < point["radius_fraction"] <= high)]
+            radial_profile.append({"region": label, "radius_fraction": [low, high], "count": len(selected)})
+        region_result = {}
+        for label, selected in regions.items():
+            row = {"count": len(selected), "mean": None, "median": None, "mad": None,
+                   "minimum": None, "maximum": None}
+            if modality == "die_bin_categorical":
+                category_counts: dict[str, int] = {}
+                for point in selected:
+                    category_counts[point["category"]] = category_counts.get(point["category"], 0) + 1
+                row["category_counts"] = dict(sorted(category_counts.items()))
+            region_result[label] = row
+        directional = ( {"status": "NOT_APPLICABLE", "reason": "directional numeric gradients do not apply to categorical observations"}
+                        if modality == "die_bin_categorical" else
+                        {"status": "NOT_APPLICABLE", "reason": "directional numeric gradients do not apply to defect-coordinate events"})
+        return {
+            "observed_points": len(points), "modality": modality, "regions": region_result,
+            "edge_center": {"status": "NOT_APPLICABLE", "reason": "edge-center arithmetic is not valid for categorical observations"},
+            "edge_minus_center": None, "radial_gradient_per_radius": None,
+            "radial_profile": radial_profile, "directional_gradient": directional,
+            "local_clusters": {"status": "NOT_APPLICABLE", "reason": "numeric cluster scoring is not valid for categorical observations"},
+            "reticle_periodicity": {"status": "NOT_APPLICABLE", "reason": "numeric periodicity scoring is not valid for categorical observations"},
+            "sectors": ({"status": "INCONCLUSIVE", "reason": "verified wafer orientation is required for sector counts"}
+                        if m["orientation_deg"] is None else [
+                            {"sector": sector, "count": sum(_sector_index(point["x"], point["y"], m["orientation_deg"]) == sector for point in points)}
+                            for sector in range(8)]),
+            "measurement_unit": m["measurement"].get("unit"), "metric": m["measurement"].get("metric"),
+            "measurement_definition_id": m["measurement"].get("definition_id"), "layer": m["measurement"].get("layer"),
+            "coordinate_unit": m["coordinate_unit"], "sampling_mask_id": m["sampling_mask_id"],
+        }
     center = [p["value"] for p in points if p["radius_fraction"] <= 0.2]
     mid = [p["value"] for p in points if 0.2 < p["radius_fraction"] < 0.8]
     edge = [p["value"] for p in points if p["radius_fraction"] >= 0.8]
-    if not center or not edge:
-        raise ValueError("center and edge measurements are both required for edge-center")
+    edge_center_status = "VALID" if center and edge else "INCONCLUSIVE"
+    edge_center = {
+        "status": edge_center_status,
+        "center_count": len(center), "edge_count": len(edge),
+        "difference": mean(edge) - mean(center) if center and edge else None,
+        "reason": None if center and edge else "both center and edge measurements are required for this feature",
+    }
+    center_points = [point for point in points if point["radius_fraction"] <= 0.2]
+    edge_points = [point for point in points if point["radius_fraction"] >= 0.8]
+    if center and edge and all(point.get("standard_uncertainty") is not None for point in center_points + edge_points):
+        center_u = [point["standard_uncertainty"] for point in center_points]
+        edge_u = [point["standard_uncertainty"] for point in edge_points]
+        edge_center["standard_uncertainty"] = sqrt(sum(u * u for u in edge_u) / len(edge_u) ** 2
+                                                       + sum(u * u for u in center_u) / len(center_u) ** 2)
+        edge_center["uncertainty_status"] = "PROPAGATED_FROM_SITE_STANDARD_UNCERTAINTIES"
+        edge_center["uncertainty_method"] = "independent_site_uncertainties_root_sum_square_of_region_means"
+        edge_center["uncertainty_unit"] = m["measurement"].get("unit")
+    else:
+        edge_center["standard_uncertainty"] = None
+        edge_center["uncertainty_status"] = "NOT_SUPPLIED"
     radial_bins = [(0.0, 0.2, "center"), (0.2, 0.5, "inner_middle"),
                    (0.5, 0.8, "outer_middle"), (0.8, 1.0 + 1e-9, "edge")]
     radial_profile = []
@@ -306,12 +384,14 @@ def fingerprint(data: dict, cancel=None) -> dict:
         radial_profile.append({"region": label, "radius_fraction": [low, high], **_summary(values)})
     result = {
         "observed_points": len(points),
+        "modality": modality,
         "regions": {
-            "center": {"count": len(center), "mean": mean(center)},
+            "center": {"count": len(center), "mean": mean(center) if center else None},
             "middle": {"count": len(mid), "mean": mean(mid) if mid else None},
-            "edge": {"count": len(edge), "mean": mean(edge)},
+            "edge": {"count": len(edge), "mean": mean(edge) if edge else None},
         },
-        "edge_minus_center": mean(edge) - mean(center),
+        "edge_center": edge_center,
+        "edge_minus_center": edge_center["difference"],
         "radial_gradient_per_radius": _linear_slope([p["radius_fraction"] for p in points], [p["value"] for p in points]),
         "radial_profile": radial_profile,
         "directional_gradient": _plane_gradient(points, m["radius"], m["orientation_deg"]),
@@ -334,6 +414,8 @@ def fingerprint(data: dict, cancel=None) -> dict:
         result["sectors"] = [
             {"sector": i, **_summary(values)} for i, values in enumerate(buckets)
         ]
+    else:
+        result["sectors"] = {"status": "INCONCLUSIVE", "reason": "verified wafer orientation is required for physical sector locations"}
     return result
 
 
@@ -346,8 +428,10 @@ def describe(points, radius):
     return {"edge_minus_center": result["edge_minus_center"], "observed_points": result["observed_points"]}
 
 
-def _context_compatible(left: dict, right: dict, require_orientation=True, cancel=None) -> tuple[bool, str]:
-    a, b = _prepare_map(left, cancel), _prepare_map(right, cancel)
+def _context_compatible(left: dict, right: dict, require_orientation=True, cancel=None,
+                       require_sampling_mask=True, prepared_left=None, prepared_right=None) -> tuple[bool, str]:
+    a = prepared_left or _prepare_map(left, cancel)
+    b = prepared_right or _prepare_map(right, cancel)
     ma, mb = a["measurement"], b["measurement"]
     for key in ("metric", "unit", "definition_id", "layer", "modality"):
         va, vb = ma.get(key), mb.get(key)
@@ -364,7 +448,9 @@ def _context_compatible(left: dict, right: dict, require_orientation=True, cance
                 return False, f"incompatible or missing {key}"
     if abs(a["radius"] - b["radius"]) > max(a["radius"], b["radius"]) * 1e-8:
         return False, "wafer radii differ"
-    if not a["sampling_mask_id"] or not b["sampling_mask_id"] or a["sampling_mask_id"] != b["sampling_mask_id"]:
+    if not a["sampling_mask_id"] or not b["sampling_mask_id"]:
+        return False, "sampling masks are unverified"
+    if require_sampling_mask and a["sampling_mask_id"] != b["sampling_mask_id"]:
         return False, "sampling masks differ or are unverified"
     if not a["coordinate_system"] or not b["coordinate_system"] or a["coordinate_system"] == "unknown" or b["coordinate_system"] == "unknown" or a["coordinate_system"] != b["coordinate_system"]:
         return False, "coordinate systems differ or are unverified"
@@ -378,8 +464,8 @@ def _context_compatible(left: dict, right: dict, require_orientation=True, cance
     return True, "compatible"
 
 
-def _physical_site_values(data: dict, cancel=None) -> dict[tuple[int, int], tuple[dict, float]]:
-    m = _prepare_map(data, cancel)
+def _physical_site_values(data: dict, cancel=None, *, prepared=None) -> dict[tuple[int, int], tuple[dict, float]]:
+    m = prepared or _prepare_map(data, cancel)
     if m["orientation_deg"] is None:
         raise ValueError("verified orientation is required for physical alignment")
     sites = {}
@@ -394,11 +480,30 @@ def _physical_site_values(data: dict, cancel=None) -> dict[tuple[int, int], tupl
     return sites
 
 
-def compare_evolution(previous: dict, current: dict, cancel=None) -> dict:
+def _validate_common_site_policy(policy: Any) -> tuple[int, float] | None:
+    if policy is None:
+        return None
+    if (not isinstance(policy, dict) or policy.get("predeclared") is not True
+            or policy.get("method") != "exact_common_site_v1"):
+        raise ValueError("common-site matching requires a predeclared exact_common_site_v1 policy")
+    minimum_sites = policy.get("minimum_sites")
+    minimum_coverage = policy.get("minimum_coverage_fraction")
+    if (type(minimum_sites) is not int or minimum_sites < 5
+            or not _number(minimum_coverage) or not 0.5 <= minimum_coverage <= 1):
+        raise ValueError("common-site policy requires at least five sites and 0.5–1.0 coverage per map")
+    return minimum_sites, float(minimum_coverage)
+
+
+def compare_evolution(previous: dict, current: dict, cancel=None, *, match_policy=None) -> dict:
     """Compare same-wafer, same-definition measurements at matched observed sites."""
     _check_cancel(cancel)
     try:
-        ok, reason = _context_compatible(previous, current, cancel=cancel)
+        common_site_policy = _validate_common_site_policy(match_policy)
+    except ValueError as exc:
+        return {"status": "INCONCLUSIVE", "reason": str(exc), "site_deltas": []}
+    try:
+        ok, reason = _context_compatible(previous, current, cancel=cancel,
+                                         require_sampling_mask=common_site_policy is None)
     except (ValueError, KeyError, TypeError, PermissionError) as exc:
         return {"status": "INCONCLUSIVE", "reason": str(exc), "site_deltas": []}
     if not ok:
@@ -418,24 +523,61 @@ def compare_evolution(previous: dict, current: dict, cancel=None) -> dict:
     except ValueError as exc:
         return {"status": "INCONCLUSIVE", "reason": str(exc), "site_deltas": []}
     before, after = _physical_site_values(previous, cancel), _physical_site_values(current, cancel)
-    if before.keys() != after.keys():
+    matched_keys = before.keys() & after.keys()
+    if common_site_policy is None and before.keys() != after.keys():
         return {"status": "INCONCLUSIVE", "reason": "observed coordinate sets differ; no interpolation was performed", "site_deltas": []}
+    minimum_sites, minimum_coverage = common_site_policy if common_site_policy else (0, 0.0)
+    before_coverage = len(matched_keys) / len(before)
+    after_coverage = len(matched_keys) / len(after)
+    if common_site_policy is not None and (len(matched_keys) < minimum_sites
+            or before_coverage < minimum_coverage or after_coverage < minimum_coverage):
+        return {"status": "INCONCLUSIVE", "reason": "exact common-site overlap is below the predeclared site or coverage minimum; no interpolation was performed",
+                "site_deltas": [], "matched_sites": len(matched_keys),
+                "coverage": {"previous": before_coverage, "current": after_coverage}}
     deltas = []
-    for index, key in enumerate(sorted(before)):
+    site_uncertainties = []
+    residuals = []
+    previous_prepared = _prepare_map(previous, cancel)
+    current_prepared = _prepare_map(current, cancel)
+    for index, key in enumerate(sorted(matched_keys)):
         if index % 1024 == 0:
             _check_cancel(cancel)
         p0, v0 = before[key]
         p1, v1 = after[key]
+        prev_coordinates = _rotate(p0["x"], p0["y"], previous_prepared["orientation_deg"])
+        current_coordinates = _rotate(p1["x"], p1["y"], current_prepared["orientation_deg"])
+        residuals.append(hypot(prev_coordinates[0] - current_coordinates[0], prev_coordinates[1] - current_coordinates[1]))
         deltas.append({"site_id": p1["site_id"], "x_normalized": key[0], "y_normalized": key[1], "previous": v0, "current": v1, "delta": v1 - v0})
+        u0, u1 = p0.get("standard_uncertainty"), p1.get("standard_uncertainty")
+        if u0 is None or u1 is None:
+            site_uncertainties.append(None)
+        else:
+            combined = sqrt(u0 * u0 + u1 * u1)
+            site_uncertainties.append(combined)
+            deltas[-1]["standard_uncertainty"] = combined
+    if deltas and all(value is not None for value in site_uncertainties):
+        mean_uncertainty = sqrt(sum(value * value for value in site_uncertainties) / len(site_uncertainties) ** 2)
+        measurement_uncertainty = {"status": "PROPAGATED_FROM_SITE_STANDARD_UNCERTAINTIES",
+                                   "mean_delta_standard_uncertainty": mean_uncertainty,
+                                   "unit": _measurement(current).get("unit"),
+                                   "assumption": "independent previous/current measurements and independent matched sites"}
+    else:
+        measurement_uncertainty = {"status": "NOT_SUPPLIED", "mean_delta_standard_uncertainty": None,
+                                   "unit": _measurement(current).get("unit")}
     return {
         "status": "VALID",
         "matched_sites": len(deltas),
         "mean_delta": mean(row["delta"] for row in deltas),
-        "registration_residual": 0.0,
+        "registration_residual": max(residuals, default=0.0),
         "site_deltas": deltas,
-        "alignment": "exact observed-site match after declared orientation transform",
-        "uncertainty": {"registration": "exact declared-origin/orientation coordinate match; no transform uncertainty supplied",
-                        "measurement_repeatability": "NOT_SUPPLIED"},
+        "alignment": "exact observed-site match after declared origin/orientation transform" if common_site_policy is None else "predeclared exact common-site match after declared origin/orientation transform; no reconstruction",
+        "alignment_method": "exact_observed_site_v1" if common_site_policy is None else "exact_common_site_v1",
+        "coverage": {"previous": before_coverage, "current": after_coverage,
+                     "unmatched_previous_sites": len(before) - len(matched_keys),
+                     "unmatched_current_sites": len(after) - len(matched_keys)},
+        "uncertainty": {"registration_residual_units": "coordinate unit", "maximum_matched_site_coordinate_residual": max(residuals, default=0.0),
+                        "coordinate_key_tolerance_normalized_per_axis": 1e-8,
+                        "measurement_repeatability": measurement_uncertainty},
         "steps": [previous["step_id"], current["step_id"]],
     }
 
@@ -454,11 +596,13 @@ def compare_evolution_sequence(previous_steps: list[dict], current: dict, cancel
                     "site_deltas": [], "comparisons": comparisons}
         comparisons.append(result)
     site_changes: dict[tuple[float, float], list[float]] = {}
+    site_uncertainty_changes: dict[tuple[float, float], list[float | None]] = {}
     site_labels: dict[tuple[float, float], str] = {}
     for result in comparisons:
         for row in result["site_deltas"]:
             key = (row["x_normalized"], row["y_normalized"])
             site_changes.setdefault(key, []).append(row["delta"])
+            site_uncertainty_changes.setdefault(key, []).append(row.get("standard_uncertainty"))
             site_labels[key] = row["site_id"]
     persistent = []
     totals = []
@@ -470,9 +614,25 @@ def compare_evolution_sequence(previous_steps: list[dict], current: dict, cancel
         totals.append(total_delta)
         persistent.append({"site_id": site_labels[key], "x_normalized": key[0], "y_normalized": key[1],
                            "step_deltas": deltas, "total_delta": total_delta,
-                           "direction_persistent": direction_persistent})
+                           "direction_persistent": direction_persistent,
+                           "_transition_standard_uncertainties": site_uncertainty_changes.get(key, [])})
     persistent_count = sum(row["direction_persistent"] for row in persistent)
     step_ids = [item.get("step_id") for item in maps]
+    sequence_uncertainties = []
+    for row in persistent:
+        values = row.pop("_transition_standard_uncertainties", [])
+        if len(values) == len(comparisons) and all(value is not None for value in values):
+            total_u = sqrt(sum(value * value for value in values))
+            row["total_delta_standard_uncertainty"] = total_u
+            sequence_uncertainties.append(total_u)
+        else:
+            row["total_delta_standard_uncertainty"] = None
+    if len(sequence_uncertainties) == len(persistent) and persistent:
+        sequence_measurement_uncertainty = {"status": "PROPAGATED_FROM_SITE_STANDARD_UNCERTAINTIES",
+                                            "mean_total_delta_standard_uncertainty": sqrt(sum(value * value for value in sequence_uncertainties) / len(sequence_uncertainties) ** 2),
+                                            "assumption": "independent measurements across transitions and independent matched sites"}
+    else:
+        sequence_measurement_uncertainty = {"status": "NOT_SUPPLIED", "mean_total_delta_standard_uncertainty": None}
     return {"status": "VALID", "matched_sites": len(persistent), "mean_delta": mean(totals),
             "registration_residual": max(result["registration_residual"] for result in comparisons),
             "site_deltas": persistent, "steps": [step_ids[0], step_ids[-1]], "step_sequence": step_ids,
@@ -480,10 +640,87 @@ def compare_evolution_sequence(previous_steps: list[dict], current: dict, cancel
             "persistence": {"transitions": len(comparisons), "sites_with_same_nonzero_direction": persistent_count,
                             "fraction_with_same_nonzero_direction": persistent_count / len(persistent) if persistent else None},
             "uncertainty": {"registration": "exact declared-origin/orientation coordinate match; no transform uncertainty supplied",
-                            "measurement_repeatability": "NOT_SUPPLIED"}}
+                            "measurement_repeatability": sequence_measurement_uncertainty}}
 
 
-def search_history(current: dict, history: list[dict], top_k=5, cancel=None) -> dict:
+def _spatial_profiles(prepared: dict) -> dict[str, dict[int, dict[str, float | int]]]:
+    points = prepared["points"]
+    overall = mean(point["value"] for point in points)
+    radial: dict[int, list[float]] = {}
+    sectors: dict[int, list[float]] = {}
+    for point in points:
+        fraction = point["radius_fraction"]
+        radial_bin = 0 if fraction <= 0.2 else 1 if fraction <= 0.5 else 2 if fraction <= 0.8 else 3
+        radial.setdefault(radial_bin, []).append(point["value"])
+        sector = _sector_index(point["x"], point["y"], prepared["orientation_deg"])
+        sectors.setdefault(sector, []).append(point["value"])
+    return {"radial": {key: {"centered_mean": mean(values) - overall, "count": len(values)}
+                        for key, values in radial.items()},
+            "sectors": {key: {"centered_mean": mean(values) - overall, "count": len(values)}
+                        for key, values in sectors.items()}}
+
+
+class SpatialSignatureIndex:
+    """Offline in-memory index of bounded, prevalidated numeric map descriptors."""
+
+    def __init__(self, maps, *, max_maps=50_000, max_total_sites=1_000_000, cancel=None):
+        if type(max_maps) is not int or not 1 <= max_maps <= 100_000:
+            raise ValueError("max_maps must be between 1 and 100000")
+        if type(max_total_sites) is not int or not 1 <= max_total_sites <= 5_000_000:
+            raise ValueError("max_total_sites must be between 1 and 5000000")
+        if not isinstance(maps, list) or len(maps) > max_maps:
+            raise ValueError("index input must be a bounded list of historical maps")
+        site_count = 0
+        for item in maps:
+            points = item.get("points") if isinstance(item, dict) else None
+            if isinstance(points, list):
+                site_count += len(points)
+                if site_count > max_total_sites:
+                    raise ValueError("historical index exceeds the configured total-site limit")
+        # Keep the descriptors tied to the exact records that were validated.
+        # Callers may reuse or mutate their input list after index construction.
+        self._maps = deepcopy(maps)
+        self._cache: dict[int, dict[str, Any]] = {}
+        self._total_sites = 0
+        self._indexed = 0
+        self._excluded = 0
+        for index, item in enumerate(self._maps):
+            if index % 32 == 0:
+                _check_cancel(cancel)
+            try:
+                if not isinstance(item, dict):
+                    raise ValueError("historical map is not an object")
+                points = item.get("points")
+                if not isinstance(points, list):
+                    raise ValueError("historical map points must be a list")
+                self._total_sites += len(points)
+                if self._total_sites > max_total_sites:
+                    raise ValueError("historical index exceeds the configured total-site limit")
+                prepared = _prepare_map(item)
+                if prepared["measurement"].get("modality") not in ("continuous", "sparse_continuous"):
+                    raise ValueError("numeric spatial index does not accept categorical or event maps")
+                sites = _physical_site_values(item, prepared=prepared)
+                profiles = _spatial_profiles(prepared)
+                self._cache[id(item)] = {"prepared": prepared, "sites": sites, "profiles": profiles}
+                self._indexed += 1
+            except (ValueError, KeyError, TypeError, PermissionError) as exc:
+                self._cache[id(item)] = {"error": str(exc)}
+                self._excluded += 1
+                if "total-site limit" in str(exc):
+                    raise
+
+    @property
+    def stats(self) -> dict[str, int]:
+        return {"historical_maps": len(self._maps), "indexed_maps": self._indexed,
+                "excluded_maps": self._excluded, "indexed_sites": self._total_sites}
+
+    def search(self, current: dict, top_k=5, cancel=None) -> dict:
+        return search_history(current, self._maps, top_k=top_k, cancel=cancel,
+                              _prepared_cache=self._cache, index_stats=self.stats)
+
+
+def search_history(current: dict, history: list[dict], top_k=5, cancel=None, *,
+                   _prepared_cache=None, index_stats=None) -> dict:
     if not isinstance(history, list) or not history:
         return {"status": "INCONCLUSIVE", "reason": "no historical maps supplied", "neighbors": []}
     if not current.get("wafer_id") or not current.get("lot_id"):
@@ -495,11 +732,14 @@ def search_history(current: dict, history: list[dict], top_k=5, cancel=None) -> 
     if type(top_k) is not int or not 1 <= top_k <= 50:
         return {"status": "INCONCLUSIVE", "reason": "top_k must be between 1 and 50", "neighbors": []}
     try:
-        current_sites = _physical_site_values(current, cancel)
+        current_prepared = _prepare_map(current, cancel)
+        current_sites = _physical_site_values(current, cancel, prepared=current_prepared)
     except (ValueError, KeyError, TypeError, PermissionError) as exc:
         return {"status": "INCONCLUSIVE", "reason": str(exc), "neighbors": []}
-    current_prepared = _prepare_map(current, cancel)
+    if current_prepared["measurement"].get("modality") not in ("continuous", "sparse_continuous"):
+        return {"status": "INCONCLUSIVE", "reason": "numeric historical profile retrieval is unavailable for categorical or event data", "neighbors": []}
     current_mean = mean(p["value"] for p in current_prepared["points"])
+    current_profiles = _spatial_profiles(current_prepared)
     rows = []
     excluded = []
     for candidate in history:
@@ -517,8 +757,14 @@ def search_history(current: dict, history: list[dict], top_k=5, cancel=None) -> 
         except ValueError as exc:
             excluded.append({"wafer_id": candidate.get("wafer_id"), "reason": str(exc)})
             continue
+        cached = _prepared_cache.get(id(candidate)) if _prepared_cache is not None else None
+        if isinstance(cached, dict) and cached.get("error"):
+            excluded.append({"wafer_id": candidate.get("wafer_id"), "reason": cached["error"]})
+            continue
         try:
-            ok, reason = _context_compatible(current, candidate, cancel=cancel)
+            candidate_prepared = cached["prepared"] if isinstance(cached, dict) else _prepare_map(candidate, cancel)
+            ok, reason = _context_compatible(current, candidate, cancel=cancel, require_sampling_mask=False,
+                                             prepared_left=current_prepared, prepared_right=candidate_prepared)
         except (ValueError, KeyError, TypeError, PermissionError) as exc:
             excluded.append({"wafer_id": candidate.get("wafer_id") if isinstance(candidate, dict) else None, "reason": str(exc)})
             continue
@@ -529,69 +775,64 @@ def search_history(current: dict, history: list[dict], top_k=5, cancel=None) -> 
             excluded.append({"wafer_id": candidate.get("wafer_id"), "reason": "missing or non-independent wafer identity"})
             continue
         try:
-            sites = _physical_site_values(candidate, cancel)
+            sites = cached["sites"] if isinstance(cached, dict) else _physical_site_values(candidate, cancel, prepared=candidate_prepared)
         except (ValueError, KeyError, TypeError, PermissionError) as exc:
             excluded.append({"wafer_id": candidate.get("wafer_id"), "reason": str(exc)})
             continue
-        if current_sites.keys() != sites.keys():
-            excluded.append({"wafer_id": candidate.get("wafer_id"), "reason": "observed coordinate sets differ"})
+        if candidate_prepared["measurement"].get("modality") not in ("continuous", "sparse_continuous"):
+            excluded.append({"wafer_id": candidate.get("wafer_id"), "reason": "numeric profile retrieval is unavailable for categorical or event data"})
             continue
-        cand_values = [sites[key][1] for key in current_sites]
+        cand_values = [entry[1] for entry in sites.values()]
         mean_candidate = mean(cand_values)
-        current_centered = [current_sites[key][1] - current_mean for key in current_sites]
-        candidate_centered = [sites[key][1] - mean_candidate for key in current_sites]
-        shape_rmse = sqrt(mean((a - b) ** 2 for a, b in zip(current_centered, candidate_centered)))
+        shape_rmse = None
         numeric_floor = max(max((abs(value) for value in [current_sites[key][1] for key in current_sites]
-                                  + [sites[key][1] for key in current_sites]), default=0.0) * 1e-12, 1e-300)
-        if shape_rmse <= numeric_floor:
-            shape_rmse = 0.0
-        raw_rmse = sqrt(mean((current_sites[key][1] - sites[key][1]) ** 2 for key in current_sites))
-        def profile_rmse(group_for_point):
-            left: dict[Any, list[float]] = {}
-            right: dict[Any, list[float]] = {}
-            for key in current_sites:
-                group = group_for_point(current_sites[key][0])
-                left.setdefault(group, []).append(current_sites[key][1] - current_mean)
-                right.setdefault(group, []).append(sites[key][1] - mean_candidate)
-            groups = sorted(set(left) & set(right), key=str)
+                                  + [sites[key][1] for key in sites]), default=0.0) * 1e-12, 1e-300)
+        raw_rmse = None
+        if current_sites.keys() == sites.keys():
+            current_centered = [current_sites[key][1] - current_mean for key in current_sites]
+            candidate_centered = [sites[key][1] - mean_candidate for key in current_sites]
+            shape_rmse = sqrt(mean((a - b) ** 2 for a, b in zip(current_centered, candidate_centered)))
+            if shape_rmse <= numeric_floor:
+                shape_rmse = 0.0
+            raw_rmse = sqrt(mean((current_sites[key][1] - sites[key][1]) ** 2 for key in current_sites))
+        candidate_profiles = cached["profiles"] if isinstance(cached, dict) else _spatial_profiles(candidate_prepared)
+        radial_groups = sorted(set(current_profiles["radial"]) & set(candidate_profiles["radial"]))
+        sector_groups = sorted(set(current_profiles["sectors"]) & set(candidate_profiles["sectors"]))
+        if current_sites.keys() != sites.keys() and (len(radial_groups) < 2 or len(sector_groups) < 4):
+            excluded.append({"wafer_id": candidate.get("wafer_id"),
+                             "reason": "different sampling layouts share fewer than two radial and four sector profile bins"})
+            continue
+        def profile_rmse(left, right, groups):
             if not groups:
                 return None
-            return sqrt(mean((mean(left[group]) - mean(right[group])) ** 2 for group in groups))
+            return sqrt(mean((left[group]["centered_mean"] - right[group]["centered_mean"]) ** 2
+                             for group in groups))
 
-        radial_rmse = profile_rmse(lambda point: 0 if point["radius_fraction"] <= 0.2 else
-                                   1 if point["radius_fraction"] <= 0.5 else
-                                   2 if point["radius_fraction"] <= 0.8 else 3)
-        sector_rmse = profile_rmse(lambda point: _sector_index(point["x"], point["y"], current_prepared["orientation_deg"]))
+        radial_rmse = profile_rmse(current_profiles["radial"], candidate_profiles["radial"], radial_groups)
+        sector_rmse = profile_rmse(current_profiles["sectors"], candidate_profiles["sectors"], sector_groups)
         radial_rmse = 0.0 if radial_rmse is not None and radial_rmse <= numeric_floor else radial_rmse
         sector_rmse = 0.0 if sector_rmse is not None and sector_rmse <= numeric_floor else sector_rmse
-        levels = [shape_rmse] + [value for value in (radial_rmse, sector_rmse) if value is not None]
+        levels = ([shape_rmse] if shape_rmse is not None else []) + [value for value in (radial_rmse, sector_rmse) if value is not None]
         multiscale_rmse = sqrt(mean(value * value for value in levels))
         rows.append({"wafer_id": candidate["wafer_id"], "source_ids": _source_ids(candidate), "shape_rmse": shape_rmse,
                      "radial_profile_rmse": radial_rmse, "sector_profile_rmse": sector_rmse,
                      "multiscale_rmse": multiscale_rmse,
                      "distance_components": {"site_centered_rmse": shape_rmse, "radial_profile_rmse": radial_rmse,
                                              "sector_profile_rmse": sector_rmse},
-                     "raw_rmse": raw_rmse, "mean_level_delta": mean_candidate - current_mean})
-    rows.sort(key=lambda row: (row["multiscale_rmse"], row["shape_rmse"], row["raw_rmse"], str(row["wafer_id"])))
-    return {"status": "VALID" if rows else "INCONCLUSIVE", "reason": None if rows else "no compatible historical maps", "neighbors": rows[:top_k], "excluded": excluded,
-            "interpretation": "shape similarity only; a neighbor does not establish a shared mechanism"}
-
-
-def _bh_adjust(p_values: list[float]) -> list[float]:
-    order = sorted(range(len(p_values)), key=lambda i: p_values[i])
-    adjusted = [1.0] * len(p_values)
-    running = 1.0
-    n = len(p_values)
-    for rank_index in range(n - 1, -1, -1):
-        i = order[rank_index]
-        rank = rank_index + 1
-        running = min(running, p_values[i] * n / rank)
-        adjusted[i] = min(1.0, running)
-    return adjusted
+                     "raw_rmse": raw_rmse, "mean_level_delta": mean_candidate - current_mean,
+                     "alignment": "exact observed-site values" if shape_rmse is not None else "common radial/sector profile descriptors; no reconstruction",
+                     "profile_coverage": {"shared_radial_bins": len(radial_groups), "current_radial_bins": len(current_profiles["radial"]),
+                                          "candidate_radial_bins": len(candidate_profiles["radial"]), "shared_sector_bins": len(sector_groups),
+                                          "current_sector_bins": len(current_profiles["sectors"]), "candidate_sector_bins": len(candidate_profiles["sectors"])}})
+    rank_key = lambda row: (row["multiscale_rmse"], row["shape_rmse"] if row["shape_rmse"] is not None else row["multiscale_rmse"],
+                            row["raw_rmse"] if row["raw_rmse"] is not None else row["multiscale_rmse"], str(row["wafer_id"]))
+    neighbors = heapq.nsmallest(top_k, rows, key=rank_key)
+    return {"status": "VALID" if rows else "INCONCLUSIVE", "reason": None if rows else "no compatible historical maps", "neighbors": neighbors, "excluded": excluded,
+            "index": index_stats, "interpretation": "spatial profile similarity only; common-profile comparisons use observed bins without interpolation and a neighbor does not establish a shared mechanism"}
 
 
 def detect_anomalies(current: dict, baseline: list[dict], *, holdout_verified=False, cancel=None) -> dict:
-    """Empirical per-site outlier screen with BH correction; never a cause claim."""
+    """Calibrated wafer-level max-T screen; site rows are post-test localizers only."""
     if not isinstance(baseline, list) or not baseline:
         return {"status": "INCONCLUSIVE", "reason": "matched baseline population is unavailable", "outliers": []}
     if holdout_verified is not True:
@@ -645,18 +886,52 @@ def detect_anomalies(current: dict, baseline: list[dict], *, holdout_verified=Fa
         mad = median(deviations)
         robust_z = (0.67448975 * (observed - middle) / mad) if mad > 0 else (0.0 if observed == middle else None)
         robust_extreme = (abs(robust_z) >= ANOMALY_ROBUST_Z) if robust_z is not None else observed != middle
-        p = (1 + sum(dev >= abs(observed - middle) for dev in deviations)) / (len(deviations) + 1)
         rows.append({"site_id": current_sites[key][0]["site_id"], "value": observed, "baseline_median": middle,
                      "baseline_mad": mad, "robust_z": robust_z, "robust_scale_zero_and_shifted": robust_z is None and observed != middle,
-                     "robust_extreme": robust_extreme, "empirical_p": p})
-    q_values = _bh_adjust([row["empirical_p"] for row in rows])
-    for row, q in zip(rows, q_values):
-        row["bh_q"] = q
-        row["outlier_candidate"] = row["robust_extreme"] and q <= ANOMALY_ALPHA
-    outliers = [row for row in rows if row["outlier_candidate"]]
-    return {"status": "VALID", "baseline_wafers": len(prepared), "tested_sites": len(rows), "alpha": ANOMALY_ALPHA,
-            "multiple_test_method": "Benjamini-Hochberg", "outliers": outliers,
-            "site_scores": rows, "interpretation": "conditional outlier screen against the supplied matched population; not a root-cause finding"}
+                     "robust_extreme": robust_extreme, "localizer_candidate": False})
+
+    # A single wafer-level maximum statistic controls the search over all measured
+    # sites while preserving the observed spatial dependence. Leave-one-wafer-out
+    # scores are symmetric across the target and baseline maps; this avoids treating
+    # correlated sites as independent tests.
+    maps = list(baseline) + [current]
+    max_statistics = []
+    target_index = len(maps) - 1
+    target_scores = []
+    for focus_index, focus in enumerate(maps):
+        _check_cancel(cancel)
+        focus_sites = current_sites if focus_index == target_index else _physical_site_values(focus, cancel)
+        reference_sites = [prepared[index] if index < target_index else current_sites
+                           for index in range(len(maps)) if index != focus_index]
+        scores = []
+        for key in sorted(focus_sites):
+            values = [sites[key][1] for sites in reference_sites]
+            middle = median(values)
+            scale = _mad(values)
+            observed = focus_sites[key][1]
+            if scale and scale > 0:
+                scores.append(abs(0.67448975 * (observed - middle) / scale))
+            else:
+                scores.append(float("inf") if observed != middle else 0.0)
+        maximum = max(scores, default=0.0)
+        max_statistics.append(maximum)
+        if focus_index == target_index:
+            target_scores = scores
+    target_max = max(target_scores, default=0.0)
+    null_max = max_statistics[:target_index]
+    max_t_p = (1 + sum(value >= target_max for value in null_max)) / (len(null_max) + 1)
+    for row, score in zip(rows, target_scores):
+        row["max_t_score"] = score if isfinite(score) else None
+        row["localizer_candidate"] = max_t_p <= ANOMALY_ALPHA and row["robust_extreme"]
+    outliers = [row for row in rows if row["localizer_candidate"]]
+    return {"status": "VALID", "baseline_wafers": len(prepared), "baseline_lots": len(seen_lots),
+            "tested_sites": len(rows), "alpha": ANOMALY_ALPHA,
+            "global_max_t_empirical_p": max_t_p,
+            "minimum_attainable_global_p": 1 / (len(prepared) + 1),
+            "global_test_method": "leave_one_wafer_out_spatial_maxT_rank_v1",
+            "site_scores": rows, "outliers": outliers,
+            "localization_interpretation": "localized sites contribute to a wafer-level max-T finding; site rows are not individually significant",
+            "interpretation": "conditional whole-wafer outlier screen against the supplied matched population; spatial dependence is preserved and the result is not a root-cause finding"}
 
 
 def _parse_time(value: Any) -> datetime:
@@ -696,6 +971,8 @@ def associate_quality(association: dict, expected_context=None, expected_coordin
         for key in context_keys
     ):
         return {"status": "INCONCLUSIVE", "reason": "downstream cohort does not match the selected map's product/measurement/population context"}
+    if any(supplied_context.get(key) is not None and expected_context.get(key) is None for key in optional_context):
+        return {"status": "INCONCLUSIVE", "reason": "selected map lacks tool/recipe/chamber/route context needed to control the downstream cohort"}
     relation = association.get("relationship", {})
     if not isinstance(relation, dict):
         return {"status": "REFUSED", "reason": "relationship definition must be a structured approved record"}
@@ -789,6 +1066,8 @@ def associate_quality(association: dict, expected_context=None, expected_coordin
             coordinate_blocks[site_key] = block_id
             row_context = tuple(row.get(key) for key in context_keys)
             expected_row_context = tuple(expected_context[key] for key in context_keys)
+            if any(row.get(key) is not None and expected_context.get(key) is None for key in optional_context):
+                return {"status": "INCONCLUSIVE", "reason": "holdout row includes tool/recipe/chamber/route context unavailable on the selected map"}
             if not all(row_context) or row_context != expected_row_context:
                 return {"status": "INCONCLUSIVE", "reason": "downstream observation product/measurement/population context is missing or mismatched"}
             if context_signature is None:
@@ -837,6 +1116,8 @@ def associate_quality(association: dict, expected_context=None, expected_coordin
     se = sqrt(sum((z - mean_z) ** 2 for z in wafer_correlations) / (len(wafer_correlations) - 1) / len(wafer_correlations))
     critical = _t_critical_95(len(wafer_correlations) - 1)
     ci = [tanh(mean_z - critical * se), tanh(mean_z + critical * se)]
+    leave_one_lot_out = [tanh(mean(wafer_correlations[:index] + wafer_correlations[index + 1:]))
+                         for index in range(len(wafer_correlations))]
     return {"status": "VALID", "wafers": len(grouped), "matched_die_sites": matched_sites,
             "mean_within_wafer_r": tanh(mean_z), "fisher_wafer_95_ci": ci,
             "relationship_source_id": relation["source_id"], "grain": "wafer_die",
@@ -844,6 +1125,14 @@ def associate_quality(association: dict, expected_context=None, expected_coordin
             "independent_lots": len(lot_wafers),
             "population_scope": "context-matched holdout wafers",
             "spatial_block_method": "predeclared_block_fixed_effects_v1",
+            "confounding_controls": {"product_measurement_population": "exact_context_match",
+                                     "tool_recipe_chamber_route": "exact_match_when supplied; unavailable dimensions are rejected if they appear only in the cohort",
+                                     "spatial_blocks": "within-wafer fixed effects",
+                                     "independent_unit": "one holdout wafer from each of at least 20 distinct lots"},
+            "uncertainty": {"interval": "95% t interval on Fisher-z transformed wafer correlations",
+                            "leave_one_lot_out_r_range": [min(leave_one_lot_out), max(leave_one_lot_out)],
+                            "leave_one_lot_out_estimates": leave_one_lot_out,
+                            "measurement_repeatability": "NOT_SUPPLIED"},
             "interpretation": "observational within-wafer association adjusted for predeclared spatial blocks; it does not attribute the selected wafer's outcome; residual confounding and selection effects remain possible"}
 
 
@@ -883,19 +1172,40 @@ def analyze(data: dict, cancel=None) -> dict:
 
     source_ids = _source_ids(data)
     unit = base["measurement_unit"]
-    claims = [claim(
-        f'Measured edge-center difference for {base["metric"]} = {base["edge_minus_center"]:g} {unit} from {base["observed_points"]} observed sites.',
-        method=METHOD_VERSION, source_ids=source_ids,
-    )]
+    limitations = ["No interpolation; unmeasured wafer regions remain unobserved.",
+                   "No causal inference, manufacturing actuation, or company-system access is performed."]
+    claims = []
+    if base["edge_center"]["status"] == "VALID":
+        claims.append(claim(
+            f'Measured edge-center difference for {base["metric"]} = {base["edge_minus_center"]:g} {unit} from {base["observed_points"]} observed sites.',
+            method=METHOD_VERSION, source_ids=source_ids,
+        ))
+    elif base["edge_center"]["status"] == "INCONCLUSIVE":
+        limitations.append("C01 edge-center feature unavailable: " + base["edge_center"]["reason"])
+    elif base["modality"] == "die_bin_categorical":
+        category_totals: dict[str, int] = {}
+        for region in base["regions"].values():
+            for category, count in region.get("category_counts", {}).items():
+                category_totals[category] = category_totals.get(category, 0) + count
+        claims.append(claim(
+            f'Observed categorical die/bin distribution for {base["metric"]} across {base["observed_points"]} measured sites: '
+            + ", ".join(f"{category}={count}" for category, count in sorted(category_totals.items())) + ".",
+            method="observed_categorical_site_counts_v1", source_ids=source_ids,
+        ))
+    elif base["modality"] == "defect_coordinates":
+        claims.append(claim(
+            f'Observed {base["observed_points"]} defect-coordinate events in the supplied measured-site set; no unobserved locations were inferred.',
+            method="observed_defect_coordinate_counts_v1", source_ids=source_ids,
+        ))
     report = {
-        "fingerprint": {"status": "VALID", **base},
+        "fingerprint": {"status": "PARTIAL" if any(base[key].get("status") == "INCONCLUSIVE" for key in ("edge_center", "directional_gradient", "local_clusters")) or (isinstance(base["sectors"], dict) and base["sectors"].get("status") == "INCONCLUSIVE") else "VALID", **base},
         "anomaly": {"status": "NOT_REQUESTED", "reason": "matched baseline not supplied", "outliers": []},
         "similarity": {"status": "NOT_REQUESTED", "reason": "historical maps not supplied", "neighbors": []},
         "evolution": {"status": "NOT_REQUESTED", "reason": "prior step not supplied", "site_deltas": []},
         "quality_association": {"status": "NOT_REQUESTED", "reason": "downstream association not supplied"},
     }
-    limitations = ["No interpolation; unmeasured wafer regions remain unobserved.",
-                   "No causal inference, manufacturing actuation, or company-system access is performed."]
+    if base["directional_gradient"].get("status") == "INCONCLUSIVE" or (isinstance(base["sectors"], dict) and base["sectors"].get("status") == "INCONCLUSIVE"):
+        limitations.append("C01 orientation-dependent features unavailable: verified wafer orientation was not supplied.")
     requested_raw = data.get("requested_capabilities", [])
     requested = {value for value in requested_raw if isinstance(value, str)} if isinstance(requested_raw, list) else set()
 
@@ -908,8 +1218,11 @@ def analyze(data: dict, cancel=None) -> dict:
         if report["anomaly"]["status"] == "VALID":
             count = len(report["anomaly"]["outliers"])
             baseline_sources = [source_id for item in baseline for source_id in _source_ids(item)]
-            claims.append(claim(f"{count} measured sites met the predeclared outlier screen against the supplied matched baseline.",
-                                 method="empirical_site_tail_probability_bh_v1", source_ids=list(dict.fromkeys(source_ids + baseline_sources)), certainty="CONDITIONAL"))
+            if report["anomaly"]["global_max_t_empirical_p"] <= report["anomaly"]["alpha"]:
+                claims.append(claim(f"The measured wafer met the predeclared spatial max-T screen against {report['anomaly']['baseline_wafers']} matched baseline wafers (global empirical p={report['anomaly']['global_max_t_empirical_p']:.4g}); {count} measured sites localize the wafer-level signal and are not separately significant.",
+                                     method="leave_one_wafer_out_spatial_maxT_rank_v1", source_ids=list(dict.fromkeys(source_ids + baseline_sources)), certainty="CONDITIONAL"))
+            else:
+                limitations.append(f"C04 max-T screen found no wafer-level alert at alpha={report['anomaly']['alpha']}; global empirical p={report['anomaly']['global_max_t_empirical_p']:.4g}.")
         else:
             limitations.append("C04 anomaly screen unavailable: " + report["anomaly"].get("reason", "insufficient evidence"))
 
@@ -928,7 +1241,11 @@ def analyze(data: dict, cancel=None) -> dict:
     if previous_steps is not None or previous is not None or "C02" in requested:
         try:
             prior_maps = previous_steps if previous_steps is not None else ([previous] if previous is not None else [])
-            report["evolution"] = compare_evolution_sequence(prior_maps, data, cancel)
+            if len(prior_maps) == 1:
+                report["evolution"] = compare_evolution(prior_maps[0], data, cancel,
+                                                        match_policy=data.get("evolution_match_policy"))
+            else:
+                report["evolution"] = compare_evolution_sequence(prior_maps, data, cancel)
         except (ValueError, KeyError, TypeError, PermissionError) as exc:
             report["evolution"] = {"status": "INCONCLUSIVE", "reason": str(exc), "site_deltas": []}
         if report["evolution"]["status"] == "VALID":
@@ -937,30 +1254,44 @@ def analyze(data: dict, cancel=None) -> dict:
             persistence = evo.get("persistence", {})
             persistence_text = (f" {persistence['fraction_with_same_nonzero_direction']:.1%} of sites kept the same nonzero direction across {persistence['transitions']} transitions."
                                 if persistence.get("transitions", 0) > 1 and persistence.get("fraction_with_same_nonzero_direction") is not None else "")
-            claims.append(claim(f"Across {evo['matched_sites']} matched observed sites, mean change from {evo['steps'][0]} to {evo['steps'][1]} was {evo['mean_delta']:g} {unit}.{persistence_text}",
+            repeatability = evo.get("uncertainty", {}).get("measurement_repeatability", {})
+            if repeatability.get("status") == "PROPAGATED_FROM_SITE_STANDARD_UNCERTAINTIES":
+                mean_uncertainty = repeatability.get("mean_total_delta_standard_uncertainty",
+                                                    repeatability.get("mean_delta_standard_uncertainty"))
+                uncertainty_text = f" Propagated one-standard-uncertainty for the mean change was {mean_uncertainty:g} {unit}."
+            else:
+                uncertainty_text = " Measurement repeatability uncertainty was not supplied."
+            claims.append(claim(f"Across {evo['matched_sites']} matched observed sites, mean change from {evo['steps'][0]} to {evo['steps'][1]} was {evo['mean_delta']:g} {unit}.{uncertainty_text}{persistence_text}",
                                  method="same_wafer_orientation_aligned_observed_delta_v1", source_ids=list(dict.fromkeys(source_ids + evolution_sources)), certainty="CONDITIONAL"))
         else:
             limitations.append("C02 evolution unavailable: " + report["evolution"].get("reason", "insufficient evidence"))
 
     association = data.get("quality_association")
     if association is not None or "C03" in requested:
-        expected_context = {"product_id": data.get("product_id"), "metric": _measurement(data).get("metric"),
-                            "measurement_definition_id": _measurement(data).get("definition_id"), "unit": _measurement(data).get("unit"),
-                            "layer": _measurement(data).get("layer"), "population_signature": data.get("population_signature"),
-                            "sampling_mask_id": data.get("sampling_mask_id", data.get("sampling", {}).get("mask_id") if isinstance(data.get("sampling"), dict) else None)}
-        for key in ("recipe_id", "tool_id", "chamber_id", "route_id"):
-            if data.get(key) is not None:
-                expected_context[key] = data[key]
-        geometry_context = _prepare_map(data, cancel)
-        expected_context.update({
-            "coordinate_system": geometry_context["coordinate_system"],
-            "coordinate_unit": geometry_context["coordinate_unit"],
-            "radius": geometry_context["radius"],
-            "orientation_deg": geometry_context["orientation_deg"],
-        })
-        expected_coordinates = set(_physical_site_values(data, cancel))
-        report["quality_association"] = associate_quality(association or {}, expected_context=expected_context,
-                                                          expected_coordinates=expected_coordinates, cancel=cancel)
+        if base["modality"] not in ("continuous", "sparse_continuous"):
+            report["quality_association"] = {"status": "INCONCLUSIVE",
+                                             "reason": "downstream spatial association requires a numeric continuous measurement"}
+        else:
+            try:
+                expected_context = {"product_id": data.get("product_id"), "metric": _measurement(data).get("metric"),
+                                    "measurement_definition_id": _measurement(data).get("definition_id"), "unit": _measurement(data).get("unit"),
+                                    "layer": _measurement(data).get("layer"), "population_signature": data.get("population_signature"),
+                                    "sampling_mask_id": data.get("sampling_mask_id", data.get("sampling", {}).get("mask_id") if isinstance(data.get("sampling"), dict) else None)}
+                for key in ("recipe_id", "tool_id", "chamber_id", "route_id"):
+                    if data.get(key) is not None:
+                        expected_context[key] = data[key]
+                geometry_context = _prepare_map(data, cancel)
+                expected_context.update({
+                    "coordinate_system": geometry_context["coordinate_system"],
+                    "coordinate_unit": geometry_context["coordinate_unit"],
+                    "radius": geometry_context["radius"],
+                    "orientation_deg": geometry_context["orientation_deg"],
+                })
+                expected_coordinates = set(_physical_site_values(data, cancel))
+                report["quality_association"] = associate_quality(association or {}, expected_context=expected_context,
+                                                                  expected_coordinates=expected_coordinates, cancel=cancel)
+            except (ValueError, KeyError, TypeError, PermissionError) as exc:
+                report["quality_association"] = {"status": "INCONCLUSIVE", "reason": str(exc)}
         if report["quality_association"]["status"] == "VALID":
             q = report["quality_association"]
             claims.append(claim(f"Across {q['wafers']} holdout wafers and {q['matched_die_sites']} matched die sites, mean spatial-block-adjusted within-wafer association was r={q['mean_within_wafer_r']:.4f} (95% wafer-level Fisher interval {q['fisher_wafer_95_ci'][0]:.4f} to {q['fisher_wafer_95_ci'][1]:.4f}); this is not causal evidence.",
@@ -968,7 +1299,10 @@ def analyze(data: dict, cancel=None) -> dict:
         else:
             limitations.append("C03 downstream association unavailable: " + report["quality_association"].get("reason", "insufficient evidence"))
 
-    unavailable_requested = any(report[key]["status"] in ("INCONCLUSIVE", "REFUSED") for key in ("anomaly", "similarity", "evolution", "quality_association") if ({"anomaly": "C04", "similarity": "C05", "evolution": "C02", "quality_association": "C03"}[key] in requested or report[key]["status"] != "NOT_REQUESTED"))
+    unavailable_requested = (report["fingerprint"]["status"] == "PARTIAL" or any(
+        report[key]["status"] in ("INCONCLUSIVE", "REFUSED")
+        for key in ("anomaly", "similarity", "evolution", "quality_association")
+        if ({"anomaly": "C04", "similarity": "C05", "evolution": "C02", "quality_association": "C03"}[key] in requested or report[key]["status"] != "NOT_REQUESTED")))
     status = "PARTIAL" if unavailable_requested else "VALID"
     related_sources = []
     if isinstance(baseline, list):
@@ -1016,7 +1350,9 @@ def analyze(data: dict, cancel=None) -> dict:
     ev["units"] = {"spatial_measurement": unit, "coordinate": base["coordinate_unit"]}
     ev["populations"] = [{"grain": "measured_site", "observed_count": base["observed_points"], "sampling_mask_id": base["sampling_mask_id"]}]
     ev["transformations"] = [{"method": METHOD_VERSION, "interpolation": False, "orientation_deg": _prepare_map(data)["orientation_deg"]}]
-    ev["uncertainty"] = {"interpolation": "none", "region_coverage": {k: v["count"] for k, v in base["regions"].items()}}
+    ev["uncertainty"] = {"interpolation": "none", "region_coverage": {k: v["count"] for k, v in base["regions"].items()},
+                         "edge_center_standard_uncertainty": base["edge_center"].get("standard_uncertainty"),
+                         "edge_center_uncertainty_status": base["edge_center"].get("uncertainty_status", "NOT_APPLICABLE")}
     ev["provenance"]["engine_version"] = ENGINE_VERSION
     ev["provenance"]["method_version"] = METHOD_VERSION
     return ev

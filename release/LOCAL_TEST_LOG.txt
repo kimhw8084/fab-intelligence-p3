@@ -10,30 +10,55 @@ test_deterministic (test_engine.EngineCase.test_deterministic) ... ok
 test_fixed_negative_oracle (test_engine.EngineCase.test_fixed_negative_oracle) ... ok
 test_fixed_positive_oracle (test_engine.EngineCase.test_fixed_positive_oracle) ... ok
 test_never_claim_caused_or_control (test_engine.EngineCase.test_never_claim_caused_or_control) ... ok
+test_adapter_cancellation_is_cooperative_and_does_not_fake_acknowledgement (test_mcp_adapter.MCPReadOnlyAdapterTests.test_adapter_cancellation_is_cooperative_and_does_not_fake_acknowledgement) ... ok
+test_cli_can_discover_a_configured_mock_server (test_mcp_adapter.MCPReadOnlyAdapterTests.test_cli_can_discover_a_configured_mock_server) ... ok
+test_discovery_semantics_relationship_read_and_audit_use_exact_bindings (test_mcp_adapter.MCPReadOnlyAdapterTests.test_discovery_semantics_relationship_read_and_audit_use_exact_bindings) ... ok
+test_environment_auth_is_resolved_without_configuring_secret_values (test_mcp_adapter.MCPReadOnlyAdapterTests.test_environment_auth_is_resolved_without_configuring_secret_values) ... ok
+test_raw_sql_and_broader_permission_context_are_rejected (test_mcp_adapter.MCPReadOnlyAdapterTests.test_raw_sql_and_broader_permission_context_are_rejected) ... ok
+test_site_config_can_run_read_only_discovery_over_streamable_http (test_mcp_adapter.MCPReadOnlyAdapterTests.test_site_config_can_run_read_only_discovery_over_streamable_http) ... ok
+test_template_is_rejected_before_server_process_launch (test_mcp_adapter.MCPReadOnlyAdapterTests.test_template_is_rejected_before_server_process_launch) ... ok
+test_tool_schema_change_after_review_fails_closed (test_mcp_adapter.MCPReadOnlyAdapterTests.test_tool_schema_change_after_review_fails_closed) ... ok
+test_unapproved_sources_and_non_read_only_tools_are_denied (test_mcp_adapter.MCPReadOnlyAdapterTests.test_unapproved_sources_and_non_read_only_tools_are_denied) ... ok
+test_legacy_server_is_detected_and_initialized (test_mcp_client.MCPStdioClientTests.test_legacy_server_is_detected_and_initialized) ... ok
+test_mock_server_uses_utf8_json_lines_only (test_mcp_client.MCPStdioClientTests.test_mock_server_uses_utf8_json_lines_only) ... ok
+test_modern_protocol_discovery_and_typed_mock_tools (test_mcp_client.MCPStdioClientTests.test_modern_protocol_discovery_and_typed_mock_tools) ... ok
+test_stdio_cancel_sends_notification_and_discards_late_response (test_mcp_client.MCPStdioClientTests.test_stdio_cancel_sends_notification_and_discards_late_response) ... ok
+test_transport_bounds_outbound_frames (test_mcp_client.MCPStdioClientTests.test_transport_bounds_outbound_frames) ... ok
+test_http_transport_negotiates_session_auth_and_matches_sse_request_id (test_mcp_client.MCPStreamableHTTPClientTests.test_http_transport_negotiates_session_auth_and_matches_sse_request_id) ... ok
+test_http_transport_rejects_cleartext_non_loopback_and_redirects (test_mcp_client.MCPStreamableHTTPClientTests.test_http_transport_rejects_cleartext_non_loopback_and_redirects) ... ok
+test_http_transport_rejects_mismatched_response_id (test_mcp_client.MCPStreamableHTTPClientTests.test_http_transport_rejects_mismatched_response_id) ... ok
 test_anomaly_holdout_rejects_lot_leakage_and_future_baseline (test_p3_integrated.AnomalyAndAssociationTests.test_anomaly_holdout_rejects_lot_leakage_and_future_baseline) ... ok
 test_anomaly_refuses_incompatible_sampling_mask (test_p3_integrated.AnomalyAndAssociationTests.test_anomaly_refuses_incompatible_sampling_mask) ... ok
 test_anomaly_requires_holdout_and_corrects_for_multiple_sites (test_p3_integrated.AnomalyAndAssociationTests.test_anomaly_requires_holdout_and_corrects_for_multiple_sites) ... ok
+test_correlated_spatial_null_has_bounded_synthetic_false_alert_rate (test_p3_integrated.AnomalyAndAssociationTests.test_correlated_spatial_null_has_bounded_synthetic_false_alert_rate) ... ok
 test_quality_association_uses_independent_wafer_count (test_p3_integrated.AnomalyAndAssociationTests.test_quality_association_uses_independent_wafer_count) ... ok
 test_quality_link_requires_approved_wafer_grain_and_time_order (test_p3_integrated.AnomalyAndAssociationTests.test_quality_link_requires_approved_wafer_grain_and_time_order) ... ok
+test_common_site_matching_requires_predeclared_coverage_and_overlap (test_p3_integrated.ComparisonTests.test_common_site_matching_requires_predeclared_coverage_and_overlap) ... ok
 test_cross_step_rotation_aligns_exact_observed_sites (test_p3_integrated.ComparisonTests.test_cross_step_rotation_aligns_exact_observed_sites) ... ok
 test_evolution_refuses_unknown_orientation_and_identity (test_p3_integrated.ComparisonTests.test_evolution_refuses_unknown_orientation_and_identity) ... ok
 test_evolution_rejects_definition_mismatch_and_unobserved_sites (test_p3_integrated.ComparisonTests.test_evolution_rejects_definition_mismatch_and_unobserved_sites) ... ok
 test_evolution_sequence_reports_direction_persistence_and_unknown_repeatability (test_p3_integrated.ComparisonTests.test_evolution_sequence_reports_direction_persistence_and_unknown_repeatability) ... ok
+test_predeclared_exact_common_sites_compare_different_sampling_masks_without_reconstruction (test_p3_integrated.ComparisonTests.test_predeclared_exact_common_sites_compare_different_sampling_masks_without_reconstruction) ... ok
 test_similarity_excludes_different_measurement_and_missing_orientation (test_p3_integrated.ComparisonTests.test_similarity_excludes_different_measurement_and_missing_orientation) ... ok
+test_similarity_index_uses_validated_snapshot_after_caller_mutation (test_p3_integrated.ComparisonTests.test_similarity_index_uses_validated_snapshot_after_caller_mutation) ... ok
 test_similarity_ranks_shape_and_does_not_infer_cause (test_p3_integrated.ComparisonTests.test_similarity_ranks_shape_and_does_not_infer_cause) ... ok
+test_similarity_retrieves_variable_sampling_layouts_and_index_matches_reference (test_p3_integrated.ComparisonTests.test_similarity_retrieves_variable_sampling_layouts_and_index_matches_reference) ... ok
 test_all_capability_workflow_exports_typed_evidence (test_p3_integrated.IntegratedEvidenceTests.test_all_capability_workflow_exports_typed_evidence) ... ok
 test_cancellation_stops_analysis_before_it_returns_evidence (test_p3_integrated.IntegratedEvidenceTests.test_cancellation_stops_analysis_before_it_returns_evidence) ... ok
 test_injected_text_is_never_executed_or_used_as_analysis_plan (test_p3_integrated.IntegratedEvidenceTests.test_injected_text_is_never_executed_or_used_as_analysis_plan) ... ok
 test_internal_mode_never_falls_through_to_synthetic_result (test_p3_integrated.IntegratedEvidenceTests.test_internal_mode_never_falls_through_to_synthetic_result) ... ok
 test_contiguous_local_cell_shift_is_reported_as_exploratory (test_p3_integrated.SpatialFingerprintTests.test_contiguous_local_cell_shift_is_reported_as_exploratory) ... ok
+test_defect_coordinates_report_observed_region_counts_only (test_p3_integrated.SpatialFingerprintTests.test_defect_coordinates_report_observed_region_counts_only) ... ok
 test_die_bin_or_categorical_map_is_not_treated_as_continuous_nm (test_p3_integrated.SpatialFingerprintTests.test_die_bin_or_categorical_map_is_not_treated_as_continuous_nm) ... ok
 test_directional_gradient_recovers_a_known_plane (test_p3_integrated.SpatialFingerprintTests.test_directional_gradient_recovers_a_known_plane) ... ok
+test_edge_center_propagates_only_explicit_independent_uncertainties (test_p3_integrated.SpatialFingerprintTests.test_edge_center_propagates_only_explicit_independent_uncertainties) ... ok
 test_missing_center_is_inconclusive_without_fill (test_p3_integrated.SpatialFingerprintTests.test_missing_center_is_inconclusive_without_fill) ... ok
+test_non_numeric_map_abstains_from_downstream_association_without_crashing (test_p3_integrated.SpatialFingerprintTests.test_non_numeric_map_abstains_from_downstream_association_without_crashing) ... ok
 test_reticle_periodicity_is_not_inferred_from_sampling_grid (test_p3_integrated.SpatialFingerprintTests.test_reticle_periodicity_is_not_inferred_from_sampling_grid) ... ok
 test_reticle_periodicity_requires_traceable_alias_check_and_recovers_signal (test_p3_integrated.SpatialFingerprintTests.test_reticle_periodicity_requires_traceable_alias_check_and_recovers_signal) ... ok
 test_ring_and_uniform_maps_with_same_mean_have_different_signature (test_p3_integrated.SpatialFingerprintTests.test_ring_and_uniform_maps_with_same_mean_have_different_signature) ... ok
 test_sparse_fingerprint_reports_only_observed_counts (test_p3_integrated.SpatialFingerprintTests.test_sparse_fingerprint_reports_only_observed_counts) ... ok
-test_unknown_orientation_refuses_spatial_claim (test_p3_integrated.SpatialFingerprintTests.test_unknown_orientation_refuses_spatial_claim) ... ok
+test_unknown_orientation_preserves_orientation_independent_features (test_p3_integrated.SpatialFingerprintTests.test_unknown_orientation_preserves_orientation_independent_features) ... ok
 test_unverified_coordinates_refuse_spatial_claim (test_p3_integrated.SpatialFingerprintTests.test_unverified_coordinates_refuse_spatial_claim) ... ok
 test_one_hundred_seeded_fingerprints_match_independent_arithmetic (test_p3_seeded_oracles.SeededOracleTests.test_one_hundred_seeded_fingerprints_match_independent_arithmetic) ... ok
 test_uniform_value_shift_does_not_change_spatial_difference (test_p3_seeded_oracles.SeededOracleTests.test_uniform_value_shift_does_not_change_spatial_difference) ... ok
@@ -54,7 +79,7 @@ test_no_fabricated_unobserved_region (test_scientific_baseline.SpecializedTests.
 test_bundled_full_workflow_matches_generator_and_runs_all_capabilities (test_synthetic_workflow.SyntheticWorkflowTests.test_bundled_full_workflow_matches_generator_and_runs_all_capabilities) ... ok
 
 ----------------------------------------------------------------------
-Ran 52 tests in 0.603s
+Ran 77 tests in 3.301s
 
 OK
 
@@ -68,17 +93,20 @@ exit=0
       "result": {
         "anomaly": {
           "alpha": 0.05,
+          "baseline_lots": 20,
           "baseline_wafers": 20,
-          "interpretation": "conditional outlier screen against the supplied matched population; not a root-cause finding",
-          "multiple_test_method": "Benjamini-Hochberg",
+          "global_max_t_empirical_p": 1.0,
+          "global_test_method": "leave_one_wafer_out_spatial_maxT_rank_v1",
+          "interpretation": "conditional whole-wafer outlier screen against the supplied matched population; spatial dependence is preserved and the result is not a root-cause finding",
+          "localization_interpretation": "localized sites contribute to a wafer-level max-T finding; site rows are not individually significant",
+          "minimum_attainable_global_p": 0.047619047619047616,
           "outliers": [],
           "site_scores": [
             {
               "baseline_mad": 0.0,
               "baseline_median": 12.0,
-              "bh_q": 1.0,
-              "empirical_p": 1.0,
-              "outlier_candidate": false,
+              "localizer_candidate": false,
+              "max_t_score": 0.0,
               "robust_extreme": false,
               "robust_scale_zero_and_shifted": false,
               "robust_z": 0.0,
@@ -88,9 +116,8 @@ exit=0
             {
               "baseline_mad": 0.0,
               "baseline_median": 12.0,
-              "bh_q": 1.0,
-              "empirical_p": 1.0,
-              "outlier_candidate": false,
+              "localizer_candidate": false,
+              "max_t_score": 0.0,
               "robust_extreme": false,
               "robust_scale_zero_and_shifted": false,
               "robust_z": 0.0,
@@ -100,9 +127,8 @@ exit=0
             {
               "baseline_mad": 0.0,
               "baseline_median": 10.0,
-              "bh_q": 1.0,
-              "empirical_p": 1.0,
-              "outlier_candidate": false,
+              "localizer_candidate": false,
+              "max_t_score": 0.0,
               "robust_extreme": false,
               "robust_scale_zero_and_shifted": false,
               "robust_z": 0.0,
@@ -112,9 +138,8 @@ exit=0
             {
               "baseline_mad": 0.0,
               "baseline_median": 12.0,
-              "bh_q": 1.0,
-              "empirical_p": 1.0,
-              "outlier_candidate": false,
+              "localizer_candidate": false,
+              "max_t_score": 0.0,
               "robust_extreme": false,
               "robust_scale_zero_and_shifted": false,
               "robust_z": 0.0,
@@ -124,9 +149,8 @@ exit=0
             {
               "baseline_mad": 0.0,
               "baseline_median": 12.0,
-              "bh_q": 1.0,
-              "empirical_p": 1.0,
-              "outlier_candidate": false,
+              "localizer_candidate": false,
+              "max_t_score": 0.0,
               "robust_extreme": false,
               "robust_scale_zero_and_shifted": false,
               "robust_z": 0.0,
@@ -138,137 +162,73 @@ exit=0
           "tested_sites": 5
         },
         "evolution": {
-          "comparisons": [
-            {
-              "alignment": "exact observed-site match after declared orientation transform",
-              "matched_sites": 5,
-              "mean_delta": 1.0,
-              "registration_residual": 0.0,
-              "site_deltas": [
-                {
-                  "current": 12.0,
-                  "delta": 1.0,
-                  "previous": 11.0,
-                  "site_id": "west",
-                  "x_normalized": -0.8,
-                  "y_normalized": 0.0
-                },
-                {
-                  "current": 12.0,
-                  "delta": 1.0,
-                  "previous": 11.0,
-                  "site_id": "south",
-                  "x_normalized": 0.0,
-                  "y_normalized": -0.9
-                },
-                {
-                  "current": 10.0,
-                  "delta": 1.0,
-                  "previous": 9.0,
-                  "site_id": "center",
-                  "x_normalized": 0.0,
-                  "y_normalized": 0.0
-                },
-                {
-                  "current": 12.0,
-                  "delta": 1.0,
-                  "previous": 11.0,
-                  "site_id": "north",
-                  "x_normalized": 0.0,
-                  "y_normalized": 0.9
-                },
-                {
-                  "current": 12.0,
-                  "delta": 1.0,
-                  "previous": 11.0,
-                  "site_id": "east",
-                  "x_normalized": 1.0,
-                  "y_normalized": 0.0
-                }
-              ],
-              "status": "VALID",
-              "steps": [
-                "SYN-STEP-0",
-                "SYN-STEP-1"
-              ],
-              "uncertainty": {
-                "measurement_repeatability": "NOT_SUPPLIED",
-                "registration": "exact declared-origin/orientation coordinate match; no transform uncertainty supplied"
-              }
-            }
-          ],
+          "alignment": "exact observed-site match after declared origin/orientation transform",
+          "alignment_method": "exact_observed_site_v1",
+          "coverage": {
+            "current": 1.0,
+            "previous": 1.0,
+            "unmatched_current_sites": 0,
+            "unmatched_previous_sites": 0
+          },
           "matched_sites": 5,
           "mean_delta": 1.0,
-          "persistence": {
-            "fraction_with_same_nonzero_direction": 0.0,
-            "sites_with_same_nonzero_direction": 0,
-            "transitions": 1
-          },
           "registration_residual": 0.0,
           "site_deltas": [
             {
-              "direction_persistent": false,
+              "current": 12.0,
+              "delta": 1.0,
+              "previous": 11.0,
               "site_id": "west",
-              "step_deltas": [
-                1.0
-              ],
-              "total_delta": 1.0,
               "x_normalized": -0.8,
               "y_normalized": 0.0
             },
             {
-              "direction_persistent": false,
+              "current": 12.0,
+              "delta": 1.0,
+              "previous": 11.0,
               "site_id": "south",
-              "step_deltas": [
-                1.0
-              ],
-              "total_delta": 1.0,
               "x_normalized": 0.0,
               "y_normalized": -0.9
             },
             {
-              "direction_persistent": false,
+              "current": 10.0,
+              "delta": 1.0,
+              "previous": 9.0,
               "site_id": "center",
-              "step_deltas": [
-                1.0
-              ],
-              "total_delta": 1.0,
               "x_normalized": 0.0,
               "y_normalized": 0.0
             },
             {
-              "direction_persistent": false,
+              "current": 12.0,
+              "delta": 1.0,
+              "previous": 11.0,
               "site_id": "north",
-              "step_deltas": [
-                1.0
-              ],
-              "total_delta": 1.0,
               "x_normalized": 0.0,
               "y_normalized": 0.9
             },
             {
-              "direction_persistent": false,
+              "current": 12.0,
+              "delta": 1.0,
+              "previous": 11.0,
               "site_id": "east",
-              "step_deltas": [
-                1.0
-              ],
-              "total_delta": 1.0,
               "x_normalized": 1.0,
               "y_normalized": 0.0
             }
           ],
           "status": "VALID",
-          "step_sequence": [
-            "SYN-STEP-0",
-            "SYN-STEP-1"
-          ],
           "steps": [
             "SYN-STEP-0",
             "SYN-STEP-1"
           ],
           "uncertainty": {
-            "measurement_repeatability": "NOT_SUPPLIED",
-            "registration": "exact declared-origin/orientation coordinate match; no transform uncertainty supplied"
+            "coordinate_key_tolerance_normalized_per_axis": 1e-08,
+            "maximum_matched_site_coordinate_residual": 0.0,
+            "measurement_repeatability": {
+              "mean_delta_standard_uncertainty": null,
+              "status": "NOT_SUPPLIED",
+              "unit": "nm"
+            },
+            "registration_residual_units": "coordinate unit"
           }
         },
         "fingerprint": {
@@ -280,6 +240,15 @@ exit=0
             "magnitude_per_radius": 0.049019607843137185,
             "method": "ordinary_least_squares_plane_on_observed_sites",
             "status": "VALID"
+          },
+          "edge_center": {
+            "center_count": 1,
+            "difference": 2.0,
+            "edge_count": 4,
+            "reason": null,
+            "standard_uncertainty": null,
+            "status": "VALID",
+            "uncertainty_status": "NOT_SUPPLIED"
           },
           "edge_minus_center": 2.0,
           "layer": "L1",
@@ -358,6 +327,7 @@ exit=0
           "measurement_definition_id": "SYN-THICKNESS-1",
           "measurement_unit": "nm",
           "metric": "film_thickness",
+          "modality": "continuous",
           "observed_points": 5,
           "radial_gradient_per_radius": 2.155688622754491,
           "radial_profile": [
@@ -510,6 +480,12 @@ exit=0
           "status": "VALID"
         },
         "quality_association": {
+          "confounding_controls": {
+            "independent_unit": "one holdout wafer from each of at least 20 distinct lots",
+            "product_measurement_population": "exact_context_match",
+            "spatial_blocks": "within-wafer fixed effects",
+            "tool_recipe_chamber_route": "exact_match_when supplied; unavailable dimensions are rejected if they appear only in the cohort"
+          },
           "fisher_wafer_95_ci": [
             0.999999999,
             0.999999999
@@ -524,13 +500,45 @@ exit=0
           "relationship_source_id": "SYN-REL-WAFER-DIE",
           "spatial_block_method": "predeclared_block_fixed_effects_v1",
           "status": "VALID",
+          "uncertainty": {
+            "interval": "95% t interval on Fisher-z transformed wafer correlations",
+            "leave_one_lot_out_estimates": [
+              0.999999999,
+              0.999999999,
+              0.999999999,
+              0.999999999,
+              0.999999999,
+              0.999999999,
+              0.999999999,
+              0.999999999,
+              0.999999999,
+              0.999999999,
+              0.999999999,
+              0.999999999,
+              0.999999999,
+              0.999999999,
+              0.999999999,
+              0.999999999,
+              0.999999999,
+              0.999999999,
+              0.999999999,
+              0.999999999
+            ],
+            "leave_one_lot_out_r_range": [
+              0.999999999,
+              0.999999999
+            ],
+            "measurement_repeatability": "NOT_SUPPLIED"
+          },
           "wafers": 20
         },
         "similarity": {
           "excluded": [],
-          "interpretation": "shape similarity only; a neighbor does not establish a shared mechanism",
+          "index": null,
+          "interpretation": "spatial profile similarity only; common-profile comparisons use observed bins without interpolation and a neighbor does not establish a shared mechanism",
           "neighbors": [
             {
+              "alignment": "exact observed-site values",
               "distance_components": {
                 "radial_profile_rmse": 0.0,
                 "sector_profile_rmse": 0.0,
@@ -538,6 +546,14 @@ exit=0
               },
               "mean_level_delta": 10.000000000000002,
               "multiscale_rmse": 0.0,
+              "profile_coverage": {
+                "candidate_radial_bins": 3,
+                "candidate_sector_bins": 4,
+                "current_radial_bins": 3,
+                "current_sector_bins": 4,
+                "shared_radial_bins": 3,
+                "shared_sector_bins": 4
+              },
               "radial_profile_rmse": 0.0,
               "raw_rmse": 10.0,
               "sector_profile_rmse": 0.0,
@@ -571,35 +587,6 @@ exit=0
     {
       "category": "DESCRIPTIVE",
       "certainty": "CONDITIONAL",
-      "method": "empirical_site_tail_probability_bh_v1",
-      "source_ids": [
-        "SYN-MAP-CURRENT",
-        "SYN-BASELINE-00",
-        "SYN-BASELINE-01",
-        "SYN-BASELINE-02",
-        "SYN-BASELINE-03",
-        "SYN-BASELINE-04",
-        "SYN-BASELINE-05",
-        "SYN-BASELINE-06",
-        "SYN-BASELINE-07",
-        "SYN-BASELINE-08",
-        "SYN-BASELINE-09",
-        "SYN-BASELINE-10",
-        "SYN-BASELINE-11",
-        "SYN-BASELINE-12",
-        "SYN-BASELINE-13",
-        "SYN-BASELINE-14",
-        "SYN-BASELINE-15",
-        "SYN-BASELINE-16",
-        "SYN-BASELINE-17",
-        "SYN-BASELINE-18",
-        "SYN-BASELINE-19"
-      ],
-      "statement": "0 measured sites met the predeclared outlier screen against the supplied matched baseline."
-    },
-    {
-      "category": "DESCRIPTIVE",
-      "certainty": "CONDITIONAL",
       "method": "exact_observed_site_centered_rmse_v1",
       "source_ids": [
         "SYN-MAP-CURRENT",
@@ -615,7 +602,7 @@ exit=0
         "SYN-MAP-CURRENT",
         "SYN-MAP-PREVIOUS"
       ],
-      "statement": "Across 5 matched observed sites, mean change from SYN-STEP-0 to SYN-STEP-1 was 1 nm."
+      "statement": "Across 5 matched observed sites, mean change from SYN-STEP-0 to SYN-STEP-1 was 1 nm. Measurement repeatability uncertainty was not supplied."
     },
     {
       "category": "ASSOCIATION",
@@ -631,7 +618,8 @@ exit=0
   "investigation_id": "SYN-p3-7b4bcb396ed7",
   "limitations": [
     "No interpolation; unmeasured wafer regions remain unobserved.",
-    "No causal inference, manufacturing actuation, or company-system access is performed."
+    "No causal inference, manufacturing actuation, or company-system access is performed.",
+    "C04 max-T screen found no wafer-level alert at alpha=0.05; global empirical p=1."
   ],
   "mode": "SYNTHETIC_DEMO",
   "populations": [
@@ -804,6 +792,8 @@ exit=0
     }
   ],
   "uncertainty": {
+    "edge_center_standard_uncertainty": null,
+    "edge_center_uncertainty_status": "NOT_SUPPLIED",
     "interpolation": "none",
     "region_coverage": {
       "center": 1,

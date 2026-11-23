@@ -14,6 +14,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from qualification.tree_hash import current_git_commit, source_tree_sha256
+
 ARCHIVE_NAME = "p3-candidate-20261122.zip"
 GENERATED = {ARCHIVE_NAME, ARCHIVE_NAME + ".sha256", "PACKAGE_QUALIFICATION.json"}
 
@@ -97,6 +100,8 @@ def main():
         "created_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
         "archive": ARCHIVE_NAME,
         "sha256": archive_hash,
+        "source_commit": current_git_commit(ROOT),
+        "source_tree_sha256": source_tree_sha256(ROOT),
         "bytes": archive.stat().st_size,
         "entries": len(package_files()),
         "repeated_build_sha256_equal": first_hash == second_hash,

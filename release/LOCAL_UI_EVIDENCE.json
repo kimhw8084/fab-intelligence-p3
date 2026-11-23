@@ -1,10 +1,11 @@
 {
   "state": "CANDIDATE",
   "environment": "Codex in-app browser on macOS",
-  "url": "http://127.0.0.1:18765/",
+  "url": "http://127.0.0.1:8799/",
   "company_data_used": false,
-  "workflow": "Loaded fixtures/p3_integrated_synthetic.json through the local example control and ran Analyze measured sites.",
-  "investigation_id": "SYN-p3-1f91bae3981a",
+  "workflow": "Loaded the bundled synthetic investigation using the local example control and ran Analyze measured sites.",
+  "investigation_id": "SYN-p3-9a14961e50b3",
+  "input_sha256": "9a14961e50b399f3ace63928fe7669f491a57f7366345016dbadfe50ce249251",
   "observed_status": "VALID",
   "observed_capabilities": {
     "C01_fingerprint": "VALID",
@@ -14,12 +15,15 @@
     "C03_quality_association": "VALID"
   },
   "observed_checks": [
-    "Local synthetic-only banner visible.",
-    "Measured-site map and tabular coordinates visible.",
-    "Claim source identifiers and input source hashes visible.",
-    "All five capability cards showed VALID after the action.",
-    "Quality association text explicitly stated it was not causal evidence.",
-    "Download evidence control enabled after completion."
+    "Synthetic-only banner and no-network input notice were visible.",
+    "Observed-site map and measured-site table rendered without interpolated values.",
+    "All five capability cards showed VALID after analysis.",
+    "Source identifiers, source hashes, coordinate/measurement units, coverage, and caller-asserted verification assumption were visible.",
+    "Historical-neighbor table showed profile alignment and no-reconstruction limitation.",
+    "Cross-step table showed matched-site deltas, coverage, coordinate residual, and repeatability uncertainty status.",
+    "Downstream association view stated observational status, wafer/lot counts, leave-one-lot-out range, and residual-confounding limits.",
+    "C04 showed a no-alert result with global empirical p=1; site localization was explicitly not individually significant.",
+    "Download evidence control became enabled after completion."
   ],
-  "limitation": "This is one synthetic browser walkthrough, not an engineer usability study. No screenshot or console log was retained."
+  "limitation": "One synthetic browser walkthrough only; the synthetic association is not evidence about a real process. No screenshot or console log was retained, and no engineer usability study was conducted."
 }

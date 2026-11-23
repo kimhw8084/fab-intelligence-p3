@@ -1,7 +1,6 @@
 """Record reproducible local candidate checks with synthetic-only evidence."""
 from __future__ import annotations
 
-import hashlib
 import json
 import os
 import platform
@@ -13,20 +12,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUTS = {"release/LOCAL_TEST_EVIDENCE.json", "release/LOCAL_TEST_LOG.txt", "release/GATE_REPORT.json",
-           "release/BOOTSTRAP_MANIFEST.sha256", "release/PACKAGE_QUALIFICATION.json"}
-
-
-def source_hash():
-    digest = hashlib.sha256()
-    for path in sorted(ROOT.rglob("*")):
-        if not path.is_file() or "__pycache__" in path.parts or path.suffix == ".pyc":
-            continue
-        relative = path.relative_to(ROOT).as_posix()
-        if relative in OUTPUTS or relative.startswith("release/p3-candidate-") or relative.endswith(".zip"):
-            continue
-        digest.update(relative.encode("utf-8") + b"\0" + hashlib.sha256(path.read_bytes()).digest())
-    return digest.hexdigest()
+from tree_hash import current_git_commit, source_tree_sha256
 
 
 def run(command):
@@ -64,8 +50,8 @@ def main():
     report = {
         "state": "CANDIDATE",
         "created_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
-        "source_tree_sha256": source_hash(),
-        "git_commit": None,
+        "source_tree_sha256": source_tree_sha256(ROOT),
+        "source_commit": current_git_commit(ROOT),
         "environment": {"os": platform.platform(), "architecture": platform.machine(), "python": sys.version,
                         "node": subprocess.run([shutil.which("node") or "node", "--version"], cwd=ROOT,
                                                 stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True).stdout.strip()

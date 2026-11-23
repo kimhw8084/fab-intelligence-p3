@@ -1,0 +1,90 @@
+{
+  "schema_version": "p3-mcp-adapter-config-v1",
+  "transport": {
+    "type": "stdio",
+    "command": [
+      "REPLACE_WITH_APPROVED_MCP_SERVER_EXECUTABLE"
+    ],
+    "cwd": null
+  },
+  "auth_provider": {
+    "type": "environment",
+    "stdio_env": {
+      "MCP_AUTH_TOKEN": "REPLACE_WITH_APPROVED_SECRET_REFERENCE_ENV_VAR"
+    },
+    "http_headers": {
+      "Authorization": "REPLACE_WITH_APPROVED_SECRET_REFERENCE_ENV_VAR"
+    }
+  },
+  "read_only_approval": {
+    "approved": false,
+    "reference": ""
+  },
+  "approved_sources": [],
+  "approved_plans": [],
+  "limits": {
+    "max_rows": 1000,
+    "max_bytes": 1048576,
+    "max_seconds": 30
+  },
+  "operations": {
+    "discover": {
+      "tool_name": "",
+      "approval": {
+        "approved": false,
+        "reference": "",
+        "tool_definition_sha256": ""
+      },
+      "argument_mapping": {}
+    },
+    "semantics": {
+      "tool_name": "",
+      "approval": {
+        "approved": false,
+        "reference": "",
+        "tool_definition_sha256": ""
+      },
+      "argument_mapping": {
+        "source_ids": "",
+        "semantic_version": ""
+      }
+    },
+    "relationships": {
+      "tool_name": "",
+      "approval": {
+        "approved": false,
+        "reference": "",
+        "tool_definition_sha256": ""
+      },
+      "argument_mapping": {
+        "typed_entity_ids": "",
+        "time_window": ""
+      }
+    },
+    "read_bounded": {
+      "tool_name": "",
+      "approval": {
+        "approved": false,
+        "reference": "",
+        "tool_definition_sha256": ""
+      },
+      "argument_mapping": {
+        "approved_plan": "",
+        "permission_context": "",
+        "limits": ""
+      }
+    },
+    "audit": {
+      "tool_name": "",
+      "approval": {
+        "approved": false,
+        "reference": "",
+        "tool_definition_sha256": ""
+      },
+      "argument_mapping": {
+        "operation_id": ""
+      }
+    }
+  },
+  "notes": "Template only. It contains no company endpoint, tool name, source mapping, approval, or credential. Replace values only from authorized site discovery and keep secrets in the approved runtime environment."
+}

@@ -14,27 +14,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG = ROOT / "qualification" / "critical_cases.json"
 OUTPUT = ROOT / "release" / "CRITICAL_CASE_EVIDENCE.json"
+from tree_hash import current_git_commit, source_tree_sha256
 
 
 def hash_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
-def source_hash() -> str:
-    entries = []
-    generated = {"release/BOOTSTRAP_MANIFEST.sha256", "release/PACKAGE_QUALIFICATION.json",
-                 "release/GATE_REPORT.json", "release/CRITICAL_CASE_EVIDENCE.json",
-                 "release/LOCAL_TEST_EVIDENCE.json", "release/LOCAL_TEST_LOG.txt",
-                 "release/SBOM.spdx.json", "release/SUPPLY_CHAIN_AUDIT.json",
-                 "release/SCIENTIFIC_PERFORMANCE_BENCHMARK.json"}
-    for path in sorted(ROOT.rglob("*")):
-        if not path.is_file() or "__pycache__" in path.parts or path.suffix in (".pyc", ".zip", ".sha256"):
-            continue
-        relative = path.relative_to(ROOT).as_posix()
-        if relative in generated:
-            continue
-        entries.append(relative.encode() + b"\0" + hashlib.sha256(path.read_bytes()).digest())
-    return hashlib.sha256(b"".join(entries)).hexdigest()
 
 
 def main():
@@ -58,7 +42,8 @@ def main():
         "exit_code": result.returncode,
         "catalog_sha256": hash_file(CATALOG),
         "test_output_sha256": hashlib.sha256(result.stdout.encode()).hexdigest(),
-        "source_tree_sha256": source_hash(),
+        "source_tree_sha256": source_tree_sha256(ROOT),
+        "source_commit": current_git_commit(ROOT),
         "environment": {"os": platform.platform(), "architecture": platform.machine(), "python": sys.version},
         "cases": results,
         "overall": "PASS" if result.returncode == 0 and all(item["status"] == "PASS" for item in results) else "FAIL",

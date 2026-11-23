@@ -1,7 +1,7 @@
 {
   "SPDXID": "SPDXRef-DOCUMENT",
   "creationInfo": {
-    "created": "2026-11-22T22:54:31Z",
+    "created": "2026-11-23T01:41:55Z",
     "creators": [
       "Tool: local-standard-library-supply-chain-audit"
     ]
@@ -74,7 +74,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "4c2bcc27a228c190d356ee70a53555d61194c28fbb78e30b801c64e97d760352"
+          "checksumValue": "eb9e37305b958496a2cf6e78bc3dc12b75e80193e2527a700f0a75f12fed5f59"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -224,6 +224,21 @@
       "checksums": [
         {
           "algorithm": "SHA256",
+          "checksumValue": "249846aad0becb5b4995ed31b1540c420f5f2224a7460239f2a2d1260c1c606e"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./docs/MCP_ADAPTER.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-16",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
           "checksumValue": "3c1d281232833624f02f459e1b843ecf2b04a8e05c2a2473d78394a5f33f18b5"
         }
       ],
@@ -235,11 +250,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-16",
+      "SPDXID": "SPDXRef-File-17",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "bb194d546d34acff920f167def7b4854c9a6d0484210b547566e6728262d6a42"
+          "checksumValue": "aa60163be0aa94c68c46001ad66a912986a7336da9b58152b857bdf202716009"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -250,7 +265,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-17",
+      "SPDXID": "SPDXRef-File-18",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -265,7 +280,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-18",
+      "SPDXID": "SPDXRef-File-19",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -280,7 +295,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-19",
+      "SPDXID": "SPDXRef-File-20",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -295,7 +310,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-20",
+      "SPDXID": "SPDXRef-File-21",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -310,7 +325,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-21",
+      "SPDXID": "SPDXRef-File-22",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -325,7 +340,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-22",
+      "SPDXID": "SPDXRef-File-23",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -340,7 +355,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-23",
+      "SPDXID": "SPDXRef-File-24",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -355,7 +370,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-24",
+      "SPDXID": "SPDXRef-File-25",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -370,7 +385,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-25",
+      "SPDXID": "SPDXRef-File-26",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -385,7 +400,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-26",
+      "SPDXID": "SPDXRef-File-27",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -400,7 +415,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-27",
+      "SPDXID": "SPDXRef-File-28",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -415,11 +430,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-28",
+      "SPDXID": "SPDXRef-File-29",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "c452b7dbfe0ad7d90c17e389a17ef273d7462b0b62fdec08410322bc2fc55710"
+          "checksumValue": "29f11424ee483bf465bc1c9ee10cd4e226c392453330eb8788d3bbe306e5d9fa"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -430,7 +445,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-29",
+      "SPDXID": "SPDXRef-File-30",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -445,7 +460,52 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-30",
+      "SPDXID": "SPDXRef-File-31",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "69c9048dd9c6659aec4d446c969562915dbd41d82434c0e8a8a25eb6f20e3ffd"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./fabintel/mcp_adapter.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-32",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "6c28231bb12d462e786814768adecd93d6885f778a44961d458d577a5023ed38"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./fabintel/mcp_client.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-33",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "0ad8d87bd0c07002fdebfe8f2fcd3c31494035b5d7727ff88da3e3c7201c913d"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./fabintel/mcp_mock_server.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-34",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -460,7 +520,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-31",
+      "SPDXID": "SPDXRef-File-35",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -475,7 +535,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-32",
+      "SPDXID": "SPDXRef-File-36",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -490,7 +550,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-33",
+      "SPDXID": "SPDXRef-File-37",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -505,7 +565,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-34",
+      "SPDXID": "SPDXRef-File-38",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -520,7 +580,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-35",
+      "SPDXID": "SPDXRef-File-39",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -535,7 +595,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-36",
+      "SPDXID": "SPDXRef-File-40",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -550,7 +610,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-37",
+      "SPDXID": "SPDXRef-File-41",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -565,7 +625,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-38",
+      "SPDXID": "SPDXRef-File-42",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -580,7 +640,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-39",
+      "SPDXID": "SPDXRef-File-43",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -595,7 +655,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-40",
+      "SPDXID": "SPDXRef-File-44",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -610,7 +670,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-41",
+      "SPDXID": "SPDXRef-File-45",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -625,11 +685,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-42",
+      "SPDXID": "SPDXRef-File-46",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "f2ebb98533b2f7175e60feafd707285e04ea336d0a9fa277419ec1d485426617"
+          "checksumValue": "7b3108d032eff906f1bd039276ecb26974610aa622b5fd2b80166b235dc15fca"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -640,7 +700,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-43",
+      "SPDXID": "SPDXRef-File-47",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -655,7 +715,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-44",
+      "SPDXID": "SPDXRef-File-48",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -670,7 +730,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-45",
+      "SPDXID": "SPDXRef-File-49",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -685,11 +745,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-46",
+      "SPDXID": "SPDXRef-File-50",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "c4e965672fd52e590ab4198f37ebbaa365794a49a93ba1999addf16f0c4a2e63"
+          "checksumValue": "ad43ba2ffa851eec0d80349ac31bb81c4fbdbb1d5d89830cdb97ad927ec4800f"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -700,7 +760,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-47",
+      "SPDXID": "SPDXRef-File-51",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -715,7 +775,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-48",
+      "SPDXID": "SPDXRef-File-52",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -730,11 +790,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-49",
+      "SPDXID": "SPDXRef-File-53",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "215c98e4d431f7e68ba05705ff776cb68295a0efb673adaf4289d380ca4908f1"
+          "checksumValue": "d97f8f275efe71d7abb5011020de553ff6d817a1d59c640b489a6639e80611df"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -745,11 +805,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-50",
+      "SPDXID": "SPDXRef-File-54",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "d8705f9c70db0b036ecb512dfd6b9ddbb095b376af081989c50082c692dffa96"
+          "checksumValue": "cf7d97bbaf15731fa20efbbab8ad846f89644a3dd6e217b6b7be245cd16e4dd3"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -760,11 +820,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-51",
+      "SPDXID": "SPDXRef-File-55",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "8226c0769aa9d26104cb3806fcaf156c48c921fd016a6a8806cd69b17d3006b8"
+          "checksumValue": "cc4c7562455bda6b4fd5decfde0f0af6b36104ce463b616573fc644737670d9a"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -775,11 +835,26 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-52",
+      "SPDXID": "SPDXRef-File-56",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "bb02b605478609ca6e41dc42f4e55f5e1a3e5147d48b9a3e2c31acb728323de2"
+          "checksumValue": "319992672af197cbc8b3e57c263004978d6a892b64e3b5574c8b91f5652d1ee0"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/tree_hash.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-57",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "d002b703478ba66c9d8d1f803c1eed2165f0d71491cbf1f979edee634398eaff"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -790,7 +865,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-53",
+      "SPDXID": "SPDXRef-File-58",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -805,7 +880,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-54",
+      "SPDXID": "SPDXRef-File-59",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -820,11 +895,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-55",
+      "SPDXID": "SPDXRef-File-60",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "5c094aa2369c56067ad66f49cfda09fc0162865a616f8694df77ace8b6d115d4"
+          "checksumValue": "4a621ec5f977ded106ccff2e3e024f695e79a7ebc990f74495449b1c99ac46be"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -835,11 +910,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-56",
+      "SPDXID": "SPDXRef-File-61",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "7d66b41cfc86084294dacaf1e540a1e504788ee697f71df9f97f9f648a00df91"
+          "checksumValue": "29594c836344cf9ab10e91b9a682768d569a3c4455989de3bfae360db204188a"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -850,7 +925,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-57",
+      "SPDXID": "SPDXRef-File-62",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -865,7 +940,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-58",
+      "SPDXID": "SPDXRef-File-63",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -880,7 +955,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-59",
+      "SPDXID": "SPDXRef-File-64",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -895,7 +970,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-60",
+      "SPDXID": "SPDXRef-File-65",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -910,7 +985,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-61",
+      "SPDXID": "SPDXRef-File-66",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -925,7 +1000,22 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-62",
+      "SPDXID": "SPDXRef-File-67",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "70ea412d78abf18a9cad0be9db68920f7edf1fe3bf7adcaf2ac1602369f8971f"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./requirements/mcp-adapter.template.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-68",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -940,7 +1030,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-63",
+      "SPDXID": "SPDXRef-File-69",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -955,7 +1045,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-64",
+      "SPDXID": "SPDXRef-File-70",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -970,7 +1060,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-65",
+      "SPDXID": "SPDXRef-File-71",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -985,11 +1075,41 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-66",
+      "SPDXID": "SPDXRef-File-72",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "9dcc8aad87a71372d2978c964cdc21305efa610f07a9d4c6d50cc2dd21adbbb9"
+          "checksumValue": "737236697ae4d7f57be29cb6fdcaec491a199b525ec8ae4a4e0afbd6c99fc2cf"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./tests/test_mcp_adapter.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-73",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "128e1b0f11e8ce91336b701bad6dd9aa3250e47f3be9224ce19c63be6b0b16ce"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./tests/test_mcp_client.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-74",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "5c5c8395c8c502fce08294c8c2c1d70f3f4ec6bbeeb7c9e26dd20f4b0323f722"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1000,7 +1120,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-67",
+      "SPDXID": "SPDXRef-File-75",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1015,7 +1135,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-68",
+      "SPDXID": "SPDXRef-File-76",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1030,7 +1150,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-69",
+      "SPDXID": "SPDXRef-File-77",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1045,7 +1165,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-70",
+      "SPDXID": "SPDXRef-File-78",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1060,11 +1180,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-71",
+      "SPDXID": "SPDXRef-File-79",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "af0e0c7df9a969b69517fe4a817a817c12a02c5a01c99fda463418989da10734"
+          "checksumValue": "29e4965aa85fe0cfbd4e694cfb8e805c149116ab407cecd051242ccd953f62d9"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1075,7 +1195,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-72",
+      "SPDXID": "SPDXRef-File-80",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1090,11 +1210,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-73",
+      "SPDXID": "SPDXRef-File-81",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "dea901027a24ace88d9fb369a45e31c839ba1feed19bc56db907bc90167316c3"
+          "checksumValue": "b930979d38f0adf3b93c6755c321a12eaf155e5a85072abd162d50ff6a2fcd0a"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1105,11 +1225,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-74",
+      "SPDXID": "SPDXRef-File-82",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "6cbff467344ce7f815eac4a745f4f8c61258b86a896c21b8d272c87daf25775e"
+          "checksumValue": "d2f87af0b1a914e632793bf98041d2f09c6b906597b142400f30512af8608a4c"
         }
       ],
       "copyrightText": "NOASSERTION",

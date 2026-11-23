@@ -13,6 +13,8 @@ def main():
     cmd.add_parser('doctor'); cmd.add_parser('demo'); cmd.add_parser('preflight')
     q=cmd.add_parser('qualify-internal',help='validate a site-generated authorized MCP capability capture')
     q.add_argument('--capture',default='',help='path to a P3 site qualification capture JSON')
+    m=cmd.add_parser('mcp-discover',help='connect to a configured read-only MCP server and report unqualified capabilities')
+    m.add_argument('--config',required=True,help='site-approved MCP adapter config JSON')
     g=cmd.add_parser('catalog'); g.add_argument('--tables',type=int,default=13000); g.add_argument('--output',default='')
     a=cmd.add_parser('analyze',help='analyze one local JSON wafer map')
     a.add_argument('input',help='path to a JSON investigation file')
@@ -35,6 +37,16 @@ def main():
         except (OSError,ValueError,json.JSONDecodeError) as exc:
             p.error(f'cannot read qualification capture: {exc}')
         obj=evaluate(capture)
+    elif a.command=='mcp-discover':
+        from fabintel.mcp_adapter import ReadOnlyMCPAdapter
+        try:
+            adapter=ReadOnlyMCPAdapter.from_config(a.config)
+            try:
+                obj=adapter.discover()
+            finally:
+                adapter.client.close()
+        except (OSError,ValueError,PermissionError,RuntimeError) as exc:
+            p.error(f'MCP discovery failed closed: {exc}')
     elif a.command=='catalog':
         obj={'catalog_version':'SYNTHETIC-1','tables':synthetic_catalog(a.tables)}
         if a.output:
