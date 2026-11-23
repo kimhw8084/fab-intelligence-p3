@@ -4,29 +4,32 @@ State: **CANDIDATE**. `EXTERNAL_TRANSFER_READY` and `READY_INTERNAL` are not ass
 
 ## Implemented product
 
-- C01–C05 run in one deterministic, model-free workflow with a local UI/API, typed evidence, source lineage, an integrated synthetic fixture, JSON export and refusal/abstention paths.
-- Spatial calculations preserve the observed-site mask; C02 matches physical sites only; C04 uses distinct earlier baseline lots and multiple-test correction; C05 ranks compatible prior maps without causal language; C03 requires approved die mapping, temporal ordering, exact site coverage, spatial blocks, and at least 20 holdout wafers from distinct lots.
-- Real company adapters, data, and semantics are not included. `INTERNAL_AUTHORIZED` mode is refused; site-side preflight stays `PENDING_INTERNAL`.
+- One deterministic, model-free workflow supports C01–C05 through the local UI and CLI, with typed evidence, source lineage, local JSON/bundle selection, export, cancellation, and refusal/abstention paths.
+- C01 covers observed radial/sector summaries, numeric edge-center with uncertainty when supplied, direction and exploratory local clusters, categorical die/bin counts, and defect-coordinate counts. Unobserved sites are never filled.
+- C02 aligns exact same-wafer/lot observations; a pair with different masks can use a predeclared exact-common-site policy only when declared overlap and coverage limits pass. C03 uses exact context, spatial blocks, wafer-level uncertainty, and leave-one-lot-out sensitivity. C04 uses a leave-one-wafer-out spatial max-T rank screen; localized sites are not individually significant. C05 supports exact-site or adequately covered radial/sector profile comparisons across masks, and its bounded index holds a validated snapshot.
+- Configurable MCP stdio and Streamable HTTP clients, exact tool and approved-plan checks, bounded read-only access, semantic/relationship validation, source lineage, cancellation, and a synthetic mock are included. Production endpoint, mappings, credentials, source grants, and approvals are not included.
+- `INTERNAL_AUTHORIZED` analysis remains refused; company mappings and model endpoints are pending internal qualification.
 
 ## Evidence recorded
 
-- `python bootstrap_check.py`: PASS after regenerating the exact package manifest; integrity covers 79 files and all 52 tests pass.
-- `python -m unittest discover -s tests -v`: 52 tests pass, including negative paths and context/lot leakage checks.
-- `python qualification/verify_critical_cases.py`: 12/12 frozen P3 cases pass.
-- `python qualification/run_scientific_benchmark.py`: 100/100 seeded numeric oracle cases pass; 13,000-entry synthetic catalog; p50/p95 and memory measurements are in the benchmark artifact. These are synthetic, build-host timings.
-- `python qualification/run_local_qualification.py`: unit suite, integrated demo, Node syntax pass; internal preflight reports `PENDING_INTERNAL`.
-- `python qualification/supply_chain_audit.py`: zero third-party Python imports and no remote UI assets. Rights review and current vulnerability database/scanner remain pending.
-- `python release/build_candidate.py`: two deterministic ZIP builds matched; fresh extraction passed all tests and the synthetic demo with Python site packages disabled on macOS arm64/Python 3.11.7.
-- `python qualification/run_blocked_egress_check.py`: macOS sandbox denied a direct outbound socket, while the model-free synthetic CLI ran with all five capabilities valid. This qualifies only the local host sandbox path, not company target policy.
-- Manual local UI walkthrough recorded in `release/LOCAL_UI_EVIDENCE.json`; one synthetic investigation, not an engineer usability study.
+- Source commit: `ef5550c553ce8405437d08393b133c2b2e63ea4a`; canonical source-tree SHA-256: `b9caccc7d066bb2a005ed8c0ed059c00baad6ac333d125e87d5f17407ddde23a`.
+- `python bootstrap_check.py`: PASS with an 89-file integrity manifest and all 78 tests passing.
+- `python -m unittest discover -s tests`: 78 tests pass. `node --check ui/app.js`: PASS.
+- `qualification/verify_critical_cases.py`: 12/12 frozen P3 cases pass.
+- `qualification/run_scientific_benchmark.py`: 100/100 independent numeric oracles pass; the 13,000-site fingerprint p95 was 73.1 ms with 6.0 MB traced peak allocation. On 1,000 compatible synthetic 13-site maps, direct-search p50 was 146.3 ms and indexed-search p50 was 64.2 ms with result parity; index build was 1.06 s with 13.4 MB incremental traced allocation. These are build-host synthetic timings, not target thresholds.
+- `qualification/run_local_qualification.py`: 78-test suite, synthetic demo, and JS syntax pass; internal preflight reports `PENDING_INTERNAL`.
+- `qualification/run_blocked_egress_check.py`: host OS sandbox denied outbound sockets while the synthetic CLI completed. This does not establish company target OS or egress policy.
+- `qualification/supply_chain_audit.py`: 82 inventoried files, zero third-party Python imports, and no remote UI assets. Rights review and a current vulnerability database/scanner remain pending.
+- `release/LOCAL_UI_EVIDENCE.json`: one in-browser synthetic C01–C05 walkthrough completed with all five capability cards `VALID`; this is not an engineer usability study.
+- `python release/build_candidate.py`: two deterministic builds matched; the fresh-extracted archive passed all 78 tests and the synthetic demo using Python without site packages on macOS arm64/Python 3.11.7. The ZIP SHA-256 and full log are recorded in `release/PACKAGE_QUALIFICATION.json` and its sidecar.
 
 ## Remaining gates
 
-- `PENDING_INTERNAL`: approved Samsung MCP bindings/permissions, semantic and relationship mappings, authorized endpoint/auth configuration, target platform/network policy, actual security approval, and first true-data engineer investigation. No company data or approval is fabricated.
-- `NOT_VERIFIED`: literal R01–R53 and Golden Standard reconciliation; the canonical source text is not included in this folder per `requirements/AUTHORITY_AND_GAPS.md` and is not a prerequisite for this external build.
-- `PARTIAL`: actual target-OS and company egress-policy qualification, engineer usability/task-time study, precommitted production task thresholds, retrieval relevance and real-data scientific calibration.
+- `PENDING_INTERNAL`: actual authorized Samsung MCP permissions/bindings, source grants, semantic and relationship mappings, endpoint/auth configuration, target OS/network policy, security and engineering approvals, and the first true-data engineer investigation.
+- `NOT_VERIFIED`: literal R01–R53 and Golden Standard reconciliation. Their authoritative source text is absent from this folder; no requirement text has been invented.
+- `PARTIAL`: target-OS/company-egress qualification, real-data scientific calibration, retrieval relevance, engineer usability/task-time study, and precommitted production thresholds.
 - `PENDING_EXTERNAL`: source redistribution rights and current vulnerability scanning/database review. No root source license or scanner database is supplied locally.
 
-## Authorized follow-up
+## Evidence paths
 
-The candidate package is prepared for site-side qualification when authorized resources exist locally: run the internal preflight with approved read-only Samsung MCP bindings, approved semantics/relationships, target OS and egress policy; then conduct the true-data pilot and engineer review. Separately complete the rights review and current vulnerability scan before redistribution. These are qualification gates, not permission to infer internal readiness from synthetic evidence.
+The machine-readable gate ledger is `release/GATE_REPORT.json`; per-gate statuses also appear in `qualification/external_gates.csv`. Rebuild and offline test output is recorded in `release/PACKAGE_QUALIFICATION.json`, with the ZIP SHA-256 sidecar in `release/p3-candidate-20261122.zip.sha256`. Host-only egress evidence is `release/OFFLINE_RUNTIME_EVIDENCE.json`.

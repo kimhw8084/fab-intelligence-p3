@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-11-23T01:41:55Z",
+  "created_utc": "2026-11-23T01:50:54Z",
   "file_sha256": {
     ".gitignore": "26ff84d8c1a32854a690b013a72402b75598e179badebf63529d144c3e4b3e6a",
     "AGENTS.md": "b534becbfb070f822b857870498f8ec8323d8153afede0c7f0c6964e1b889578",
@@ -31,7 +31,7 @@
     "fabintel/catalog.py": "5d1ec6b292e755cf38a77789ef308310ed42ff5ed9adc2a121c85a8150bd44b0",
     "fabintel/cli.py": "29f11424ee483bf465bc1c9ee10cd4e226c392453330eb8788d3bbe306e5d9fa",
     "fabintel/contracts.py": "a6cc06200d00bfefccdcdb038786e1bb21fb194eff64d0ed48213619d09c7e1a",
-    "fabintel/mcp_adapter.py": "69c9048dd9c6659aec4d446c969562915dbd41d82434c0e8a8a25eb6f20e3ffd",
+    "fabintel/mcp_adapter.py": "4a2cdec5d0cc2bacef7dd95784917f6ef7cbef4cb0f487332b6966790486c769",
     "fabintel/mcp_client.py": "6c28231bb12d462e786814768adecd93d6885f778a44961d458d577a5023ed38",
     "fabintel/mcp_mock_server.py": "0ad8d87bd0c07002fdebfe8f2fcd3c31494035b5d7727ff88da3e3c7201c913d",
     "fabintel/mock_mcp.py": "e72fe85913b9f87d138f5fe0b480b6eaff1d289b099a9600c4f823eed2d46f2e",
@@ -53,18 +53,18 @@
     "qualification/external_gates.csv": "ad43ba2ffa851eec0d80349ac31bb81c4fbdbb1d5d89830cdb97ad927ec4800f",
     "qualification/generate_synthetic_workflow.py": "8d5ff8fcc33846d1a98d33383351dbb8a8dd21f7a0509b3e7934b7fd08b1f176",
     "qualification/run_blocked_egress_check.py": "bea2fd4735054d60e68da399c3f2d9432668cc7e143d76da59e1226799daef60",
-    "qualification/run_local_qualification.py": "d97f8f275efe71d7abb5011020de553ff6d817a1d59c640b489a6639e80611df",
-    "qualification/run_scientific_benchmark.py": "cf7d97bbaf15731fa20efbbab8ad846f89644a3dd6e217b6b7be245cd16e4dd3",
-    "qualification/supply_chain_audit.py": "cc4c7562455bda6b4fd5decfde0f0af6b36104ce463b616573fc644737670d9a",
-    "qualification/tree_hash.py": "319992672af197cbc8b3e57c263004978d6a892b64e3b5574c8b91f5652d1ee0",
-    "qualification/verify_critical_cases.py": "d002b703478ba66c9d8d1f803c1eed2165f0d71491cbf1f979edee634398eaff",
+    "qualification/run_local_qualification.py": "f25dda31da7e1db25424ecc6d776e4de885f012641da734ebc0ea104cb765075",
+    "qualification/run_scientific_benchmark.py": "488b0a6c2bcff139dba2db031b99b21b33a7585c3b01f285ae2369b0860aa685",
+    "qualification/supply_chain_audit.py": "a47c340650b40c81d85ec20c3feed94a8751e454e833c1f8cd0e586dcb6da8df",
+    "qualification/tree_hash.py": "43915ab36ee473b923b9ff92bf33a04436ce2ac41b20e5896f5d91bee3119755",
+    "qualification/verify_critical_cases.py": "87d07e0c9d1f4fcf558822e82c131b0ed6c6ffc951dd5b2201d561dfe60a9376",
     "qualification/write_bootstrap_manifest.py": "616799223b57c9953b29ef0f3ebf1580fe9734e168d598a86862026c15483279",
     "release/INTERNAL_QUALIFICATION_REPORT_TEMPLATE.json": "92435a4633ab801117985807b985badb724abf897ffaaf07f208d7a544509437",
     "release/LOCAL_UI_EVIDENCE.json": "4a621ec5f977ded106ccff2e3e024f695e79a7ebc990f74495449b1c99ac46be",
-    "release/OFFLINE_RUNTIME_EVIDENCE.json": "29594c836344cf9ab10e91b9a682768d569a3c4455989de3bfae360db204188a",
+    "release/OFFLINE_RUNTIME_EVIDENCE.json": "13886b08477f86b1a7e61776b7176356d7386bc908a01d7ca1e5e82aacf367a8",
     "release/RUNBOOK_ROLLBACK_KILL_SWITCH.md": "6aee2d9edc14cbb36e968323d6b74a31ab80bf3b0d2009efa55f256390aebce3",
     "release/TARGET_OFFLINE_QUALIFICATION_TEMPLATE.md": "fad539886b5d79bcd9c7ee45e8f5b7a521cb40727143b01877795508cc00f4b6",
-    "release/build_candidate.py": "6241ac0ec911ba38368306327dbd7ce3cc26a051390fc673e00ed4a22768418d",
+    "release/build_candidate.py": "b0c593296c0aadb488eb12495a5444769b84effae68da444b7896728d4b34504",
     "requirements/AUTHORITY_AND_GAPS.md": "825436eaa72989256c9933d997269f01ecfd8a292063c9c897561c6c2ec1e4c2",
     "requirements/company-config.template.json": "bba882abe2015fd91762fa260a833910d4cbbc9a1b7cb9d1b6a160efed231a56",
     "requirements/mcp-adapter.template.json": "70ea412d78abf18a9cad0be9db68920f7edf1fe3bf7adcaf2ac1602369f8971f",
@@ -72,7 +72,7 @@
     "research/SOURCES_TO_REVERIFY.md": "3d5bc2a0610cb76de19446f76e35b97e7fa1c642010b45da70dc7df18a76cabf",
     "tests/test_contracts.py": "af1430571f12f31fdddf94e98556656568d638fa2e27b33312df6070b9632acf",
     "tests/test_engine.py": "71d948207f29cf217182d736c5a64ac11e18fdddad5e4387555a87fbf5d84d2e",
-    "tests/test_mcp_adapter.py": "737236697ae4d7f57be29cb6fdcaec491a199b525ec8ae4a4e0afbd6c99fc2cf",
+    "tests/test_mcp_adapter.py": "54a953ffd817c16a38af95a142ab688fdf059d6c576c3d97186a573f233e6a81",
     "tests/test_mcp_client.py": "128e1b0f11e8ce91336b701bad6dd9aa3250e47f3be9224ce19c63be6b0b16ce",
     "tests/test_p3_integrated.py": "5c5c8395c8c502fce08294c8c2c1d70f3f4ec6bbeeb7c9e26dd20f4b0323f722",
     "tests/test_p3_seeded_oracles.py": "e70e3771c06fa1a0d02faaacdce3b00e20fef7e7bdd45752214647c74d2e3f83",
@@ -89,9 +89,7 @@
     "first_party_license": "NOASSERTION",
     "root_license_files": [],
     "status": "PENDING_RIGHTS_REVIEW",
-    "third_party_runtime_dependencies": [
-      "tree_hash"
-    ]
+    "third_party_runtime_dependencies": []
   },
   "limitations": [
     "The target Python distribution and operating-system libraries are not bundled or pinned here.",
@@ -100,16 +98,14 @@
   ],
   "runtime": {
     "bundled_ui_assets": true,
-    "external_python_dependencies": null,
+    "external_python_dependencies": 0,
     "minimum_python": "3.10",
     "remote_asset_findings": {
       "remote_font_or_image_reference": false,
       "remote_runtime_api_reference": false,
       "remote_script_or_style_reference": false
     },
-    "third_party_imports": [
-      "tree_hash"
-    ]
+    "third_party_imports": []
   },
   "scan_scope": "local source tree only; no network access",
   "state": "CANDIDATE",

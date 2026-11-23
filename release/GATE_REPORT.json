@@ -2,6 +2,13 @@
   "product": "p3",
   "state": "CANDIDATE",
   "external_transfer_ready": false,
+  "build_provenance": {
+    "source_commit": "ef5550c553ce8405437d08393b133c2b2e63ea4a",
+    "source_tree_sha256": "b9caccc7d066bb2a005ed8c0ed059c00baad6ac333d125e87d5f17407ddde23a",
+    "candidate_archive": "release/p3-candidate-20261122.zip",
+    "archive_checksum_sidecar": "release/p3-candidate-20261122.zip.sha256",
+    "archive_build_evidence": "release/PACKAGE_QUALIFICATION.json"
+  },
   "internal": {
     "state": "PENDING_INTERNAL",
     "verified": false,
@@ -70,7 +77,7 @@
     "E11": {
       "status": "PARTIAL",
       "evidence": ["release/SCIENTIFIC_PERFORMANCE_BENCHMARK.json"],
-      "result": "Local timing and memory measurements cover 100 numeric oracles, a 13,000-site map, and direct-versus-indexed retrieval over 1,000 compatible synthetic maps. No precommitted target-hardware thresholds, real-task baseline or user-effort study exists."
+      "result": "On this macOS arm64 host, 13,000-site fingerprint p95 was 73.1 ms. For 1,000 synthetic 13-site historical maps, direct query p50 was 146.3 ms versus 64.2 ms indexed, with result parity; index build was 1.06 s and 13.4 MB incremental traced allocation. No precommitted target-hardware thresholds, real-task baseline or user-effort study exists."
     },
     "E12": {
       "status": "PENDING_INTERNAL",

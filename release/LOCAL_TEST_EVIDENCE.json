@@ -18,11 +18,11 @@
     "unit_suite": {
       "command": "/opt/anaconda3/bin/python -m unittest discover -s tests -v",
       "status": "PASS",
-      "tests": 77
+      "tests": 78
     }
   },
   "company_data_used": false,
-  "created_utc": "2026-11-23T01:41:55Z",
+  "created_utc": "2026-11-23T01:50:54Z",
   "environment": {
     "architecture": "arm64",
     "node": "v26.13.0",
@@ -30,7 +30,7 @@
     "python": "3.11.7 (main, Dec 15 2023, 12:09:56) [Clang 14.0.6 ]"
   },
   "external_status": "CANDIDATE; target OS/network isolation, supply chain, license, company MCP and user-study gates are not established by this local run.",
-  "git_commit": null,
-  "source_tree_sha256": "5fe4954c1354dc47396154328c2d6d42c14fc0d2bc70f83f8e9189d776db5c32",
+  "source_commit": "ef5550c553ce8405437d08393b133c2b2e63ea4a",
+  "source_tree_sha256": "b9caccc7d066bb2a005ed8c0ed059c00baad6ac333d125e87d5f17407ddde23a",
   "state": "CANDIDATE"
 }

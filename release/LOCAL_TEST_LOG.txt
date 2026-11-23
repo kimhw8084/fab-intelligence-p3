@@ -14,6 +14,7 @@ test_adapter_cancellation_is_cooperative_and_does_not_fake_acknowledgement (test
 test_cli_can_discover_a_configured_mock_server (test_mcp_adapter.MCPReadOnlyAdapterTests.test_cli_can_discover_a_configured_mock_server) ... ok
 test_discovery_semantics_relationship_read_and_audit_use_exact_bindings (test_mcp_adapter.MCPReadOnlyAdapterTests.test_discovery_semantics_relationship_read_and_audit_use_exact_bindings) ... ok
 test_environment_auth_is_resolved_without_configuring_secret_values (test_mcp_adapter.MCPReadOnlyAdapterTests.test_environment_auth_is_resolved_without_configuring_secret_values) ... ok
+test_invalid_limits_are_rejected_before_stdio_process_launch (test_mcp_adapter.MCPReadOnlyAdapterTests.test_invalid_limits_are_rejected_before_stdio_process_launch) ... ok
 test_raw_sql_and_broader_permission_context_are_rejected (test_mcp_adapter.MCPReadOnlyAdapterTests.test_raw_sql_and_broader_permission_context_are_rejected) ... ok
 test_site_config_can_run_read_only_discovery_over_streamable_http (test_mcp_adapter.MCPReadOnlyAdapterTests.test_site_config_can_run_read_only_discovery_over_streamable_http) ... ok
 test_template_is_rejected_before_server_process_launch (test_mcp_adapter.MCPReadOnlyAdapterTests.test_template_is_rejected_before_server_process_launch) ... ok
@@ -79,7 +80,7 @@ test_no_fabricated_unobserved_region (test_scientific_baseline.SpecializedTests.
 test_bundled_full_workflow_matches_generator_and_runs_all_capabilities (test_synthetic_workflow.SyntheticWorkflowTests.test_bundled_full_workflow_matches_generator_and_runs_all_capabilities) ... ok
 
 ----------------------------------------------------------------------
-Ran 77 tests in 3.301s
+Ran 78 tests in 3.340s
 
 OK
 
