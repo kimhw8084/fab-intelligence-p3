@@ -7,6 +7,8 @@ import json
 import re
 import shutil
 import sys
+import zipfile
+from pathlib import PurePosixPath
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -43,6 +45,60 @@ def imported_modules(path: Path) -> set[str]:
         elif isinstance(node, ast.ImportFrom) and node.module:
             names.add(node.module.split(".")[0])
     return names
+
+
+def inspect_vendor_licenses(root: Path, inventory: dict) -> dict:
+    """Verify each pinned wheel/license file and resolve only explicit MIT texts."""
+    wheelhouse = root / "vendor" / "mcp-sdk-2.3.0" / "macos-arm64-cp311" / "wheelhouse"
+    expressions = {}
+    derived = []
+    unresolved = []
+    verified_wheels = 0
+    verified_license_files = 0
+    for dependency in inventory.get("packages", []):
+        name = dependency["name"]
+        wheel_name = dependency["wheel"]
+        if not dependency.get("bundled_license_files"):
+            raise ValueError(f"No embedded license file is recorded for {name}.")
+        wheel_path = wheelhouse / wheel_name
+        if (Path(wheel_name).name != wheel_name or wheel_path.is_symlink() or not wheel_path.is_file()
+                or sha256(wheel_path) != dependency["wheel_sha256"]):
+            raise ValueError(f"Bundled wheel integrity mismatch for {name}.")
+        verified_wheels += 1
+        license_texts = []
+        try:
+            with zipfile.ZipFile(wheel_path) as archive:
+                archive_names = set(archive.namelist())
+                for license_file in dependency.get("bundled_license_files", []):
+                    relative = PurePosixPath(license_file["path"])
+                    if relative.is_absolute() or ".." in relative.parts or license_file["path"] not in archive_names:
+                        raise ValueError(f"Embedded license file is missing or unsafe for {name}.")
+                    contents = archive.read(license_file["path"])
+                    if hashlib.sha256(contents).hexdigest() != license_file["sha256"]:
+                        raise ValueError(f"Embedded license hash mismatch for {name}.")
+                    verified_license_files += 1
+                    license_texts.append(contents.decode("utf-8", errors="replace"))
+        except (OSError, zipfile.BadZipFile) as exc:
+            raise ValueError(f"Cannot inspect bundled wheel for {name}.") from exc
+
+        expression = dependency.get("license_expression")
+        if expression:
+            expressions[name] = expression
+        elif any(
+            "mit license" in normalized[:500]
+            and "permission is hereby granted, free of charge" in normalized
+            and "deal in the software without restriction" in normalized
+            for normalized in (" ".join(text.lower().split()) for text in license_texts)
+        ):
+            expressions[name] = "MIT"
+            derived.append({"name": name, "version": dependency["version"], "expression": "MIT",
+                            "basis": "verified embedded MIT license text", "license_file_count": len(license_texts)})
+        else:
+            expressions[name] = "NOASSERTION"
+            unresolved.append({"name": name, "version": dependency["version"]})
+    return {"license_expressions": expressions, "derived_expressions": derived,
+            "unresolved_packages": unresolved, "verified_wheels": verified_wheels,
+            "verified_embedded_license_files": verified_license_files}
 
 
 def main():
@@ -93,6 +149,7 @@ def main():
     }
     inventory_path = ROOT / "vendor" / "mcp-sdk-2.3.0" / "macos-arm64-cp311" / "license-inventory.json"
     inventory = json.loads(inventory_path.read_text(encoding="utf-8")) if inventory_path.is_file() else {"packages": []}
+    license_audit = inspect_vendor_licenses(ROOT, inventory)
     dependency_packages = []
     dependency_relationships = []
     for dependency in inventory.get("packages", []):
@@ -101,7 +158,7 @@ def main():
         source = next((item["url"] for item in dependency.get("source_references", [])
                        if "source" in item.get("label", "").lower() or "homepage" in item.get("label", "").lower()),
                       "NOASSERTION")
-        license_expression = dependency.get("license_expression") or "NOASSERTION"
+        license_expression = license_audit["license_expressions"][dependency["name"]]
         dependency_packages.append({
             "name": dependency["name"],
             "SPDXID": dependency_id,
@@ -151,6 +208,10 @@ def main():
         "license_review": {"root_license_files": licenses, "first_party_license": "NOASSERTION",
                             "third_party_runtime_dependencies": ["mcp==2.3.0 optional candidate; hash-locked wheel closure"] if third_party else [],
                             "bundled_optional_package_count": len(dependency_packages),
+                            "verified_bundled_wheels": license_audit["verified_wheels"],
+                            "verified_embedded_license_files": license_audit["verified_embedded_license_files"],
+                            "license_expression_derivations": license_audit["derived_expressions"],
+                            "unresolved_package_licenses": license_audit["unresolved_packages"],
                             "status": "PENDING_RIGHTS_REVIEW" if not licenses else "PENDING_SCOPE_REVIEW"},
         "vulnerability_review": {"syft_available": shutil.which("syft") is not None,
                                  "grype_available": shutil.which("grype") is not None,
@@ -164,6 +225,10 @@ def main():
     (ROOT / "release" / "SUPPLY_CHAIN_AUDIT.json").write_text(json.dumps(audit, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps({"files": len(spdx_files), "third_party_imports": third_party,
                       "root_license_files": licenses, "license_status": audit["license_review"]["status"],
+                      "verified_wheels": audit["license_review"]["verified_bundled_wheels"],
+                      "verified_license_files": audit["license_review"]["verified_embedded_license_files"],
+                      "derived_licenses": [item["name"] for item in license_audit["derived_expressions"]],
+                      "unresolved_package_licenses": license_audit["unresolved_packages"],
                       "vulnerability_status": audit["vulnerability_review"]["status"]}, indent=2))
 
 
