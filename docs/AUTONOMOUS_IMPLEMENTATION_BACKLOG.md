@@ -6,7 +6,7 @@ This ordered backlog is suitable for an empty Codex repository. Maintain `progre
 - [x] Run integrity check, basic tests and seeded 13,000-table generator; classify the result as a candidate, not a release.
 - [x] Read the supplied contracts, specs, policies and critical tests. Record the gap inventory; preserve the frozen shared v1 schema and folder/API boundaries.
 - [x] Check the supplied folder for the authoritative R01–R53/Golden source; the literal text is absent and remains unverified. Do not invent requirement text.
-- [~] Establish a product vertical-slice E2E harness with deterministic calculation, typed evidence and refusal fixtures. The former local selection/upload UI was removed so P3 does not compete with the shared host; actual selection, cancel and export integration remains with P1.
+- [x] Establish a product vertical-slice E2E harness with official MCP SDK transport, exact approved tool/plan bindings, server-returned semantic-role mapping, bounded current/prior/baseline/history/quality reads, correlated audit, deterministic C01–C05 analysis, and a validated evidence envelope. The synthetic server verifies all five results and fail-closed unit/audit cases. Company sources remain `PENDING_INTERNAL`.
 
 ## Stage 1 — Full integrated product behavior
 - [x] Implement C01: Spatial Fingerprint; independently validate result and negative path.
@@ -14,15 +14,15 @@ This ordered backlog is suitable for an empty Codex repository. Maintain `progre
 - [x] Implement C05: Historical Similarity; independently validate result and negative path.
 - [x] Implement C02: Spatial Evolution; independently validate result and negative path.
 - [x] Implement C03: Downstream Association; independently validate result and negative path.
-- [~] Implement source/relationship permission checks and rigorous provenance; synthetic denial, approved-relationship checks, lineage and refusal exist, while real source grants and mappings remain internal.
-- [~] Build the headless P1-hosted React evidence panel with empty/result/refusal states, provenance and an accessible measured-site table. P1-host request controls, spatial renderer integration, browser accessibility walkthrough and engineer usability study remain pending.
+- [~] Implement source/relationship permission checks and rigorous provenance; synthetic end-to-end approval, source scoping, exact plan/tool hashes, row lineage, correlated remote audit and refusal are verified. Real source grants and mappings remain internal.
+- [~] Build the headless P1-hosted React evidence panel with empty/result/refusal states, provenance and an accessible measured-site table. The available P1 checkout contains its headless product panel and contracts, but no shared application host; spatial renderer integration, browser accessibility walkthrough and engineer usability study remain pending.
 - [x] Implement safe deterministic operation with model use disabled; no model path showed an objective benefit for this candidate.
 
 ## Stage 2 — Independent qualification and simplification
 - [~] Build fixed challenging positive/negative cases, independent numeric oracles and metamorphic tests. Hidden real-data holdouts and blinded engineer-review tasks require qualified site data and engineers.
 - [x] Establish synthetic baseline metrics and benchmark the standard-library-only stack; no third-party dependency was justified by measured need.
 - [~] Fix detected false positives, invalid relationships and unsupported conclusions; regressions cover supplied challenges. Real-data calibration remains unqualified.
-- [~] Record p50/p95 and peak-memory measurements for the synthetic task mix. Target thresholds and hardware-specific optimization remain pending.
+- [~] Record p50/p95 and peak-memory measurements for the synthetic task mix. The refreshed 1,000-map retrieval benchmark includes five generated regimes, 50 repeated queries, alternate sampling, ineligible historical records, relevance oracles, 21.5 MB index-build allocation, explicit invalidation/refresh, and direct/index parity. Product targets and hardware-specific optimization remain pending.
 
 ## Stage 3 — External release engineering
 - [~] Build and test a fresh-extraction, standard-library-only archive on the available macOS arm64 host; a host sandbox also denied outbound sockets during the synthetic CLI run. The approved target OS and company egress policy are not supplied.

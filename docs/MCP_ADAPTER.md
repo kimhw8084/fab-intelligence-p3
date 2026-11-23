@@ -32,4 +32,29 @@ python -m fabintel mcp-discover --config /absolute/path/to/approved-p3-mcp.json
 
 The result is deliberately labeled `CONFIGURED_READ_ONLY_UNQUALIFIED`; external code cannot set internal qualification ready. No company endpoint, tool name, data source, semantic definition or credential is bundled.
 
-The official SDK client is tested against `tests/fixtures/mcp_mock_server.py`, a synthetic standard-library protocol peer that exercises modern/legacy negotiation, permission denials, schema drift and cancellation. A local HTTP/SSE fixture exercises the official SDK Streamable HTTP client. The peer is test-only; the production P3 package contains no custom JSON-RPC framing or duplicate MCP transport.
+## P3 analysis workflow
+
+`fabintel.mcp_workflow.run_mcp_analysis` composes the existing adapter and engine. Each approved query plan declares one exact `analysis_role`: `current`, `previous`, `baseline`, `history`, or `association`. The workflow discovers capabilities, requests the approved semantic version, converts returned column roles into P3's typed spatial input, checks geometry/units/identity and source scope, performs each bounded read, and requires the remote audit to match the read's source, operation, query hash and audit ID. Only then does it invoke C01–C05 and validate the shared evidence envelope. The MCP operation mapping for `read_bounded` must forward `operation_id` for that audit correlation.
+
+Auxiliary roles are optional. When they are absent, the engine returns its normal `INCONCLUSIVE` capability results rather than fabricating prior steps, a baseline, a history population or quality outcomes. Reads marked truncated are rejected for analysis. Semantic-role, source, unit, coordinate, or audit mismatches fail closed before a scientific claim can be produced.
+
+For map sources, P3 consumes semantic roles `wafer_id`, `lot_id`, `measured_at`, `product_id`, `population_signature`, `sampling_mask_id`, `site_id`, `x`, `y`, and `value` for continuous modalities or `category` for die-bin data. `step_id`, `step_instance_id`, `standard_uncertainty`, and `measurement_unit` are optional when equivalent approved metadata is present in the semantic profile. `spatial_profile` supplies coordinate verification and geometry; `measurement_profile` supplies the metric, unit, modality, definition and layer. A quality source maps wafer/die identity, holdout cohort, feature/outcome timestamps, coordinates, values, spatial block and matching product/measurement context. Its approved definition supplies quality context, geometry and holdout metadata. Source column names may differ from these logical roles; P3 uses the server's approved role map.
+
+An approved configuration can run the workflow with repeated plan IDs:
+
+```sh
+python -m fabintel mcp-analyze \
+  --config /absolute/path/to/approved-p3-mcp.json \
+  --plan-id SITE-CURRENT-MAP \
+  --plan-id SITE-PRIOR-MAP \
+  --plan-id SITE-BASELINE \
+  --plan-id SITE-HISTORY \
+  --plan-id SITE-QUALITY-COHORT \
+  --time-start 2026-01-01T00:00:00Z \
+  --time-end 2026-02-01T00:00:00Z \
+  --output /absolute/path/to/evidence.json
+```
+
+The protocol-compatible synthetic peer runs this same path with intentionally noncanonical source column names, mapped only by server-returned semantic roles. Its current, prior, historical, baseline and quality rows are derived from the existing synthetic scientific fixture. All five capabilities produce `VALID` in that fixture, and the workflow evidence remains `SYNTHETIC_DEMO` with `PENDING_INTERNAL`; it does not qualify company mappings or approvals.
+
+The official SDK client is tested against `tests/fixtures/mcp_mock_server.py`, a synthetic standard-library protocol peer that exercises modern/legacy negotiation, permission denials, schema drift, cancellation, semantic-role mapping, full C01–C05 evidence, incomplete support data, unit refusal and audit mismatch. A local HTTP/SSE fixture exercises the official SDK Streamable HTTP client. The peer is test-only; the production P3 package contains no custom JSON-RPC framing or duplicate MCP transport.

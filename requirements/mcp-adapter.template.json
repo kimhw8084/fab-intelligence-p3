@@ -71,7 +71,8 @@
       "argument_mapping": {
         "approved_plan": "",
         "permission_context": "",
-        "limits": ""
+        "limits": "",
+        "operation_id": ""
       }
     },
     "audit": {

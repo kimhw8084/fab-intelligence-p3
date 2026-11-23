@@ -15,6 +15,13 @@ def main():
     q.add_argument('--capture',default='',help='path to a P3 site qualification capture JSON')
     m=cmd.add_parser('mcp-discover',help='connect to a configured read-only MCP server and report unqualified capabilities')
     m.add_argument('--config',required=True,help='site-approved MCP adapter config JSON')
+    w=cmd.add_parser('mcp-analyze',help='run P3 C01-C05 through approved MCP semantics and bounded read plans')
+    w.add_argument('--config',required=True,help='site-approved MCP adapter config JSON')
+    w.add_argument('--plan-id',action='append',required=True,help='site-approved P3 analysis plan ID; repeat for current and any auxiliary datasets')
+    w.add_argument('--time-start',required=True,help='timezone-aware start for approved relationship discovery')
+    w.add_argument('--time-end',required=True,help='timezone-aware end for approved relationship discovery')
+    w.add_argument('--top-k',type=int,default=5,help='maximum historical maps to return (1..50)')
+    w.add_argument('--output',default='',help='write the validated evidence envelope to this path')
     g=cmd.add_parser('catalog'); g.add_argument('--tables',type=int,default=13000); g.add_argument('--output',default='')
     a=cmd.add_parser('analyze',help='analyze one local JSON wafer map')
     a.add_argument('input',help='path to a JSON investigation file')
@@ -45,6 +52,23 @@ def main():
                 adapter.client.close()
         except (OSError,ValueError,PermissionError,RuntimeError) as exc:
             p.error(f'MCP discovery failed closed: {exc}')
+    elif a.command=='mcp-analyze':
+        from fabintel.mcp_adapter import ReadOnlyMCPAdapter
+        from fabintel.mcp_workflow import run_mcp_analysis
+        try:
+            adapter=ReadOnlyMCPAdapter.from_config(a.config)
+            try:
+                obj=run_mcp_analysis(adapter,a.plan_id,
+                    time_window={'start':a.time_start,'end':a.time_end},top_k=a.top_k)
+            finally:
+                adapter.client.close()
+        except (OSError,ValueError,PermissionError,RuntimeError) as exc:
+            p.error(f'MCP analysis failed closed: {exc}')
+        validate_envelope(obj)
+        if a.output:
+            Path(a.output).write_text(json.dumps(obj,indent=2,sort_keys=True)+'\n',encoding='utf8')
+            print('WROTE evidence envelope:',a.output,file=sys.stderr)
+            return
     elif a.command=='catalog':
         obj={'catalog_version':'SYNTHETIC-1','tables':synthetic_catalog(a.tables)}
         if a.output:

@@ -12,6 +12,7 @@ import os
 import re
 import threading
 import uuid
+from copy import deepcopy
 from datetime import datetime, timezone
 from math import isfinite
 from pathlib import Path
@@ -459,7 +460,8 @@ class ReadOnlyMCPAdapter:
         plan_hash = approved_query_plan_sha256(approved_plan)
         try:
             payload = self._invoke("read_bounded", {"approved_plan": dict(approved_plan),
-                "permission_context": {"scope": "read_only", "source_ids": [source_id]}, "limits": effective},
+                "permission_context": {"scope": "read_only", "source_ids": [source_id]}, "limits": effective,
+                "operation_id": operation_id},
                 cancel_event=cancel_event, timeout=effective["max_seconds"])
         finally:
             with self._lock:
@@ -487,6 +489,12 @@ class ReadOnlyMCPAdapter:
         with self._lock:
             self._audit.append(trace)
         return {**payload, "audit_trace": trace, "external_internal_qualification": "PENDING_INTERNAL"}
+
+    def approved_plan(self, plan_id: str) -> dict[str, Any]:
+        """Return an immutable-by-copy site-reviewed plan by its local identifier."""
+        if not isinstance(plan_id, str) or plan_id not in self.plans:
+            raise MCPPolicyError("requested plan ID is not present in the site-approved plan set")
+        return deepcopy(self.plans[plan_id]["plan"])
 
     def cancel(self, operation_id: str) -> dict[str, Any]:
         with self._lock:

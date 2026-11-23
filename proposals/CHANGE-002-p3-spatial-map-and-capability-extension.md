@@ -24,3 +24,9 @@ The current `suite-chart.v1` schema supports only line and scatter data. A wafer
 - Missing renderer leaves the accessible table and a pending message.
 
 The local P3 module and tests implement the product-side behavior. P1 schema approval and suite-host rendering remain integration gates; no host behavior is claimed here.
+
+## Current integration inventory
+
+The available P1 checkout was inspected on 2026-11-22. It contains the P1 headless product panel, the `suite-ui-module.v1` and `suite-chart.v1` contracts, and a React/TypeScript/Vite component toolchain. Its package scripts run type checking, component tests and a module build; the checkout has no shared application shell, product route, or running suite host. The local snapshot has no Git revision metadata. P3 records this observation in `release/P1_HOST_INTEGRATION_AUDIT.json`.
+
+P3 retains its headless panel and typed `p3-wafer-map.v1` callback model. P1 remains the owner for additive C01–C05 capability metadata and a versioned spatial-map renderer contract. CHANGE-002 has no P1 owner approval or merged contract migration yet; interactive host rendering and browser accessibility remain pending that shared integration point.

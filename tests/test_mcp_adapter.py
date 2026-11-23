@@ -12,10 +12,12 @@ from pathlib import Path
 from http.server import ThreadingHTTPServer
 from unittest.mock import patch
 
-from fabintel.mcp_adapter import (EnvironmentCredentialProvider, MCPPolicyError,
+from fabintel.contracts import validate_envelope
+from fabintel.mcp_adapter import (EnvironmentCredentialProvider, MCPDataError, MCPPolicyError,
                                   ReadOnlyMCPAdapter, approved_query_plan_sha256,
                                   tool_definition_sha256)
 from fabintel.mcp_client import MCPClient, MCPCancelled
+from fabintel.mcp_workflow import run_mcp_analysis
 from tests.test_mcp_client import _HTTPMockHandler
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -28,7 +30,8 @@ def adapter_config(client):
         "discover": {},
         "semantics": {"source_ids": "source_ids", "semantic_version": "semantic_version"},
         "relationships": {"typed_entity_ids": "typed_entity_ids", "time_window": "time_window"},
-        "read_bounded": {"approved_plan": "approved_plan", "permission_context": "permission_context", "limits": "limits"},
+        "read_bounded": {"approved_plan": "approved_plan", "permission_context": "permission_context", "limits": "limits",
+                         "operation_id": "operation_id"},
         "audit": {"operation_id": "operation_id"},
     }
     names = {"discover": "fab_discover", "semantics": "fab_semantics", "relationships": "fab_relationships",
@@ -40,11 +43,31 @@ def adapter_config(client):
                          "tool_definition_sha256": tool_definition_sha256(tools[tool_name])},
             "argument_mapping": fields[logical]}
     plans = []
+    workflow_plans = (("SYN-WF-CURRENT", "MOCK_MAP", "current"),
+                      ("SYN-WF-PREVIOUS", "MOCK_MAP", "previous"),
+                      ("SYN-WF-BASELINE", "MOCK_MAP", "baseline"),
+                      ("SYN-WF-HISTORY", "MOCK_MAP", "history"),
+                      ("SYN-WF-ASSOCIATION", "MOCK_QUALITY", "association"))
     for plan_id, delay in (("SYN-PLAN-1", 0), ("SYN-CANCEL", 700)):
         plan = {"plan_id": plan_id, "source_id": "MOCK_MAP", "semantic_version": "MOCK-SEM-1",
                 "test_delay_ms": delay}
         plans.append({"approved": True, "approval_reference": "SYN-QUERY-" + plan_id,
                       "plan": plan, "plan_sha256": approved_query_plan_sha256(plan)})
+    for plan_id, source_id, role in workflow_plans:
+        plan = {"plan_id": plan_id, "source_id": source_id, "semantic_version": "MOCK-SEM-1",
+                "analysis_role": role}
+        plans.append({"approved": True, "approval_reference": "SYN-QUERY-" + plan_id,
+                      "plan": plan, "plan_sha256": approved_query_plan_sha256(plan)})
+    malformed_plan = {"plan_id": "SYN-WF-CURRENT-BAD-UNIT", "source_id": "MOCK_MAP",
+                      "semantic_version": "MOCK-SEM-1", "analysis_role": "current",
+                      "test_case": "wrong_measurement_unit"}
+    plans.append({"approved": True, "approval_reference": "SYN-QUERY-" + malformed_plan["plan_id"],
+                  "plan": malformed_plan, "plan_sha256": approved_query_plan_sha256(malformed_plan)})
+    bad_audit_plan = {"plan_id": "SYN-WF-CURRENT-BAD-AUDIT", "source_id": "MOCK_MAP",
+                      "semantic_version": "MOCK-SEM-1", "analysis_role": "current",
+                      "test_case": "wrong_audit_hash"}
+    plans.append({"approved": True, "approval_reference": "SYN-QUERY-" + bad_audit_plan["plan_id"],
+                  "plan": bad_audit_plan, "plan_sha256": approved_query_plan_sha256(bad_audit_plan)})
     return {"schema_version": "p3-mcp-adapter-config-v1",
         "transport": {"type": "stdio", "command": SERVER},
         "read_only_approval": {"approved": True, "reference": "SYN-READ-ONLY-APPROVAL"},
@@ -54,7 +77,7 @@ def adapter_config(client):
             for source in ("MOCK_MAP", "MOCK_QUALITY")
         ],
         "approved_plans": plans,
-        "limits": {"max_rows": 50, "max_bytes": 1048576, "max_seconds": 5},
+        "limits": {"max_rows": 100, "max_bytes": 1048576, "max_seconds": 5},
         "operations": operations}
 
 
@@ -83,6 +106,83 @@ class MCPReadOnlyAdapterTests(unittest.TestCase):
         self.assertEqual(result["audit_trace"]["query_hash"], adapter.local_audit_trace[0]["query_hash"])
         self.assertEqual(adapter.audit("SYN-OP-1")["permission_scope"], "read_only")
         self.assertEqual(result["external_internal_qualification"], "PENDING_INTERNAL")
+
+    def test_protocol_to_approved_semantics_to_bounded_map_to_c01_c05_evidence(self):
+        adapter, _, _ = self.open_adapter()
+        evidence = run_mcp_analysis(adapter,
+            ["SYN-WF-CURRENT", "SYN-WF-PREVIOUS", "SYN-WF-BASELINE", "SYN-WF-HISTORY", "SYN-WF-ASSOCIATION"],
+            time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
+            operation_id="SYN-WORKFLOW")
+        self.assertTrue(validate_envelope(evidence))
+        self.assertEqual(evidence["mode"], "SYNTHETIC_DEMO")
+        self.assertEqual(evidence["status"], "VALID")
+        result = evidence["artifacts"][0]["result"]
+        self.assertEqual({key: result[key]["status"] for key in
+                          ("fingerprint", "evolution", "quality_association", "anomaly", "similarity")},
+                         {"fingerprint": "VALID", "evolution": "VALID", "quality_association": "VALID",
+                          "anomaly": "VALID", "similarity": "VALID"})
+        trace = evidence["provenance"]["mcp_workflow"]
+        self.assertEqual(trace["permission_scope"], "read_only")
+        self.assertEqual(len(trace["bounded_reads"]), 5)
+        self.assertTrue(all(read["audit_id"] and read["query_hash"] for read in trace["bounded_reads"]))
+        self.assertEqual({source["id"] for source in evidence["sources"]}, {"MOCK_MAP", "MOCK_QUALITY"})
+        self.assertTrue(all(source["approved_semantic_version"] == "MOCK-SEM-1" for source in evidence["sources"]))
+        self.assertEqual(trace["internal_qualification"], "PENDING_INTERNAL")
+
+    def test_mcp_workflow_keeps_missing_support_data_as_capability_abstentions(self):
+        adapter, _, _ = self.open_adapter()
+        evidence = run_mcp_analysis(adapter, ["SYN-WF-CURRENT"],
+            time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
+            operation_id="SYN-WORKFLOW-MISSING")
+        result = evidence["artifacts"][0]["result"]
+        self.assertEqual(result["fingerprint"]["status"], "VALID")
+        self.assertEqual(result["evolution"]["status"], "INCONCLUSIVE")
+        self.assertEqual(result["quality_association"]["status"], "INCONCLUSIVE")
+        self.assertEqual(result["anomaly"]["status"], "INCONCLUSIVE")
+        self.assertEqual(result["similarity"]["status"], "INCONCLUSIVE")
+
+    def test_mcp_workflow_rejects_measurement_values_outside_approved_semantic_units(self):
+        adapter, _, _ = self.open_adapter()
+        with self.assertRaisesRegex(MCPDataError, "unit differs"):
+            run_mcp_analysis(adapter, ["SYN-WF-CURRENT-BAD-UNIT"],
+                time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
+                operation_id="SYN-WORKFLOW-BAD-UNIT")
+
+    def test_mcp_workflow_rejects_an_audit_not_correlated_to_its_exact_read(self):
+        adapter, _, _ = self.open_adapter()
+        with self.assertRaisesRegex(MCPDataError, "audit does not correlate"):
+            run_mcp_analysis(adapter, ["SYN-WF-CURRENT-BAD-AUDIT"],
+                time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
+                operation_id="SYN-WORKFLOW-BAD-AUDIT")
+
+    def test_mcp_workflow_rejects_unbounded_historical_top_k(self):
+        adapter, _, _ = self.open_adapter()
+        with self.assertRaisesRegex(MCPPolicyError, "top_k must be between 1 and 50"):
+            run_mcp_analysis(adapter, ["SYN-WF-CURRENT"],
+                time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
+                top_k=100_000, operation_id="SYN-WORKFLOW-TOP-K")
+
+    def test_cli_runs_full_mcp_workflow_and_writes_evidence(self):
+        _, client, config = self.open_adapter()
+        client.close()
+        with tempfile.TemporaryDirectory() as directory:
+            config_path = Path(directory) / "approved-mock.json"
+            output_path = Path(directory) / "evidence.json"
+            config_path.write_text(json.dumps(config), encoding="utf-8")
+            plan_ids = ["SYN-WF-CURRENT", "SYN-WF-PREVIOUS", "SYN-WF-BASELINE",
+                        "SYN-WF-HISTORY", "SYN-WF-ASSOCIATION"]
+            command = [sys.executable, "-m", "fabintel", "mcp-analyze", "--config", str(config_path),
+                       "--time-start", "2026-01-01T00:00:00Z", "--time-end", "2026-02-01T00:00:00Z",
+                       "--output", str(output_path)]
+            for plan_id in plan_ids:
+                command.extend(("--plan-id", plan_id))
+            result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, timeout=20)
+            evidence = json.loads(output_path.read_text(encoding="utf-8")) if output_path.exists() else None
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIsInstance(evidence, dict)
+        self.assertTrue(validate_envelope(evidence))
+        self.assertEqual(evidence["status"], "VALID")
+        self.assertEqual(len(evidence["provenance"]["mcp_workflow"]["bounded_reads"]), 5)
 
     def test_unapproved_sources_and_non_read_only_tools_are_denied(self):
         adapter, _, config = self.open_adapter()

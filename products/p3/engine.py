@@ -10,6 +10,7 @@ from datetime import datetime
 import heapq
 from math import atan2, cos, floor, hypot, isfinite, log, pi, sin, sqrt, tanh
 from statistics import mean, median
+from threading import RLock
 from typing import Any
 
 from fabintel.contracts import claim, digest, envelope
@@ -661,7 +662,7 @@ def _spatial_profiles(prepared: dict) -> dict[str, dict[int, dict[str, float | i
 
 
 class SpatialSignatureIndex:
-    """Offline in-memory index of bounded, prevalidated numeric map descriptors."""
+    """Offline in-memory snapshot index with explicit invalidation and refresh."""
 
     def __init__(self, maps, *, max_maps=50_000, max_total_sites=1_000_000, cancel=None):
         if type(max_maps) is not int or not 1 <= max_maps <= 100_000:
@@ -677,6 +678,11 @@ class SpatialSignatureIndex:
                 site_count += len(points)
                 if site_count > max_total_sites:
                     raise ValueError("historical index exceeds the configured total-site limit")
+        self._max_maps = max_maps
+        self._max_total_sites = max_total_sites
+        self._lock = RLock()
+        self._generation = 1
+        self._invalidated = False
         # Keep the descriptors tied to the exact records that were validated.
         # Callers may reuse or mutate their input list after index construction.
         self._maps = deepcopy(maps)
@@ -710,13 +716,43 @@ class SpatialSignatureIndex:
                     raise
 
     @property
-    def stats(self) -> dict[str, int]:
-        return {"historical_maps": len(self._maps), "indexed_maps": self._indexed,
-                "excluded_maps": self._excluded, "indexed_sites": self._total_sites}
+    def stats(self) -> dict[str, Any]:
+        with self._lock:
+            return {"historical_maps": len(self._maps), "indexed_maps": self._indexed,
+                    "excluded_maps": self._excluded, "indexed_sites": self._total_sites,
+                    "generation": self._generation, "invalidated": self._invalidated}
+
+    def invalidate(self) -> dict[str, Any]:
+        """Drop a stale snapshot before its backing historical population changes."""
+        with self._lock:
+            self._maps = []
+            self._cache.clear()
+            self._total_sites = self._indexed = self._excluded = 0
+            self._invalidated = True
+            return self.stats
+
+    def refresh(self, maps, *, cancel=None) -> dict[str, Any]:
+        """Build a bounded replacement snapshot and atomically publish its cache."""
+        replacement = type(self)(maps, max_maps=self._max_maps,
+                                 max_total_sites=self._max_total_sites, cancel=cancel)
+        with self._lock:
+            self._maps = replacement._maps
+            self._cache = replacement._cache
+            self._total_sites = replacement._total_sites
+            self._indexed = replacement._indexed
+            self._excluded = replacement._excluded
+            self._invalidated = False
+            self._generation += 1
+            return self.stats
 
     def search(self, current: dict, top_k=5, cancel=None) -> dict:
-        return search_history(current, self._maps, top_k=top_k, cancel=cancel,
-                              _prepared_cache=self._cache, index_stats=self.stats)
+        with self._lock:
+            if self._invalidated:
+                return {"status": "INCONCLUSIVE",
+                        "reason": "historical index snapshot was invalidated and must be refreshed before search",
+                        "neighbors": [], "index": self.stats}
+            return search_history(current, self._maps, top_k=top_k, cancel=cancel,
+                                  _prepared_cache=self._cache, index_stats=self.stats)
 
 
 def search_history(current: dict, history: list[dict], top_k=5, cancel=None, *,

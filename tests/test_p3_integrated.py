@@ -300,6 +300,15 @@ class ComparisonTests(unittest.TestCase):
         history[0]["points"][0]["value"] += 100
         after_source_mutation = index.search(current)
         self.assertEqual(after_source_mutation["neighbors"], baseline["neighbors"])
+        invalidated = index.invalidate()
+        self.assertTrue(invalidated["invalidated"])
+        stale_search = index.search(current)
+        self.assertEqual(stale_search["status"], "INCONCLUSIVE")
+        self.assertIn("invalidated", stale_search["reason"])
+        refreshed = index.refresh(history)
+        self.assertFalse(refreshed["invalidated"])
+        self.assertEqual(refreshed["generation"], 2)
+        self.assertEqual(index.search(current)["neighbors"], search_history(current, history)["neighbors"])
         with self.assertRaisesRegex(ValueError, "total-site limit"):
             SpatialSignatureIndex(history, max_total_sites=3)
 

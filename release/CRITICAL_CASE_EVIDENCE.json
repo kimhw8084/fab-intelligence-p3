@@ -144,7 +144,7 @@
   "catalog_sha256": "b84c09f4fcfe542fe1ba0950a5eb4113a07d7948507cb0396cd81ec6a1726c3c",
   "command": "python -m unittest discover -s tests -v",
   "company_data_used": false,
-  "created_utc": "2026-11-23T04:15:48Z",
+  "created_utc": "2026-11-23T05:15:12Z",
   "environment": {
     "architecture": "arm64",
     "os": "macOS-26.6.2-arm64-arm-64bit",
@@ -153,8 +153,8 @@
   "exit_code": 0,
   "overall": "PASS",
   "scope": "synthetic candidate tests only; not an internal Samsung qualification",
-  "source_commit": "ecab7f430c23b0f58aa2558ed22d8bb987689c3d",
-  "source_tree_sha256": "d215497a411815b8548ba0e71c46048082deca8d4820f8da3506e17d202b7d29",
+  "source_commit": "7cc4b21c840c8c5e65d3813bab67422e059bdd67",
+  "source_tree_sha256": "1ec8844aac102576e4a6bafabb6a59c8c0e48beeb30b0d054239f60fca5523b3",
   "state": "CANDIDATE",
-  "test_output_sha256": "6751ef8d02dd3d60894b3cc747638b814edfb5c720285046e6919aff05a19907"
+  "test_output_sha256": "c8ece20ef9a7d6a6a31c5387e0401e36ea4ad299adb4b07f40e48c8ec738fb5c"
 }

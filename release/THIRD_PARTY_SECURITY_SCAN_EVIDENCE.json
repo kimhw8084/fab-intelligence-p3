@@ -1,0 +1,46 @@
+{
+  "evidence_date_utc": "2026-11-23",
+  "overall_scope": "external candidate package and reused P1 panel toolchain only; not company target-host security clearance",
+  "python_dependencies": {
+    "scanner": "pip-audit 2.10.1",
+    "advisory_service": "OSV live API",
+    "queried_on_utc_date": "2026-11-23",
+    "lockfile": "vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock",
+    "lockfile_sha256": "91bb6e70d813a23f630db5b3956e2755558dbd5c1b25ca6a17dcc5382fd84de7",
+    "packages_scanned": 28,
+    "known_vulnerabilities": 0,
+    "status": "PASS",
+    "machine_report": "release/PIP_AUDIT_OSV.json"
+  },
+  "source_static_analysis": {
+    "scanner": "Bandit 1.9.4",
+    "targets": ["fabintel/", "products/p3/engine.py"],
+    "high_findings": 0,
+    "medium_findings": 0,
+    "low_findings": 1,
+    "reviewed_finding": {
+      "rule": "B311",
+      "file": "fabintel/catalog.py",
+      "line": 7,
+      "disposition": "Intentional deterministic pseudo-random numbers are used only for synthetic catalog generation. They do not create secrets, credentials, tokens or security-sensitive identifiers."
+    },
+    "status": "PASS_WITH_REVIEWED_LOW_FINDING",
+    "machine_report": "release/BANDIT_SOURCE_SCAN.json"
+  },
+  "reused_p1_ui_dependencies": {
+    "scanner": "npm audit",
+    "npm_version": "11.20.0",
+    "lockfile": "P1/package-lock.json",
+    "lockfile_sha256": "3ec0e042f1c6d27328e8147947dc62bed15012bbebeaa2ea6fff0a70ccbf3adc",
+    "dependencies_scanned": 123,
+    "known_vulnerabilities": {"info": 0, "low": 0, "moderate": 0, "high": 0, "critical": 0},
+    "status": "PASS"
+  },
+  "limits": [
+    "Advisory results are a point-in-time lookup and the vulnerability database timestamp is not emitted by the scanners.",
+    "The Python scan covers the bundled macOS arm64 CPython 3.11 MCP wheel lock only.",
+    "Windows/Linux native assets, the unknown company target OS, company host controls and company threat review are not qualified.",
+    "Dependency scans do not establish redistribution rights or a first-party source license."
+  ],
+  "company_security_and_rights_approval": "PENDING_EXTERNAL"
+}

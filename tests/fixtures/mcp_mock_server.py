@@ -6,11 +6,13 @@ speaks newline-delimited JSON-RPC on stdio and never reads company data.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 import threading
 import time
 from datetime import datetime, timezone
+from pathlib import Path
 
 MAX_LINE = 4 * 1024 * 1024
 PROTOCOLS = ["2026-07-28", "2025-11-25"]
@@ -20,7 +22,44 @@ _state_lock = threading.Lock()
 _cancel: dict[str | int, threading.Event] = {}
 _cancelled: list[str | int] = []
 _calls: list[dict] = []
+_read_audits: dict[str, dict] = {}
 _legacy_initialized = False
+
+
+def _integration_fixture() -> dict:
+    path = Path(__file__).resolve().parents[2] / "fixtures" / "p3_integrated_synthetic.json"
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _map_rows(maps: list[dict]) -> list[dict]:
+    rows = []
+    for data in maps:
+        for point in data.get("points", []):
+            rows.append({"source": "MOCK_MAP", "wafer_key": data["wafer_id"],
+                         "lot_key": data["lot_id"], "measurement_timestamp": data["measured_at"],
+                         "product": data["product_id"], "population_id": data["population_signature"],
+                         "sample_mask": data["sampling_mask_id"], "operation_step": data.get("step_id"),
+                         "step_instance": data.get("step_instance_id"), "measurement_site": point["site_id"],
+                         "x_mm": point["x"], "y_mm": point["y"], "thickness_nm": point.get("value"),
+                         "measurement_unit": data["measurement"]["unit"],
+                         "std_uncertainty": point.get("standard_uncertainty")})
+    return rows
+
+
+def _quality_rows() -> list[dict]:
+    association = _integration_fixture()["quality_association"]
+    result = []
+    for row in association["observations"]:
+        result.append({"source": "MOCK_QUALITY", "wafer_key": row["wafer_id"], "lot_key": row["lot_id"],
+                       "die_key": row["die_id"], "holdout_cohort": row["cohort"],
+                       "feature_timestamp": row["feature_at"], "outcome_timestamp": row["outcome_at"],
+                       "x_mm": row["x"], "y_mm": row["y"], "spatial_feature_value": row["feature_value"],
+                       "outcome_value": row["outcome_value"], "spatial_block": row["spatial_block_id"],
+                       "product": row["product_id"], "metric_name": row["metric"],
+                       "measurement_definition": row["measurement_definition_id"],
+                       "measurement_unit": row["unit"], "process_layer": row["layer"],
+                       "population_id": row["population_signature"], "sample_mask": row["sampling_mask_id"]})
+    return result
 
 
 def _modern(message: dict) -> bool:
@@ -44,7 +83,7 @@ def _tool_descriptors():
         {"name": "fab_discover", "description": "Synthetic read-only capability discovery", "inputSchema": {"type": "object", "additionalProperties": False}, "annotations": common},
         {"name": "fab_semantics", "description": "Synthetic approved source definitions", "inputSchema": {"type": "object", "properties": {"source_ids": {"type": "array", "items": {"type": "string"}}, "semantic_version": {"type": "string"}}, "required": ["source_ids", "semantic_version"], "additionalProperties": False}, "annotations": common},
         {"name": "fab_relationships", "description": "Synthetic approved wafer/die relationship", "inputSchema": {"type": "object", "properties": {"typed_entity_ids": {"type": "object"}, "time_window": {"type": "object"}}, "required": ["typed_entity_ids", "time_window"], "additionalProperties": False}, "annotations": common},
-        {"name": "fab_read_bounded", "description": "Synthetic bounded read of approved mock rows", "inputSchema": {"type": "object", "properties": {"approved_plan": {"type": "object"}, "permission_context": {"type": "object"}, "limits": {"type": "object"}}, "required": ["approved_plan", "permission_context", "limits"], "additionalProperties": False}, "annotations": common},
+        {"name": "fab_read_bounded", "description": "Synthetic bounded read of approved mock rows", "inputSchema": {"type": "object", "properties": {"approved_plan": {"type": "object"}, "permission_context": {"type": "object"}, "limits": {"type": "object"}, "operation_id": {"type": "string"}}, "required": ["approved_plan", "permission_context", "limits", "operation_id"], "additionalProperties": False}, "annotations": common},
         {"name": "fab_audit", "description": "Synthetic redacted source audit trace", "inputSchema": {"type": "object", "properties": {"operation_id": {"type": "string"}}, "required": ["operation_id"], "additionalProperties": False}, "annotations": common},
         {"name": "mock_wait_for_cancel", "description": "Test-only cancellable operation", "inputSchema": {"type": "object", "additionalProperties": False}, "annotations": common},
         {"name": "unsafe_recipe_write", "description": "Synthetic write tool that must never be invoked", "inputSchema": {"type": "object"}, "annotations": {"readOnlyHint": False, "destructiveHint": True}},
@@ -64,17 +103,50 @@ def _tool_result(name: str, args: dict, request_id, cancel_event: threading.Even
             return {"isError": True, "content": [{"type": "text", "text": "permission denied: source is not approved"}]}
         if args.get("semantic_version") != "MOCK-SEM-1":
             return {"isError": True, "content": [{"type": "text", "text": "unsupported semantic version"}]}
-        result = {"column_definitions": [{"source_id": source, "approved": True, "semantic_version": "MOCK-SEM-1",
-                    "grain": "wafer_site" if source == "MOCK_MAP" else "wafer_die",
-                    "units": ["nm"] if source == "MOCK_MAP" else ["count"],
-                    "effective_time": "synthetic-event-time-v1",
-                    "column_definitions": [{"name": "value", "unit": "nm", "role": "measurement"}]} for source in ids]}
+        fixture = _integration_fixture()
+        map_roles = [("source", "source_id"), ("wafer_key", "wafer_id"), ("lot_key", "lot_id"),
+                     ("measurement_timestamp", "measured_at"), ("product", "product_id"),
+                     ("population_id", "population_signature"), ("sample_mask", "sampling_mask_id"),
+                     ("operation_step", "step_id"), ("step_instance", "step_instance_id"),
+                     ("measurement_site", "site_id"), ("x_mm", "x"), ("y_mm", "y"),
+                     ("thickness_nm", "value"), ("measurement_unit", "measurement_unit"),
+                     ("std_uncertainty", "standard_uncertainty")]
+        quality_roles = [("source", "source_id"), ("wafer_key", "wafer_id"), ("lot_key", "lot_id"),
+                         ("die_key", "die_id"), ("holdout_cohort", "cohort"),
+                         ("feature_timestamp", "feature_at"), ("outcome_timestamp", "outcome_at"),
+                         ("x_mm", "x"), ("y_mm", "y"), ("spatial_feature_value", "feature_value"),
+                         ("outcome_value", "outcome_value"), ("spatial_block", "spatial_block_id"),
+                         ("product", "product_id"), ("metric_name", "metric"),
+                         ("measurement_definition", "measurement_definition_id"),
+                         ("measurement_unit", "measurement_unit"), ("process_layer", "layer"),
+                         ("population_id", "population_signature"), ("sample_mask", "sampling_mask_id")]
+        definitions = []
+        for source in ids:
+            if source == "MOCK_MAP":
+                definitions.append({"source_id": source, "approved": True, "semantic_version": "MOCK-SEM-1",
+                    "grain": "wafer_site", "units": [fixture["measurement"]["unit"]],
+                    "effective_time": "synthetic-measurement-time-v1",
+                    "column_definitions": [{"name": field, "role": role, "unit": "mm" if role in ("x", "y") else fixture["measurement"]["unit"] if role in ("value", "measurement_unit", "standard_uncertainty") else None} for field, role in map_roles],
+                    "spatial_profile": {"coordinates_verified": fixture["coordinates_verified"], "geometry": fixture["geometry"]},
+                    "measurement_profile": fixture["measurement"],
+                    "baseline_holdout": {"verified": fixture["baseline_holdout_verified"], "approval_reference": "SYN-HOLDOUT-DESIGN-1"}})
+            else:
+                association = fixture["quality_association"]
+                definitions.append({"source_id": source, "approved": True, "semantic_version": "MOCK-SEM-1",
+                    "grain": "wafer_die", "units": ["nm", "count"],
+                    "effective_time": "synthetic-feature-outcome-time-v1",
+                    "column_definitions": [{"name": field, "role": role, "unit": "mm" if role in ("x", "y") else None} for field, role in quality_roles],
+                    "quality_context": association["context"], "quality_geometry": association["geometry"],
+                    "quality_holdout": association["holdout"]})
+        result = {"column_definitions": definitions}
     elif name == "fab_relationships":
         ids = args.get("typed_entity_ids", {})
         valid = isinstance(ids, dict) and ids.get("source_id") == "MOCK_MAP" and ids.get("target_source_id") == "MOCK_QUALITY"
         result = {"approved": valid, "keys": ["wafer_id", "die_id"] if valid else [],
                   "cardinality": "one_to_many" if valid else "unknown", "grain": "wafer_die" if valid else None,
-                  "effectivity": "synthetic-event-time-v1", "source_reference": "MOCK-REL-1" if valid else None}
+                  "effectivity": "synthetic-event-time-v1", "source_reference": "MOCK-REL-1" if valid else None,
+                  "coordinate_mapping_verified": valid,
+                  "spatial_block_method": "predeclared_block_fixed_effects_v1" if valid else None}
     elif name == "fab_read_bounded":
         plan = args.get("approved_plan", {})
         permission = args.get("permission_context", {})
@@ -91,17 +163,42 @@ def _tool_result(name: str, args: dict, request_id, cancel_event: threading.Even
                 with _state_lock:
                     _cancelled.append(request_id)
                 return {"cancelled": True}
-        rows = [{"wafer_id": "MOCK-W-01", "lot_id": "MOCK-L-01", "site_id": "center", "x": 0.0, "y": 0.0,
-                 "value": 10.0, "unit": "nm", "measured_at": "2026-01-01T00:00:00Z"}]
-        result = {"typed_rows": rows[:limit], "audit_id": "MOCK-AUDIT-READ-1",
-                  "source_versions": {source: "mock/1"}, "truncation": False}
+        analysis_role = plan.get("analysis_role")
+        fixture = _integration_fixture()
+        if analysis_role == "current" and source == "MOCK_MAP":
+            rows = _map_rows([fixture])
+        elif analysis_role == "previous" and source == "MOCK_MAP":
+            rows = _map_rows(fixture["previous_steps"])
+        elif analysis_role == "baseline" and source == "MOCK_MAP":
+            rows = _map_rows(fixture["baseline_population"])
+        elif analysis_role == "history" and source == "MOCK_MAP":
+            rows = _map_rows(fixture["history"])
+        elif analysis_role == "association" and source == "MOCK_QUALITY":
+            rows = _quality_rows()
+        else:
+            rows = [{"wafer_id": "MOCK-W-01", "lot_id": "MOCK-L-01", "site_id": "center", "x": 0.0, "y": 0.0,
+                     "value": 10.0, "unit": "nm", "measured_at": "2026-01-01T00:00:00Z"}]
+        if plan.get("test_case") == "wrong_measurement_unit" and rows:
+            rows[0]["measurement_unit"] = "um"
+        operation_id = args.get("operation_id")
+        plan_hash = hashlib.sha256(json.dumps(plan, ensure_ascii=False, sort_keys=True,
+                                              separators=(",", ":"), allow_nan=False).encode("utf-8")).hexdigest()
+        audit_id = "MOCK-AUDIT-" + hashlib.sha256(str(operation_id).encode("utf-8")).hexdigest()[:12]
+        with _state_lock:
+            _read_audits[operation_id] = {"operation_id": operation_id, "permission_scope": "read_only",
+                "sources": [source], "timestamps": {"completed_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")},
+                "query_hash": ("0" * 64 if plan.get("test_case") == "wrong_audit_hash" else plan_hash),
+                "audit_id": audit_id}
+        result = {"typed_rows": rows[:limit], "audit_id": audit_id,
+                  "source_versions": {source: "mock/1"}, "truncation": len(rows) > limit}
     elif name == "fab_audit":
         with _state_lock:
             cancelled_count = len(_cancelled)
-        result = {"operation_id": args.get("operation_id"), "permission_scope": "read_only",
-                  "sources": sorted(SOURCES), "timestamps": {"completed_at": "2026-01-01T00:00:00Z"},
-                  "query_hash": "0" * 64, "audit_id": "MOCK-AUDIT-1",
-                  "cancelled_request_count": cancelled_count}
+            recorded = dict(_read_audits.get(args.get("operation_id"), {}))
+        result = recorded or {"operation_id": args.get("operation_id"), "permission_scope": "read_only",
+                  "sources": ["MOCK_MAP"], "timestamps": {"completed_at": "2026-01-01T00:00:00Z"},
+                  "query_hash": "0" * 64, "audit_id": "MOCK-AUDIT-1"}
+        result["cancelled_request_count"] = cancelled_count
     elif name == "mock_wait_for_cancel":
         deadline = time.monotonic() + 5
         while not cancel_event.wait(0.01) and time.monotonic() < deadline:
