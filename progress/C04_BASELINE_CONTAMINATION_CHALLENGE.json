@@ -1,0 +1,81 @@
+{
+  "cases": [
+    {
+      "alert": true,
+      "alpha": 0.05,
+      "baseline_cohort_assessment": {
+        "contamination_assessment": "NOT_PERFORMED",
+        "holdout_basis": "CALLER_ATTESTED_NOT_INDEPENDENTLY_AUDITED",
+        "limitation": "Temporal stability checks ordered population change only; they do not certify baseline cleanliness. A temporally stable baseline containing maps similar to a true target anomaly can mask the alert.",
+        "review_action": "Verify source-approved baseline inclusion criteria and investigate known anomalous baseline maps before interpreting a no-alert result.",
+        "status": "NOT_CERTIFIED_CLEAN",
+        "temporal_stability_check": "NO_SHIFT_DETECTED"
+      },
+      "empirical_p": 0.047619047619047616,
+      "reason": null,
+      "status": "VALID",
+      "target_like_baseline_maps": 0,
+      "temporal_stability": "NO_SHIFT_DETECTED"
+    },
+    {
+      "alert": false,
+      "alpha": 0.05,
+      "baseline_cohort_assessment": {
+        "contamination_assessment": "NOT_PERFORMED",
+        "holdout_basis": "CALLER_ATTESTED_NOT_INDEPENDENTLY_AUDITED",
+        "limitation": "Temporal stability checks ordered population change only; they do not certify baseline cleanliness. A temporally stable baseline containing maps similar to a true target anomaly can mask the alert.",
+        "review_action": "Verify source-approved baseline inclusion criteria and investigate known anomalous baseline maps before interpreting a no-alert result.",
+        "status": "NOT_CERTIFIED_CLEAN",
+        "temporal_stability_check": "NO_SHIFT_DETECTED"
+      },
+      "empirical_p": 0.09523809523809523,
+      "reason": null,
+      "status": "VALID",
+      "target_like_baseline_maps": 1,
+      "temporal_stability": "NO_SHIFT_DETECTED"
+    },
+    {
+      "alert": false,
+      "alpha": 0.05,
+      "baseline_cohort_assessment": {
+        "contamination_assessment": "NOT_PERFORMED",
+        "holdout_basis": "CALLER_ATTESTED_NOT_INDEPENDENTLY_AUDITED",
+        "limitation": "Temporal stability checks ordered population change only; they do not certify baseline cleanliness. A temporally stable baseline containing maps similar to a true target anomaly can mask the alert.",
+        "review_action": "Verify source-approved baseline inclusion criteria and investigate known anomalous baseline maps before interpreting a no-alert result.",
+        "status": "NOT_CERTIFIED_CLEAN",
+        "temporal_stability_check": "NO_SHIFT_DETECTED"
+      },
+      "empirical_p": 0.14285714285714285,
+      "reason": null,
+      "status": "VALID",
+      "target_like_baseline_maps": 2,
+      "temporal_stability": "NO_SHIFT_DETECTED"
+    },
+    {
+      "alert": false,
+      "alpha": null,
+      "baseline_cohort_assessment": null,
+      "empirical_p": null,
+      "reason": "the matched historical spatial profiles show an ordered temporal shift; select a reviewed stable baseline cohort",
+      "status": "INCONCLUSIVE",
+      "target_like_baseline_maps": 4,
+      "temporal_stability": "INCONCLUSIVE"
+    }
+  ],
+  "company_data_used": false,
+  "design": {
+    "baseline_contaminants_are_earliest_records": true,
+    "baseline_size": 20,
+    "center_value_nm": 10.0,
+    "in_control_outer_site_value_nm": 12.0,
+    "randomization": "none; deterministic falsification case",
+    "target_like_outer_site_value_nm": 18.0,
+    "target_matches_contaminating_signature": true
+  },
+  "finding": "One target-like historical map increased p from the clean-baseline rank floor 1/21 to 2/21 and removed the alert while the ordered temporal-stability test reported NO_SHIFT_DETECTED. P3 now identifies the baseline as NOT_CERTIFIED_CLEAN and requires source-approved eligibility review; it does not claim to automatically detect or remove contamination.",
+  "oracle_authored_before_run": true,
+  "schema": "p3-c04-baseline-contamination-challenge/v1",
+  "scope": "Deterministic synthetic counterexample; not a false-alert rate, sensitivity estimate, manufacturing calibration, or evidence that a real baseline is contaminated.",
+  "source_tree_sha256": "c636a72961b4621d0ce737c2995c25d2e96e4b6a7df7855ccd4b57867e763d7b",
+  "status": "PASS_COUNTEREXAMPLE"
+}

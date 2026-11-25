@@ -1,0 +1,27 @@
+{
+  "command": [
+    "pip-audit",
+    "-r",
+    "vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock",
+    "--format",
+    "json",
+    "--vulnerability-service",
+    "osv",
+    "--require-hashes",
+    "--disable-pip",
+    "--no-deps",
+    "--progress-spinner",
+    "off"
+  ],
+  "company_security_approval": "PENDING_EXTERNAL",
+  "dependency_count": 28,
+  "executed_at_utc": "2026-11-23T18:36:01Z",
+  "exit_code": 0,
+  "hash_check_note": "OSV mode checked hash presence; independent bundled-wheel SHA-256 verification is in release/SUPPLY_CHAIN_AUDIT.json.",
+  "raw_report": "release/PIP_AUDIT_OSV.json",
+  "raw_report_sha256": "e334a0b2ecd58638d207f9b041900538147b6fe217d0588af8cecc5233b21bcc",
+  "scanner": "pip-audit 2.10.1",
+  "target": "macOS arm64 CPython 3.11 MCP SDK lock (28 pinned packages)",
+  "vulnerability_count": 0,
+  "vulnerability_service": "OSV"
+}

@@ -55,6 +55,13 @@ def build():
                      "orientation_deg": 0, "coordinate_system": "wafer_xy_v1", "coordinate_unit": "mm"},
         "holdout": {"verified": True, "split_method": "out_of_time_by_wafer_and_lot", "grouped_by_wafer": True,
                     "grouped_by_lot": True, "leakage_checked": True},
+        "cohort_selection": {"verified": True, "sampling_design": "COMPLETE_ELIGIBLE_FRAME",
+                             "frame_id": "SYN-C03-FRAME-1", "eligibility_rule_id": "SYN-C03-ELIGIBILITY-1",
+                             "eligibility_rule_predeclared": True,
+                             "selection_blind_to_feature_and_outcome": True,
+                             "eligible_wafer_count": 20, "selected_wafer_count": 20},
+        "hypothesis_selection": {"hypothesis_id": "SYN-C03-HYPOTHESIS-1", "family_size": 20,
+                                 "predeclared_before_holdout_outcomes": True, "family_complete": True},
         "observations": [
             {"wafer_id": f"SYN-W-Q{wafer:02d}", "lot_id": f"SYN-L-Q{wafer:02d}", "die_id": f"SYN-D{site}",
              "x": coordinates[site][0], "y": coordinates[site][1],

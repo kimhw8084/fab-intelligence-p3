@@ -1,0 +1,98 @@
+{
+  "schema": "p3-next-phase-regression/v1",
+  "source_tree_sha256": "e13a0869c5a5f5394d26b9a3896744f8d83ad535fcff98d5f9cd7a905404d2f0",
+  "scope": "Working P3 next-phase source tree; the frozen candidate archive was not rebuilt or modified.",
+  "environment": {
+    "python": "3.11.7",
+    "node": "26.13.0",
+    "npm": "11.20.0",
+    "react": "19.2.0",
+    "typescript": "5.9.3",
+    "vite": "7.3.8",
+    "vitest": "5.1.1",
+    "echarts": "6.1.0"
+  },
+  "checks": {
+    "python_regression": {
+      "command": "PYTHONPATH=.venv/lib/python3.11/site-packages python -m pytest -q",
+      "result": "PASS",
+      "tests": 131,
+      "duration_seconds": 7.11
+    },
+    "critical_catalog": {
+      "command": "PYTHONPATH=.venv/lib/python3.11/site-packages python qualification/verify_critical_cases.py",
+      "result": "PASS",
+      "cases": "14/14",
+      "source_tree_sha256": "e13a0869c5a5f5394d26b9a3896744f8d83ad535fcff98d5f9cd7a905404d2f0"
+    },
+    "react": {
+      "command": "npm test -- --run",
+      "result": "PASS",
+      "tests": 20
+    },
+    "typescript": {
+      "command": "npm run typecheck",
+      "result": "PASS"
+    },
+    "python_compileall": {
+      "command": "python -m compileall -q fabintel products/p3 tests qualification",
+      "result": "PASS"
+    },
+    "production_build": {
+      "command": "npm run build",
+      "result": "PASS_WITH_BUNDLE_SIZE_ADVISORY",
+      "vite": "7.3.8",
+      "javascript_minified_kb": 759.53,
+      "javascript_gzip_kb": 251.52,
+      "advisory": "JavaScript chunk exceeds the default 500 kB threshold."
+    },
+    "changed_source_whitespace": {
+      "command": "rtk proxy git diff --check -- products/p3/engine.py qualification/tree_hash.py",
+      "result": "PASS",
+      "scope": "Files changed in this milestone; the broad worktree diff still reports trailing whitespace/CRLF in earlier modified handoff and gate files."
+    }
+  },
+  "synthetic_benchmark_evidence": {
+    "c04_repeated_target": "progress/C04_REPEATED_TARGET_NULL_STUDY.json",
+    "c04_family_browser": "progress/C04_FAMILY_BROWSER_ACCEPTANCE.json",
+    "c05_10000_map": "progress/C05_SCALE_10K_BENCHMARK.json",
+    "c02_browser": "progress/C02_COVARIANCE_BROWSER_ACCEPTANCE.json",
+    "c01_geometry_oracle": "progress/C01_GEOMETRY_ORACLE.json",
+    "c02_correlated_error": "progress/C02_CORRELATED_ERROR_STUDY.json",
+    "c03_zone_confound": "progress/C03_ZONE_CONFOUND_BENCHMARK.json",
+    "c05_15k_before_compaction": "progress/C05_SCALE_15K_BENCHMARK.json",
+    "c05_15k_after_compaction": "progress/C05_SCALE_15K_COMPACTED_BENCHMARK.json"
+  },
+  "states": {
+    "P3_PRODUCT_IMPLEMENTATION": "VERIFIED_SYNTHETIC_SCOPE",
+    "P3_STANDALONE_BROWSER": "VERIFIED_SYNTHETIC_MCP",
+    "SHARED_SUITE_COMPATIBILITY": "READY",
+    "ACTUAL_SHARED_SUITE_INTEGRATION": "PENDING",
+    "EXTERNAL_TRANSFER": "NOT_QUALIFIED",
+    "INTERNAL_COMPANY_QUALIFICATION": "PENDING"
+  },
+  "company_data_used": false,
+  "public_push_performed": false,
+  "browser_acceptance": {
+    "evidence": "progress/C02_COVARIANCE_BROWSER_ACCEPTANCE.json",
+    "real_reference_host": true,
+    "synthetic_official_sdk_mcp": true,
+    "rendered_conditional_uncertainty_label": "conditional 1\u03c3 assuming independent errors: 0.038 nm",
+    "common_site_matches_per_transition": 44,
+    "canonical_export_sha256_displayed": "718ad486212b4c198c886ba7d8d812ff4f6e2bbc482507203e604a7cf0f67ca5"
+  },
+  "c05_snapshot_compaction": {
+    "maps": 15000,
+    "sites": 440000,
+    "peak_rss_before_bytes": 797130752,
+    "peak_rss_after_bytes": 707592192,
+    "peak_rss_reduction_bytes": 89538560,
+    "incremental_peak_rss_before_bytes": 601702400,
+    "incremental_peak_rss_after_bytes": 513179648,
+    "traced_peak_before_bytes": 496995364,
+    "traced_peak_after_bytes": 412521508,
+    "direct_index_top5_parity": true,
+    "precision_at_5_all_queries": 1.0,
+    "scope": "paired seeded synthetic benchmark, one local process; resource and relevance evidence only"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "p3-c01-geometry-oracle/v1",
+  "scope": "Independent deterministic synthetic metamorphic oracle; no manufacturing data or calibration.",
+  "fixture": {
+    "true_physical_radius_mm": 150.0,
+    "radial_fraction_rings": [0.1, 0.2, 0.5, 0.8, 0.9],
+    "sites_per_ring": 8,
+    "origin_offset_mm": [800.0, -350.0],
+    "sensor_orientation_deg": 37.0,
+    "oracle": "Equivalent physical points encoded directly and in an offset/rotated sensor frame must produce the same radial bins and summaries. Exact cutoffs follow center <=0.2; inner-middle 0.2<r<=0.5; outer-middle 0.5<r<=0.8; edge r>0.8."
+  },
+  "frozen_engine": {
+    "physical_frame_radial_counts": [16, 7, 9, 8],
+    "rotated_frame_radial_counts": [12, 11, 6, 11],
+    "physical_frame_radial_means_nm": [107.15, 107.35714285714286, 107.87777777777778, 107.9],
+    "rotated_frame_radial_means_nm": [106.46666666666667, 107.48181818181818, 110.75, 106.87272727272727],
+    "result": "FAIL_METAMORPHIC_INVARIANCE"
+  },
+  "candidate_engine": {
+    "physical_frame_radial_counts": [16, 8, 8, 8],
+    "rotated_frame_radial_counts": [16, 8, 8, 8],
+    "physical_frame_radial_means_nm": [107.15, 107.5, 107.8, 107.9],
+    "rotated_frame_radial_means_nm": [107.15, 107.5, 107.8, 107.9],
+    "result": "PASS_METAMORPHIC_INVARIANCE"
+  },
+  "correction": "Normalize from the verified origin and true wafer radius as before, then snap only radial fractions within the existing relative geometry-validation tolerance to the exact 0.2/0.5/0.8 boundaries. No observation values or coordinates are changed.",
+  "truncated_scan_case": {
+    "test": "test_truncated_sampling_uses_verified_radius_and_coordinate_origin",
+    "observed_sites": 9,
+    "maximum_observed_radius_fraction": 0.65,
+    "true_physical_radius_mm": 150.0,
+    "expected_radial_counts": [3, 3, 3, 0],
+    "edge_center_status": "INCONCLUSIVE",
+    "result": "PASS_NO_FALSE_EDGE_FROM_MAXIMUM_OBSERVED_RADIUS"
+  },
+  "metamorphic_test": "tests.test_p3_integrated.SpatialFingerprintTests.test_equivalent_rotated_sensor_coordinates_preserve_physical_fingerprint",
+  "baseline_source": "../FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22/products/p3/engine.py",
+  "company_data_used": false
+}

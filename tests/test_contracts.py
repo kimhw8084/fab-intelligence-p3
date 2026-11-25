@@ -1,7 +1,10 @@
 import unittest
-from fabintel.contracts import envelope, claim, ContractError, validate_envelope
-from tests.fixtures.mock_mcp import SyntheticFabAdapter, PermissionDenied
-from fabintel.catalog import synthetic_catalog, approved_join
+
+from fabintel.catalog import approved_join, synthetic_catalog
+from fabintel.contracts import ContractError, envelope
+from tests.fixtures.mock_mcp import PermissionDenied, SyntheticFabAdapter
+
+
 class ContractTests(unittest.TestCase):
     def test_refusal_requires_reason(self):
         with self.assertRaises(ContractError): envelope('p1',{},'REFUSED',[],[])

@@ -1,0 +1,19 @@
+{
+  "schema_version": "p3-mcp-transport-config-v1",
+  "transport": {
+    "type": "stdio",
+    "command": ["REPLACE_WITH_AUTHORIZED_MCP_SERVER_EXECUTABLE"],
+    "cwd": null
+  },
+  "auth_provider": {
+    "type": "environment",
+    "stdio_env": {
+      "MCP_AUTH_TOKEN": "REPLACE_WITH_APPROVED_SECRET_REFERENCE_ENV_VAR"
+    },
+    "http_headers": {}
+  },
+  "limits": {
+    "max_seconds": 30
+  },
+  "notes": "Transport and optional environment-secret references only. mcp-tool-catalog performs MCP protocol negotiation and tool listing; it invokes no server tools, reads no manufacturing records, and grants no permissions."
+}

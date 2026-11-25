@@ -1,0 +1,28 @@
+{
+  "fixture_id": "SYN-P3-SPATIAL-TYPED-VALUES-V2",
+  "purpose": "Contract fixture for value identity, missingness, and observed-site reconciliation.",
+  "points": [
+    { "site_id": "metrology-float", "modality": "continuous", "value": 42.5, "expected_type": "number" },
+    { "site_id": "metrology-integer", "modality": "continuous", "value": 42, "expected_type": "number" },
+    { "site_id": "bin-label", "modality": "die_bin_categorical", "category": "BIN-A", "expected_type": "string" },
+    { "site_id": "bin-code", "modality": "die_bin_categorical", "category": 2, "expected_type": "number" },
+    { "site_id": "defect-label", "modality": "defect_coordinates", "category": "BRIDGE", "expected_type": "string" },
+    { "site_id": "defect-code", "modality": "defect_coordinates", "bin": 7, "expected_type": "number" },
+    { "site_id": "defect-unlabeled", "modality": "defect_coordinates", "expected_kind": "DEFECT_EVENT", "expected_type": "null" },
+    { "site_id": "missing", "modality": "continuous", "value": null, "expected_type": "null" }
+  ],
+  "refusal_cases": [
+    { "site_id": "numeric-text", "modality": "continuous", "value": "42.5", "reason": "continuous measurements remain numeric" },
+    { "site_id": "boolean-category", "modality": "die_bin_categorical", "category": true, "reason": "values are finite JSON numbers, strings, or explicit nulls" },
+    { "site_id": "conflicting-aliases", "modality": "die_bin_categorical", "category": 2, "bin": "2", "reason": "category and bin aliases cannot conflict" }
+  ],
+  "invariants": {
+    "preserve_input_order": true,
+    "preserve_primitive_types": true,
+    "preserve_null": true,
+    "input_point_count": 8,
+    "refusal_case_count": 3,
+    "no_interpolation": true,
+    "no_default_values": true
+  }
+}

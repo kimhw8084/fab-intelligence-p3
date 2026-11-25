@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fab-intelligence.local/contracts/p3-spatial-map.v2.schema.json",
+  "title": "FAB Intelligence typed spatial observation map v2",
+  "type": "object",
+  "required": ["schema_version", "wafer_id", "lot_id", "product_id", "measured_at", "coordinates_verified", "coordinate_unit", "metric", "measurement_unit", "modality", "geometry", "sampling", "observations", "interpolation", "provenance"],
+  "properties": {
+    "schema_version": {"const": "fab-spatial-map.v2"},
+    "wafer_id": {"type": "string", "minLength": 1},
+    "lot_id": {"type": "string", "minLength": 1},
+    "product_id": {"type": "string", "minLength": 1},
+    "step_id": {"type": ["string", "null"]},
+    "step_instance_id": {"type": ["string", "null"]},
+    "measured_at": {"type": "string", "minLength": 1},
+    "coordinates_verified": {"type": "boolean"},
+    "coordinate_unit": {"type": "string", "minLength": 1},
+    "metric": {"type": "string", "minLength": 1},
+    "measurement_unit": {"type": "string", "minLength": 1},
+    "modality": {"enum": ["continuous", "sparse_continuous", "die_bin_categorical", "defect_coordinates"]},
+    "geometry": {
+      "type": "object",
+      "required": ["coordinate_system", "coordinate_unit", "origin", "radius"],
+      "properties": {
+        "coordinate_system": {"type": "string", "minLength": 1},
+        "coordinate_unit": {"type": "string", "minLength": 1},
+        "origin": {"type": "object", "required": ["x", "y"], "properties": {"x": {"type": "number"}, "y": {"type": "number"}}, "additionalProperties": false},
+        "radius": {"type": "number", "exclusiveMinimum": 0},
+        "orientation_deg": {"type": ["number", "null"], "minimum": 0, "exclusiveMaximum": 360},
+        "reticle": {"type": ["object", "null"]}
+      },
+      "additionalProperties": true
+    },
+    "sampling": {
+      "type": "object",
+      "required": ["observation_count", "numeric_measurement_count", "categorical_measurement_count", "defect_event_count", "explicit_missing_value_count", "coverage_basis"],
+      "properties": {
+        "mask_id": {"type": ["string", "null"]},
+        "observation_count": {"type": "integer", "minimum": 0},
+        "numeric_measurement_count": {"type": "integer", "minimum": 0},
+        "categorical_measurement_count": {"type": "integer", "minimum": 0},
+        "defect_event_count": {"type": "integer", "minimum": 0},
+        "explicit_missing_value_count": {"type": "integer", "minimum": 0},
+        "expected_site_count": {"type": "integer", "minimum": 1},
+        "coverage_fraction": {"type": "number", "minimum": 0, "maximum": 1},
+        "coverage_basis": {"enum": ["DECLARED_EXPECTED_SITE_COUNT", "EXPECTED_DENOMINATOR_NOT_SUPPLIED", "EVENT_COUNTS_ARE_NOT_SITE_COVERAGE"]}
+      },
+      "additionalProperties": false
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["site_id", "x", "y", "observation_kind", "value", "value_type"],
+        "properties": {
+          "site_id": {"type": "string", "minLength": 1},
+          "x": {"type": "number"},
+          "y": {"type": "number"},
+          "observation_kind": {"enum": ["NUMERIC_MEASUREMENT", "CATEGORICAL_MEASUREMENT", "DEFECT_EVENT", "MISSING_MEASUREMENT"]},
+          "value": {"type": ["number", "string", "null"]},
+          "value_type": {"enum": ["number", "string", "null"]},
+          "standard_uncertainty": {"type": "number", "minimum": 0},
+          "standard_uncertainty_unit": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "interpolation": {"const": "none"},
+    "provenance": {
+      "type": "object",
+      "required": ["source_id", "source_version", "semantic_version", "source_hash", "grain"],
+      "properties": {
+        "source_id": {"type": "string", "minLength": 1},
+        "source_version": {"type": "string", "minLength": 1},
+        "semantic_version": {"type": "string", "minLength": 1},
+        "source_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "grain": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

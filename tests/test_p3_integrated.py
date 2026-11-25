@@ -1,12 +1,23 @@
 import copy
+import json
 import math
 import random
 import threading
 import unittest
+from datetime import UTC, datetime, timedelta
+from pathlib import Path
 
-from products.p3.engine import (AnalysisCancelled, SpatialSignatureIndex, analyze, associate_quality,
-                                compare_evolution, compare_evolution_sequence, detect_anomalies,
-                                fingerprint, search_history)
+from products.p3.engine import (
+    AnalysisCancelled,
+    SpatialSignatureIndex,
+    analyze,
+    associate_quality,
+    compare_evolution,
+    compare_evolution_sequence,
+    detect_anomalies,
+    fingerprint,
+    search_history,
+)
 
 
 def make_map(wafer="W0", values=(10, 12, 12, 12), *, orientation=0, metric="thickness", unit="nm", definition="MET-1", layer="L1", step="S1", instance=None, measured_at="2026-01-01T00:00:00Z", include_south=False):
@@ -70,6 +81,48 @@ class SpatialFingerprintTests(unittest.TestCase):
         self.assertEqual(fingerprint(ring)["edge_minus_center"], 2)
         self.assertEqual(fingerprint(uniform)["edge_minus_center"], 0)
 
+    def test_c01_discloses_sampling_density_and_single_map_artifact_limits(self):
+        data = make_map()
+        result = fingerprint(data)
+        limits = result["interpretation_limits"]
+        self.assertEqual(limits["sampling"]["summary_weighting"], "EQUAL_WEIGHT_PER_OBSERVED_RECORD")
+        self.assertEqual(limits["sampling"]["area_weighted_estimate"], "NOT_COMPUTED")
+        self.assertIn("fixed common sampling mask", limits["sampling"]["review_question"])
+        self.assertEqual(limits["measurement_attribution"]["status"],
+                         "NOT_IDENTIFIABLE_FROM_A_SINGLE_SPATIAL_MAP")
+        self.assertIn("independent calibrated measurement path",
+                      limits["measurement_attribution"]["review_question"])
+        self.assertIn("not area-weighted", " ".join(analyze(data)["limitations"]))
+
+    def test_same_physical_field_with_different_edge_sampling_changes_observed_contrast(self):
+        def sampled(edge_radius):
+            data = make_map()
+            data["points"] = [
+                {"site_id": "center", "x": 0.1, "y": 0, "value": 10.2},
+                *[{"site_id": f"edge-{index}",
+                   "x": edge_radius * math.cos(index * math.pi / 4),
+                   "y": edge_radius * math.sin(index * math.pi / 4),
+                   "value": 10 + 2 * edge_radius} for index in range(8)],
+            ]
+            data["sampling_mask_id"] = f"EDGE-{edge_radius}"
+            return data
+
+        inner_layout = fingerprint(sampled(0.81))
+        outer_layout = fingerprint(sampled(0.99))
+        self.assertAlmostEqual(inner_layout["edge_minus_center"], 1.42)
+        self.assertAlmostEqual(outer_layout["edge_minus_center"], 1.78)
+        self.assertNotEqual(inner_layout["edge_minus_center"], outer_layout["edge_minus_center"])
+        self.assertEqual(inner_layout["interpretation_limits"], outer_layout["interpretation_limits"])
+
+    def test_categorical_summary_also_carries_sampling_design_limit(self):
+        data = make_map()
+        data["measurement"]["modality"] = "die_bin_categorical"
+        for point in data["points"]:
+            point.pop("value")
+            point["category"] = 2
+        result = fingerprint(data)
+        self.assertEqual(result["interpretation_limits"]["sampling"]["area_weighted_estimate"], "NOT_COMPUTED")
+
     def test_unverified_coordinates_refuse_spatial_claim(self):
         result = analyze({"coordinates_verified": False, "radius": 1, "points": []})
         self.assertEqual(result["status"], "REFUSED")
@@ -93,7 +146,27 @@ class SpatialFingerprintTests(unittest.TestCase):
         self.assertEqual(fingerprint_result["edge_center"]["status"], "INCONCLUSIVE")
         self.assertIsNone(fingerprint_result["edge_minus_center"])
         self.assertEqual(sum(row["count"] for row in fingerprint_result["radial_profile"]), 3)
+        self.assertEqual(sum(row["count"] for row in fingerprint_result["sectors"]), 3)
+        self.assertEqual(fingerprint_result["directional_gradient"]["status"], "VALID")
         self.assertIn("center and edge", " ".join(result["limitations"]))
+
+    def test_explicit_null_site_degrades_only_the_features_that_need_that_value(self):
+        for missing_site, expected_edge_center in (("center", "INCONCLUSIVE"), ("east", "VALID")):
+            with self.subTest(missing_site=missing_site):
+                data = make_map()
+                next(point for point in data["points"] if point["site_id"] == missing_site)["value"] = None
+                result = analyze(data)
+                fingerprint_result = result["artifacts"][0]["result"]["fingerprint"]
+                self.assertEqual(fingerprint_result["status"], "PARTIAL")
+                self.assertEqual(fingerprint_result["input_observation_count"], 4)
+                self.assertEqual(fingerprint_result["observed_points"], 3)
+                self.assertEqual(fingerprint_result["explicit_missing_count"], 1)
+                self.assertEqual(fingerprint_result["explicit_missing_site_ids"], [missing_site])
+                self.assertEqual(fingerprint_result["edge_center"]["status"], expected_edge_center)
+                self.assertEqual(sum(row["count"] for row in fingerprint_result["radial_profile"]), 3)
+                self.assertEqual(sum(row["count"] for row in fingerprint_result["sectors"]), 3)
+                self.assertEqual(fingerprint_result["directional_gradient"]["status"], "VALID")
+                self.assertIn("explicit missing measurement rows were retained", " ".join(result["limitations"]))
 
     def test_sparse_fingerprint_reports_only_observed_counts(self):
         result = fingerprint(make_map())
@@ -101,6 +174,83 @@ class SpatialFingerprintTests(unittest.TestCase):
         self.assertEqual(result["regions"]["center"]["count"], 1)
         self.assertEqual(result["regions"]["edge"]["count"], 3)
         self.assertIsNone(result["regions"]["middle"]["mean"])
+
+    def test_truncated_sampling_uses_verified_radius_and_coordinate_origin(self):
+        radius = 150.0
+        origin = (1000.0, -500.0)
+        points = []
+        for radial_fraction, ring in ((0.1, "center"), (0.35, "inner"), (0.65, "outer")):
+            for index, angle_deg in enumerate((15, 135, 255)):
+                angle = math.radians(angle_deg)
+                points.append({"site_id": f"{ring}-{index}",
+                               "x": origin[0] + radial_fraction * radius * math.cos(angle),
+                               "y": origin[1] + radial_fraction * radius * math.sin(angle),
+                               "value": float(len(points))})
+        data = {
+            "coordinates_verified": True,
+            "geometry": {"radius": radius, "origin": {"x": origin[0], "y": origin[1]},
+                         "orientation_deg": 30, "coordinate_system": "wafer_xy_v1", "coordinate_unit": "mm"},
+            "measurement": {"metric": "thickness", "unit": "nm", "modality": "continuous",
+                            "definition_id": "MET-1", "layer": "L1"},
+            "points": points,
+            "product_id": "P-1", "wafer_id": "W-TRUNCATED", "sampling_mask_id": "INNER-ONLY",
+            "population_signature": "POP-A",
+        }
+
+        result = fingerprint(data)
+
+        self.assertEqual(result["observed_points"], 9)
+        self.assertEqual(result["regions"]["center"]["count"], 3)
+        self.assertEqual(result["regions"]["middle"]["count"], 6)
+        self.assertEqual(result["regions"]["edge"]["count"], 0)
+        self.assertEqual([row["count"] for row in result["radial_profile"]], [3, 3, 3, 0])
+        self.assertEqual(result["edge_center"]["status"], "INCONCLUSIVE")
+        self.assertIn("both center and edge", result["edge_center"]["reason"])
+
+    def test_equivalent_rotated_sensor_coordinates_preserve_physical_fingerprint(self):
+        radius = 150.0
+        angle_deg = 37.0
+        theta = math.radians(angle_deg)
+        offset = (800.0, -350.0)
+        physical_points = []
+        sensor_points = []
+        for radial_fraction, ring in ((0.1, "center"), (0.2, "center-boundary"),
+                                      (0.5, "inner-boundary"), (0.8, "outer-boundary"), (0.9, "edge")):
+            for sector in range(8):
+                angle = (sector + 0.5) * math.pi / 4
+                x = radial_fraction * radius * math.cos(angle)
+                y = radial_fraction * radius * math.sin(angle)
+                value = 100.0 + sector * 2.0 + radial_fraction
+                site_id = f"{ring}-{sector}"
+                physical_points.append({"site_id": site_id, "x": x, "y": y, "value": value})
+                sensor_points.append({"site_id": site_id,
+                                      "x": offset[0] + x * math.cos(theta) + y * math.sin(theta),
+                                      "y": offset[1] - x * math.sin(theta) + y * math.cos(theta),
+                                      "value": value})
+
+        def wafer(points, origin, orientation, wafer_id):
+            return {"coordinates_verified": True,
+                    "geometry": {"radius": radius, "origin": {"x": origin[0], "y": origin[1]},
+                                 "orientation_deg": orientation, "coordinate_system": "wafer_xy_v1",
+                                 "coordinate_unit": "mm"},
+                    "measurement": {"metric": "thickness", "unit": "nm", "modality": "continuous",
+                                    "definition_id": "MET-1", "layer": "L1"},
+                    "points": points, "product_id": "P-1", "wafer_id": wafer_id,
+                    "sampling_mask_id": "FULL-24", "population_signature": "POP-A"}
+
+        physical = fingerprint(wafer(physical_points, (0.0, 0.0), 0.0, "W-PHYSICAL"))
+        rotated = fingerprint(wafer(sensor_points, offset, angle_deg, "W-ROTATED"))
+
+        self.assertAlmostEqual(rotated["edge_minus_center"], physical["edge_minus_center"], places=10)
+        self.assertEqual([row["count"] for row in physical["radial_profile"]], [16, 8, 8, 8])
+        self.assertEqual([row["count"] for row in rotated["radial_profile"]],
+                         [row["count"] for row in physical["radial_profile"]])
+        for observed, expected in zip(rotated["radial_profile"], physical["radial_profile"]):
+            self.assertAlmostEqual(observed["mean"], expected["mean"], places=10)
+        self.assertEqual(rotated["sectors"], physical["sectors"])
+        for key in ("gradient_x_per_radius", "gradient_y_per_radius"):
+            self.assertAlmostEqual(rotated["directional_gradient"][key],
+                                   physical["directional_gradient"][key], places=10)
 
     def test_die_bin_or_categorical_map_is_not_treated_as_continuous_nm(self):
         data = make_map()
@@ -112,9 +262,26 @@ class SpatialFingerprintTests(unittest.TestCase):
         self.assertEqual(result["status"], "VALID")
         fingerprint_result = result["artifacts"][0]["result"]["fingerprint"]
         self.assertEqual(fingerprint_result["modality"], "die_bin_categorical")
-        self.assertEqual(fingerprint_result["regions"]["edge"]["category_counts"], {"FAIL": 1, "PASS": 1, "RETEST": 1})
+        self.assertEqual(fingerprint_result["regions"]["edge"]["category_counts"], [
+            {"category": "FAIL", "count": 1}, {"category": "PASS", "count": 1}, {"category": "RETEST", "count": 1},
+        ])
         self.assertIsNone(fingerprint_result["edge_minus_center"])
         self.assertEqual(len(result["claims"]), 1)
+
+    def test_missing_die_bin_value_is_retained_without_categorical_arithmetic(self):
+        data = make_map()
+        data["measurement"]["modality"] = "die_bin_categorical"
+        for point, category in zip(data["points"], ("PASS", None, 2, "FAIL")):
+            point.pop("value")
+            point["category"] = category
+        result = analyze(data)
+        fingerprint_result = result["artifacts"][0]["result"]["fingerprint"]
+        self.assertEqual(fingerprint_result["status"], "PARTIAL")
+        self.assertEqual(fingerprint_result["input_observation_count"], 4)
+        self.assertEqual(fingerprint_result["observed_points"], 3)
+        self.assertEqual(fingerprint_result["explicit_missing_count"], 1)
+        self.assertIsNone(fingerprint_result["edge_minus_center"])
+        self.assertIn({"category": 2, "count": 1}, fingerprint_result["regions"]["edge"]["category_counts"])
 
     def test_defect_coordinates_report_observed_region_counts_only(self):
         data = make_map()
@@ -128,18 +295,76 @@ class SpatialFingerprintTests(unittest.TestCase):
         self.assertIsNone(fingerprint_result["edge_minus_center"])
         self.assertEqual(result["status"], "VALID")
 
-    def test_non_numeric_map_abstains_from_downstream_association_without_crashing(self):
+    def test_categorical_values_keep_json_types_and_defect_labels(self):
+        fixture = json.loads((Path(__file__).parent / "fixtures" / "spatial_value_contract.json").read_text())
+        self.assertEqual(fixture["invariants"]["input_point_count"], len(fixture["points"]))
+        for point in fixture["points"]:
+            self.assertEqual(point["expected_type"], "null" if point.get("value", point.get("category", point.get("bin"))) is None else
+                             "number" if type(point.get("value", point.get("category", point.get("bin")))) in (int, float) else "string")
+        data = make_map()
+        data["measurement"].update({"metric": "bin_code", "unit": "category", "modality": "die_bin_categorical"})
+        values = [2, "2", 3.5, "PASS"]
+        for point, category in zip(data["points"], values):
+            point.pop("value")
+            point["category"] = category
+        report = fingerprint(data)
+        counts = [item for region in report["regions"].values() for item in region["category_counts"]]
+        observed = {(type(item["category"]), item["category"]): item["count"] for item in counts}
+        self.assertEqual(observed, {(int, 2): 1, (str, "2"): 1, (float, 3.5): 1, (str, "PASS"): 1})
+        self.assertIsInstance(next(item["category"] for item in counts if item["category"] == 2), int)
+
+        defects = make_map()
+        defects["measurement"].update({"metric": "defect_event", "unit": "count", "modality": "defect_coordinates"})
+        for point in defects["points"]:
+            point.pop("value")
+        defects["points"][0]["category"] = "bridge"
+        defects["points"][1]["bin"] = 7
+        defect_report = analyze(defects)
+        defect_fp = defect_report["artifacts"][0]["result"]["fingerprint"]
+        self.assertEqual(defect_fp["unlabeled_event_count"], 2)
+        defect_counts = [item for region in defect_fp["regions"].values() for item in region["category_counts"]]
+        self.assertEqual({(type(item["category"]), item["category"]): item["count"] for item in defect_counts},
+                         {(str, "bridge"): 1, (int, 7): 1})
+
+    def test_conflicting_category_aliases_are_rejected_without_coercion(self):
         data = make_map()
         data["measurement"]["modality"] = "die_bin_categorical"
         for point in data["points"]:
             point.pop("value")
-            point["category"] = "PASS"
-        data["requested_capabilities"] = ["C03"]
+            point["category"] = 2
+            point["bin"] = "2"
         result = analyze(data)
-        quality = result["artifacts"][0]["result"]["quality_association"]
-        self.assertEqual(result["status"], "PARTIAL")
-        self.assertEqual(quality["status"], "INCONCLUSIVE")
-        self.assertIn("numeric continuous", quality["reason"])
+        self.assertEqual(result["status"], "INCONCLUSIVE")
+        self.assertIn("conflicting category and bin", " ".join(result["limitations"]))
+
+    def test_numeric_modality_does_not_coerce_numeric_strings_and_missing_is_not_filled(self):
+        text_value = make_map()
+        text_value["points"][1]["value"] = "12"
+        text_result = analyze(text_value)
+        self.assertEqual(text_result["status"], "INCONCLUSIVE")
+        self.assertIn("invalid coordinate/value", " ".join(text_result["limitations"]))
+        missing_value = make_map()
+        missing_value["points"][1]["value"] = None
+        missing_result = analyze(missing_value)
+        self.assertEqual(missing_result["status"], "PARTIAL")
+        fingerprint_result = missing_result["artifacts"][0]["result"]["fingerprint"]
+        self.assertEqual(fingerprint_result["explicit_missing_count"], 1)
+        self.assertEqual(fingerprint_result["observed_points"], 3)
+        self.assertIn("explicit missing measurement rows were retained", " ".join(missing_result["limitations"]))
+
+    def test_non_numeric_map_abstains_from_downstream_association_without_crashing(self):
+        for category in ("PASS", 2):
+            data = make_map()
+            data["measurement"]["modality"] = "die_bin_categorical"
+            for point in data["points"]:
+                point.pop("value")
+                point["category"] = category
+            data["requested_capabilities"] = ["C03"]
+            result = analyze(data)
+            quality = result["artifacts"][0]["result"]["quality_association"]
+            self.assertEqual(result["status"], "PARTIAL")
+            self.assertEqual(quality["status"], "INCONCLUSIVE")
+            self.assertIn("numeric continuous", quality["reason"])
 
     def test_edge_center_propagates_only_explicit_independent_uncertainties(self):
         data = make_map()
@@ -156,6 +381,8 @@ class SpatialFingerprintTests(unittest.TestCase):
         result = fingerprint(data)
         self.assertEqual(result["reticle_periodicity"]["status"], "NOT_COMPUTED")
         self.assertIn("sampling-alias", result["reticle_periodicity"]["reason"])
+        self.assertEqual(result["edge_center"]["status"], "VALID")
+        self.assertEqual(sum(row["count"] for row in result["sectors"]), len(data["points"]))
 
     def test_reticle_periodicity_requires_traceable_alias_check_and_recovers_signal(self):
         data = make_map()
@@ -205,16 +432,55 @@ class SpatialFingerprintTests(unittest.TestCase):
         self.assertEqual(result["clusters"][0]["observed_site_count"], 6)
         self.assertIn("not calibrated", result["interpretation"])
 
+    def test_dense_radial_background_uses_observation_density_for_local_screen(self):
+        def radial_map(wafer, cluster_shift):
+            data = make_map(wafer, measured_at="2026-02-01T00:00:00Z")
+            data["geometry"]["radius"] = 150
+            points = []
+            for ix in range(-10, 11):
+                for iy in range(-10, 11):
+                    x, y = ix * 14.0, iy * 14.0
+                    physical_radius = math.hypot(x, y)
+                    if 0 < physical_radius <= 145:
+                        value = 100 + 5 * (physical_radius / 150) ** 2 + 0.02 * math.sin(7 * x / 150 + 3 * y / 150)
+                        if cluster_shift and 60 <= x <= 90 and 30 <= y <= 60:
+                            value += cluster_shift
+                        points.append({"site_id": f"{ix}:{iy}", "x": x, "y": y, "value": value})
+            data["points"] = points
+            return data
+
+        baseline = fingerprint(radial_map("W-RADIAL-BASE", 0))["local_clusters"]
+        shifted = fingerprint(radial_map("W-RADIAL-HOTSPOT", 8))["local_clusters"]
+        self.assertEqual(baseline["grid_size"], 10)
+        self.assertEqual(baseline["clusters"], [])
+        self.assertEqual(shifted["screening_adjustment"]["status"], "APPLIED")
+        self.assertEqual(shifted["grid_size"], 10)
+        self.assertEqual(len(shifted["clusters"]), 1)
+        self.assertEqual(shifted["clusters"][0]["observed_site_count"], 4)
+        self.assertIn("descriptive candidate groups only", shifted["interpretation"])
+
 
 class ComparisonTests(unittest.TestCase):
     def test_cross_step_rotation_aligns_exact_observed_sites(self):
         previous = make_map("W1", (10, 10, 10, 10), orientation=0, step="S1", instance="I1", measured_at="2026-01-01T00:00:00Z")
         current = make_map("W1", (12, 12, 12, 12), orientation=90, step="S2", instance="I2", measured_at="2026-02-01T00:00:00Z")
+        for point in previous["points"]:
+            point["standard_uncertainty"] = 0.1
+        for point in current["points"]:
+            point["standard_uncertainty"] = 0.2
         result = compare_evolution(previous, current)
         self.assertEqual(result["status"], "VALID")
         self.assertEqual(result["matched_sites"], 4)
         self.assertAlmostEqual(result["mean_delta"], 2)
         self.assertAlmostEqual(result["registration_residual"], 0)
+        uncertainty = result["uncertainty"]["measurement_uncertainty"]
+        self.assertAlmostEqual(uncertainty["mean_delta_standard_uncertainty"], math.sqrt(0.05 / 4))
+        bounds = uncertainty["unknown_covariance_bounds"]
+        self.assertAlmostEqual(bounds["lower_standard_uncertainty"], 0)
+        self.assertAlmostEqual(bounds["upper_standard_uncertainty"], 0.3)
+        self.assertIn("not a confidence interval", bounds["interpretation"])
+        self.assertEqual(uncertainty["covariance"]["between_steps"], "NOT_SUPPLIED")
+        self.assertTrue(uncertainty["conditional_on_independence"])
 
     def test_evolution_sequence_reports_direction_persistence_and_unknown_repeatability(self):
         first = make_map("W1", (8, 8, 8, 8), step="S0", instance="I0", measured_at="2026-01-01T00:00:00Z")
@@ -228,8 +494,59 @@ class ComparisonTests(unittest.TestCase):
         self.assertAlmostEqual(result["mean_delta"], 4)
         self.assertEqual(result["persistence"]["transitions"], 2)
         self.assertEqual(result["persistence"]["fraction_with_same_nonzero_direction"], 1)
-        self.assertEqual(result["uncertainty"]["measurement_repeatability"]["status"], "PROPAGATED_FROM_SITE_STANDARD_UNCERTAINTIES")
-        self.assertAlmostEqual(result["uncertainty"]["measurement_repeatability"]["mean_total_delta_standard_uncertainty"], math.sqrt(0.18 / 4))
+        uncertainty = result["uncertainty"]["measurement_uncertainty"]
+        self.assertEqual(uncertainty["status"], "PROPAGATED_FROM_SITE_STANDARD_UNCERTAINTIES")
+        self.assertAlmostEqual(uncertainty["mean_total_delta_standard_uncertainty"], math.sqrt(0.1 / 4))
+        self.assertAlmostEqual(uncertainty["unknown_covariance_bounds"]["upper_standard_uncertainty"], 0.4)
+        self.assertIn("intermediate observations cancel", uncertainty["assumption"])
+        self.assertEqual(uncertainty["covariance"], {"between_steps": "NOT_SUPPLIED", "across_sites": "NOT_SUPPLIED"})
+        self.assertTrue(uncertainty["conditional_on_independence"])
+
+    def test_sequence_cumulative_change_uses_only_full_sequence_exact_sites(self):
+        policy = {"predeclared": True, "method": "exact_common_site_v1", "minimum_sites": 5,
+                  "minimum_coverage_fraction": 0.5}
+        extra_sites = [f"extra-{index}" for index in range(21)]
+        base_sites = {"center", "east", "north", "west"}
+        common = base_sites | {"extra-0"}
+        group_a = {f"extra-{index}" for index in range(1, 6)}
+        group_b = {f"extra-{index}" for index in range(6, 11)}
+        group_c = {f"extra-{index}" for index in range(11, 16)}
+        group_d = {f"extra-{index}" for index in range(16, 21)}
+
+        def step(step_id, day, value, included):
+            result = make_map("W-SEQUENCE", (value,) * 4, step=step_id,
+                              measured_at=f"2026-03-{day:02d}T00:00:00Z")
+            result["sampling_mask_id"] = "MASK-" + step_id
+            for index, site_id in enumerate(extra_sites):
+                if site_id in included:
+                    result["points"].append({"site_id": site_id, "x": 0.4 + index * 0.01,
+                                             "y": 0.4, "value": value})
+            result["points"] = [point for point in result["points"]
+                                 if point["site_id"] in included]
+            return result
+
+        first = step("S0", 1, 10, common | group_a)
+        middle = step("S1", 2, 12, common | group_b)
+        last = step("S2", 3, 15, common | group_c)
+        supported = compare_evolution_sequence([first, middle], last, match_policy=policy)
+        self.assertEqual(supported["status"], "VALID")
+        self.assertEqual(supported["matched_sites"], 5)
+        self.assertEqual(supported["mean_delta"], 5)
+        self.assertTrue(all(item["status"] == "VALID" for item in supported["comparisons"]))
+
+        other_common = group_a
+        unsupported_steps = [step("U0", 10, 10, common | group_b),
+                             step("U1", 11, 11, common | group_c),
+                             step("U2", 12, 12, other_common | group_c),
+                             step("U3", 13, 13, other_common | group_d),
+                             step("U4", 14, 14, other_common | group_d)]
+        unsupported = compare_evolution_sequence(unsupported_steps[:-1], unsupported_steps[-1],
+                                                 match_policy=policy)
+        self.assertEqual(unsupported["status"], "INCONCLUSIVE")
+        self.assertEqual(unsupported["matched_sites"], 0)
+        self.assertIn("common to every transition", unsupported["reason"])
+        self.assertEqual(len(unsupported["comparisons"]), 4)
+        self.assertTrue(all(item["status"] == "VALID" for item in unsupported["comparisons"]))
 
     def test_evolution_refuses_unknown_orientation_and_identity(self):
         previous = make_map("W1", (10, 10, 10, 10), orientation=0, measured_at="2026-01-01T00:00:00Z")
@@ -252,7 +569,7 @@ class ComparisonTests(unittest.TestCase):
     def test_similarity_ranks_shape_and_does_not_infer_cause(self):
         current = make_map("W0", (10, 12, 12, 12), measured_at="2026-02-01T00:00:00Z")
         shape_same_offset = make_map("W1", (20, 22, 22, 22))
-        different_shape = make_map("W2", (20, 20, 20, 22))
+        different_shape = make_map("W2", (21.5, 21.5, 21.5, 21.5))
         result = search_history(current, [different_shape, shape_same_offset])
         self.assertEqual(result["status"], "VALID")
         self.assertEqual(result["neighbors"][0]["wafer_id"], "W1")
@@ -261,6 +578,53 @@ class ComparisonTests(unittest.TestCase):
         self.assertIn("does not establish", result["interpretation"])
         evidence = analyze(current | {"history": [different_shape, shape_same_offset]})
         self.assertFalse(any("root cause" in c["statement"].lower() or "same cause" in c["statement"].lower() for c in evidence["claims"]))
+
+        product_decoy = copy.deepcopy(shape_same_offset)
+        product_decoy.update(wafer_id="W3", lot_id="W3-LOT", product_id="P-2", source_id="SYN-MAP-W3")
+        layer_decoy = copy.deepcopy(shape_same_offset)
+        layer_decoy.update(wafer_id="W4", lot_id="W4-LOT", source_id="SYN-MAP-W4")
+        layer_decoy["measurement"]["layer"] = "L2"
+        metric_decoy = copy.deepcopy(shape_same_offset)
+        metric_decoy.update(wafer_id="W5", lot_id="W5-LOT", source_id="SYN-MAP-W5")
+        metric_decoy["measurement"].update(metric="roughness", definition_id="MET-R")
+        future_decoy = copy.deepcopy(shape_same_offset)
+        future_decoy.update(wafer_id="W6", lot_id="W6-LOT", measured_at="2026-03-01T00:00:00Z", source_id="SYN-MAP-W6")
+        candidates = [different_shape, product_decoy, layer_decoy, metric_decoy, future_decoy, shape_same_offset]
+        challenged = search_history(current, candidates, top_k=5)
+        self.assertEqual(challenged["neighbors"][0]["wafer_id"], "W1")
+        excluded = {row["wafer_id"]: row["reason"] for row in challenged["excluded"]}
+        self.assertIn("product_id", excluded["W3"])
+        self.assertIn("layer", excluded["W4"])
+        self.assertIn("metric", excluded["W5"])
+        self.assertIn("not earlier", excluded["W6"])
+        indexed = SpatialSignatureIndex(candidates).search(current, top_k=5)
+        self.assertEqual(indexed["neighbors"], challenged["neighbors"])
+
+    def test_similarity_breaks_radial_and_sector_marginal_alias_across_sampling_masks(self):
+        def joint_pattern_map(wafer, high_cells, offset_deg, timestamp):
+            result = make_map(wafer, measured_at=timestamp)
+            result["sampling_mask_id"] = "MASK-" + wafer
+            points = []
+            for radial_bin, radius in enumerate((0.1, 0.4, 0.65, 0.9)):
+                for sector in range(8):
+                    angle = 2 * math.pi * (sector + 0.21) / 8 + math.radians(offset_deg)
+                    points.append({"site_id": f"{radial_bin}-{sector}",
+                                   "x": radius * math.cos(angle), "y": radius * math.sin(angle),
+                                   "value": 20 + 3 * radial_bin + (4 if (radial_bin, sector) in high_cells else 0)})
+            result["points"] = points
+            return result
+
+        target_cells = {(1, 0), (3, 4)}
+        marginal_alias_cells = {(1, 4), (3, 0)}
+        current = joint_pattern_map("W0", target_cells, 0, "2026-03-01T00:00:00Z")
+        wrong_alias = joint_pattern_map("A-WRONG", marginal_alias_cells, 1.0, "2026-01-01T00:00:00Z")
+        true_analog = joint_pattern_map("Z-RIGHT", target_cells, 1.0, "2026-01-02T00:00:00Z")
+        result = search_history(current, [wrong_alias, true_analog], top_k=2)
+        self.assertEqual(result["status"], "VALID")
+        self.assertEqual(result["neighbors"][0]["wafer_id"], "Z-RIGHT")
+        self.assertEqual(result["neighbors"][0]["radial_sector_profile_rmse"], 0)
+        self.assertGreater(result["neighbors"][1]["radial_sector_profile_rmse"], 0)
+        self.assertIn("radial-sector", result["neighbors"][0]["alignment"])
 
     def test_similarity_retrieves_variable_sampling_layouts_and_index_matches_reference(self):
         def angular_map(wafer, angle_count, mask, measured_at, sector_pattern=False):
@@ -296,8 +660,11 @@ class ComparisonTests(unittest.TestCase):
         current = make_map("W0", measured_at="2026-03-01T00:00:00Z")
         history = [make_map("W1", measured_at="2026-01-01T00:00:00Z")]
         index = SpatialSignatureIndex(history)
+        self.assertEqual(len(history[0]["points"]), 4)
         baseline = index.search(current)
         history[0]["points"][0]["value"] += 100
+        history[0]["product_id"] = "MUTATED-PRODUCT"
+        history[0]["measurement"]["unit"] = "s"
         after_source_mutation = index.search(current)
         self.assertEqual(after_source_mutation["neighbors"], baseline["neighbors"])
         invalidated = index.invalidate()
@@ -358,18 +725,101 @@ class ComparisonTests(unittest.TestCase):
 class AnomalyAndAssociationTests(unittest.TestCase):
     def test_anomaly_requires_holdout_and_corrects_for_multiple_sites(self):
         current = make_map("W-current", (100, 102, 102, 102), measured_at="2026-02-01T00:00:00Z")
-        baseline = [make_map(f"W{i}", (10, 12, 12, 12)) for i in range(20)]
+        baseline = [make_map(f"W{i}", (10, 12, 12, 12), measured_at=f"2026-01-{i + 1:02d}T00:00:00Z") for i in range(20)]
         self.assertEqual(detect_anomalies(current, baseline, holdout_verified=False)["status"], "INCONCLUSIVE")
         result = detect_anomalies(current, baseline, holdout_verified=True)
         self.assertEqual(result["status"], "VALID")
         self.assertEqual(result["global_test_method"], "leave_one_wafer_out_spatial_maxT_rank_v1")
+        self.assertEqual(result["evaluation_scope"], "SINGLE_TARGET_CONDITIONAL_SCREEN")
+        self.assertEqual(result["repeated_target_adjustment"], "NOT_APPLIED")
+        self.assertIn("repeated or adaptive target searches are not multiplicity-adjusted", result["interpretation"])
+        self.assertEqual(result["baseline_temporal_stability"]["status"], "NO_SHIFT_DETECTED")
+        self.assertIn("does not establish stationarity", result["baseline_temporal_stability"]["interpretation"])
+        self.assertEqual(result["baseline_cohort_assessment"]["status"], "NOT_CERTIFIED_CLEAN")
+        self.assertEqual(result["baseline_cohort_assessment"]["contamination_assessment"], "NOT_PERFORMED")
         self.assertEqual(result["global_max_t_empirical_p"], result["minimum_attainable_global_p"])
+        self.assertAlmostEqual(result["minimum_attainable_global_p"], 1 / 21)
+        below_resolution = detect_anomalies(current, baseline[:-1], holdout_verified=True)
+        self.assertEqual(below_resolution["status"], "INCONCLUSIVE")
+        self.assertIn("at least 20 distinct baseline wafers", below_resolution["reason"])
+        larger_baseline = [make_map(f"LARGE-{i}", (10, 12, 12, 12),
+                                    measured_at=(datetime(2026, 1, 1, tzinfo=UTC) + timedelta(days=i)).isoformat().replace("+00:00", "Z"))
+                           for i in range(40)]
+        larger_current = make_map("LARGE-CURRENT", (100, 102, 102, 102), measured_at="2026-02-10T00:00:00Z")
+        larger_result = detect_anomalies(larger_current, larger_baseline, holdout_verified=True)
+        self.assertEqual(larger_result["status"], "VALID")
+        self.assertAlmostEqual(larger_result["minimum_attainable_global_p"], 1 / 41)
+        family = {"family_id": "SYN-C04-FAMILY-2", "family_size": 2,
+                  "selection_rule_id": "SYN-FIXED-TARGET-ROSTER", "predeclared": True, "complete": True}
+        unresolved_family = detect_anomalies(current, baseline, holdout_verified=True, target_family=family)
+        self.assertEqual(unresolved_family["status"], "INCONCLUSIVE")
+        self.assertAlmostEqual(unresolved_family["alpha"], 0.025)
+        self.assertAlmostEqual(unresolved_family["minimum_attainable_global_p"], 1 / 21)
+        self.assertIn("at least 39 distinct baseline wafers", unresolved_family["reason"])
+        adjusted_family = detect_anomalies(larger_current, larger_baseline, holdout_verified=True, target_family=family)
+        self.assertEqual(adjusted_family["status"], "VALID")
+        self.assertAlmostEqual(adjusted_family["alpha"], 0.025)
+        self.assertAlmostEqual(adjusted_family["minimum_attainable_global_p"], 1 / 41)
+        self.assertEqual(adjusted_family["evaluation_scope"], "PREDECLARED_TARGET_FAMILY_BONFERRONI")
+        self.assertEqual(adjusted_family["repeated_target_adjustment"], "BONFERRONI")
+        propagated = analyze(larger_current | {"baseline_population": larger_baseline,
+                                               "baseline_holdout_verified": True,
+                                               "anomaly_target_family": family})
+        propagated_anomaly = propagated["artifacts"][0]["result"]["anomaly"]
+        self.assertEqual(propagated_anomaly["target_family"]["family_id"], "SYN-C04-FAMILY-2")
+        self.assertTrue(propagated_anomaly["target_family"]["predeclared_as_declared"])
+        self.assertTrue(propagated_anomaly["target_family"]["complete_as_declared"])
+        self.assertFalse(propagated_anomaly["target_family"]["source_registry_independently_audited"])
+        claim_text = " ".join(item["statement"] for item in propagated.get("claims", []))
+        self.assertIn("Bonferroni family SYN-C04-FAMILY-2 includes 2 caller-declared targets", claim_text)
+        self.assertIn("targets outside that family remain unadjusted", claim_text)
+        family_20 = {"family_id": "SYN-C04-FAMILY-20", "family_size": 20,
+                     "selection_rule_id": "SYN-FIXED-20-TARGET-ROSTER",
+                     "predeclared": True, "complete": True}
+        rank_baseline = [make_map(f"RANK-{i}", (10, 12, 12, 12),
+                                  measured_at=(datetime(2025, 1, 1, tzinfo=UTC) + timedelta(days=i)).isoformat().replace("+00:00", "Z"))
+                         for i in range(399)]
+        rank_target = make_map("RANK-TARGET", (100, 102, 102, 102), measured_at="2026-03-01T00:00:00Z")
+        unresolved_at_floor = detect_anomalies(rank_target, rank_baseline[:-1], holdout_verified=True,
+                                               target_family=family_20)
+        self.assertEqual(unresolved_at_floor["status"], "INCONCLUSIVE")
+        self.assertAlmostEqual(unresolved_at_floor["alpha"], 0.0025)
+        self.assertAlmostEqual(unresolved_at_floor["minimum_attainable_global_p"], 1 / 399)
+        self.assertIn("at least 399 distinct baseline wafers", unresolved_at_floor["reason"])
+        resolved_at_floor = detect_anomalies(rank_target, rank_baseline, holdout_verified=True,
+                                             target_family=family_20)
+        self.assertEqual(resolved_at_floor["status"], "VALID")
+        self.assertAlmostEqual(resolved_at_floor["alpha"], 0.0025)
+        self.assertAlmostEqual(resolved_at_floor["minimum_attainable_global_p"], 1 / 400)
+        self.assertAlmostEqual(resolved_at_floor["global_max_t_empirical_p"], 1 / 400)
+        self.assertLessEqual(resolved_at_floor["global_max_t_empirical_p"], resolved_at_floor["alpha"])
+        invalid_family = detect_anomalies(current, baseline, holdout_verified=True,
+                                          target_family={"family_id": "missing-completeness"})
+        self.assertEqual(invalid_family["status"], "INCONCLUSIVE")
+        self.assertIn("complete, predeclared family", invalid_family["reason"])
         self.assertEqual(len(result["outliers"]), 4)
         self.assertTrue(all(row["localizer_candidate"] for row in result["outliers"]))
         self.assertIn("not individually significant", result["localization_interpretation"])
 
+    def test_single_stable_baseline_contaminant_can_mask_a_similar_target(self):
+        target = make_map("CONTAM-TARGET", (10, 18, 18, 18), measured_at="2026-02-01T00:00:00Z")
+        baseline = [make_map(f"CONTAM-B{i}", (10, 18, 18, 18) if i == 0 else (10, 12, 12, 12),
+                             measured_at=f"2026-01-{i + 1:02d}T00:00:00Z") for i in range(20)]
+        result = detect_anomalies(target, baseline, holdout_verified=True)
+        self.assertEqual(result["status"], "VALID")
+        self.assertEqual(result["baseline_temporal_stability"]["status"], "NO_SHIFT_DETECTED")
+        self.assertAlmostEqual(result["global_max_t_empirical_p"], 2 / 21)
+        self.assertGreater(result["global_max_t_empirical_p"], result["alpha"])
+        self.assertEqual(result["outliers"], [])
+        self.assertEqual(result["baseline_cohort_assessment"]["status"], "NOT_CERTIFIED_CLEAN")
+        self.assertIn("temporally stable baseline containing maps similar",
+                      result["baseline_cohort_assessment"]["limitation"])
+        evidence = analyze(target | {"requested_capabilities": ["C04"], "baseline_population": baseline,
+                                     "baseline_holdout_verified": True})
+        self.assertTrue(any("baseline cleanliness" in item.lower() for item in evidence["limitations"]))
+
     def test_correlated_spatial_null_has_bounded_synthetic_false_alert_rate(self):
-        rng = random.Random(73119)
+        rng = random.Random(73119)  # nosec B311
         false_alerts = 0
         repetitions = 120
         site_effects = (0.0, 1.0, 0.5, -0.5)
@@ -392,7 +842,7 @@ class AnomalyAndAssociationTests(unittest.TestCase):
 
     def test_anomaly_refuses_incompatible_sampling_mask(self):
         current = make_map("W-current", measured_at="2026-02-01T00:00:00Z")
-        baseline = [make_map(f"W{i}") for i in range(20)]
+        baseline = [make_map(f"W{i}", measured_at=f"2026-01-{i + 1:02d}T00:00:00Z") for i in range(20)]
         baseline[0]["sampling_mask_id"] = "MASK-B"
         result = detect_anomalies(current, baseline, holdout_verified=True)
         self.assertEqual(result["status"], "INCONCLUSIVE")
@@ -406,15 +856,26 @@ class AnomalyAndAssociationTests(unittest.TestCase):
 
     def test_anomaly_holdout_rejects_lot_leakage_and_future_baseline(self):
         current = make_map("W-current", measured_at="2026-02-01T00:00:00Z")
-        baseline = [make_map(f"W{i}") for i in range(20)]
+        baseline = [make_map(f"W{i}", measured_at=f"2026-01-{i + 1:02d}T00:00:00Z") for i in range(20)]
         baseline[1]["lot_id"] = baseline[0]["lot_id"]
         result = detect_anomalies(current, baseline, holdout_verified=True)
         self.assertEqual(result["status"], "INCONCLUSIVE")
-        baseline = [make_map(f"W{i}") for i in range(20)]
+        baseline = [make_map(f"W{i}", measured_at=f"2026-01-{i + 1:02d}T00:00:00Z") for i in range(20)]
         baseline[0]["measured_at"] = "2026-03-01T00:00:00Z"
         result = detect_anomalies(current, baseline, holdout_verified=True)
         self.assertEqual(result["status"], "INCONCLUSIVE")
         self.assertIn("precede", result["reason"])
+
+    def test_anomaly_abstains_when_matched_historical_profiles_drift_over_time(self):
+        baseline = [make_map(f"DRIFT-{i}", (10 + i * 0.2, 12 + i * 0.2, 12 + i * 0.2, 12 + i * 0.2),
+                             measured_at=f"2026-01-{i + 1:02d}T00:00:00Z") for i in range(20)]
+        current = make_map("DRIFT-CURRENT", (14, 16, 16, 16), measured_at="2026-02-01T00:00:00Z")
+        result = detect_anomalies(current, baseline, holdout_verified=True)
+        self.assertEqual(result["status"], "INCONCLUSIVE")
+        self.assertIn("temporal shift", result["reason"])
+        self.assertLessEqual(result["baseline_temporal_stability"]["empirical_p"],
+                             result["baseline_temporal_stability"]["alpha"])
+        self.assertEqual(result["outliers"], [])
 
     def test_quality_link_requires_approved_wafer_grain_and_time_order(self):
         reference = make_map(include_south=True)
@@ -434,6 +895,13 @@ class AnomalyAndAssociationTests(unittest.TestCase):
                               "coordinate_system": "wafer_xy_v1", "coordinate_unit": "mm"},
                  "holdout": {"verified": True, "split_method": "out_of_time_by_wafer_and_lot", "grouped_by_wafer": True,
                              "grouped_by_lot": True, "leakage_checked": True},
+                 "cohort_selection": {"verified": True, "sampling_design": "COMPLETE_ELIGIBLE_FRAME",
+                                      "frame_id": "TEST-C03-FRAME-1", "eligibility_rule_id": "TEST-C03-RULE-1",
+                                      "eligibility_rule_predeclared": True,
+                                      "selection_blind_to_feature_and_outcome": True,
+                                      "eligible_wafer_count": 20, "selected_wafer_count": 20},
+                 "hypothesis_selection": {"hypothesis_id": "H1", "family_size": 1,
+                                           "predeclared_before_holdout_outcomes": True, "family_complete": True},
                  "observations": records}
         result = associate_quality(assoc, expected_context, expected_coordinates)
         self.assertEqual(result["status"], "VALID")
@@ -441,10 +909,94 @@ class AnomalyAndAssociationTests(unittest.TestCase):
         self.assertGreater(result["fisher_wafer_95_ci"][0], 0)
         self.assertEqual(result["matched_die_sites"], 100)
         self.assertEqual(result["independent_lots"], 20)
+        self.assertEqual(result["cohort_selection"]["selected_wafer_count"], 20)
+        self.assertTrue(result["cohort_selection"]["selection_blind_to_feature_and_outcome"])
         self.assertIn("observational", result["interpretation"])
         self.assertEqual(len(result["uncertainty"]["leave_one_lot_out_estimates"]), 20)
         self.assertEqual(len(result["uncertainty"]["leave_one_lot_out_r_range"]), 2)
-        self.assertEqual(result["confounding_controls"]["independent_unit"], "one holdout wafer from each of at least 20 distinct lots")
+        self.assertEqual(result["confounding_controls"]["independent_unit"], "distinct lot; multiple wafer Fisher-z estimates are averaged within lot before inference")
+        self.assertTrue(result["hypothesis_selection"]["confirmatory_single_hypothesis_scope"])
+        self.assertEqual(result["uncertainty"]["interval_scope"], "nominal per-hypothesis; not family-wise adjusted")
+        self.assertEqual(result["temporal_association"]["status"], "NOT_ASSESSED")
+
+        temporal_flip = copy.deepcopy(assoc)
+        temporal_flip["temporal_partition"] = {
+            "verified": True, "predeclared_before_holdout_outcomes": True,
+            "partition_id": "TEST-TIME-EPOCHS-1", "source_id": "SYN-C03-TEMPORAL", "approval_reference": "SYN-REVIEW-C03-1",
+            "cutoff_at": "2026-01-11T00:00:00Z",
+            "earlier_label": "earlier", "later_label": "later",
+            "minimum_independent_lots_per_stratum": 10,
+        }
+        for row in temporal_flip["observations"]:
+            wafer_index = int(row["wafer_id"][1:])
+            row["feature_at"] = f"2026-01-{wafer_index + 1:02d}T00:00:00Z"
+            row["outcome_at"] = f"2026-01-{wafer_index + 2:02d}T00:00:00Z"
+            row["outcome_value"] = (-2 if wafer_index < 10 else 2) * row["feature_value"]
+        temporal_result = associate_quality(temporal_flip, expected_context, expected_coordinates)
+        self.assertEqual(temporal_result["status"], "VALID")
+        self.assertAlmostEqual(temporal_result["mean_within_wafer_r"], 0, places=5)
+        temporal = temporal_result["temporal_association"]
+        self.assertEqual(temporal["status"], "OPPOSITE_DIRECTIONS_OBSERVED")
+        self.assertLess(temporal["strata"][0]["fisher_wafer_95_ci"][1], 0)
+        self.assertGreater(temporal["strata"][1]["fisher_wafer_95_ci"][0], 0)
+        self.assertIn("pooled estimate masks temporal heterogeneity", temporal_result["interpretation"])
+
+        unreviewed_temporal_partition = copy.deepcopy(temporal_flip)
+        unreviewed_temporal_partition["temporal_partition"]["predeclared_before_holdout_outcomes"] = False
+        temporal_refusal = associate_quality(unreviewed_temporal_partition, expected_context, expected_coordinates)
+        self.assertEqual(temporal_refusal["status"], "INCONCLUSIVE")
+        crossing_wafer = copy.deepcopy(temporal_flip)
+        crossing_row = next(row for row in crossing_wafer["observations"] if row["wafer_id"] == "W0")
+        crossing_row["feature_at"] = "2026-01-12T00:00:00Z"
+        crossing_row["outcome_at"] = "2026-01-13T00:00:00Z"
+        self.assertEqual(associate_quality(crossing_wafer, expected_context, expected_coordinates)["status"], "INCONCLUSIVE")
+
+        nested_lots = copy.deepcopy(assoc)
+        for row in list(nested_lots["observations"]):
+            repeated = copy.deepcopy(row)
+            repeated["wafer_id"] = f"W{int(row['wafer_id'][1:]) + 20}"
+            nested_lots["observations"].append(repeated)
+        nested_lots["cohort_selection"]["eligible_wafer_count"] = 40
+        nested_lots["cohort_selection"]["selected_wafer_count"] = 40
+        nested_result = associate_quality(nested_lots, expected_context, expected_coordinates)
+        self.assertEqual(nested_result["status"], "VALID")
+        self.assertEqual(nested_result["wafers"], 40)
+        self.assertEqual(nested_result["independent_lots"], 20)
+        self.assertEqual(len(nested_result["uncertainty"]["leave_one_lot_out_estimates"]), 20)
+        self.assertIn("average Fisher-z wafer associations within lot", nested_result["lot_aggregation"])
+
+        missing_selection = copy.deepcopy(assoc)
+        missing_selection.pop("hypothesis_selection")
+        self.assertEqual(associate_quality(missing_selection, expected_context, expected_coordinates)["status"], "INCONCLUSIVE")
+        post_selected = copy.deepcopy(assoc)
+        post_selected["hypothesis_selection"]["predeclared_before_holdout_outcomes"] = False
+        self.assertEqual(associate_quality(post_selected, expected_context, expected_coordinates)["status"], "INCONCLUSIVE")
+        incomplete_family = copy.deepcopy(assoc)
+        incomplete_family["hypothesis_selection"]["family_complete"] = False
+        self.assertEqual(associate_quality(incomplete_family, expected_context, expected_coordinates)["status"], "INCONCLUSIVE")
+        missing_cohort_frame = copy.deepcopy(assoc)
+        missing_cohort_frame.pop("cohort_selection")
+        self.assertEqual(associate_quality(missing_cohort_frame, expected_context, expected_coordinates)["status"], "INCONCLUSIVE")
+        outcome_selected = copy.deepcopy(assoc)
+        outcome_selected["cohort_selection"].update({
+            "sampling_design": "OUTCOME_INFORMED_TOP_ASSOCIATION",
+            "eligible_wafer_count": 80, "selected_wafer_count": 20,
+            "selection_blind_to_feature_and_outcome": False,
+        })
+        rejected_selection = associate_quality(outcome_selected, expected_context, expected_coordinates)
+        self.assertEqual(rejected_selection["status"], "INCONCLUSIVE")
+        self.assertIn("outcome-blind complete eligible-wafer frame", rejected_selection["reason"])
+        incomplete_frame = copy.deepcopy(assoc)
+        incomplete_frame["cohort_selection"]["eligible_wafer_count"] = 21
+        frame_mismatch = associate_quality(incomplete_frame, expected_context, expected_coordinates)
+        self.assertEqual(frame_mismatch["status"], "INCONCLUSIVE")
+        self.assertIn("does not reconcile to the complete declared eligible-wafer frame", frame_mismatch["reason"])
+        multi_hypothesis = copy.deepcopy(assoc)
+        multi_hypothesis["hypothesis_selection"].update({"hypothesis_id": "H7", "family_size": 20})
+        multi_result = associate_quality(multi_hypothesis, expected_context, expected_coordinates)
+        self.assertEqual(multi_result["status"], "VALID")
+        self.assertFalse(multi_result["hypothesis_selection"]["confirmatory_single_hypothesis_scope"])
+        self.assertIn("treat selected associations as exploratory", multi_result["interpretation"])
 
         shared_lot = copy.deepcopy(assoc)
         for row in shared_lot["observations"]:
@@ -501,6 +1053,13 @@ class AnomalyAndAssociationTests(unittest.TestCase):
                               "coordinate_system": "wafer_xy_v1", "coordinate_unit": "mm"},
                  "holdout": {"verified": True, "split_method": "out_of_time_by_wafer_and_lot", "grouped_by_wafer": True,
                              "grouped_by_lot": True, "leakage_checked": True},
+                 "cohort_selection": {"verified": True, "sampling_design": "COMPLETE_ELIGIBLE_FRAME",
+                                      "frame_id": "TEST-C03-SMALL-FRAME", "eligibility_rule_id": "TEST-C03-SMALL-RULE",
+                                      "eligibility_rule_predeclared": True,
+                                      "selection_blind_to_feature_and_outcome": True,
+                                      "eligible_wafer_count": 10, "selected_wafer_count": 10},
+                 "hypothesis_selection": {"hypothesis_id": "H1", "family_size": 1,
+                                           "predeclared_before_holdout_outcomes": True, "family_complete": True},
                  "observations": records}
         self.assertEqual(associate_quality(assoc, expected_context, expected_coordinates)["status"], "INCONCLUSIVE")
 
@@ -509,7 +1068,9 @@ class IntegratedEvidenceTests(unittest.TestCase):
     def test_all_capability_workflow_exports_typed_evidence(self):
         data = make_map("W-current", (10, 12, 12, 12), measured_at="2026-02-01T00:00:00Z", include_south=True)
         data["source_ids"] = ["SYN-SPATIAL"]
-        data["baseline_population"] = [make_map(f"W{i}", (10, 12, 12, 12), include_south=True) for i in range(20)]
+        data["baseline_population"] = [make_map(f"W{i}", (10, 12, 12, 12),
+                                                measured_at=f"2026-01-{i + 1:02d}T00:00:00Z", include_south=True)
+                                         for i in range(20)]
         data["baseline_holdout_verified"] = True
         data["history"] = [make_map("W-history", (20, 22, 22, 22), include_south=True)]
         data["previous_step"] = make_map("W-current", (9, 11, 11, 11), step="S0", instance="I0", measured_at="2026-01-01T00:00:00Z", include_south=True)
@@ -519,23 +1080,41 @@ class IntegratedEvidenceTests(unittest.TestCase):
             "context": {"product_id": "P-1", "metric": "thickness", "measurement_definition_id": "MET-1", "unit": "nm", "layer": "L1", "population_signature": "POP-A", "sampling_mask_id": "MASK-A"},
             "holdout": {"verified": True, "split_method": "out_of_time_by_wafer_and_lot", "grouped_by_wafer": True,
                         "grouped_by_lot": True, "leakage_checked": True},
+            "cohort_selection": {"verified": True, "sampling_design": "COMPLETE_ELIGIBLE_FRAME",
+                                 "frame_id": "TEST-C03-INTEGRATED-FRAME", "eligibility_rule_id": "TEST-C03-INTEGRATED-RULE",
+                                 "eligibility_rule_predeclared": True,
+                                 "selection_blind_to_feature_and_outcome": True,
+                                 "eligible_wafer_count": 20, "selected_wafer_count": 20},
+            "hypothesis_selection": {"hypothesis_id": "H7", "family_size": 20,
+                                      "predeclared_before_holdout_outcomes": True, "family_complete": True},
+            "temporal_partition": {"verified": True, "predeclared_before_holdout_outcomes": True,
+                                    "partition_id": "SYN-EPOCHS-INTEGRATED", "source_id": "SYN-TEMPORAL",
+                                    "approval_reference": "SYN-REVIEW-EPOCHS-1",
+                                    "cutoff_at": "2026-01-11T00:00:00Z",
+                                    "earlier_label": "early", "later_label": "late",
+                                    "minimum_independent_lots_per_stratum": 10},
             "geometry": {"verified": True, "radius": 1, "origin": {"x": 0, "y": 0}, "orientation_deg": 0,
                          "coordinate_system": "wafer_xy_v1", "coordinate_unit": "mm"},
             "observations": [{"wafer_id": f"Q{w}", "lot_id": f"QL{w}", "die_id": f"D{d}", "x": association_coordinates[d][0], "y": association_coordinates[d][1],
-                "feature_value": d, "outcome_value": d * 2, "product_id": "P-1", "metric": "thickness", "measurement_definition_id": "MET-1", "unit": "nm", "layer": "L1",
+                "feature_value": d, "outcome_value": d * (2 if w < 10 else -2), "product_id": "P-1", "metric": "thickness", "measurement_definition_id": "MET-1", "unit": "nm", "layer": "L1",
                 "population_signature": "POP-A", "sampling_mask_id": "MASK-A", "cohort": "holdout",
                 "spatial_block_id": "block-a" if d < 3 else "block-b",
-                "feature_at": "2026-01-01T00:00:00Z", "outcome_at": "2026-01-02T00:00:00Z"} for w in range(20) for d in range(len(association_coordinates))]}
+                "feature_at": f"2026-01-{w + 1:02d}T00:00:00Z", "outcome_at": f"2026-01-{w + 2:02d}T00:00:00Z"} for w in range(20) for d in range(len(association_coordinates))]}
         result = analyze(data)
         self.assertEqual(result["status"], "VALID")
         self.assertTrue(result["investigation_id"].startswith("SYN-p3-"))
         self.assertIn("ASSOCIATION", [claim["category"] for claim in result["claims"]])
+        self.assertTrue(any("not family-wise adjusted" in claim["statement"] for claim in result["claims"]))
         report = result["artifacts"][0]["result"]
         self.assertEqual(report["fingerprint"]["status"], "VALID")
         self.assertEqual(report["anomaly"]["status"], "VALID")
         self.assertEqual(report["similarity"]["status"], "VALID")
         self.assertEqual(report["evolution"]["status"], "VALID")
         self.assertEqual(report["quality_association"]["status"], "VALID")
+        self.assertEqual(report["quality_association"]["temporal_association"]["status"], "OPPOSITE_DIRECTIONS_OBSERVED")
+        self.assertIn("SYN-TEMPORAL", [source["id"] for source in result["sources"]])
+        self.assertTrue(any("opposite nominal interval directions" in claim["statement"] for claim in result["claims"]))
+        self.assertEqual(report["quality_association"]["cohort_selection"]["sampling_design"], "COMPLETE_ELIGIBLE_FRAME")
         self.assertFalse(result["transformations"][0]["interpolation"])
         self.assertEqual(result["sources"][0]["id"], "SYN-SPATIAL")
         source_hashes = {source["id"]: source["source_hash"] for source in result["sources"]}

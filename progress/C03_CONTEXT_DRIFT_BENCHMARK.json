@@ -1,0 +1,232 @@
+{
+  "company_data_used": false,
+  "created_utc": "2026-11-24T14:59:05Z",
+  "declared_context_drift": {
+    "measurement_definition_id": {
+      "abstention_rate": 1.0,
+      "inconclusive": 100,
+      "trials": 100,
+      "unexpected_statuses": [],
+      "wilson_95": [
+        0.9630065017930143,
+        1.0
+      ]
+    },
+    "metric": {
+      "abstention_rate": 1.0,
+      "inconclusive": 100,
+      "trials": 100,
+      "unexpected_statuses": [],
+      "wilson_95": [
+        0.9630065017930143,
+        1.0
+      ]
+    },
+    "population_signature": {
+      "abstention_rate": 1.0,
+      "inconclusive": 100,
+      "trials": 100,
+      "unexpected_statuses": [],
+      "wilson_95": [
+        0.9630065017930143,
+        1.0
+      ]
+    },
+    "product_id": {
+      "abstention_rate": 1.0,
+      "inconclusive": 100,
+      "trials": 100,
+      "unexpected_statuses": [],
+      "wilson_95": [
+        0.9630065017930143,
+        1.0
+      ]
+    },
+    "recipe_id": {
+      "abstention_rate": 1.0,
+      "inconclusive": 100,
+      "trials": 100,
+      "unexpected_statuses": [],
+      "wilson_95": [
+        0.9630065017930143,
+        1.0
+      ]
+    },
+    "sampling_mask_id": {
+      "abstention_rate": 1.0,
+      "inconclusive": 100,
+      "trials": 100,
+      "unexpected_statuses": [],
+      "wilson_95": [
+        0.9630065017930143,
+        1.0
+      ]
+    },
+    "unit": {
+      "abstention_rate": 1.0,
+      "inconclusive": 100,
+      "trials": 100,
+      "unexpected_statuses": [],
+      "wilson_95": [
+        0.9630065017930143,
+        1.0
+      ]
+    }
+  },
+  "design": {
+    "contract_trials_per_case": 100,
+    "distinct_lots_per_replicate": 20,
+    "feature_precedes_outcome": true,
+    "one_wafer_per_lot": true,
+    "outcome_prevalence_shift": "wafer-level intercept -1.25 to +1.25 across the two time epochs",
+    "random_seed": 20261124,
+    "sites_per_wafer": 48,
+    "statistical_replicates_per_dgp": 500,
+    "wafers_per_replicate": 20
+  },
+  "hidden_site_confounding": {
+    "ground_truth": "A latent site field U causes both feature and outcome; there is no feature-to-outcome causal path. U is intentionally absent from source semantics.",
+    "interval_excludes_zero": 500,
+    "noncausal_caveat_present": true,
+    "reported_association_mc": {
+      "mean": 0.8413176581760206,
+      "monte_carlo_95_interval": [
+        0.8406713226306427,
+        0.8419639937213984
+      ],
+      "monte_carlo_standard_error": 0.00032976303335603084,
+      "replicates": 500
+    },
+    "significant_fraction_wilson_95": [
+      0.9923756595384479,
+      1.0
+    ],
+    "valid": 500
+  },
+  "interpretation": "Observed context drift and support violations are rejected. Prevalence-only wafer intercept shifts are removed by within-wafer spatial-block adjustment in this design. Hidden common causes and stale/unreported population epochs can still yield VALID observational associations; current source authority and cohort attestations are trusted inputs, not facts P3 can independently establish. The result is not causal.",
+  "other_abstention_challenges": {
+    "changed_block_map": {
+      "abstention_rate": 1.0,
+      "inconclusive": 100,
+      "trials": 100,
+      "unexpected_statuses": [],
+      "wilson_95": [
+        0.9630065017930143,
+        1.0
+      ]
+    },
+    "duplicate_lot": {
+      "abstention_rate": 1.0,
+      "inconclusive": 100,
+      "trials": 100,
+      "unexpected_statuses": [],
+      "wilson_95": [
+        0.9630065017930143,
+        1.0
+      ]
+    },
+    "outcome_dependent_selection": {
+      "abstention_rate": 1.0,
+      "inconclusive": 100,
+      "trials": 100,
+      "unexpected_statuses": [],
+      "wilson_95": [
+        0.9630065017930143,
+        1.0
+      ]
+    },
+    "sparse_common_support": {
+      "abstention_rate": 1.0,
+      "inconclusive": 100,
+      "trials": 100,
+      "unexpected_statuses": [],
+      "wilson_95": [
+        0.9630065017930143,
+        1.0
+      ]
+    }
+  },
+  "predeclared_acceptance": {
+    "declared_context_drift": "Every changed product/recipe/metric/definition/unit/mask/population signature abstains INCONCLUSIVE.",
+    "invalid_support": "Sparse exact-site coverage, repeated lots, changed block registration and outcome-informed selection all abstain.",
+    "stable_null": "All 500 analyses VALID and nominal 95% intervals cover zero in 88%-99% of replicates; Wilson interval reported.",
+    "temporal_reversal": "All predeclared-reversal replicates report opposite nominal interval directions by authorized time stratum even if the pooled estimate is near zero; no post-outcome cutpoint selection.",
+    "unmeasured_confounding": "Report behavior and verify non-causal/residual-confounding language; do not interpret a VALID estimate as causal."
+  },
+  "schema": "p3-c03-context-drift-benchmark/v2",
+  "scope": "Independent synthetic falsification study; no manufacturing data, internal semantic validation, or causal claim.",
+  "stable_null_with_prevalence_shift": {
+    "abstentions": 0,
+    "coverage_fraction": 0.954,
+    "coverage_wilson_95": [
+      0.9319222072317267,
+      0.9691548916291838
+    ],
+    "ground_truth": "Within each wafer and predeclared spatial block, feature and outcome residuals are independent; a changing wafer-level outcome intercept is not a spatial effect.",
+    "mean_within_wafer_r_mc": {
+      "mean": 0.0004528975037725793,
+      "monte_carlo_95_interval": [
+        -0.0025318740200004353,
+        0.0034376690275455942
+      ],
+      "monte_carlo_standard_error": 0.0015228426141699054,
+      "replicates": 500
+    },
+    "valid": 500,
+    "zero_covered": 477
+  },
+  "status": "PASS",
+  "temporal_effect_reversal": {
+    "ground_truth": "Feature/outcome spatial association reverses sign between timestamp epochs while the declared population signature is falsely held constant; this models stale source semantics and must not be treated as a validated stable effect.",
+    "interval_excludes_zero": 0,
+    "interval_excludes_zero_fraction_wilson_95": [
+      4.336808689942018e-19,
+      0.007624340461552241
+    ],
+    "limitation": "A verified, predeclared temporal partition reveals opposite descriptive estimates in this synthetic challenge. Without authorized epoch boundaries, P3 cannot detect a population epoch omitted or misrepresented by the source authority. Stratum intervals are nominal and not multiplicity-adjusted.",
+    "noncausal_caveat_present": true,
+    "opposite_predeclared_directions_detected": 500,
+    "reported_association_mc": {
+      "mean": 0.0005571060754513719,
+      "monte_carlo_95_interval": [
+        -0.0016767386284161445,
+        0.0027909507793188884
+      ],
+      "monte_carlo_standard_error": 0.001139716685646692,
+      "replicates": 500
+    },
+    "strata_example": {
+      "approval_reference": "SYN-REVIEW-C03-TEMPORAL-1",
+      "cutoff_at": "2025-01-11T00:00:00Z",
+      "interval_scope": "nominal per stratum; no family-wise adjustment",
+      "opposite_directions_observed": true,
+      "partition_id": "SYN-TIME-EPOCH-REVERSAL",
+      "predeclared_before_holdout_outcomes": true,
+      "source_id": "SYN-AUTHORIZED-TEMPORAL-METADATA",
+      "status": "OPPOSITE_DIRECTIONS_OBSERVED",
+      "strata": [
+        {
+          "fisher_wafer_95_ci": [
+            0.900511942626134,
+            0.9313318520505859
+          ],
+          "independent_lots": 10,
+          "label": "early",
+          "mean_within_wafer_r": 0.9172846731900482,
+          "wafers": 10
+        },
+        {
+          "fisher_wafer_95_ci": [
+            -0.9269086855162827,
+            -0.9125600882716421
+          ],
+          "independent_lots": 10,
+          "label": "late",
+          "mean_within_wafer_r": -0.9200422763888181,
+          "wafers": 10
+        }
+      ]
+    },
+    "valid": 500
+  }
+}

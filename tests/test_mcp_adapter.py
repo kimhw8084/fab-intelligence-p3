@@ -2,89 +2,43 @@ import copy
 import importlib.util
 import json
 import os
-import subprocess
+import subprocess  # nosec B404
 import sys
-import threading
 import tempfile
+import threading
 import time
 import unittest
-from pathlib import Path
 from http.server import ThreadingHTTPServer
+from pathlib import Path
 from unittest.mock import patch
 
 from fabintel.contracts import validate_envelope
-from fabintel.mcp_adapter import (EnvironmentCredentialProvider, MCPDataError, MCPPolicyError,
-                                  ReadOnlyMCPAdapter, approved_query_plan_sha256,
-                                  tool_definition_sha256)
-from fabintel.mcp_client import MCPClient, MCPCancelled
-from fabintel.mcp_workflow import run_mcp_analysis
+from fabintel.mcp_adapter import (
+    EnvironmentCredentialProvider,
+    MCPDataError,
+    MCPPolicyError,
+    ReadOnlyMCPAdapter,
+    approved_query_plan_sha256,
+    tool_definition_sha256,
+)
+from fabintel.mcp_client import MCPCancelled, MCPClient, MCPToolError
+from fabintel.mcp_workflow import run_mcp_analysis, run_mcp_host_module
+from fabintel.synthetic_mcp import synthetic_adapter_config
 from tests.test_mcp_client import _HTTPMockHandler
 
 ROOT = Path(__file__).resolve().parent.parent
-SERVER = [sys.executable, "-S", "-m", "tests.fixtures.mcp_mock_server", "--protocol", "dual"]
+SERVER = [sys.executable, "-S", "-m", "qualification.synthetic_mcp_peer", "--protocol", "dual"]
 
 
 def adapter_config(client):
-    tools = {tool["name"]: tool for tool in client.list_tools()}
-    fields = {
-        "discover": {},
-        "semantics": {"source_ids": "source_ids", "semantic_version": "semantic_version"},
-        "relationships": {"typed_entity_ids": "typed_entity_ids", "time_window": "time_window"},
-        "read_bounded": {"approved_plan": "approved_plan", "permission_context": "permission_context", "limits": "limits",
-                         "operation_id": "operation_id"},
-        "audit": {"operation_id": "operation_id"},
-    }
-    names = {"discover": "fab_discover", "semantics": "fab_semantics", "relationships": "fab_relationships",
-             "read_bounded": "fab_read_bounded", "audit": "fab_audit"}
-    operations = {}
-    for logical, tool_name in names.items():
-        operations[logical] = {"tool_name": tool_name,
-            "approval": {"approved": True, "reference": "SYN-TOOL-APPROVAL-" + logical,
-                         "tool_definition_sha256": tool_definition_sha256(tools[tool_name])},
-            "argument_mapping": fields[logical]}
-    plans = []
-    workflow_plans = (("SYN-WF-CURRENT", "MOCK_MAP", "current"),
-                      ("SYN-WF-PREVIOUS", "MOCK_MAP", "previous"),
-                      ("SYN-WF-BASELINE", "MOCK_MAP", "baseline"),
-                      ("SYN-WF-HISTORY", "MOCK_MAP", "history"),
-                      ("SYN-WF-ASSOCIATION", "MOCK_QUALITY", "association"))
-    for plan_id, delay in (("SYN-PLAN-1", 0), ("SYN-CANCEL", 700)):
-        plan = {"plan_id": plan_id, "source_id": "MOCK_MAP", "semantic_version": "MOCK-SEM-1",
-                "test_delay_ms": delay}
-        plans.append({"approved": True, "approval_reference": "SYN-QUERY-" + plan_id,
-                      "plan": plan, "plan_sha256": approved_query_plan_sha256(plan)})
-    for plan_id, source_id, role in workflow_plans:
-        plan = {"plan_id": plan_id, "source_id": source_id, "semantic_version": "MOCK-SEM-1",
-                "analysis_role": role}
-        plans.append({"approved": True, "approval_reference": "SYN-QUERY-" + plan_id,
-                      "plan": plan, "plan_sha256": approved_query_plan_sha256(plan)})
-    malformed_plan = {"plan_id": "SYN-WF-CURRENT-BAD-UNIT", "source_id": "MOCK_MAP",
-                      "semantic_version": "MOCK-SEM-1", "analysis_role": "current",
-                      "test_case": "wrong_measurement_unit"}
-    plans.append({"approved": True, "approval_reference": "SYN-QUERY-" + malformed_plan["plan_id"],
-                  "plan": malformed_plan, "plan_sha256": approved_query_plan_sha256(malformed_plan)})
-    bad_audit_plan = {"plan_id": "SYN-WF-CURRENT-BAD-AUDIT", "source_id": "MOCK_MAP",
-                      "semantic_version": "MOCK-SEM-1", "analysis_role": "current",
-                      "test_case": "wrong_audit_hash"}
-    plans.append({"approved": True, "approval_reference": "SYN-QUERY-" + bad_audit_plan["plan_id"],
-                  "plan": bad_audit_plan, "plan_sha256": approved_query_plan_sha256(bad_audit_plan)})
-    return {"schema_version": "p3-mcp-adapter-config-v1",
-        "transport": {"type": "stdio", "command": SERVER},
-        "read_only_approval": {"approved": True, "reference": "SYN-READ-ONLY-APPROVAL"},
-        "approved_sources": [
-            {"approved": True, "source_id": source, "semantic_version": "MOCK-SEM-1",
-             "approval_reference": "SYN-SOURCE-" + source}
-            for source in ("MOCK_MAP", "MOCK_QUALITY")
-        ],
-        "approved_plans": plans,
-        "limits": {"max_rows": 100, "max_bytes": 1048576, "max_seconds": 5},
-        "operations": operations}
+    return synthetic_adapter_config(client, ROOT)
 
 
 @unittest.skipUnless(importlib.util.find_spec("mcp"), "install the local hash-locked MCP SDK candidate to run adapter integration checks")
 class MCPReadOnlyAdapterTests(unittest.TestCase):
-    def open_adapter(self):
-        client = MCPClient({"type": "stdio", "command": SERVER, "cwd": str(ROOT)}, request_timeout=3)
+    def open_adapter(self, scenario=None):
+        command = SERVER + (["--scenario", scenario] if scenario else [])
+        client = MCPClient({"type": "stdio", "command": command, "cwd": str(ROOT)}, request_timeout=3)
         self.addCleanup(client.close)
         config = adapter_config(client)
         return ReadOnlyMCPAdapter(client, config), client, config
@@ -121,6 +75,11 @@ class MCPReadOnlyAdapterTests(unittest.TestCase):
                           ("fingerprint", "evolution", "quality_association", "anomaly", "similarity")},
                          {"fingerprint": "VALID", "evolution": "VALID", "quality_association": "VALID",
                           "anomaly": "VALID", "similarity": "VALID"})
+        self.assertEqual(result["quality_association"]["hypothesis_selection"]["family_size"], 20)
+        self.assertEqual(result["quality_association"]["cohort_selection"]["selected_wafer_count"], 20)
+        self.assertEqual(result["quality_association"]["cohort_selection"]["sampling_design"], "COMPLETE_ELIGIBLE_FRAME")
+        self.assertFalse(result["quality_association"]["hypothesis_selection"]["confirmatory_single_hypothesis_scope"])
+        self.assertIn("treat selected associations as exploratory", result["quality_association"]["interpretation"])
         trace = evidence["provenance"]["mcp_workflow"]
         self.assertEqual(trace["permission_scope"], "read_only")
         self.assertEqual(len(trace["bounded_reads"]), 5)
@@ -128,6 +87,113 @@ class MCPReadOnlyAdapterTests(unittest.TestCase):
         self.assertEqual({source["id"] for source in evidence["sources"]}, {"MOCK_MAP", "MOCK_QUALITY"})
         self.assertTrue(all(source["approved_semantic_version"] == "MOCK-SEM-1" for source in evidence["sources"]))
         self.assertEqual(trace["internal_qualification"], "PENDING_INTERNAL")
+        self.assertEqual({item["source_version"] for item in trace["bounded_reads"]},
+                         {"MOCK-SNAPSHOT-MAP", "MOCK-SNAPSHOT-QUALITY"})
+
+    def test_protocol_mapping_with_outcome_selected_cohort_abstains_only_from_c03(self):
+        adapter, _, _ = self.open_adapter("unsupported-cohort-selection")
+        evidence = run_mcp_analysis(adapter,
+            ["SYN-WF-CURRENT", "SYN-WF-PREVIOUS", "SYN-WF-BASELINE", "SYN-WF-HISTORY", "SYN-WF-ASSOCIATION"],
+            time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
+            operation_id="SYN-OUTCOME-SELECTED-C03")
+        report = evidence["artifacts"][0]["result"]
+        self.assertEqual(report["quality_association"]["status"], "INCONCLUSIVE")
+        self.assertIn("outcome-blind complete eligible-wafer frame", report["quality_association"]["reason"])
+        self.assertEqual({key: report[key]["status"] for key in
+                          ("fingerprint", "evolution", "anomaly", "similarity")},
+                         {"fingerprint": "VALID", "evolution": "VALID", "anomaly": "VALID", "similarity": "VALID"})
+        self.assertEqual(evidence["status"], "PARTIAL")
+
+    def test_protocol_workflow_builds_typed_p3_host_module_result(self):
+        adapter, _, _ = self.open_adapter()
+        module = run_mcp_host_module(adapter,
+            ["SYN-WF-CURRENT", "SYN-WF-PREVIOUS", "SYN-WF-BASELINE", "SYN-WF-HISTORY", "SYN-WF-ASSOCIATION"],
+            time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
+            operation_id="SYN-MODULE-RESULT")
+        evidence = module["evidence"]
+        spatial_map = module["spatial_map"]
+        self.assertEqual(module["contract_version"], "p3-reference-module.v2")
+        self.assertEqual(module["product_id"], "p3")
+        self.assertEqual(module["capabilities"], ["C01", "C02", "C03", "C04", "C05"])
+        self.assertEqual(module["source_preview"]["status"], "SYNTHETIC_ONLY")
+        self.assertEqual(module["source_preview"]["semantic_version"], "MOCK-SEM-1")
+        self.assertTrue(validate_envelope(evidence))
+        self.assertEqual(spatial_map["schema_version"], "fab-spatial-map.v2")
+        self.assertEqual(spatial_map["sampling"]["observation_count"], len(spatial_map["observations"]))
+        self.assertEqual([point["site_id"] for point in spatial_map["observations"]],
+                         ["center", "east", "north", "west", "south"])
+        self.assertEqual([point["value"] for point in spatial_map["observations"]], [10, 12, 12, 12, 12])
+        self.assertEqual([point["value_type"] for point in spatial_map["observations"]], ["number"] * 5)
+        self.assertEqual(spatial_map["interpolation"], "none")
+        historical_map = module["historical_spatial_map"]
+        self.assertEqual(historical_map["schema_version"], "fab-spatial-map.v2")
+        self.assertEqual(historical_map["wafer_id"], "SYN-W-HIST")
+        self.assertEqual(historical_map["sampling"]["observation_count"],
+                         module["evidence"]["artifacts"][0]["result"]["similarity"]["neighbors"][0]["candidate_observed_site_count"])
+        self.assertEqual(historical_map["interpolation"], "none")
+        self.assertTrue(historical_map["coordinates_verified"])
+        self.assertEqual(module["suite_compatibility"]["status"], "COMPATIBLE")
+        self.assertEqual(module["suite_compatibility"]["spatial_map"]["schema_version"], "suite-spatial-map.v1")
+        trace = evidence["provenance"]["mcp_workflow"]
+        self.assertEqual(len(trace["bounded_reads"]), 5)
+        self.assertTrue(all(item["audit_id"] and item["source_version"] for item in trace["bounded_reads"]))
+        self.assertEqual(module["source_preview"]["coverage"]["observations"], len(spatial_map["observations"]))
+        # The host receives the same validated envelope object; export serialization remains host-owned.
+        self.assertIs(module["evidence"], evidence)
+
+    def test_protocol_workflow_preserves_typed_categorical_and_defect_values(self):
+        missing_adapter, _, _ = self.open_adapter("explicit-missing")
+        missing = run_mcp_host_module(missing_adapter, ["SYN-WF-CURRENT"],
+            time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
+            operation_id="SYN-MISSING-MODULE")
+        missing_map = missing["spatial_map"]
+        self.assertEqual(missing_map["sampling"]["observation_count"], 5)
+        self.assertEqual(missing_map["sampling"]["explicit_missing_value_count"], 1)
+        self.assertIsNone(missing_map["observations"][1]["value"])
+        self.assertEqual(missing_map["observations"][1]["observation_kind"], "MISSING_MEASUREMENT")
+        self.assertEqual(missing["evidence"]["status"], "PARTIAL")
+        missing_fingerprint = missing["evidence"]["artifacts"][0]["result"]["fingerprint"]
+        self.assertEqual(missing_fingerprint["status"], "PARTIAL")
+        self.assertEqual(missing_fingerprint["explicit_missing_count"], 1)
+        self.assertEqual(missing_fingerprint["observed_points"], 4)
+
+        categorical_adapter, _, _ = self.open_adapter("typed-categorical")
+        categorical = run_mcp_host_module(categorical_adapter, ["SYN-WF-CURRENT"],
+            time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
+            operation_id="SYN-CATEGORICAL-MODULE")
+        values = [point["value"] for point in categorical["spatial_map"]["observations"]]
+        self.assertEqual(values, ["PASS", 2, "FAIL", "PASS", 3])
+        self.assertIs(type(values[1]), int)
+        self.assertEqual(categorical["spatial_map"]["sampling"]["observation_count"], 5)
+        self.assertEqual(categorical["spatial_map"]["sampling"]["categorical_measurement_count"], 5)
+        self.assertEqual(categorical["spatial_map"]["sampling"]["explicit_missing_value_count"], 0)
+        self.assertEqual(categorical["evidence"]["artifacts"][0]["result"]["fingerprint"]["modality"], "die_bin_categorical")
+
+        defect_adapter, _, _ = self.open_adapter("typed-defect")
+        defects = run_mcp_host_module(defect_adapter, ["SYN-WF-CURRENT"],
+            time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
+            operation_id="SYN-DEFECT-MODULE")
+        defect_values = [point["value"] for point in defects["spatial_map"]["observations"]]
+        self.assertEqual(defect_values, ["BRIDGE", 7, None, None, None])
+        self.assertIs(type(defect_values[1]), int)
+        defect_result = defects["evidence"]["artifacts"][0]["result"]["fingerprint"]
+        self.assertEqual(defect_result["observed_points"], 5)
+        self.assertEqual(defect_result["unlabeled_event_count"], 3)
+        self.assertEqual(defects["spatial_map"]["sampling"]["observation_count"], 5)
+        self.assertEqual(defects["spatial_map"]["sampling"]["defect_event_count"], 5)
+        self.assertEqual(defects["spatial_map"]["sampling"]["explicit_missing_value_count"], 0)
+        self.assertEqual(defects["spatial_map"]["observations"][2]["observation_kind"], "DEFECT_EVENT")
+
+    def test_mcp_quality_semantics_require_predeclared_complete_hypothesis_family(self):
+        adapter, _, _ = self.open_adapter("missing-hypothesis-selection")
+        evidence = run_mcp_analysis(adapter, ["SYN-WF-CURRENT", "SYN-WF-ASSOCIATION"],
+            time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
+            operation_id="SYN-WORKFLOW-MISSING-SELECTION")
+        result = evidence["artifacts"][0]["result"]
+        self.assertEqual(evidence["status"], "PARTIAL")
+        self.assertEqual(result["fingerprint"]["status"], "VALID")
+        self.assertEqual(result["quality_association"]["status"], "INCONCLUSIVE")
+        self.assertIn("hypothesis family", result["quality_association"]["reason"])
 
     def test_mcp_workflow_keeps_missing_support_data_as_capability_abstentions(self):
         adapter, _, _ = self.open_adapter()
@@ -155,6 +221,112 @@ class MCPReadOnlyAdapterTests(unittest.TestCase):
                 time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
                 operation_id="SYN-WORKFLOW-BAD-AUDIT")
 
+    def test_mcp_workflow_rejects_audit_source_version_mismatch(self):
+        adapter, _, _ = self.open_adapter("audit-version-drift")
+        with self.assertRaisesRegex(MCPDataError, "audit does not correlate"):
+            run_mcp_analysis(adapter, ["SYN-WF-CURRENT"],
+                time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
+                operation_id="SYN-WORKFLOW-AUDIT-VERSION-DRIFT")
+
+    def test_peer_denial_fails_closed_before_any_scientific_evidence_is_created(self):
+        adapter, _, _ = self.open_adapter("read-denied")
+        with self.assertRaisesRegex(MCPPolicyError, "denied or failed"):
+            run_mcp_analysis(adapter, ["SYN-WF-CURRENT"],
+                time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
+                operation_id="SYN-WORKFLOW-DENIED")
+
+    def test_official_sdk_tool_error_keeps_its_safe_typed_failure(self):
+        adapter, _, _ = self.open_adapter()
+        with self.assertRaises(MCPToolError) as error:
+            adapter.client.call_tool("fab_semantics", {"source_ids": ["UNAPPROVED"],
+                                                        "semantic_version": "MOCK-SEM-1"})
+        self.assertNotIn("permission denied", str(error.exception).lower())
+
+    def test_stale_advertised_semantic_version_is_rejected(self):
+        adapter, _, _ = self.open_adapter("stale-semantic-inventory")
+        with self.assertRaisesRegex(MCPPolicyError, "does not advertise"):
+            adapter.discover()
+
+    def test_stale_semantics_response_is_rejected(self):
+        adapter, _, _ = self.open_adapter("stale-semantics")
+        with self.assertRaisesRegex(MCPDataError, "semantics response is incomplete or unapproved"):
+            run_mcp_analysis(adapter, ["SYN-WF-CURRENT"],
+                time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
+                operation_id="SYN-WORKFLOW-STALE-SEMANTICS")
+
+    def test_source_snapshot_version_drift_is_rejected(self):
+        adapter, _, _ = self.open_adapter("source-version-drift")
+        with self.assertRaisesRegex(MCPDataError, "source version drifted"):
+            run_mcp_analysis(adapter, ["SYN-WF-CURRENT"],
+                time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
+                operation_id="SYN-WORKFLOW-SOURCE-DRIFT")
+
+    def test_invalid_approved_relationship_is_rejected_before_c03_analysis(self):
+        adapter, _, _ = self.open_adapter("invalid-relationship")
+        with self.assertRaisesRegex(MCPPolicyError, "does not satisfy P3 wafer/die"):
+            run_mcp_analysis(adapter, ["SYN-WF-CURRENT", "SYN-WF-ASSOCIATION"],
+                time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
+                operation_id="SYN-WORKFLOW-INVALID-RELATION")
+
+    def test_bad_verified_geometry_is_rejected_before_analysis(self):
+        adapter, _, _ = self.open_adapter("bad-geometry")
+        with self.assertRaisesRegex(MCPDataError, "outside the approved wafer geometry"):
+            run_mcp_analysis(adapter, ["SYN-WF-CURRENT"],
+                time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
+                operation_id="SYN-WORKFLOW-BAD-GEOMETRY")
+
+    def test_peer_cannot_exceed_approved_read_row_limit(self):
+        adapter, _, _ = self.open_adapter("oversized-read")
+        with self.assertRaisesRegex(MCPDataError, "missing or excessive typed rows"):
+            run_mcp_analysis(adapter, ["SYN-WF-CURRENT"],
+                time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
+                operation_id="SYN-WORKFLOW-OVERSIZED")
+
+    def test_missing_center_keeps_directional_c01_evidence_and_abstains_edge_center(self):
+        adapter, _, _ = self.open_adapter("missing-center")
+        evidence = run_mcp_analysis(adapter, ["SYN-WF-CURRENT"],
+            time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
+            operation_id="SYN-WORKFLOW-MISSING-CENTER")
+        result = evidence["artifacts"][0]["result"]["fingerprint"]
+        self.assertEqual(result["status"], "PARTIAL")
+        self.assertEqual(result["edge_center"]["status"], "INCONCLUSIVE")
+        self.assertEqual(result["directional_gradient"]["status"], "VALID")
+
+    def test_missing_edge_keeps_directional_c01_evidence(self):
+        adapter, _, _ = self.open_adapter("missing-edge")
+        evidence = run_mcp_analysis(adapter, ["SYN-WF-CURRENT"],
+            time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
+            operation_id="SYN-WORKFLOW-MISSING-EDGE")
+        result = evidence["artifacts"][0]["result"]["fingerprint"]
+        self.assertEqual(result["edge_center"]["status"], "INCONCLUSIVE")
+        self.assertEqual(result["directional_gradient"]["status"], "VALID")
+        self.assertEqual(evidence["status"], "PARTIAL")
+
+    def test_full_workflow_cancellation_does_not_return_partial_success(self):
+        adapter, _, _ = self.open_adapter()
+        cancel = threading.Event()
+        errors = []
+        results = []
+        def analyze_in_thread():
+            try:
+                results.append(run_mcp_analysis(adapter, ["SYN-WF-CURRENT-CANCEL"],
+                    time_window={"start": "2026-01-01T00:00:00Z", "end": "2026-02-01T00:00:00Z"},
+                    operation_id="SYN-WORKFLOW-CANCEL", cancel=cancel))
+            except BaseException as exc:  # noqa: BLE001 - surface worker cancellation/exception to the test thread.
+                errors.append(exc)
+        worker = threading.Thread(target=analyze_in_thread)
+        worker.start()
+        deadline = time.monotonic() + 2
+        while "SYN-WORKFLOW-CANCEL-1" not in adapter._active and time.monotonic() < deadline:
+            time.sleep(0.01)
+        self.assertIn("SYN-WORKFLOW-CANCEL-1", adapter._active)
+        cancel.set()
+        worker.join(timeout=3)
+        self.assertFalse(worker.is_alive())
+        self.assertEqual(results, [])
+        self.assertTrue(errors)
+        self.assertIsInstance(errors[0], MCPCancelled)
+
     def test_mcp_workflow_rejects_unbounded_historical_top_k(self):
         adapter, _, _ = self.open_adapter()
         with self.assertRaisesRegex(MCPPolicyError, "top_k must be between 1 and 50"):
@@ -176,7 +348,7 @@ class MCPReadOnlyAdapterTests(unittest.TestCase):
                        "--output", str(output_path)]
             for plan_id in plan_ids:
                 command.extend(("--plan-id", plan_id))
-            result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, timeout=20)
+            result = subprocess.run(command, check=False, cwd=ROOT, capture_output=True, text=True, timeout=20)  # nosec B603
             evidence = json.loads(output_path.read_text(encoding="utf-8")) if output_path.exists() else None
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIsInstance(evidence, dict)
@@ -235,7 +407,7 @@ class MCPReadOnlyAdapterTests(unittest.TestCase):
                 results.append(adapter.read_bounded(
                     adapter.plans["SYN-CANCEL"]["plan"],
                     {"scope": "read_only", "source_ids": ["MOCK_MAP"]}, operation_id="SYN-CANCEL-OP"))
-            except BaseException as exc:
+            except BaseException as exc:  # noqa: BLE001 - surface worker cancellation/exception to the test thread.
                 errors.append(exc)
         worker = threading.Thread(target=read)
         worker.start()
@@ -252,18 +424,16 @@ class MCPReadOnlyAdapterTests(unittest.TestCase):
         self.assertEqual(client.call_tool("fab_audit", {"operation_id": "cancel-check"})["structuredContent"]["cancelled_request_count"] > 0, True)
 
     def test_environment_auth_is_resolved_without_configuring_secret_values(self):
-        provider = EnvironmentCredentialProvider(stdio_env={"MCP_ACCESS_TOKEN": "P3_TEST_TOKEN"})
-        with patch.dict(os.environ, {"P3_TEST_TOKEN": "test-secret-value"}):
-            self.assertEqual(provider.stdio_environment(), {"MCP_ACCESS_TOKEN": "test-secret-value"})
-        with patch.dict(os.environ, {}, clear=True):
-            with self.assertRaises(MCPPolicyError):
-                provider.stdio_environment()
+        provider = EnvironmentCredentialProvider(stdio_env={"MCP_ACCESS_TOKEN": "P3_TEST_TOKEN"})  # nosec B105
+        with patch.dict(os.environ, {"P3_TEST_TOKEN": "test-secret-value"}):  # nosec B105
+            self.assertEqual(provider.stdio_environment(), {"MCP_ACCESS_TOKEN": "test-secret-value"})  # nosec B105
+        with patch.dict(os.environ, {}, clear=True), self.assertRaises(MCPPolicyError):
+            provider.stdio_environment()
         http_provider = EnvironmentCredentialProvider(http_headers={"Authorization": "P3_TEST_HTTP_TOKEN"})
-        with patch.dict(os.environ, {"P3_TEST_HTTP_TOKEN": "Bearer http-test-secret"}):
+        with patch.dict(os.environ, {"P3_TEST_HTTP_TOKEN": "Bearer http-test-secret"}):  # nosec B105
             self.assertEqual(http_provider.http_headers(), {"Authorization": "Bearer http-test-secret"})
-        with patch.dict(os.environ, {}, clear=True):
-            with self.assertRaises(MCPPolicyError):
-                http_provider.http_headers()
+        with patch.dict(os.environ, {}, clear=True), self.assertRaises(MCPPolicyError):
+            http_provider.http_headers()
 
     def test_site_config_can_run_read_only_discovery_over_streamable_http(self):
         _HTTPMockHandler.requests = []
@@ -296,7 +466,7 @@ class MCPReadOnlyAdapterTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "approved-http-mock.json"
             path.write_text(json.dumps(config), encoding="utf-8")
-            with patch.dict(os.environ, {"P3_HTTP_TOKEN": "Bearer synthetic-http-secret"}):
+            with patch.dict(os.environ, {"P3_HTTP_TOKEN": "Bearer synthetic-http-secret"}):  # nosec B105
                 adapter = ReadOnlyMCPAdapter.from_config(path)
                 self.addCleanup(adapter.client.close)
                 discovery = adapter.discover()
@@ -310,7 +480,7 @@ class MCPReadOnlyAdapterTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "approved-mock.json"
             path.write_text(json.dumps(config), encoding="utf-8")
-            result = subprocess.run([sys.executable, "-m", "fabintel", "mcp-discover", "--config", str(path)],
+            result = subprocess.run([sys.executable, "-m", "fabintel", "mcp-discover", "--config", str(path)], check=False,  # nosec B603
                                     cwd=ROOT, capture_output=True, text=True, timeout=10)
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(json.loads(result.stdout)["status"], "CONFIGURED_READ_ONLY_UNQUALIFIED")

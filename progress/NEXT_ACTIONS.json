@@ -1,0 +1,917 @@
+{
+  "acceptance": {
+    "p1_acceptance_after_owner_fixes": "Expected runner state PASS_P3_MODULE_MOUNTED_WITH_P1_SHARED_RENDERER, generated Vitest exit 0 with 4/4 tests, strict TypeScript exit 0, zero p1_host_owner_changes, all typed flags/counts true, source snapshot hashes current. Require the actual shared route and v2 renderer/table before clearing integration pending.",
+    "p1_acceptance_harness": "qualification/run_p1_module_integration.py; regression cases are generated from its unchanged integration_test_source and documented in proposals/CHANGE-002-p3-spatial-map-and-capability-extension.md. Do not weaken or rewrite the P3 fixture/tests to make the current v1 converter pass.",
+    "p1_current_observed": "PARTIAL_P1_SHARED_CONTRACT_CHANGES_REQUIRED; generated Vitest exit 1 (3 passed, 1 typed-conversion test failed), strict TypeScript exit 0. Current false diagnostics include numeric category type, numeric defect type, unlabeled-event/missing distinction, and numeric-string refusal; P1 Python adapter also fails numeric-string refusal, numeric category preservation, defect category preservation, and defect-event missing count.",
+    "p1_exact_current_defects": {
+      "python_api_spatial_adapter": {
+        "continuous_numeric_string_42_5": {
+          "expected": "refuse/no map",
+          "observed": "string \"42.5\" accepted"
+        },
+        "defect_label_BRIDGE": {
+          "expected": "string \"BRIDGE\"",
+          "observed": "dropped (null value; missing count 1)"
+        },
+        "explicit_numeric_missing": {
+          "observed": "null retained; missing count 1"
+        },
+        "numeric_category_code_2": {
+          "expected": "number 2",
+          "observed": "string \"2\""
+        },
+        "unlabeled_defect_event": {
+          "expected": "DEFECT_EVENT with missing count 0",
+          "observed": "null value; missing count 1"
+        }
+      },
+      "record": "release/P1_MODULE_INTEGRATION_EVIDENCE.json",
+      "typescript_spatial_adapter": {
+        "continuous_numeric_string_42_5": "not refused",
+        "numeric_category_code_2": "converted to string \"2\"",
+        "numeric_defect_code_7": "number type is not preserved",
+        "unlabeled_defect_event": "counted as missing instead of a DEFECT_EVENT"
+      }
+    },
+    "p1_host_command": "From the P3 root, run python qualification/run_p1_module_integration.py with FAB_P1_TOOLCHAIN_ROOT pointing to an authorized writable P1 integration checkout if needed. The script checks actual P1 contracts/route, generates and removes its temporary test, performs strict TS and Vitest checks, then updates release/P1_MODULE_INTEGRATION_EVIDENCE.json.",
+    "p3_python": "python -m unittest discover -s tests -v \u2014 expected 123 tests pass with the pinned offline MCP SDK bundle installed.",
+    "react_build": "npm run build \u2014 expected exit 0; existing Vite large-chunk advisory is informational.",
+    "react_tests": "npm test \u2014 expected 15 tests pass (12 P3Panel + 3 reference host).",
+    "react_typecheck": "npm run typecheck \u2014 expected exit 0.",
+    "standalone_browser": "Use release/P3_STANDALONE_BROWSER_EVIDENCE.json \u2014 already observed full synthetic official-SDK workflow, all C01\u2013C05 VALID, five bounded reads, typed table reconciliation, refusal/cancel/retry and evidence export. Do not rerun unchanged."
+  },
+  "capabilities": [
+    {
+      "id": "C01",
+      "name": "Spatial fingerprint",
+      "purpose": "Measured-site spatial signatures; independently abstains for unsupported modalities/features.",
+      "result_key": "fingerprint"
+    },
+    {
+      "id": "C02",
+      "name": "Process-step evolution",
+      "purpose": "Time-ordered, compatible step-instance comparison using registered common observed sites and stated repeatability.",
+      "result_key": "evolution"
+    },
+    {
+      "id": "C03",
+      "name": "Spatial-to-quality association",
+      "purpose": "Eligible observational association with predeclared hypotheses and dependency-aware holdout; never causal attribution.",
+      "result_key": "quality_association"
+    },
+    {
+      "id": "C04",
+      "name": "Spatial anomaly review",
+      "purpose": "Wafer-level spatial dependence-aware anomaly evidence with baseline/drift limits; no individually significant site claims.",
+      "result_key": "anomaly"
+    },
+    {
+      "id": "C05",
+      "name": "Historical analogs",
+      "purpose": "Bounded indexed retrieval of comparable historical spatial signatures; similarity is not cause.",
+      "result_key": "similarity"
+    }
+  ],
+  "entry_points": {
+    "standalone_reference_application": {
+      "export": "App",
+      "manifest": "products/p3/reference_host/module-manifest.v2.json",
+      "module": "products/p3/reference_host/src/App.tsx",
+      "module_contract": "p3-reference-module.v2",
+      "use": "Standalone reference host only; it fetches its local reference-host API and is not the suite route/component."
+    },
+    "suite_product_panel": {
+      "export": "P3Panel",
+      "module": "products/p3/ui/P3Panel.tsx",
+      "module_contract": "suite-ui-module.v1",
+      "props": {
+        "evidence": "P3Evidence | null",
+        "onExportEvidence": "(evidence: P3Evidence) => void; host owns serialization and destination",
+        "renderWaferMap": "(model: P3WaferMap) => ReactNode (legacy v1 only)",
+        "requestStatus": "IDLE | LOADING | CANCELLED | ERROR",
+        "sourcePreview": "P3SourcePreview",
+        "waferMap": "P3WaferMap | null (legacy suite-spatial-map.v1)"
+      },
+      "registration": "integration/p3-suite-ui-module.v1.json",
+      "typed_v2_mount_rule": "Do not down-convert fab-spatial-map.v2 into P3WaferMap: the v1 prop has no modality or per-observation kind. For the lossless shared-suite path, mount P3Panel with waferMap omitted/null and let the shared host render the same result spatial_map with its own v2 renderer and accessible table alongside the panel. This keeps the single renderer owned by the suite foundation."
+    },
+    "typed_spatial_renderer_fixture": {
+      "contract": "fab-spatial-map.v2",
+      "export": "SpatialMapRenderer",
+      "module": "products/p3/reference_host/src/SpatialMapRenderer.tsx",
+      "props": "{ model: SpatialMapV2 }",
+      "use": "Behavioral reference/test fixture for a host-owned shared renderer; do not fork it into the suite as a competing renderer."
+    }
+  },
+  "evidence_export": {
+    "browser_proof_sha256": "eaae2687607fff72a8194fa4e7c0de2bd38819005c917ae918e8aa2afc025e22",
+    "schema": "contracts/evidence.v1.schema.json",
+    "standalone_export": "canonical JSON from result.export.canonical_json, identified by result.export.sha256 and canonicalization metadata; browser downloads p3-investigation-{investigation_id}.json.",
+    "suite_module_interface": "onExportEvidence(evidence: P3Evidence) => void; no P3 serialization or destination ownership."
+  },
+  "external_and_internal_gates_pending": [
+    "First-party ownership/licensing and third-party dependency redistribution authorization.",
+    "Approved target OS and company offline/egress policy beyond the qualified macOS arm64 CPython 3.11 candidate.",
+    "Independent target-host security review and authorized transfer approval.",
+    "Real read-only company MCP grants, source/semantic mappings and representative manufacturing data.",
+    "Authorized-data scientific validation/calibration and engineer acceptance."
+  ],
+  "final_engineering_closure_2026_11_24": {
+    "acceptance": {
+      "c03": "Unadjusted intervals remain clearly marked exploratory in engine/UI; no multiplicity adjustment added because workflow does not claim simultaneous confirmation.",
+      "comparison_export": "Current evidence hash shown in browser; not downloaded/rehashed during replay.",
+      "critical_cases": "14/14 PASS, refreshed against current source hash.",
+      "offline_release": "Fresh extraction demo and offline official MCP SDK install/test PASS; repeated deterministic builds match.",
+      "onboarding": "15/15 oracle cases, 54/54 ranking pairs, zero invalid ready mappings, 13,000 descriptors; tested assisted screening reduces modeled descriptor triage 13,000 to 14; final human approval slots stay 16 and human time is unmeasured.",
+      "python": "Fresh extraction: 148 Python tests, zero skipped in the bundled hash-locked MCP SDK environment; offline install and pip check PASS; dependency-light run: 148 discovered, 55 SDK-dependent skips; demo PASS.",
+      "react": "23 React tests PASS; TypeScript typecheck and Vite production build PASS.",
+      "real_browser": "PASS; configured synthetic official-SDK peer, five bounded reads, C01-C05 VALID, 536 ms reported analysis, current and historical maps each show five measured sites."
+    },
+    "candidate": {
+      "archive": "release/p3-candidate-20261124-final.zip",
+      "bytes": 9437125,
+      "critical_cases": "14/14 PASS; evidence source hash matches current tree",
+      "fresh_extraction": "148 tests pass, zero skipped with hash-locked offline MCP SDK; pip check and demo pass",
+      "frozen_archive_sha256": "aa51df3d510c26d2cfa56ce13603b0d7cdb48ee16a6124de75176729df012499",
+      "react_tests": "23 PASS; TypeScript/Vite build PASS",
+      "repeated_builds_equal": true,
+      "sha256": "427b051ebe82a7d844334bb4cc0b8ecc3a0c1125b224681b912c4e92831fb7aa",
+      "sidecar_matches": true,
+      "source_tree_sha256": "f6ecff59338b4f5e12615a6934fb608b790fcd73a5a9167aad957e4a6abbd84c",
+      "supersedes": "p3-candidate-20261124-spatial-comparison.zip; that intermediate candidate contained older critical/UI evidence"
+    },
+    "change": [
+      "C05 now presents the exact closest eligible historical wafer as a typed measured-site map with accessible table and provenance context.",
+      "Physical renderer bounds honor nonzero coordinate origins."
+    ],
+    "current_source_tree_sha256": "f6ecff59338b4f5e12615a6934fb608b790fcd73a5a9167aad957e4a6abbd84c",
+    "frozen_source_and_archive_preserved": true,
+    "next_executable_action": "Authorized internal first run using .opencode/skills/p3-spatial-onboarding/SKILL.md; do not change P3 source until an authorized schema fails deterministic mapping or validation.",
+    "remaining_limitations": [
+      "No company source, semantic truth, authorization, or human approval.",
+      "Human setup time/ROI not measured.",
+      "No real manufacturing validation.",
+      "Security, target OS, transfer and redistribution rights remain pending.",
+      "Static Ruff/Bandit unavailable; no new runtime dependency was introduced."
+    ]
+  },
+  "frozen_baseline": {
+    "archive_bytes": 9284796,
+    "archive_entries": 193,
+    "archive_sha256": "aa51df3d510c26d2cfa56ce13603b0d7cdb48ee16a6124de75176729df012499",
+    "base_commit": "83a08682a189944adf984fe891353e84485ac381",
+    "candidate_archive": "release/p3-candidate-20261123.zip",
+    "candidate_state": "UNCOMMITTED_TESTED_SOURCE",
+    "checksum_sidecar": "release/p3-candidate-20261123.zip.sha256",
+    "qualification_environment": {
+      "architecture": "arm64",
+      "os": "macOS-26.6.2-arm64-arm-64bit",
+      "python": "3.11.7 (main, Dec 15 2023, 12:09:56) [Clang 14.0.6 ]"
+    },
+    "qualification_evidence": "release/PACKAGE_QUALIFICATION.json",
+    "repeated_deterministic_builds_equal": true,
+    "repository": "fab-intelligence-p3",
+    "source_tree_sha256": "9044a31aa5e79480aaa614496d6ee05778ea72862db3df07bc518030d700755f",
+    "verification_note": "The source version, qualified package record, archived source version and checksum sidecar must all match these digests. No rebuild is part of this handoff."
+  },
+  "frozen_dependencies": {
+    "node_engine_constraint": "^22.12.0 || ^24.0.0 || >=26.0.0",
+    "node_runtime_tested": "Node.js v26.13.0",
+    "npm_lock_node_modules_records": 126,
+    "npm_runtime_tested": "npm 11.20.0",
+    "offline_note": "The ZIP includes prebuilt local UI assets and Python wheelhouse. npm ci --offline was verified using the machine cache; npm tarballs are not bundled in the P3 archive. Suite runtime should use the already qualified shared host toolchain.",
+    "package_lock": "package-lock.json (npm lockfile v3); full dependency closure is integrity-pinned by this lock.",
+    "package_lock_sha256": "fab3478bb04736094b3f3e3e84f93edfb44d667bf7b31c90273dd3b82bd64a5f",
+    "pinned_direct_dependencies": {
+      "dependencies": {
+        "echarts": "6.1.0"
+      },
+      "devDependencies": {
+        "@testing-library/jest-dom": "6.9.1",
+        "@testing-library/react": "16.3.0",
+        "@testing-library/user-event": "14.6.1",
+        "@types/react": "19.2.2",
+        "@types/react-dom": "19.2.2",
+        "happy-dom": "21.0.4",
+        "react": "19.2.0",
+        "react-dom": "19.2.0",
+        "typescript": "5.9.3",
+        "vite": "7.3.8",
+        "vitest": "5.1.1"
+      }
+    },
+    "python_lock_dependency_closure": [
+      {
+        "name": "annotated-types",
+        "version": "0.8.0"
+      },
+      {
+        "name": "anyio",
+        "version": "4.16.0"
+      },
+      {
+        "name": "attrs",
+        "version": "26.1.0"
+      },
+      {
+        "name": "cffi",
+        "version": "2.1.1"
+      },
+      {
+        "name": "click",
+        "version": "8.5.1"
+      },
+      {
+        "name": "cryptography",
+        "version": "50.0.2"
+      },
+      {
+        "name": "h11",
+        "version": "0.16.0"
+      },
+      {
+        "name": "httpcore2",
+        "version": "2.16.2"
+      },
+      {
+        "name": "httpx2",
+        "version": "2.16.2"
+      },
+      {
+        "name": "idna",
+        "version": "3.20"
+      },
+      {
+        "name": "jsonschema",
+        "version": "4.26.0"
+      },
+      {
+        "name": "jsonschema-specifications",
+        "version": "2025.9.1"
+      },
+      {
+        "name": "mcp",
+        "version": "2.3.0"
+      },
+      {
+        "name": "mcp-types",
+        "version": "2.3.0"
+      },
+      {
+        "name": "opentelemetry-api",
+        "version": "1.45.2"
+      },
+      {
+        "name": "pycparser",
+        "version": "3.12"
+      },
+      {
+        "name": "pydantic",
+        "version": "2.14.4"
+      },
+      {
+        "name": "pydantic_core",
+        "version": "2.50.5"
+      },
+      {
+        "name": "PyJWT",
+        "version": "2.15.1"
+      },
+      {
+        "name": "python-multipart",
+        "version": "0.0.34"
+      },
+      {
+        "name": "referencing",
+        "version": "0.37.0"
+      },
+      {
+        "name": "rpds-py",
+        "version": "2026.9.1"
+      },
+      {
+        "name": "sse-starlette",
+        "version": "3.7.0"
+      },
+      {
+        "name": "starlette",
+        "version": "1.10.0"
+      },
+      {
+        "name": "truststore",
+        "version": "0.10.5"
+      },
+      {
+        "name": "typing_extensions",
+        "version": "4.16.0"
+      },
+      {
+        "name": "typing-inspection",
+        "version": "0.4.5"
+      },
+      {
+        "name": "uvicorn",
+        "version": "0.54.0"
+      }
+    ],
+    "python_lock_sha256": "91bb6e70d813a23f630db5b3956e2755558dbd5c1b25ca6a17dcc5382fd84de7",
+    "python_runtime_qualification": {
+      "architecture": "arm64",
+      "os": "macOS-26.6.2-arm64-arm-64bit",
+      "python": "3.11.7 (main, Dec 15 2023, 12:09:56) [Clang 14.0.6 ]"
+    },
+    "python_sdk": "Official MCP SDK 2.3.0; 28 hash-pinned wheels in vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock",
+    "python_wheelhouse": "vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse; qualified target is macOS arm64 / CPython 3.11 only."
+  },
+  "handoff_date": "2026-11-24",
+  "human_report": "progress/OVERNIGHT_EXECUTION.md",
+  "latest_external_work_2026_11_24": {
+    "c01_sampling_density_and_artifact_identifiability": {
+      "evidence": "progress/C01_SAMPLING_AND_ARTIFACT_CHALLENGE.json",
+      "implementation": [
+        "products/p3/engine.py",
+        "products/p3/reference_host/src/App.tsx",
+        "tests/test_p3_integrated.py",
+        "products/p3/reference_host/src/App.test.tsx",
+        "qualification/run_c01_sampling_artifact_challenge.py"
+      ],
+      "product_change": "C01 exposes equal-observed-record weighting, no area-weighted estimate, and the two specific review questions in capability details and exported limitations; numeric and categorical measured-only methods are unchanged.",
+      "result": "On one unchanged linear radial field, moving all edge samples from radius fraction 0.81 to 0.99 changed the observed edge-center contrast from 1.42 to 1.78 nm. Identical observed payloads under physical-pattern and metrology-bias ground truths produced identical analysis.",
+      "scope": "Deterministic identifiability counterexample only; no manufacturing error rate or causal attribution."
+    },
+    "c02_sequence_mask_support": {
+      "evidence": "progress/C02_SEQUENCE_MASK_CHALLENGE.json",
+      "implementation": "products/p3/engine.py::compare_evolution_sequence",
+      "limit": "Synthetic deterministic masks only. No interpolation; covariance-agnostic bounds are not confidence intervals or process calibration.",
+      "result": "PASS: cumulative results now use only exact measured sites present at every step and enforce the declared minimum count/coverage. Adjacent valid comparisons are preserved with INCONCLUSIVE sequence status when common support is insufficient. Sequence uncertainty uses first/last endpoint marginals; intermediate measurements cancel from endpoint totals instead of being double-counted.",
+      "test": "tests/test_p3_integrated.py::ComparisonTests.test_sequence_cumulative_change_uses_only_full_sequence_exact_sites"
+    },
+    "c02_uncertainty_bounds": {
+      "benchmark": "qualification/run_c02_covariance_benchmark.py",
+      "evidence": "progress/C02_CORRELATED_ERROR_STUDY.json",
+      "implementation": [
+        "products/p3/engine.py",
+        "products/p3/reference_host/src/App.tsx"
+      ],
+      "limit": "Bounds are mathematical SD limits, not confidence intervals or calibrated process uncertainty; do not infer covariance from marginal uncertainty.",
+      "result": "Added sharp marginal-only standard-deviation bounds under unrestricted valid cross-step and cross-site covariance while retaining the explicitly conditional independence estimate. Across 10,000 Monte Carlo replicates for each of rho=0, 0.5, 1, the known analytical standard deviation fell inside [0, 2.00998] nm; the conditional \u00b11\u03c3 coverage was 12.01%, 17.75%, and 100% respectively.",
+      "test": [
+        "tests/test_p3_integrated.py",
+        "products/p3/reference_host/src/App.test.tsx"
+      ]
+    },
+    "c03_context_drift": {
+      "evidence": "progress/C03_CONTEXT_DRIFT_BENCHMARK.json",
+      "limit": "500/500 hidden site-confounded estimates remained VALID with the residual-confounding caveat; stale/unreported population epochs are not detectable from absent source semantics. No causal claim or engine change.",
+      "result": "500/500 stable-null runs; nominal 95% coverage 477/500 (95.4%, Wilson interval recorded); seven declared context drifts and four support/selection failures each abstained 100/100.",
+      "runner": "qualification/run_c03_context_drift_benchmark.py"
+    },
+    "c03_nested_lot_cluster_inference": {
+      "benchmark": "qualification/run_c03_nested_lot_benchmark.py",
+      "implementation": [
+        "products/p3/engine.py",
+        "tests/test_p3_integrated.py",
+        "qualification/run_c03_nested_lot_benchmark.py",
+        "progress/C03_NESTED_LOT_BENCHMARK.json"
+      ],
+      "method": "Average Fisher-z wafer correlations within each lot, then calculate the nominal t interval across independent lots. Leave-one-lot-out removes an entire lot. Equal lot weighting avoids wafer pseudoreplication; lot independence and synthetic measurement assumptions remain unverified for manufacturing.",
+      "result": "500 independently generated investigations; actual associate_quality accepted both one-wafer and two-wafer-per-lot designs with zero invalid results. Coverage of the known 0.32 correlation was 95.6% for one wafer/lot and 96.2% for two; Wilson intervals 93.4%-97.1% and 94.1%-97.6%. Two-wafer lot-clustered median interval width fell 11.37% at the same 20 independent lots."
+    },
+    "c03_targeted_review_2026_11_24": {
+      "epoch_and_selection": "Declared drift and invalid support abstained in existing replicated tests; hidden residual confounding and unadjusted multi-hypothesis intervals remain explicit limits.",
+      "evidence": [
+        "progress/C03_NESTED_LOT_BENCHMARK.json",
+        "progress/C03_CONTEXT_DRIFT_BENCHMARK.json"
+      ],
+      "informative_cluster_sizes": "The 500-replicate nested-lot study covered one and two wafers per lot; estimates were accepted with 95.6% and 96.2% coverage for the known synthetic correlation.",
+      "missingness": "Removing an observed site triggered exact-mask INCONCLUSIVE rather than fabricated correspondence.",
+      "result": "No method defect demonstrated; preserve equal-lot inference and abstention.",
+      "unequal_lot_sizes": "10 positive lots x 3 wafers and 10 negative lots x 1 wafer yielded equal-lot r approximately 0 versus naive wafer-weighted r=0.6."
+    },
+    "c03_temporal_epoch_reporting": {
+      "evidence": "progress/C03_CONTEXT_DRIFT_BENCHMARK.json",
+      "guardrails": "Epoch cutpoint, labels and minimum support require reviewed/predeclared source metadata, source ID and approval reference; at least 10 independent lots per stratum; lot cannot span strata. Stratum intervals are nominal and unadjusted. Hidden source-omitted temporal epochs remain undetectable.",
+      "implementation": [
+        "products/p3/engine.py",
+        "products/p3/reference_host/src/App.tsx",
+        "products/p3/reference_host/src/App.test.tsx",
+        "tests/test_p3_integrated.py",
+        "qualification/run_c03_context_drift_benchmark.py",
+        "docs/SCIENCE_AND_METHODS.md"
+      ],
+      "result": "500/500 temporal-reversal cases expose opposite nominal per-epoch intervals although the pooled mean is 0.000557; 500/500 declared context-drift cases and 400/400 invalid-support cases abstained. Stable-null nominal 95% coverage was 477/500 (95.4%; Wilson 93.2%-96.9%)."
+    },
+    "c04_baseline_contamination": {
+      "benchmark": "qualification/run_c04_baseline_contamination_benchmark.py",
+      "evidence": "progress/C04_BASELINE_CONTAMINATION_CHALLENGE.json",
+      "implementation": [
+        "products/p3/engine.py",
+        "products/p3/reference_host/src/App.tsx"
+      ],
+      "limit": "Counterexample only, not an estimated false-negative rate. P3 does not automatically remove contaminating wafers or certify baseline cleanliness.",
+      "result": "A deterministic 20-wafer baseline with one target-like contaminant changed empirical p from 1/21 to 2/21, suppressed the alert, and still returned NO_SHIFT_DETECTED. P3 reports baseline NOT_CERTIFIED_CLEAN, contamination NOT_PERFORMED, and the review action to verify approved cohort eligibility. Four or more ordered contaminants trigger temporal-shift abstention in the declared fixture.",
+      "test": [
+        "tests/test_p3_integrated.py::AnomalyAndAssociationTests.test_single_stable_baseline_contaminant_can_mask_a_similar_target",
+        "products/p3/reference_host/src/App.test.tsx"
+      ]
+    },
+    "c05_index_snapshot_compaction": {
+      "build_ms": 3996.539,
+      "command": "python -c 'from qualification.run_c05_scale_benchmark import run; run(15000)'",
+      "direct_median_query_ms": 4658.283,
+      "implementation": "products/p3/engine.py::SpatialSignatureIndex.__init__",
+      "indexed_median_query_ms": 1446.981,
+      "peak_rss_bytes": {
+        "new_metadata_only_snapshot_copy": 665157632,
+        "previous_compacted_snapshot": 707592192,
+        "reduction": 42434560
+      },
+      "refresh_ms": 3950.634,
+      "regression": "tests/test_p3_integrated.py::ComparisonTests.test_similarity_index_uses_validated_snapshot_after_caller_mutation",
+      "result": "PASS: 15,000 maps / 440,000 sites; direct-index top-five parity; mean precision@5 1.0; all 500 incompatible-context and 3 invalid-geometry records excluded; invalidation and refresh passed.",
+      "scope": "One-machine synthetic ceiling benchmark; no manufacturing source/table-count or fleet-memory claim.",
+      "snapshot_safety": "Original input points are left untouched; caller point and metadata mutation cannot change indexed results.",
+      "traced_peak_bytes": {
+        "new": 411675644,
+        "previous": 412521508
+      }
+    },
+    "current_source_standalone_browser_replay": {
+      "elapsed_ms": 600,
+      "evidence": "release/P3_STANDALONE_BROWSER_EVIDENCE.json::latest_working_revision_replay",
+      "export_sha256": "540dc12e8aa38fd2437e3a36542458371f1bd56a552856e83682d58f5f96e3e1",
+      "offline_install_evidence": "release/MCP_SDK_OFFLINE_QUALIFICATION.json",
+      "result": "PASS: actual browser selected Configured read-only MCP, ran the reviewed synthetic SDK peer through C01-C05, showed provenance and limitations, and saved the reproducible evidence JSON.",
+      "scope": "Local loopback synthetic peer only; the UI states its evidence is unqualified; company qualification remains pending."
+    },
+    "current_working_source_tree_sha256": "ea94c58b3c7464cd120ca12c08727f4c860fc5fefbc28dfa62e04961a6d2af1f",
+    "final_external_regression": {
+      "bootstrap_check": "BOOTSTRAP INTEGRITY PASS: 219 files. The dependency-light root run discovered 148 tests, with 55 MCP-SDK-dependent tests skipped; the fresh offline SDK candidate run passed all 148 with zero skips.",
+      "build": "Initial JavaScript 218.79 kB / 69.56 kB gzip; deferred renderer 542.26 kB / 182.31 kB gzip. Initial bundle was previously reduced 71.3%; no measured degradation justified another renderer change.",
+      "result": "Fresh extracted candidate: 148 Python tests passed with zero skips; 14/14 critical cases and 100/100 numeric oracles; 22 React tests, TypeScript, compileall, pip consistency, and Vite production build passed. C03 replicated evidence and spatial onboarding benchmark remain preserved.",
+      "source_tree_sha256": "ea94c58b3c7464cd120ca12c08727f4c860fc5fefbc28dfa62e04961a6d2af1f",
+      "static_security_tools": "Ruff unavailable as an installed Python module; Bandit/pip-audit were not rerun in this revision; no runtime dependencies changed. This is not a company security approval."
+    },
+    "frozen_hashes": {
+      "candidate_archive": "aa51df3d510c26d2cfa56ce13603b0d7cdb48ee16a6124de75176729df012499",
+      "changed_or_rebuilt": false,
+      "source_tree": "9044a31aa5e79480aaa614496d6ee05778ea72862db3df07bc518030d700755f"
+    },
+    "next_executable_action": "No further C03 method change is justified by the current independent designs. Resume with a new falsifiable P3 C01-C05 defect, newly authorized MCP semantics/permissions, or external target-platform/security/rights qualification. Do not repeat the unchanged onboarding or 15k retrieval runs.",
+    "offline_host_first_run_and_missing_sdk_diagnostic": {
+      "implementation": [
+        "README.md",
+        "docs/P3_REFERENCE_HOST.md",
+        "fabintel/reference_host.py"
+      ],
+      "result": "Run instructions now create the supported venv, install only from the bundled hash-locked wheelhouse, and launch using that environment's Python. A missing SDK returns an actionable 503 without exposing internal exception details.",
+      "test": "tests/test_reference_host.py::MissingSDKReferenceHostTests.test_missing_sdk_returns_an_actionable_offline_install_error",
+      "verification": "Missing-SDK handler test PASS; offline 144-test qualification PASS; live browser replay PASS."
+    },
+    "previous_source_standalone_browser_replay_1435_utc": {
+      "elapsed_ms": 274,
+      "evidence": "release/P3_STANDALONE_BROWSER_EVIDENCE.json::latest_working_revision_replay",
+      "export_sha256": "7378eb5f61b78fc0b9a6a838c3f525129febb2cc58d90ca25711484230898c7c",
+      "offline_install_evidence": "release/MCP_SDK_OFFLINE_QUALIFICATION.json",
+      "result": "PASS in the current local browser: official-SDK synthetic MCP to C01-C05, 5 bounded reads, five VALID capabilities, 5 measured observations, lazy wafer renderer visible, both new C01 review questions visible, canonical export saved.",
+      "runtime": "Bundled MCP SDK 2.3.0 installed with --no-index and --require-hashes into an isolated macOS arm64 CPython 3.11.7 environment; pip check PASS.",
+      "scope": "Synthetic numeric fixture and local loopback only; categorical/missing/defect cases remain separately verified; no company qualification."
+    },
+    "reference_host_initial_bundle_split": {
+      "after_initial_js": "217.84 kB / 69.20 kB gzip",
+      "before_initial_js": "760.22 kB / 251.75 kB gzip",
+      "change": "Lazy-load the existing ECharts wafer renderer only after observations are present.",
+      "deferred_renderer_chunk": "542.26 kB / 182.31 kB gzip",
+      "limit": "Byte reduction only; no real-browser startup latency claim. Vite still warns that the deferred renderer chunk exceeds 500 kB.",
+      "result": "Initial JavaScript transferred is 71.3% smaller uncompressed and 72.5% smaller gzip; renderer code remains local/offline and is loaded when the map is rendered.",
+      "verification": "npm test (21/21), npm run typecheck, npm run build"
+    },
+    "relationship_screening_scaling": {
+      "implementation": "fabintel/onboarding.py",
+      "result": "PASS: 13,000 eligible but non-joinable sources, zero pairs, under the 2-second acceptance bound; latest benchmark measured 7.707 ms. Candidate role semantics and ordering remain equivalent through the complete SDK onboarding harness.",
+      "test": "tests/test_onboarding.py::SpatialOnboardingTests.test_relationship_discovery_is_bounded_for_unrelated_large_catalogs"
+    },
+    "spatial_onboarding": {
+      "browser": "Actual browser run on 2026-11-24: 600 ms; reviewed synthetic configured-MCP path; five bounded reads; C01-C05 VALID; provenance, missing geometry denominator, scientific limits and evidence export inspected. See release/P3_STANDALONE_BROWSER_EVIDENCE.json::latest_working_revision_replay.",
+      "effort_boundary": "The one-triage-per-descriptor baseline is an explicit synthetic workload rubric: 13,000 manual-screening items versus 14 proposals; final source and relationship approvals remain 2+1 in both. No measured human time, engineer productivity, or company ROI.",
+      "evidence": [
+        "progress/SPATIAL_ONBOARDING_BENCHMARK.json",
+        "progress/SPATIAL_ONBOARDING_BROWSER_ACCEPTANCE.json"
+      ],
+      "implementation": [
+        "fabintel/onboarding.py",
+        "fabintel/mcp_adapter.py",
+        "qualification/spatial_catalog_fixture.py",
+        "qualification/synthetic_mcp_peer.py",
+        "qualification/onboarding_harness.py"
+      ],
+      "oracle": "qualification/fixtures/spatial_catalog_oracle.json",
+      "relationship_screening_stress": "13,000 unrelated wafer_id descriptors produced zero candidate pairs in 7.707 ms after replacing the quadratic scan with sorted typed-role buckets; 200-pair output cap retained.",
+      "result": "13,000 catalog descriptors; 15/15 source oracle cases; 10/10 expected profiles and 9/9 expected roles; 54/54 positive-vs-abstain ranking pairs; zero invalid ready mappings. Median classification 17.325 ms. Two distinct naming schemas completed official-SDK discovery, simulated human review, reviewed-config validation and all five valid P3 capabilities. Zero row reads before review, five bounded reads after it.",
+      "runner": "qualification/run_spatial_onboarding_benchmark.py",
+      "tests": "tests/test_onboarding.py"
+    },
+    "working_candidate_2026_11_24": {
+      "archive": "release/p3-candidate-20261124-onboarding.zip",
+      "archive_bytes": 9433523,
+      "archive_sha256": "f8dc95da46c8587e541862f90ee00e36868782441380be9383adab5cf5ee9805",
+      "critical_cases": "14/14 PASS; 100/100 numeric oracle cases retained",
+      "fresh_extraction_python_tests": "148 passed, zero skipped with the bundled hash-locked MCP SDK; fresh extraction demo and dependency check passed",
+      "qualification": "release/p3-candidate-20261124-onboarding.qualification.json",
+      "react_tests": "22 passed; TypeScript and Vite production build passed",
+      "reproducibility": "Repeated build digests equal; original frozen archive digest unchanged",
+      "source_tree_sha256": "ea94c58b3c7464cd120ca12c08727f4c860fc5fefbc28dfa62e04961a6d2af1f"
+    }
+  },
+  "manifest_location": "progress/NEXT_ACTIONS.json",
+  "mounting_and_lifecycle": {
+    "P3Panel": "Mount as a React child with sourcePreview and evidence. For v2 integration omit the legacy waferMap prop; pass the same typed spatial_map to the P1 shared renderer/table adjacent to the panel. Host performs cancellation and passes requestStatus; export callback receives the original P3Evidence object.",
+    "reference_host_api": [
+      "GET /api/status",
+      "POST /api/investigate (source_mode, plan_ids, time_start, time_end, top_k)",
+      "POST /api/cancel (request_id)"
+    ],
+    "reference_renderer_lifecycle": "SpatialMapRenderer initializes ECharts in useEffect, resizes on ResizeObserver/window resize, then disconnects/removes listeners and disposes the chart on unmount.",
+    "suite_host_owns": [
+      "route and shell",
+      "source permission/configuration",
+      "MCP discovery/read request lifecycle",
+      "loading/cancel/error/refusal/empty states",
+      "P1 shared SpatialMapV2 renderer and table",
+      "evidence export destination and file naming"
+    ]
+  },
+  "next_actions": {
+    "candidate": {
+      "archive": "release/p3-candidate-20261124-closure.zip",
+      "preserved_final_sha256": "427b051ebe82a7d844334bb4cc0b8ecc3a0c1125b224681b912c4e92831fb7aa",
+      "preserved_original_sha256": "aa51df3d510c26d2cfa56ce13603b0d7cdb48ee16a6124de75176729df012499",
+      "qualification": "release/p3-candidate-20261124-closure.qualification.json",
+      "sha256": "cf800043086c97266e0a8cb59ead8d25024da12271751f838bab8ba38df54583",
+      "source_tree_sha256": "90a938d98b74213656e3e96f1a36174c4cd36dae8727978ef9b092702044533f"
+    },
+    "company_human_time_or_roi_measured": false,
+    "company_only_prerequisites": [
+      "Approved transfer and redistribution rights plus target OS",
+      "Authorized MCP endpoint, secret reference and read-only access",
+      "Administrator-approved tools, tool-definition hashes, source IDs, semantic versions/snapshots, relationships, bounded plans and audit scope",
+      "Engineer review of generated mappings and preflight evidence",
+      "Company security approval, manufacturing validation and engineer acceptance"
+    ],
+    "current_next_action": "After approved transfer and read-only MCP access are available, use .opencode/skills/p3-spatial-onboarding/SKILL.md: start with python -m fabintel mcp-tool-catalog --config <transport-only.json> --output <catalog.json>, then run metadata proposal, obtain human mapping/relationship approval, validate the bounded analysis config, and execute the listed approved plans. No code change is expected for sources satisfying the documented typed semantic row contract.",
+    "development_status": "P3_EXTERNAL_ENGINEERING_HANDOFF_PREPARED; AUTHORIZED_COMPANY_QUALIFICATION_PENDING",
+    "next_executable_action": "After company rights/security/target-platform approval, verify the transferred ZIP SHA-256, extract once, open the package root in authorized OpenCode, and invoke @p3-spatial-onboarding. No P3 source edits unless a real authorized schema or qualification defect demonstrates one.",
+    "p1_acceptance_command": "Not required for independent P3 completion; suite integration remains optional and unverified.",
+    "public_push_performed": false,
+    "resume_only_for": [
+      "New independent P3 scientific or workflow defect",
+      "Authorized company MCP endpoint, semantics, read-only scope and plans",
+      "Approved transfer rights, target-platform and security evidence",
+      "Actual manufacturing validation or engineer acceptance"
+    ]
+  },
+  "next_phase_checkpoint": {
+    "external_company_gates": "UNCHANGED_PENDING",
+    "final_candidate_2026_11_24": {
+      "archive": "release/p3-candidate-20261124-final.zip",
+      "bytes": 9437125,
+      "critical_cases": "14/14 PASS; evidence source hash matches current tree",
+      "fresh_extraction": "148 tests pass, zero skipped with hash-locked offline MCP SDK; pip check and demo pass",
+      "frozen_archive_sha256": "aa51df3d510c26d2cfa56ce13603b0d7cdb48ee16a6124de75176729df012499",
+      "react_tests": "23 PASS; TypeScript/Vite build PASS",
+      "repeated_builds_equal": true,
+      "sha256": "427b051ebe82a7d844334bb4cc0b8ecc3a0c1125b224681b912c4e92831fb7aa",
+      "sidecar_matches": true,
+      "source_tree_sha256": "f6ecff59338b4f5e12615a6934fb608b790fcd73a5a9167aad957e4a6abbd84c",
+      "supersedes": "p3-candidate-20261124-spatial-comparison.zip; that intermediate candidate contained older critical/UI evidence"
+    },
+    "frozen_archive_sha256_reverified": "aa51df3d510c26d2cfa56ce13603b0d7cdb48ee16a6124de75176729df012499",
+    "frozen_source_tree_sha256_reverified_in_original_checkout": "9044a31aa5e79480aaa614496d6ee05778ea72862db3df07bc518030d700755f",
+    "latest_browser_c02_evidence_sha256": "c57d70cccab69143250f3671c569fc0ddc2b47dc6d3cf8e9945d1da92511755b",
+    "latest_browser_c04_evidence_sha256": "e926b2847b506ecd8ccb6bad7ea984ab07f79efb4c4df11c84cca184e6beef4f",
+    "latest_browser_capabilities": "Configured read-only UI path to synthetic reviewed SDK peer; 5 bounded reads; C01-C05 VALID; evidence export saved.",
+    "latest_browser_comparison": "Real browser C05 rendered SYN-W-HIST beside current map; five measured sites and accessible table; no interpolation; five bounded reads, C01-C05 VALID.",
+    "latest_browser_full_engineer_workflow_file": "Canonical hash observed in UI; export was not saved as a release package",
+    "latest_browser_full_engineer_workflow_sha256": "6c609dfa12784973c6eaf2da2d4c28cafcf9ee867a332fd7a2ca9d616ecf0e2a",
+    "latest_browser_keyboard": "ArrowRight C01\u2192C02\u2192C03 verified; no browser console errors",
+    "latest_browser_product_checks": {
+      "C01": "real standalone browser, synthetic MCP; 697 numeric sites; one exploratory 3-site group with 18.8 mm cells after resolution fallback",
+      "C02": "44 exact common sites per transition; 91.7/100 and 100/91.7 percent coverage; propagated 1-sigma 0.038 nm with independence/covariance caveat visible",
+      "C04": "20 earlier baseline lots; p=0.0476 at minimum rank floor; per-target and repeated/adaptive-unadjusted warning visible",
+      "C05": "real browser joint radial/sector profile; 27 shared bins; 48 target versus 44 analog observations; excluded incompatible/future records; no interpolation or causal claim"
+    },
+    "latest_browser_reported_analysis_ms": 600,
+    "latest_browser_workflow_file": "Result hash shown in live local browser; downloaded file was not independently re-hashed in this replay.",
+    "latest_browser_workflow_sha256": "045ccfd02bc936faecb4be84a270390cd70715e2e0991d2840cb30b1d0068a03",
+    "latest_c01_density_benchmark": {
+      "command": "python qualification/run_c01_density_benchmark.py",
+      "mean_candidate_site_precision": "0.7865 at 0% missing; 0.6569 at 40% missing",
+      "mean_site_recall": "0.1669 at 0% missing; 0.1449 at 40% missing",
+      "null_candidate_maps": "0/80 at 0% missing; 0/80 at 40% missing",
+      "planted_map_detection": "74/80 at 0% missing; 54/80 at 40% missing",
+      "policy": "adaptive 8-32 grid; 16-cell resolution sensitivity fallback only when adaptive grid finds no candidate",
+      "scope": "synthetic exploratory groups, not calibrated alerts",
+      "seed_count_per_condition": 80,
+      "seed_start": 73000
+    },
+    "latest_c01_density_floor_regression": {
+      "candidate": "10-cell density-sized screen returned one exploratory group of four measured sites; null control returned none",
+      "case": "340 observed sites on a smooth quadratic radial background; fixed 8 nm shift across four measured sites",
+      "command": "python -m unittest tests.test_p3_integrated.SpatialFingerprintTests.test_dense_radial_background_uses_observation_density_for_local_screen",
+      "previous_16_cell_floor": "no local candidate; fine cells contained fewer than the three-site minimum",
+      "uncertainty": "single deterministic synthetic challenge; not alert calibration"
+    },
+    "latest_c01_geometry_oracle": {
+      "candidate_result": "Both encodings produce counts [16,8,8,8] and equal radial means [107.15,107.5,107.8,107.9] nm.",
+      "evidence": "progress/C01_GEOMETRY_ORACLE.json",
+      "frozen_engine_result": "Equivalent 40-site physical vs offset/37-degree maps had radial counts [16,7,9,8] vs [12,11,6,11].",
+      "result": "PASS_SYNTHETIC_ORACLE; only radial fractions within geometry tolerance are snapped at 0.2/0.5/0.8; no values or coordinates change",
+      "tests": [
+        "test_truncated_sampling_uses_verified_radius_and_coordinate_origin",
+        "test_equivalent_rotated_sensor_coordinates_preserve_physical_fingerprint"
+      ],
+      "truncated_sampling": "9 sites through 0.65R; true edge count 0; edge-center INCONCLUSIVE."
+    },
+    "latest_c02_correlated_error_evidence_sha256": "db0f772ae296bc6ef8225de689cff50203ac9e7c495c7001e3b3fe20424ba472",
+    "latest_c02_correlated_error_study": {
+      "cases": [
+        {
+          "cross_step_common_error_correlation": 0.0,
+          "empirical_1sigma_coverage": 0.1201,
+          "model_sigma_nm": 1.4143742593297381,
+          "sigma_ratio": 6.6010800196439545,
+          "wilson_95": [
+            0.11387401396732148,
+            0.12661774799471856
+          ]
+        },
+        {
+          "cross_step_common_error_correlation": 0.5,
+          "empirical_1sigma_coverage": 0.1775,
+          "model_sigma_nm": 1.0002272469066944,
+          "sigma_ratio": 4.668198711271921,
+          "wilson_95": [
+            0.17013540183078724,
+            0.18511227711829914
+          ]
+        },
+        {
+          "cross_step_common_error_correlation": 1.0,
+          "empirical_1sigma_coverage": 1.0,
+          "model_sigma_nm": 0.021320071635561044,
+          "sigma_ratio": 0.09950371902099898,
+          "wilson_95": [
+            0.9996160016293234,
+            1.0
+          ]
+        }
+      ],
+      "command": "python qualification/run_c02_covariance_benchmark.py",
+      "conditional_engine_sigma_nm": 0.21426406817077578,
+      "evidence": "progress/C02_CORRELATED_ERROR_STUDY.json",
+      "replicates_per_case": 10000,
+      "scope": "Synthetic known-covariance challenge; scalar site uncertainty does not identify cross-step or cross-site covariance.",
+      "sites": 44
+    },
+    "latest_c02_uncertainty_followup": {
+      "browser_evidence": "progress/C02_COVARIANCE_BROWSER_ACCEPTANCE.json",
+      "focused_tests": "11 ComparisonTests passed",
+      "source_change": "measurement_repeatability renamed measurement_uncertainty; between-step and across-site covariance marked NOT_SUPPLIED; propagation marked conditional_on_independence",
+      "visible_result": "44 exact common sites per transition; 0.038 nm propagated 1-sigma; covariance limitation visible; no interpolation",
+      "visible_value_wording": "conditional 1\u03c3 assuming independent errors: 0.038 nm"
+    },
+    "latest_c03_selection_bias_benchmark": {
+      "candidate_abstentions": "40/40",
+      "command": "python qualification/run_c03_selection_bias_benchmark.py --baseline-root ../FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22",
+      "frozen_baseline_positive_nominal_intervals": "40/40",
+      "independent_candidate_wafers_per_seed": 80,
+      "scope": "synthetic selection-bias guard only; external registry truth not independently audited",
+      "seed_count": 40,
+      "selected_after_outcome_review_per_seed": 20
+    },
+    "latest_c03_zone_confound": {
+      "evidence": "progress/C03_ZONE_CONFOUND_BENCHMARK.json",
+      "interpretation": "Synthetic process-zone confound removed for the predeclared within-block estimand; no causal or production calibration claim.",
+      "mean_within_wafer_r": -0.0022854641,
+      "nominal_intervals_covering_zero": "37/40 (92.5%; Wilson 95% 80.1\u201397.4%)",
+      "pooled_unadjusted_r": 0.9616995422,
+      "replicates": 40,
+      "sites_per_wafer": 48,
+      "wafers_and_independent_lots_per_replicate": 20
+    },
+    "latest_c04_family_browser": {
+      "bonferroni_alpha": 0.025,
+      "bounded_reads": 5,
+      "capabilities": {
+        "C01": "VALID",
+        "C02": "VALID",
+        "C03": "VALID",
+        "C04": "INCONCLUSIVE",
+        "C05": "VALID"
+      },
+      "evidence": "progress/C04_FAMILY_BROWSER_ACCEPTANCE.json",
+      "family_size": 2,
+      "minimum_empirical_p": 0.047619047619047616,
+      "result": "abstained for insufficient empirical rank resolution; other capabilities available"
+    },
+    "latest_c04_repeated_target_study": {
+      "baseline_lots_per_family": 20,
+      "command": "python qualification/run_c04_repeated_target_benchmark.py",
+      "evidence": "progress/C04_REPEATED_TARGET_NULL_STUDY.json",
+      "gaussian_families_with_any_alert": "9/20 (45%)",
+      "gaussian_per_target_alerts": "24/400 (6%)",
+      "interval_method": "10,000 family-cluster bootstrap resamples for per-target intervals",
+      "null_families_per_distribution": 20,
+      "scope": "synthetic only; not manufacturing calibration",
+      "student_t3_families_with_any_alert": "11/20 (55%)",
+      "student_t3_per_target_alerts": "28/400 (7%)",
+      "targets_per_family": 20
+    },
+    "latest_c05_joint_profile": {
+      "command": "python qualification/run_c05_joint_profile_benchmark.py --baseline-root ../FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22",
+      "historical_retrieval": "1000 maps, 24920 observed sites; all five top-five relevance oracles passed; direct/index parity true",
+      "index_cost": "about 2.4 s build, 29.1 MB peak traced memory; indexed query 56-92 ms versus direct 227-275 ms in five cases",
+      "radial_sector_alias_oracle": "40 fixed seeds; frozen baseline correct top1 0/40, candidate 40/40",
+      "status": "PASS_SYNTHETIC_ONLY"
+    },
+    "latest_c05_scale_10k": {
+      "command": "python qualification/run_c05_scale_benchmark.py",
+      "direct_index_top5_parity": true,
+      "direct_median_ms": 3042.302,
+      "evidence": "progress/C05_SCALE_10K_BENCHMARK.json",
+      "index_build_ms": 3106.683,
+      "indexed_median_ms": 970.184,
+      "maps": 10000,
+      "mean_precision_at_5": 1.0,
+      "process_peak_rss_bytes": 528580608,
+      "queries": 5,
+      "refresh_ms": 2993.479,
+      "scope": "one-machine synthetic scale/relevance evidence only",
+      "sites": 293328,
+      "traced_index_bytes": 331205524
+    },
+    "latest_c05_scale_15k": {
+      "after": "progress/C05_SCALE_15K_COMPACTED_BENCHMARK.json",
+      "before": "progress/C05_SCALE_15K_BENCHMARK.json",
+      "direct_median_ms_after": 4650.946,
+      "indexed_median_ms_after": 1439.69,
+      "invalidation_requires_refresh": true,
+      "maps": 15000,
+      "peak_rss_after_bytes": 707592192,
+      "peak_rss_before_bytes": 797130752,
+      "peak_rss_reduction_bytes": 89538560,
+      "precision_at_5": 1.0,
+      "refresh_ms_after": 4540.153,
+      "scope": "one-machine synthetic 15k-map/440k-site ceiling run; does not characterize company table counts or fleet memory",
+      "sites": 440000,
+      "top5_parity": true,
+      "traced_peak_after_bytes": 412521508,
+      "traced_peak_before_bytes": 496995364
+    },
+    "latest_critical_cases": "14/14 PASS; bound to current source tree hash ea94c58b3c7464cd120ca12c08727f4c860fc5fefbc28dfa62e04961a6d2af1f; 100/100 numeric oracle cases preserved.",
+    "latest_frozen_integrity": {
+      "both_checkouts_byte_identical": true,
+      "candidate_archive": "release/p3-candidate-20261123.zip",
+      "candidate_archive_bytes": 9284796,
+      "candidate_archive_sha256": "aa51df3d510c26d2cfa56ce13603b0d7cdb48ee16a6124de75176729df012499",
+      "rebuilt": false,
+      "source_tree_sha256": "9044a31aa5e79480aaa614496d6ee05778ea72862db3df07bc518030d700755f"
+    },
+    "latest_p3_owned_changes": [
+      "products/p3/engine.py",
+      "products/p3/reference_host/src/App.tsx",
+      "products/p3/reference_host/src/App.test.tsx",
+      "tests/test_p3_integrated.py",
+      "docs/SCIENCE_AND_METHODS.md",
+      "qualification/tree_hash.py",
+      "qualification/run_c04_repeated_target_benchmark.py",
+      "qualification/run_c05_scale_benchmark.py",
+      "progress/C01_GEOMETRY_ORACLE.json",
+      "progress/C02_COVARIANCE_BROWSER_ACCEPTANCE.json",
+      "progress/C04_REPEATED_TARGET_NULL_STUDY.json",
+      "progress/C04_FAMILY_BROWSER_ACCEPTANCE.json",
+      "progress/C05_SCALE_10K_BENCHMARK.json",
+      "progress/REGRESSION_2026-11-23.json",
+      "products/p3/reference_host/static/assets/index-IlU1qW8U.js",
+      "products/p3/reference_host/static/index.html",
+      "qualification/run_c02_covariance_benchmark.py",
+      "progress/C02_CORRELATED_ERROR_STUDY.json"
+    ],
+    "latest_python_compileall": "PASS after C05 snapshot compaction",
+    "latest_python_tests": "148 passed, zero skipped in bundled hash-locked MCP SDK candidate; offline install and pip check passed. Dependency-light bootstrap discovers 148 with 55 SDK-dependent skips.",
+    "latest_react_tests": "23 passed; TypeScript typecheck and Vite production build passed.",
+    "latest_regression_evidence": "progress/REGRESSION_2026-11-23.json",
+    "latest_targeted_diff_check": "PASS for all changed P3 engine, UI, benchmark, test, tree-hash and science-method files.",
+    "latest_typescript_and_build": "PASS; Node 26.13.0 / npm 11.20.0 / React 19.2.0 / TypeScript 5.9.3 / Vite 7.3.8 / Vitest 5.1.1 / ECharts 6.1.0; initial JS 218.79 kB (69.56 kB gzip), deferred renderer 542.26 kB (182.31 kB gzip); informational >500 kB chunk advisory.",
+    "next_independent_task": "After approved transfer and read-only MCP access are available, use .opencode/skills/p3-spatial-onboarding/SKILL.md: start with python -m fabintel mcp-tool-catalog --config <transport-only.json> --output <catalog.json>, then run metadata proposal, obtain human mapping/relationship approval, validate the bounded analysis config, and execute the listed approved plans. No code change is expected for sources satisfying the documented typed semantic row contract.",
+    "working_candidate_2026_11_24_spatial_comparison": {
+      "archive": "release/p3-candidate-20261124-spatial-comparison.zip",
+      "bytes": 9437010,
+      "frozen_archive_sha256": "aa51df3d510c26d2cfa56ce13603b0d7cdb48ee16a6124de75176729df012499",
+      "repeated_builds_equal": true,
+      "sha256": "654fe2cc842d6a4e28a6a50d14970fead24d375866af0c6518a46f3c62d0f4bc",
+      "sidecar_matches": true,
+      "source_tree_sha256": "f6ecff59338b4f5e12615a6934fb608b790fcd73a5a9167aad957e4a6abbd84c"
+    },
+    "working_revision": "../FAB_INTELLIGENCE_P3_NEXT_PHASE_2026-11-23",
+    "working_source_tree_sha256": "f6ecff59338b4f5e12615a6934fb608b790fcd73a5a9167aad957e4a6abbd84c"
+  },
+  "p1_regression_file_sha256": {
+    "qualification/run_p1_module_integration.py": "f95434521b6ea944a53b4c22e6532c9f08d5684c5c38c3780d04abd7510c41ea",
+    "tests/fixtures/spatial_value_contract.json": "ae1bf32587d104fe03d35f44306fd6090432ea8e9278a629fc1992bb5e7dddc4",
+    "tests/test_spatial_observations.py": "1919d61facbbddf695bba425cebde539a3c932bd134f95de29644773636b8ef1"
+  },
+  "remaining_host_responsibilities": [
+    "P1 owns suite route/shell, host source permissions and request/cancellation/recovery lifecycle.",
+    "P1/shared foundation owns a lossless versioned spatial contract v2 and shared renderer/table driven by modality plus observation_kind; suite-spatial-map.v1 cannot express required semantics.",
+    "P1 Python/TypeScript adapters must preserve number/string/null and reject continuous numeric strings; distinguish DEFECT_EVENT null from MISSING_MEASUREMENT null; reject conflicting category/bin aliases, malformed geometry and count mismatches.",
+    "Use P3Panel for C01\u2013C05/source/evidence review and wire onExportEvidence to host-owned canonical evidence export. For typed v2 maps, omit P3Panel legacy waferMap and let the shared renderer/table consume the same v2 model without conversion loss.",
+    "Refresh reviewed P3 engine/panel source snapshot and current hashes; register the exact five C01\u2013C05 result keys; implement and test loading/cancel/empty/refused/error/provenance states on the actual route.",
+    "Execute qualification/run_p1_module_integration.py and actual browser route tests after P1-owned corrections. Keep actual suite integration pending until all expected checks pass."
+  ],
+  "schema": "fab-intelligence-shared-suite-handoff/v1",
+  "states": {
+    "ACTUAL_SHARED_SUITE_INTEGRATION": "PENDING_P1_HOST_ACCEPTANCE",
+    "EXTERNAL_TRANSFER": "NOT_QUALIFIED",
+    "INTERNAL_COMPANY_QUALIFICATION": "PENDING",
+    "P3_PRODUCT_IMPLEMENTATION_COMPLETE": "VERIFIED_SYNTHETIC_SCOPE",
+    "P3_STANDALONE_WORKFLOW_VERIFIED": "PASS_REAL_BROWSER_SYNTHETIC_MCP",
+    "SHARED_SUITE_COMPATIBILITY_HANDOFF": "READY_VERSIONED_CONTRACTS_AND_EXECUTABLE_TESTS"
+  },
+  "synthetic_mcp_to_evidence_fixture": {
+    "browser_evidence": "release/P3_STANDALONE_BROWSER_EVIDENCE.json",
+    "contract_cases": "tests/fixtures/spatial_value_contract.json",
+    "export_sha256": "eaae2687607fff72a8194fa4e7c0de2bd38819005c917ae918e8aa2afc025e22",
+    "host_result_builder": "qualification/build_synthetic_mcp_host_result.py",
+    "observed_workflow": {
+      "bounded_reads": 5,
+      "capabilities": {
+        "C01": "VALID",
+        "C02": "VALID",
+        "C03": "VALID",
+        "C04": "VALID",
+        "C05": "VALID"
+      },
+      "evidence_status": "VALID",
+      "plans": [
+        "SYN-WF-CURRENT",
+        "SYN-WF-PREVIOUS",
+        "SYN-WF-BASELINE",
+        "SYN-WF-HISTORY",
+        "SYN-WF-ASSOCIATION"
+      ],
+      "typed_rows_reconciled": true
+    },
+    "protocol_peer": "tests/fixtures/mcp_mock_server.py",
+    "python_acceptance": "tests/test_reference_host.py; tests/test_mcp_adapter.py; tests/test_p3_integrated.py; tests/test_spatial_observations.py",
+    "synthetic_sdk_peer": "qualification/synthetic_mcp_peer.py",
+    "workflow_plan": "fixtures/p3_integrated_synthetic.json"
+  },
+  "typed_spatial_contract": {
+    "P3_source_schema": "fab-spatial-map.v2",
+    "invariants": [
+      "preserve source site ID, exact primitive type, point order, coordinates, units and source/evidence provenance",
+      "continuous values must be finite JSON numbers or explicit null; refuse numeric strings",
+      "categorical numeric codes remain numbers and categorical arithmetic is refused",
+      "unlabeled defect event is DEFECT_EVENT with null; it does not increment missing count",
+      "explicit missing metrology is MISSING_MEASUREMENT with null and remains a table row",
+      "observation and modality counts reconcile; no row deletion, defaults, interpolation or unsampled values",
+      "geometry/radius/orientation are accepted only from verified declared source semantics"
+    ],
+    "json_schema": "products/p3/contracts/spatial-map.v2.schema.json",
+    "modality_values": [
+      "continuous",
+      "sparse_continuous",
+      "die_bin_categorical",
+      "defect_coordinates"
+    ],
+    "observation_kind_values": [
+      "NUMERIC_MEASUREMENT",
+      "CATEGORICAL_MEASUREMENT",
+      "DEFECT_EVENT",
+      "MISSING_MEASUREMENT"
+    ],
+    "sampling": "observation_count equals observations.length; each typed-kind count reconciles; explicit_missing_value_count counts only MISSING_MEASUREMENT; coverage is reported only against a declared expected-site denominator.",
+    "shared_host_target": "P1-owned suite-spatial-map.v2 must losslessly carry this meaning. Any mapping from P3 fab-spatial-map.v2 must be explicit, typed, unit-preserving and tested. The current suite-spatial-map.v1 is insufficient.",
+    "typescript": "products/p3/contracts/spatial-map.v2.ts",
+    "value_primitives": [
+      "JSON number",
+      "JSON string",
+      "explicit null"
+    ]
+  },
+  "visualization_interface": {
+    "P3Panel_v1_callback": "P3Panel accepts renderWaferMap(model: P3WaferMap) => ReactNode, but that legacy map type cannot carry typed v2 observation_kind/modality. Do not claim it is a v2 visualization API.",
+    "P3_renderer_fixture": "products/p3/reference_host/src/SpatialMapRenderer.tsx#SpatialMapRenderer",
+    "required_host_behavior": [
+      "plot only supplied observed coordinates",
+      "separate continuous, categorical, defect-event and missing series by modality plus observation_kind, never typeof alone",
+      "retain exact category primitive in accessible tooltip/table and preserve source site identity",
+      "use declared verified coordinate system, units, true wafer radius and orientation; withhold map for unverified geometry",
+      "keep table rows and counts reconciled; never interpolate",
+      "dispose chart listeners/instance on unmount and resize with host layout"
+    ],
+    "suite_owner": "Shared foundation/P1 owns the single suite renderer and adjacent semantic table.",
+    "typed_model": "SpatialMapV2"
+  }
+}

@@ -6,9 +6,9 @@ import json
 import os
 import platform
 import re
-import subprocess
+import subprocess  # nosec B404
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,7 +24,7 @@ def hash_file(path: Path) -> str:
 def main():
     catalog = json.loads(CATALOG.read_text(encoding="utf-8"))
     command = [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"]
-    result = subprocess.run(command, cwd=ROOT, env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
+    result = subprocess.run(command, check=False, cwd=ROOT, env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},  # nosec B603
                             stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=180)
     results = []
     for item in catalog:
@@ -37,7 +37,7 @@ def main():
                         "checks": checks, "required_result": item["required_result"]})
     report = {
         "state": "CANDIDATE",
-        "created_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+        "created_utc": datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
         "command": "python -m unittest discover -s tests -v",
         "exit_code": result.returncode,
         "catalog_sha256": hash_file(CATALOG),

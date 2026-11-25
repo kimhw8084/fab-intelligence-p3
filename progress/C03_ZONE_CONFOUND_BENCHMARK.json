@@ -1,0 +1,36 @@
+{
+  "candidate": {
+    "abstention_reasons": {},
+    "abstentions": 0,
+    "interval_coverage_fraction": 0.925,
+    "interval_coverage_wilson_95": [
+      0.8013576647568946,
+      0.9741639742254119
+    ],
+    "mean_pooled_unadjusted_r": 0.9616995422041182,
+    "mean_within_wafer_r": -0.002285464111563739,
+    "nominal_intervals_covering_zero": 37,
+    "nominal_intervals_excluding_zero": 3,
+    "valid_results": 40
+  },
+  "company_data_used": false,
+  "created_utc": "2026-11-24T04:18:33Z",
+  "design": {
+    "complete_outcome_blind_eligible_frame": true,
+    "feature_time_precedes_outcome": true,
+    "independent_lots_per_replicate": 20,
+    "replicates": 40,
+    "seed_start": 20261123,
+    "sites_per_wafer": 48,
+    "spatial_blocks": [
+      "SYN-RADIAL-INNER",
+      "SYN-RADIAL-OUTER"
+    ],
+    "wafers_per_replicate": 20
+  },
+  "ground_truth": "Within each predeclared spatial block, feature and downstream outcome residuals are independent. A shared process-zone effect drives both block means; this is a between-block confound, not a within-block association.",
+  "interpretation": "The pooled correlation is induced by a known shared process-zone factor. C03 targets within-wafer association after predeclared spatial-block fixed effects; this benchmark evaluates that narrow estimand. It does not establish control of unmeasured confounding or causation.",
+  "schema": "p3-c03-zone-confounding-benchmark/v1",
+  "scope": "Synthetic C03 falsification challenge only; no manufacturing data or causal claim.",
+  "status": "PASS"
+}

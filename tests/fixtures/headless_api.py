@@ -1,15 +1,15 @@
 """Test-only loopback API fixture for exercising the shared headless contract."""
 from __future__ import annotations
 
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
-from pathlib import Path
 import re
 import threading
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
 
+from fabintel.contracts import validate_envelope
 from fabintel.project import analyze
 from products.p3.engine import AnalysisCancelled
-from fabintel.contracts import validate_envelope
 
 BASE = Path(__file__).resolve().parents[2]
 MAX_REQUEST_BYTES = 10 * 1024 * 1024
@@ -97,7 +97,7 @@ class _Handler(BaseHTTPRequestHandler):
             self._send(200, body, "application/json; charset=utf-8")
         except AnalysisCancelled:
             self._send(409, '{"status":"CANCELLED","reason":"local analysis was stopped"}', "application/json; charset=utf-8")
-        except Exception:
+        except Exception:  # noqa: BLE001 - keep browser responses generic and avoid leaking request details.
             # Avoid leaking input fragments or stack traces into a browser response.
             self._send(500, '{"error":"analysis failed; input was not logged"}', "application/json; charset=utf-8")
         finally:
@@ -135,9 +135,7 @@ class _Handler(BaseHTTPRequestHandler):
         origin = self.headers.get("Origin")
         if origin and origin not in (f"http://{expected_host}", f"http://localhost:{self.server.server_port}"):
             return False
-        if self.headers.get("Sec-Fetch-Site", "").lower() == "cross-site":
-            return False
-        return True
+        return self.headers.get("Sec-Fetch-Site", "").lower() != "cross-site"
 
 
 def serve(port=8765):

@@ -32,20 +32,38 @@ export interface P3Evidence {
 }
 
 export interface P3WaferMap {
-  schema_version: "p3-wafer-map.v1";
+  schema_version: "suite-spatial-map.v1";
   wafer_id: string;
   coordinates_verified: boolean;
   coordinate_unit: string;
   metric: string;
   measurement_unit: string;
-  geometry: { coordinate_system: string; orientation_deg: number; radius: number };
+  geometry: {
+    coordinate_system: string;
+    origin: { x: number; y: number };
+    orientation_deg: number | null;
+    radius: number;
+  };
+  sampling: {
+    mask_id: string | null;
+    observed_site_count: number;
+    expected_site_count?: number;
+    coverage_fraction?: number;
+    explicit_missing_value_count: number;
+    coverage_basis: "DECLARED_EXPECTED_SITE_COUNT" | "EXPECTED_DENOMINATOR_NOT_SUPPLIED";
+    missing_site_ids?: string[];
+  };
   points: Array<{ site_id: string; x: number; y: number; value: number | string | null }>;
+  interpolation: "none";
 }
 
 export interface P3PanelProps {
   sourcePreview: P3SourcePreview;
   evidence?: P3Evidence | null;
   waferMap?: P3WaferMap | null;
+  requestStatus?: "IDLE" | "LOADING" | "CANCELLED" | "ERROR";
+  /** The suite host owns serialization, naming, and the final export destination. */
+  onExportEvidence?: (evidence: P3Evidence) => void;
   /** The suite host supplies the single shared spatial visualization renderer. */
   renderWaferMap?: (model: P3WaferMap) => ReactNode;
 }
@@ -75,23 +93,48 @@ function capabilityStatus(value: unknown): string {
   return "NOT_AVAILABLE";
 }
 
-function P3Map({ model, renderWaferMap }: { model: P3WaferMap; renderWaferMap?: P3PanelProps["renderWaferMap"] }) {
-  if (!model.coordinates_verified) {
-    return <p role="status">Wafer map withheld because the coordinate system has not been verified.</p>;
+function mapCountError(model: P3WaferMap): string | null {
+  const pointCount = model.points.length;
+  const missingIds = model.points.filter((point) => point.value === null).map((point) => point.site_id);
+  const uniqueIds = new Set(model.points.map((point) => point.site_id));
+  if (model.sampling.observed_site_count !== pointCount) {
+    return `Spatial map declares ${model.sampling.observed_site_count} observed sites but supplies ${pointCount}; rendering is withheld.`;
   }
+  if (model.sampling.explicit_missing_value_count !== missingIds.length) {
+    return `Spatial map declares ${model.sampling.explicit_missing_value_count} explicit missing values but supplies ${missingIds.length}; rendering is withheld.`;
+  }
+  if (uniqueIds.size !== pointCount) {
+    return "Spatial map contains duplicate site identities; rendering is withheld.";
+  }
+  if (model.sampling.missing_site_ids) {
+    const declaredMissingIds = new Set(model.sampling.missing_site_ids);
+    if (declaredMissingIds.size !== model.sampling.missing_site_ids.length ||
+        declaredMissingIds.size !== missingIds.length || missingIds.some((siteId) => !declaredMissingIds.has(siteId))) {
+      return "Spatial map missing-site identifiers do not match the explicit missing observations; rendering is withheld.";
+    }
+  }
+  return null;
+}
 
+function P3Map({ model, renderWaferMap }: { model: P3WaferMap; renderWaferMap?: P3PanelProps["renderWaferMap"] }) {
+  const countError = mapCountError(model);
   return (
     <section aria-labelledby="p3-map-title">
       <h3 id="p3-map-title">Observed wafer map</h3>
-      {renderWaferMap ? (
+      {countError ? (
+        <p role="alert">{countError}</p>
+      ) : !model.coordinates_verified ? (
+        <p role="status">Wafer map withheld because the coordinate system has not been verified.</p>
+      ) : renderWaferMap ? (
         <figure>{renderWaferMap(model)}<figcaption>Only supplied measurement sites are shown. No values are interpolated.</figcaption></figure>
       ) : (
         <p role="status">The shared spatial renderer is not mounted; verified site data remains available in the table.</p>
       )}
-      <details open>
+      <p>Wafer {model.wafer_id} · {model.geometry.coordinate_system} · origin ({model.geometry.origin.x}, {model.geometry.origin.y}) {model.coordinate_unit} · radius {model.geometry.radius} {model.coordinate_unit} · orientation {model.geometry.orientation_deg === null ? "unknown" : `${model.geometry.orientation_deg}°`} · {model.points.length} supplied site observations · {model.sampling.explicit_missing_value_count} explicit missing values{model.sampling.coverage_fraction === undefined || model.sampling.expected_site_count === undefined ? "" : ` · ${(model.sampling.coverage_fraction * 100).toFixed(1)}% of ${model.sampling.expected_site_count} declared sites`} · no interpolation.</p>
+      {!countError && <details open>
         <summary>Accessible measured sites</summary>
         <table>
-          <caption>{model.metric} ({model.measurement_unit}) on wafer {model.wafer_id}</caption>
+          <caption>{model.metric} ({model.measurement_unit}) on wafer {model.wafer_id}; {model.sampling.observed_site_count} observed sites; coverage basis {model.sampling.coverage_basis}</caption>
           <thead><tr><th scope="col">Site</th><th scope="col">X ({model.coordinate_unit})</th><th scope="col">Y ({model.coordinate_unit})</th><th scope="col">Value ({model.measurement_unit})</th></tr></thead>
           <tbody>{model.points.map((point, index) => (
             <tr key={`${model.wafer_id}-${point.site_id}-${index}`}>
@@ -100,13 +143,13 @@ function P3Map({ model, renderWaferMap }: { model: P3WaferMap; renderWaferMap?: 
             </tr>
           ))}</tbody>
         </table>
-      </details>
+      </details>}
     </section>
   );
 }
 
 /** P3 evidence module. The FAB Intelligence host owns route, shell, controls, tokens, and shared renderers. */
-export function P3Panel({ sourcePreview, evidence, waferMap, renderWaferMap }: P3PanelProps) {
+export function P3Panel({ sourcePreview, evidence, waferMap, requestStatus = "IDLE", onExportEvidence, renderWaferMap }: P3PanelProps) {
   const blocked = Boolean(evidence && STOP_STATUSES.has(evidence.status));
   const result = resultFor(evidence);
 
@@ -132,7 +175,11 @@ export function P3Panel({ sourcePreview, evidence, waferMap, renderWaferMap }: P
         </dl>
       </section>
 
-      {!evidence ? <p role="status">No analysis result is available. The shared workspace controls request and retry actions.</p> : (
+      {requestStatus === "LOADING" && <p role="status">Analysis is running. No new result is available yet.</p>}
+      {requestStatus === "CANCELLED" && <p role="status">Cancellation was requested. No result is available for this request.</p>}
+      {requestStatus === "ERROR" && <p role="alert">The analysis request failed before a valid result was returned.</p>}
+
+      {!evidence ? (requestStatus === "IDLE" ? <p role="status">No analysis result is available. The shared workspace controls request and retry actions.</p> : null) : (
         <>
           <section aria-labelledby="p3-capabilities-title">
             <h3 id="p3-capabilities-title">Capability status</h3>
@@ -162,6 +209,7 @@ export function P3Panel({ sourcePreview, evidence, waferMap, renderWaferMap }: P
             {evidence.provenance?.engine_version && <p>Engine: {evidence.provenance.engine_version}</p>}
             {evidence.provenance?.method_version && <p>Method: {evidence.provenance.method_version}</p>}
           </details>
+          {onExportEvidence && <button type="button" onClick={() => onExportEvidence(evidence)}>Export evidence</button>}
         </>
       )}
     </article>

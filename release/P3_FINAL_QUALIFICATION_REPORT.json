@@ -1,0 +1,193 @@
+{
+  "candidate": {
+    "archive": "release/p3-candidate-20261124-external-closure.zip",
+    "archive_acceptance_commands": [
+      "python -S bootstrap_check.py",
+      "python -S -m unittest discover -s tests -v",
+      "python -S -m fabintel demo",
+      "release/build_candidate.py verifies the hash-locked offline MCP SDK installation, pip check and SDK-backed suite after fresh extraction"
+    ],
+    "archive_qualification_record": "release/p3-candidate-20261124-external-closure.qualification.json is generated after packaging and binds the exact ZIP SHA-256 to reproducible-build and fresh-extraction results; the digest is detached because the archive cannot contain its own hash.",
+    "archive_sha256": "See detached release/p3-candidate-20261124-external-closure.zip.sha256; the archive cannot include its own SHA-256 without changing that digest.",
+    "single_package_contents": [
+      "offline Python SDK wheelhouse",
+      "prebuilt local browser assets",
+      "OpenCode and Codex onboarding skills",
+      "configuration and review templates",
+      "scientific, MCP, browser and critical-case evidence",
+      "security review, SBOM, license inventory and third-party notices",
+      "installation, stop, uninstall and rollback runbook"
+    ],
+    "source_tree_sha256": "011e11c65d59cf745f983d9b4147efe80f9c81a1909eff9667c755b340613a44",
+    "source_version": "release/P3_WORKING_SOURCE_VERSION_20261124.json"
+  },
+  "governing_requirements": {
+    "Golden": "pinned pilot v0.1.0-dev; checks it cannot execute remain NOT_RUN and do not qualify release",
+    "Samsung_AI_Innovation_Master_Requirements_v1_1_R01_R43": "NOT_VERIFIED; literal governing documents unavailable in this workspace; no requirements reconstructed"
+  },
+  "known_external_limits": [
+    "Formal accessibility audit and real engineer acceptance cannot be established synthetically.",
+    "First-party ownership and company redistribution authorization require rights-holder/company action.",
+    "Current target OS, real MCP grants/semantics/data, manufacturing calibration and production security require the company environment.",
+    "R01-R43 cannot be assessed without the authoritative source documents.",
+    "Prior pip/npm vulnerability scans are point-in-time only; Syft/Grype unavailable; current company advisory databases not checked.",
+    "Ruff was not available for the final closure; it is not a security scanner and no material correctness/security gate depends on it.",
+    "Desktop visual accessibility review and formal WCAG/assistive-technology audit are not available in this environment."
+  ],
+  "preserved_artifacts": [
+    {
+      "archive": "release/p3-candidate-20261124-final.zip",
+      "modified": false,
+      "sha256": "427b051ebe82a7d844334bb4cc0b8ecc3a0c1125b224681b912c4e92831fb7aa"
+    },
+    {
+      "archive": "release/p3-candidate-20261123.zip",
+      "modified": false,
+      "sha256": "aa51df3d510c26d2cfa56ce13603b0d7cdb48ee16a6124de75176729df012499"
+    }
+  ],
+  "public_push": "NOT_PERFORMED",
+  "readiness": {
+    "accessibility_qualification": {
+      "completed": [
+        "Automated contrast test passes: small text >= 4.5:1; tested control borders/focus >= 3:1.",
+        "Keyboard navigation and visible focus observed; typed data table preserves all observations.",
+        "Browser review ran from a fresh offline extraction of the candidate source tree; its same-tree successor archive differs only in generated qualification evidence and manifest hashes."
+      ],
+      "evidence": "release/P3_FINAL_BROWSER_A11Y_REVIEW_20261124.json; tests/test_reference_host.py",
+      "pending": [
+        "Formal WCAG audit and assistive-technology matrix.",
+        "Desktop viewport manual review and real engineer usability acceptance."
+      ],
+      "status": "PARTIAL"
+    },
+    "autonomous_onboarding": {
+      "boundary": "agent operates tools and deterministic validation; company permissions and source/semantic approvals remain human-authorized",
+      "cli_commands_verified": [
+        "doctor",
+        "mcp-tool-catalog",
+        "mcp-onboard",
+        "mcp-onboard-validate",
+        "mcp-discover",
+        "mcp-analyze",
+        "reference-host",
+        "qualify-internal"
+      ],
+      "entrypoint": "@p3-spatial-onboarding",
+      "first_run_procedure": {
+        "Codex": "Open extracted package root; follow .agents/skills/p3-spatial-onboarding/SKILL.md.",
+        "OpenCode": "Open extracted package root; invoke @p3-spatial-onboarding.",
+        "analysis": "The exact mcp-analyze invocation with five distinct --plan-id <APPROVED_..._ID> flags is in .opencode/skills/p3-spatial-onboarding/SKILL.md; IDs are read only from the validated reviewed configuration and never guessed.",
+        "application": ".venv/bin/python -m fabintel reference-host --port 8765; open http://127.0.0.1:8765/.",
+        "discovery": " .venv/bin/python -m fabintel mcp-tool-catalog --config <approved-transport-only.json> --output <local-evidence-dir>/p3-tool-catalog.json",
+        "mapping": " .venv/bin/python -m fabintel mcp-onboard --config <approved-metadata-only.json> --time-start <START_ISO8601_Z> --time-end <END_ISO8601_Z> --as-of <REVIEW_TIME_ISO8601_Z> --output <local-evidence-dir>/p3-proposals.json",
+        "runtime_install": "python3.11 -m venv .venv; then the hash-required --no-index wheelhouse install and pip check in README.md / the skill.",
+        "validation": " .venv/bin/python -m fabintel mcp-onboard-validate --config <approved-analysis.json> --proposal <local-evidence-dir>/p3-proposals.json --review <local-evidence-dir>/p3-review.json --output <local-evidence-dir>/site-p3-reviewed.json"
+      },
+      "skills": [
+        ".opencode/skills/p3-spatial-onboarding/SKILL.md",
+        ".agents/skills/p3-spatial-onboarding/SKILL.md"
+      ],
+      "status": "READY_FOR_AUTHORIZED_INTERNAL_CONFIGURATION",
+      "synthetic_benchmark": {
+        "actionable_profiles_recalled": "10/10",
+        "actionable_roles_recalled": "9/9",
+        "automated_mapping_approvals": 0,
+        "candidate_pair_ranking": "54/54 correct",
+        "catalog_descriptors": 13000,
+        "evidence_source": "progress/SPATIAL_ONBOARDING_BENCHMARK.json (metrics summarized here because transient progress files are not packaged)",
+        "human_authorization_reference_slots": 16,
+        "human_setup_time": "NOT_MEASURED",
+        "independent_source_role_or_abstention_cases": "15/15 correct",
+        "invalid_ready_mappings_accepted": 0,
+        "modeled_triage_decisions": "13000 manual-rubric decisions to 14 assisted local candidates (99.8923% fewer triage decisions; not a measured time or productivity result)",
+        "synthetic_sdk_end_to_end": "two differently structured synthetic MCP schemas completed five bounded reads, C01-C05 and valid evidence after simulated review; zero reads before reviewed configuration"
+      }
+    },
+    "current_source_security": {
+      "bandit_findings": 0,
+      "broad_python_scan_low_flags": 16,
+      "broad_python_scan_medium_high_flags": 0,
+      "dependency_advisories": {
+        "caveat": "Point-in-time feeds do not replace future target-host monitoring.",
+        "evidence": [
+          "release/NPM_AUDIT_CURRENT_2026-11-24.json",
+          "release/P3_CURRENT_OSV_AUDIT_20261124.json"
+        ],
+        "npm": "0 reported (npm 11.20.0)",
+        "python": "0 reported across 28 pinned wheels (OSV querybatch)"
+      },
+      "evidence": "release/P3_FINAL_SECURITY_REVIEW_20261124.json; release/P3_CURRENT_SOURCE_BANDIT_20261124.json",
+      "matched_scanned_runtime_file_hashes": 15,
+      "review_disposition": "14 seeded synthetic RNG and 2 fixed-argv local subprocess notices manually reviewed; no material actionable finding.",
+      "source_tree_sha256": "011e11c65d59cf745f983d9b4147efe80f9c81a1909eff9667c755b340613a44",
+      "status": "EXTERNAL_SCAN_AND_REVIEW_COMPLETE; INTERNAL_CLEARANCE_PENDING",
+      "target_host_security_approval": "PENDING"
+    },
+    "engineer_acceptance": "PENDING_REAL_ENGINEER_STUDY",
+    "external_engineering_completion": {
+      "evidence": "release/CRITICAL_CASE_EVIDENCE.json; release/P3_STANDALONE_BROWSER_EVIDENCE.json; fresh-extraction results in detached candidate qualification report",
+      "scope": [
+        "14/14 critical cases",
+        "100/100 independent numeric oracles",
+        "C01-C05 synthetic MCP workflow",
+        "149 Python tests with the hash-locked MCP SDK on the prior exact runtime source",
+        "23 React tests; strict TypeScript and production build",
+        "5 bounded synthetic MCP reads; all C01-C05 VALID; evidence export",
+        "Real-browser typed defect-event case: five sites reconcile, three unlabeled events remain typed, zero count as missing; contrast regression passes."
+      ],
+      "status": "VERIFIED_SYNTHETIC_SCOPE"
+    },
+    "formal_transfer_authorization": "PENDING_COMPANY_RIGHTS_AND_SECURITY_APPROVAL",
+    "internal_manufacturing_qualification": "PENDING_AUTHORIZED_MCP_PERMISSIONS_SEMANTICS_AND_DATA",
+    "licensing_and_redistribution": {
+      "evidence": "release/SBOM.spdx.json; release/SUPPLY_CHAIN_AUDIT.json; release/THIRD_PARTY_NOTICES.md",
+      "first_party_ownership_and_transfer_rights": "PENDING",
+      "installed_lock_resolved_npm_packages_audited": 76,
+      "offline_python_wheels": 28,
+      "root_first_party_license": "NOASSERTION",
+      "sbom_files": 209,
+      "status": "INVENTORY_COMPLETE; RIGHTS_NOT_CLEARED",
+      "wheel_license_file_hashes_verified": 28
+    },
+    "measured_company_roi": "NOT_MEASURED",
+    "offline_runtime_by_platform": {
+      "qualified": "macOS arm64 / CPython 3.11 bundled MCP SDK wheelhouse; fresh extraction, hash-locked no-index install, pip check, demo and SDK tests",
+      "runtime_network": "no external AI, CDN, telemetry or auto-update; configured MCP endpoint is the only intended external data connection",
+      "status": "PARTIAL",
+      "unverified": [
+        "company target OS/runtime",
+        "Linux and Windows",
+        "other Python versions",
+        "company egress and browser policy"
+      ]
+    },
+    "product_independence": {
+      "runtime_or_source_dependency_on_P1_P2_P4": false,
+      "status": "VERIFIED",
+      "suite_integration": "OPTIONAL AND PENDING; not required for independent P3 operation"
+    },
+    "production_readiness": "NOT_QUALIFIED",
+    "standalone_browser_workflow": {
+      "evidence": "release/P3_STANDALONE_BROWSER_EVIDENCE.json; release/P3_FINAL_BROWSER_A11Y_REVIEW_20261124.json",
+      "limitations": [
+        "not a formal WCAG audit",
+        "no engineer acceptance study",
+        "Desktop-sized browser evaluation unavailable in this environment.",
+        "Browser-tested extraction preceded the final evidence-only/release-tooling refresh; byte comparison confirmed all 34 fabintel/ and products/p3/ files are identical to final candidate, and the final archive separately passed all fresh-extraction checks."
+      ],
+      "observations": [
+        "real local browser; typed table reconciles 5 observed sites",
+        "keyboard capability tabs and accessible table; no page overflow at 390px",
+        "provenance, limitations, cancellation, permission refusal, recovery, canonical export",
+        "Typed defect-event browser path preserves numeric, string and null values; five rows reconcile and unlabeled events are not missing measurements.",
+        "Small-screen browser interaction confirmed semantic table, keyboard tabs and visible focus after contrast fix.",
+        "Fresh-extracted candidate ran offline on loopback from the bundled CPython 3.11 arm64 wheelhouse; the synthetic MCP defect-event workflow completed in 1,198 ms, with five reconciled observations and zero missing measurements.",
+        "Three unlabeled defect events remained null-typed DEFECT_EVENT rows; export produced SHA-256 9ccb5a519644412344757be76a8be883eae7cd3fb0b021bd7af9647de05aef23."
+      ],
+      "status": "VERIFIED_SYNTHETIC"
+    }
+  },
+  "review_date": "2026-11-24",
+  "schema": "p3-final-external-qualification/v1"
+}

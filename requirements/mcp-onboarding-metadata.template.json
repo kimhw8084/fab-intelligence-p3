@@ -1,0 +1,41 @@
+{
+  "schema_version": "p3-mcp-adapter-config-v1",
+  "access_mode": "metadata_only",
+  "transport": {
+    "type": "stdio",
+    "command": ["REPLACE_WITH_AUTHORIZED_MCP_SERVER_EXECUTABLE"],
+    "cwd": null
+  },
+  "auth_provider": {
+    "type": "environment",
+    "stdio_env": {
+      "MCP_AUTH_TOKEN": "REPLACE_WITH_APPROVED_SECRET_REFERENCE_ENV_VAR"
+    },
+    "http_headers": {}
+  },
+  "read_only_approval": {
+    "approved": false,
+    "scope": "metadata_only",
+    "reference": ""
+  },
+  "approved_sources": [],
+  "metadata_sources": [],
+  "approved_plans": [],
+  "limits": {
+    "max_rows": 1000,
+    "max_bytes": 1048576,
+    "max_seconds": 30
+  },
+  "operations": {
+    "discover": {
+      "tool_name": "REPLACE_WITH_REVIEWED_TOOL_FROM_MCP_CATALOG",
+      "approval": {
+        "approved": false,
+        "reference": "",
+        "tool_definition_sha256": ""
+      },
+      "argument_mapping": {}
+    }
+  },
+  "notes": "Initial stage only. After explicit tool review, this configuration can discover bounded source metadata and propose roles. It grants no source, relationship, query-plan, row-read, or analysis permission. If metadata_sources are explicitly approved for semantic/relationship metadata review, add the exact approved semantics and relationships tool bindings; row tools and plans remain prohibited."
+}

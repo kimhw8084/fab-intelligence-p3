@@ -5,16 +5,16 @@ and protocol handling live in the official MCP Python SDK.
 """
 from __future__ import annotations
 
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import importlib.util
 import json
-from pathlib import Path
-import subprocess
 import sys
 import threading
 import unittest
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+from typing import ClassVar
 
-from fabintel.mcp_client import MCPClient, MCPCancelled
+from fabintel.mcp_client import MCPCancelled, MCPClient
 
 ROOT = Path(__file__).resolve().parent.parent
 SERVER = [sys.executable, "-S", "-m", "tests.fixtures.mcp_mock_server", "--protocol", "dual"]
@@ -55,7 +55,7 @@ class MCPClientSDKTests(unittest.TestCase):
         def invoke():
             try:
                 client.call_tool("mock_wait_for_cancel", {}, cancel_event=cancel, timeout=3)
-            except BaseException as exc:
+            except BaseException as exc:  # noqa: BLE001 - surface worker cancellation/exception to the test thread.
                 outcome.append(exc)
 
         worker = threading.Thread(target=invoke)
@@ -73,7 +73,7 @@ class MCPClientSDKTests(unittest.TestCase):
 
 
 class _HTTPMockHandler(BaseHTTPRequestHandler):
-    requests = []
+    requests: ClassVar[list] = []
     redirect = False
 
     def log_message(self, *_):

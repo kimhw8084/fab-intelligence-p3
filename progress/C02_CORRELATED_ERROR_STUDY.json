@@ -1,0 +1,81 @@
+{
+  "actual_engine_probe": {
+    "independence_formula_matches_oracle": true,
+    "status": "VALID",
+    "uncertainty": {
+      "assumption": "independent previous/current measurement errors and independent matched sites",
+      "conditional_on_independence": true,
+      "covariance": {
+        "across_sites": "NOT_SUPPLIED",
+        "between_steps": "NOT_SUPPLIED"
+      },
+      "mean_delta_standard_uncertainty": 0.21426406817077578,
+      "status": "PROPAGATED_FROM_SITE_STANDARD_UNCERTAINTIES",
+      "unit": "nm",
+      "unknown_covariance_bounds": {
+        "interpretation": "mathematical standard-deviation bounds, not a confidence interval or calibrated process uncertainty",
+        "lower_standard_uncertainty": 0.0,
+        "scope": "all valid cross-step and cross-site covariance structures consistent with supplied marginal standard uncertainties",
+        "upper_standard_uncertainty": 2.0099751242241752
+      }
+    }
+  },
+  "assumption": "Zero true process change; 44 common sites; each site's supplied marginal standard uncertainty is sqrt(common_component^2 + site_component^2). Common error components are shared across all sites; between-step correlation varies by case.",
+  "cases": [
+    {
+      "actual_to_conditional_sigma_ratio": 6.6010800196439545,
+      "conditional_independence_1sigma_nm": 0.21426406817077578,
+      "cross_step_common_error_correlation": 0.0,
+      "empirical_fraction_95_wilson": [
+        0.11387401396732148,
+        0.12661774799471856
+      ],
+      "empirical_fraction_within_reported_1sigma": 0.1201,
+      "known_model_sd_within_marginal_only_bounds": true,
+      "known_model_standard_deviation_nm": 1.4143742593297381,
+      "monte_carlo_standard_deviation_nm": 1.4210821555433766,
+      "nominal_normal_1sigma_coverage": 0.6826894921370859
+    },
+    {
+      "actual_to_conditional_sigma_ratio": 4.668198711271921,
+      "conditional_independence_1sigma_nm": 0.21426406817077578,
+      "cross_step_common_error_correlation": 0.5,
+      "empirical_fraction_95_wilson": [
+        0.17013540183078724,
+        0.18511227711829914
+      ],
+      "empirical_fraction_within_reported_1sigma": 0.1775,
+      "known_model_sd_within_marginal_only_bounds": true,
+      "known_model_standard_deviation_nm": 1.0002272469066944,
+      "monte_carlo_standard_deviation_nm": 0.9793313968570823,
+      "nominal_normal_1sigma_coverage": 0.6826894921370859
+    },
+    {
+      "actual_to_conditional_sigma_ratio": 0.09950371902099898,
+      "conditional_independence_1sigma_nm": 0.21426406817077578,
+      "cross_step_common_error_correlation": 1.0,
+      "empirical_fraction_95_wilson": [
+        0.9996160016293234,
+        1.0
+      ],
+      "empirical_fraction_within_reported_1sigma": 1.0,
+      "known_model_sd_within_marginal_only_bounds": true,
+      "known_model_standard_deviation_nm": 0.021320071635561044,
+      "monte_carlo_standard_deviation_nm": 0.02126734981151102,
+      "nominal_normal_1sigma_coverage": 0.6826894921370859
+    }
+  ],
+  "company_data_used": false,
+  "created_utc": "2026-11-24T12:54:52Z",
+  "interpretation": "The independence-based point estimate remains conditional. The added lower/upper standard-deviation bounds contain each independently known synthetic covariance model; they are not a confidence interval and may be wide. Scalar marginal uncertainties cannot identify covariance or calibrated process uncertainty.",
+  "parameters": {
+    "common_component_sd_nm": 1.0,
+    "marginal_per_site_sd_nm": 1.004987562112089,
+    "replicates": 10000,
+    "seed": 20261123,
+    "site_independent_sd_nm": 0.1,
+    "sites": 44
+  },
+  "result": "PASS_SYNTHETIC_COVARIANCE_BOUNDS_CHALLENGE",
+  "schema": "p3-c02-correlated-error-benchmark/v1"
+}

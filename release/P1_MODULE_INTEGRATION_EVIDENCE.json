@@ -1,0 +1,180 @@
+{
+  "integration_test": {
+    "categorical_conversion_diagnostic": {
+      "defect_category_preserved": true,
+      "defect_numeric_category_type_preserved": false,
+      "explicit_missing_preserved": true,
+      "input_point_count": 2,
+      "interpolation": "none",
+      "numeric_category_type_preserved": false,
+      "numeric_string_refused": false,
+      "output_point_count": 2,
+      "string_category_preserved": true,
+      "unlabeled_defect_not_counted_as_missing": false
+    },
+    "mcp_host_module_diagnostic": {
+      "accessible_table_site_rows": 5,
+      "bounded_reads": 5,
+      "current_source": "MOCK_MAP",
+      "evidence_export_callback_unchanged": true,
+      "evidence_status": "VALID",
+      "input_points": 5,
+      "plotted_numeric_points": 5,
+      "protocol_result_mounted": true
+    },
+    "renderer_diagnostic": {
+      "expected_numeric_color_series_index": 0,
+      "input_points": 3,
+      "interpolation": "none",
+      "module_mounted": true,
+      "numeric_color_series_index": 0,
+      "rendered_missing_points": 1,
+      "rendered_numeric_points": 2,
+      "suite_renderer_validated_map": true
+    },
+    "typescript_exit_code": 0,
+    "typescript_output": "",
+    "vitest_exit_code": 1,
+    "vitest_output": "\n RUN  v5.1.1 /Users/haewonkim/home/work/product 1/FAB_INTELLIGENCE_P1_CODEX_LAUNCHKIT_2026-11-22\n\n \u276f products/p1/ui/__p3_host_integration.generated.test.tsx (4 tests | 1 failed) 29ms\n   \u276f P3 module against the P1 shared renderer (4)\n     \u00d7 reports whether the P1 input converter preserves categorical site values 3ms\n\n Test Files  1 failed (1)\n      Tests  1 failed | 3 passed (4)\n   Start at  07:27:04\n   Duration  500ms (import 66%, environment 24%, tests 7%, transform 3%)\n\n\n\u23af\u23af\u23af\u23af\u23af\u23af\u23af Failed Tests 1 \u23af\u23af\u23af\u23af\u23af\u23af\u23af\n\n FAIL  products/p1/ui/__p3_host_integration.generated.test.tsx > P3 module against the P1 shared renderer > reports whether the P1 input converter preserves categorical site values\nAssertionError: expected { \u2026(10) } to deeply equal { \u2026(10) }\n\n- Expected\n+ Received\n\n  {\n    \"defect_category_preserved\": true,\n-   \"defect_numeric_category_type_preserved\": true,\n+   \"defect_numeric_category_type_preserved\": false,\n    \"explicit_missing_preserved\": true,\n    \"input_point_count\": 2,\n    \"interpolation\": \"none\",\n-   \"numeric_category_type_preserved\": true,\n-   \"numeric_string_refused\": true,\n+   \"numeric_category_type_preserved\": false,\n+   \"numeric_string_refused\": false,\n    \"output_point_count\": 2,\n    \"string_category_preserved\": true,\n-   \"unlabeled_defect_not_counted_as_missing\": true,\n+   \"unlabeled_defect_not_counted_as_missing\": false,\n  }\n\n \u276f products/p1/ui/__p3_host_integration.generated.test.tsx:93:24\n     91|     };\n     92|     (globalThis as { __p3CategoryDiagnostic?: unknown }).__p3CategoryD\u2026\n     93|     expect(diagnostic).toEqual({string_category_preserved: true, numer\u2026\n       |                        ^\n     94|       explicit_missing_preserved: true, defect_category_preserved: tru\u2026\n     95|       unlabeled_defect_not_counted_as_missing: true, numeric_string_re\u2026\n\n\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af[1/1]\u23af\n\n"
+  },
+  "mcp_to_module_fixture": {
+    "fixture_bytes": 30528,
+    "fixture_sha256": "fd7b70d81109535406d9fce2508f01788744357c6512b96f4a608d9e13350c1b",
+    "status": "PASS",
+    "steps": [
+      {
+        "command": [
+          "python",
+          "-m",
+          "venv",
+          "/var/folders/nz/6q2p_ldx3txdbw_gttbpnwjr0000gn/T/p3-mcp-host-fixture-3x1qmbfz/venv"
+        ],
+        "exit_code": 0,
+        "output": ""
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "pip",
+          "install",
+          "--no-index",
+          "--disable-pip-version-check",
+          "--find-links",
+          "/Users/haewonkim/home/work/product 3/FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse",
+          "--require-hashes",
+          "-r",
+          "/Users/haewonkim/home/work/product 3/FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock"
+        ],
+        "exit_code": 0,
+        "output": "use/mcp-2.3.0-py3-none-any.whl (from -r /Users/haewonkim/home/work/product 3/FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 13))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/mcp_types-2.3.0-py3-none-any.whl (from -r /Users/haewonkim/home/work/product 3/FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 14))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/opentelemetry_api-1.45.2-py3-none-any.whl (from -r /Users/haewonkim/home/work/product 3/FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 15))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/pycparser-3.12-py3-none-any.whl (from -r /Users/haewonkim/home/work/product 3/FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 16))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/pydantic-2.14.4-py3-none-any.whl (from -r /Users/haewonkim/home/work/product 3/FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 17))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/pydantic_core-2.50.5-cp311-cp311-macosx_11_0_arm64.whl (from -r /Users/haewonkim/home/work/product 3/FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 18))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/pyjwt-2.15.1-py3-none-any.whl (from -r /Users/haewonkim/home/work/product 3/FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 19))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/python_multipart-0.0.34-py3-none-any.whl (from -r /Users/haewonkim/home/work/product 3/FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 20))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/referencing-0.37.0-py3-none-any.whl (from -r /Users/haewonkim/home/work/product 3/FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 21))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/rpds_py-2026.9.1-cp311-cp311-macosx_11_0_arm64.whl (from -r /Users/haewonkim/home/work/product 3/FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 22))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/sse_starlette-3.7.0-py3-none-any.whl (from -r /Users/haewonkim/home/work/product 3/FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 23))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/starlette-1.10.0-py3-none-any.whl (from -r /Users/haewonkim/home/work/product 3/FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 24))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/truststore-0.10.5-py3-none-any.whl (from -r /Users/haewonkim/home/work/product 3/FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 25))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/typing_extensions-4.16.0-py3-none-any.whl (from -r /Users/haewonkim/home/work/product 3/FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 26))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/typing_inspection-0.4.5-py3-none-any.whl (from -r /Users/haewonkim/home/work/product 3/FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 27))\nProcessing ./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/uvicorn-0.54.0-py3-none-any.whl (from -r /Users/haewonkim/home/work/product 3/FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22/vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock (line 28))\nInstalling collected packages: typing_extensions, truststore, rpds-py, python-multipart, PyJWT, pycparser, idna, h11, click, attrs, annotated-types, uvicorn, typing-inspection, referencing, pydantic_core, opentelemetry-api, httpcore2, cffi, anyio, starlette, pydantic, jsonschema-specifications, httpx2, cryptography, sse-starlette, mcp-types, jsonschema, mcp\nSuccessfully installed PyJWT-2.15.1 annotated-types-0.8.0 anyio-4.16.0 attrs-26.1.0 cffi-2.1.1 click-8.5.1 cryptography-50.0.2 h11-0.16.0 httpcore2-2.16.2 httpx2-2.16.2 idna-3.20 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 mcp-2.3.0 mcp-types-2.3.0 opentelemetry-api-1.45.2 pycparser-3.12 pydantic-2.14.4 pydantic_core-2.50.5 python-multipart-0.0.34 referencing-0.37.0 rpds-py-2026.9.1 sse-starlette-3.7.0 starlette-1.10.0 truststore-0.10.5 typing-inspection-0.4.5 typing_extensions-4.16.0 uvicorn-0.54.0\n"
+      },
+      {
+        "command": [
+          "python",
+          "-m",
+          "pip",
+          "check"
+        ],
+        "exit_code": 0,
+        "output": "No broken requirements found.\n"
+      },
+      {
+        "command": [
+          "python",
+          "qualification/build_synthetic_mcp_host_result.py",
+          "/Users/haewonkim/home/work/product 3/FAB_INTELLIGENCE_P3_CODEX_LAUNCHKIT_2026-11-22/release/.p1_mcp_host_result.tmp.json"
+        ],
+        "exit_code": 0,
+        "output": "{\"status\": \"PASS\", \"product_id\": \"p3\", \"evidence_status\": \"VALID\", \"point_count\": 5, \"source_count\": 2, \"bounded_read_count\": 5}\n"
+      }
+    ],
+    "target": "macos-arm64-cp311-offline-wheelhouse"
+  },
+  "p1_backend_probe_exit_code": 0,
+  "p1_backend_value_diagnostic": {
+    "category_number": {
+      "missing_count": 0,
+      "point_count": 1,
+      "value": "2",
+      "value_type": "str"
+    },
+    "category_string": {
+      "missing_count": 0,
+      "point_count": 1,
+      "value": "BIN-A",
+      "value_type": "str"
+    },
+    "defect_event": {
+      "missing_count": 1,
+      "point_count": 1,
+      "value": null,
+      "value_type": "NoneType"
+    },
+    "defect_string": {
+      "missing_count": 1,
+      "point_count": 1,
+      "value": null,
+      "value_type": "NoneType"
+    },
+    "missing": {
+      "missing_count": 1,
+      "point_count": 1,
+      "value": null,
+      "value_type": "NoneType"
+    },
+    "numeric": {
+      "missing_count": 0,
+      "point_count": 1,
+      "value": 42.5,
+      "value_type": "float"
+    },
+    "numeric_string": {
+      "missing_count": 0,
+      "point_count": 1,
+      "value": "42.5",
+      "value_type": "str"
+    }
+  },
+  "p1_contracts": {
+    "checks": {
+      "p1_registered_module_against_p1_schema": true,
+      "p3_module_against_p1_schema": true,
+      "p3_spatial_model_against_p1_schema": true,
+      "registrations_match": true
+    },
+    "p1_registration_sha256": "bb4a98d13daf3e3f1a6d8e465baf87b864757b45e46f5ab7ac03c3985a787b61",
+    "shared_renderer_sha256": "af42ecc5b29cc7afcde42156c555b486a0b7321f91a40af33f7489bedc1c1d39",
+    "suite_spatial_map_schema_sha256": "ecbf26d77f64c3a6a90c172e7e46d2db6f0493306c0f6d501a422a43444641b7",
+    "suite_ui_module_schema_sha256": "e3f0da372a2528d993a8a1555403c6e115df7256edfc8cfc0f09be3995e17c4f"
+  },
+  "p1_host_owner_changes": [
+    "P1 route snapshot does not match the current tested P3 engine; review and update its pinned P3 contribution before integrated qualification.",
+    "P1 route snapshot does not match the current tested P3 React module; review and update its pinned P3 contribution before integrated qualification.",
+    "P1 TS adapter fails typed spatial acceptance cases: numeric categorical value 2 type, numeric defect category type, unlabeled defect event versus missing measurement, rejection of numeric strings in continuous modality.",
+    "P1 Python API spatial adapter numeric_string: expected (None, None, None), observed ('42.5', 'str', 0)",
+    "P1 Python API spatial adapter category_number: expected (2, 'int', 0), observed ('2', 'str', 0)",
+    "P1 Python API spatial adapter defect_string: expected ('BRIDGE', 'str', 0), observed (None, 'NoneType', 1)",
+    "P1 Python API spatial adapter defect_event: expected (None, 'NoneType', 0), observed (None, 'NoneType', 1)"
+  ],
+  "p1_snapshot_revision": "UNAVAILABLE_NO_COMMIT_IN_LOCAL_SNAPSHOT",
+  "p1_suite_route": "/fab-intelligence/p3",
+  "p1_suite_shell_available": true,
+  "p1_suite_shell_files": [
+    "products/p1/ui/SuiteHost.tsx",
+    "products/p1/ui/main.tsx"
+  ],
+  "p3_source_snapshot": {
+    "engine_matches": false,
+    "fixture_matches": true,
+    "p1_engine_sha256": "7113b825d14f399efebd140a31d450d720e4702a553491e80a458834c4423140",
+    "p1_fixture_sha256": "7843120c45abfcc08d217986153db7f3fbf99393f53381d9ecc6775c8023d460",
+    "p1_panel_sha256": "9128c812767a11898abdfceaead0b0555c11c18b824364e7a6bf494942ffa1e7",
+    "p3_engine_sha256": "b076b1b18410e8796c5d411b1f4ecacc2dcd4337a9d1ef6c9e28cabb2eb3d376",
+    "p3_fixture_sha256": "7843120c45abfcc08d217986153db7f3fbf99393f53381d9ecc6775c8023d460",
+    "p3_panel_sha256": "4dd5091986c51823eba96b29c310a791694586f237955232ad9b3bbfa33a9d4f",
+    "panel_matches": false
+  },
+  "state": "CANDIDATE",
+  "status": "PARTIAL_P1_SHARED_CONTRACT_CHANGES_REQUIRED"
+}

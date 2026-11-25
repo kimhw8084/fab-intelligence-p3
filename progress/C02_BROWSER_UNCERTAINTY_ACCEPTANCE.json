@@ -1,0 +1,21 @@
+{
+  "schema": "p3-c02-browser-uncertainty-acceptance/v1",
+  "date": "2026-11-24",
+  "host": "standalone P3 reference host on loopback; synthetic MCP mode",
+  "result": "PASS",
+  "workflow": {
+    "elapsed_ms": 381,
+    "evidence_status": "VALID",
+    "capabilities": {"C01": "VALID", "C02": "VALID", "C03": "VALID", "C04": "VALID", "C05": "VALID"},
+    "observed_rows": 5,
+    "bounded_reads": 5,
+    "export_sha256": "47609833182da4740a9c71c28d99c483c530f9d5d22c1e03d952a69d335fe767"
+  },
+  "c02_ui": {
+    "observed": "Exact observed-site comparison; no interpolation; conditional independence estimate and covariance limitations are disclosed.",
+    "synthetic_fixture_supplied_site_uncertainty": false,
+    "numeric_bound_visible_in_this_browser_run": false,
+    "numeric_bound_component_test": "20 React tests passed; the C02 component fixture displays 0.010–0.200 nm and labels it as not a confidence interval."
+  },
+  "scope": "Browser verification used only the local synthetic peer and does not establish company permissions, engineering acceptance, or production uncertainty calibration."
+}

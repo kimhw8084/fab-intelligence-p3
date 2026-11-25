@@ -94,6 +94,6 @@ def read_report(path: str | Path) -> dict:
         raise ValueError("qualification capture exceeds the 2 MiB limit")
     parsed = json.loads(file_path.read_text(encoding="utf-8"))
     if not isinstance(parsed, dict):
-        raise ValueError("qualification capture must be a JSON object")
+        raise ValueError("qualification capture must be a JSON object")  # noqa: TRY004 - all malformed captures expose one stable ValueError API.
     return parsed
 

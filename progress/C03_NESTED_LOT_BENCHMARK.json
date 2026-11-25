@@ -1,0 +1,64 @@
+{
+  "company_data_used": false,
+  "created_utc": "2026-11-24T16:17:57Z",
+  "design": {
+    "estimand": "population correlation after block adjustment and independent wafer measurement error",
+    "independent_lots": 20,
+    "independent_wafer_measurement_noise_sd": 0.5,
+    "latent_spatial_correlation": 0.4,
+    "oracle_correlation": 0.32,
+    "oracle_formula": "latent_rho / (1 + measurement_noise_variance)",
+    "random_seed_start": 20261124,
+    "replicates": 500,
+    "sites_per_wafer": 48,
+    "spatial_blocks": 2,
+    "wafers_per_lot": 2
+  },
+  "engine_integration": {
+    "invalid_results": {
+      "nested_wafers": 0,
+      "single_wafer": 0
+    },
+    "method": "products.p3.engine.associate_quality; independent DGP, verified wafer-site context and complete-frame metadata"
+  },
+  "informative_cluster_size_and_missing_site": {
+    "acceptance": true,
+    "equal_lot_expected_r": 0.0,
+    "independent_lots": 20,
+    "lot_size_pattern": "10 positive lots have 3 wafers each; 10 negative lots have 1 each",
+    "naive_wafer_weighted_r": 0.6,
+    "observed_lot_weighted_r": 3.3306690738754696e-16,
+    "single_missing_site_reason": "holdout wafers do not cover the selected map's exact observed-site mask",
+    "single_missing_site_status": "INCONCLUSIVE",
+    "status": "VALID",
+    "wafers": 40
+  },
+  "interpretation": "Synthetic Monte Carlo only. The candidate averages wafer estimates within lot and uses lots as independent units; this does not establish manufacturing validity or complete control of within-lot dependence.",
+  "one_wafer_per_lot_baseline": {
+    "coverage": 0.956,
+    "mean_estimate_mc": 0.32050215445882185,
+    "median_interval_width": 0.12326702401939091,
+    "wilson_95": [
+      0.9342805571276716,
+      0.9707660443713928
+    ]
+  },
+  "predeclared_acceptance": {
+    "both_methods_nominal_95_coverage": "90%-99% across 500 independent simulated investigations",
+    "candidate": "Average Fisher-z wafer correlations within each lot, then estimate across independent lots; no wafer pseudoreplication",
+    "informative_cluster_size": "Unequal lot sizes correlated with lot effect preserve equal-lot estimand rather than wafer weighting; one missing site in any wafer abstains.",
+    "useful_gain": "At least 5% reduction in median 95% interval width at unchanged independent lot count"
+  },
+  "schema": "p3-c03-nested-lot-benchmark/v1",
+  "status": "PASS",
+  "two_wafers_per_lot_clustered_candidate": {
+    "coverage": 0.962,
+    "mean_estimate_mc": 0.3213706155137121,
+    "median_interval_width": 0.10924755113548668,
+    "median_width_reduction_vs_baseline": 0.11373254928016152,
+    "wilson_95": [
+      0.9414152274693561,
+      0.9755398819441696
+    ]
+  }
+}

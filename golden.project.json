@@ -6,7 +6,7 @@
   "golden_source_commit": "dc2ece864b2d744e47dfe8c7d9ad78aadbed369e",
   "capabilities": {
     "ui": true,
-    "api": false,
+    "api": true,
     "database": false,
     "jobs": false,
     "observability": false,
@@ -17,6 +17,11 @@
     "target_host_qualified": false
   },
   "commands": {
-    "python_tests": ["${PYTHON}", "-m", "unittest", "discover", "-s", "tests", "-v"]
+    "python_tests": ["${PYTHON}", "-m", "unittest", "discover", "-s", "tests", "-v"],
+    "ui_contracts": ["${NODE}", "node_modules/vitest/vitest.mjs", "run"],
+    "python_lint": ["${PYTHON}", "-m", "ruff", "check", "."],
+    "security_scan": ["${PYTHON}", "-m", "bandit", "-r", "."],
+    "ts_typecheck": ["${NODE}", "node_modules/typescript/bin/tsc", "--noEmit", "--project", "tsconfig.json"],
+    "web_tests": ["${NODE}", "node_modules/vitest/vitest.mjs", "run"]
   }
 }

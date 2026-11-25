@@ -139,12 +139,38 @@
       "id": "P3-12",
       "required_result": "holdout grouped by wafer/lot/time",
       "status": "PASS"
+    },
+    {
+      "checks": [
+        {
+          "status": "PASS",
+          "test": "test_anomaly_abstains_when_matched_historical_profiles_drift_over_time"
+        },
+        {
+          "status": "PASS",
+          "test": "test_anomaly_requires_holdout_and_corrects_for_multiple_sites"
+        }
+      ],
+      "id": "P3-13",
+      "required_result": "abstain when the whole-wafer spatial profile drift screen detects a shift; never describe a no-detection outcome as proof of stationarity",
+      "status": "PASS"
+    },
+    {
+      "checks": [
+        {
+          "status": "PASS",
+          "test": "test_quality_link_requires_approved_wafer_grain_and_time_order"
+        }
+      ],
+      "id": "P3-14",
+      "required_result": "require complete source-bound predeclaration; label multi-hypothesis nominal intervals exploratory; abstain when selected after holdout outcome review",
+      "status": "PASS"
     }
   ],
-  "catalog_sha256": "b84c09f4fcfe542fe1ba0950a5eb4113a07d7948507cb0396cd81ec6a1726c3c",
+  "catalog_sha256": "ab730f251c3aa6390a280422f39fbeb2bccb8c53bdeedc868a773c53c50a9df0",
   "command": "python -m unittest discover -s tests -v",
   "company_data_used": false,
-  "created_utc": "2026-11-23T05:18:36Z",
+  "created_utc": "2026-11-24T19:17:29Z",
   "environment": {
     "architecture": "arm64",
     "os": "macOS-26.6.2-arm64-arm-64bit",
@@ -153,8 +179,8 @@
   "exit_code": 0,
   "overall": "PASS",
   "scope": "synthetic candidate tests only; not an internal Samsung qualification",
-  "source_commit": "c214bfa9cf2b1b42495f23dde10748cfd1121f53",
-  "source_tree_sha256": "d1591a7572c853fcec2c1f379982f0bd2d87418f9183cd9ecc9106e254db7eb6",
+  "source_commit": "83a08682a189944adf984fe891353e84485ac381",
+  "source_tree_sha256": "f6ecff59338b4f5e12615a6934fb608b790fcd73a5a9167aad957e4a6abbd84c",
   "state": "CANDIDATE",
-  "test_output_sha256": "c5fd83736658167807be38156cb333f3b16739073dc0086b1c6a476926441a16"
+  "test_output_sha256": "584674b3cf3323e8d07d9e28f74addae23c9d69e6a1a19b6a22cb218ecfebb69"
 }

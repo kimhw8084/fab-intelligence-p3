@@ -1,16 +1,20 @@
 """Verify the supplied ZIP extraction has not been altered, then run seeded tests."""
+import hashlib
+import subprocess  # nosec B404
+import sys
 from pathlib import Path
-import hashlib, subprocess, sys
+
 ROOT=Path(__file__).resolve().parent
-GENERATED={"release/BOOTSTRAP_MANIFEST.sha256","release/PACKAGE_QUALIFICATION.json"}
+GENERATED={"release/BOOTSTRAP_MANIFEST.sha256","release/PACKAGE_QUALIFICATION.json","release/GATE_REPORT.json"}
 ARCHIVE_SUFFIXES={".zip",".dmg",".exe",".pyc",".sha256"}
+IGNORED_DIRS={".git",".venv","venv","node_modules","__pycache__",".pytest_cache",".ruff_cache"}
 
 def package_files():
     rows=set()
     for path in ROOT.rglob('*'):
-        if not path.is_file() or '__pycache__' in path.parts or '.git' in path.parts: continue
+        if not path.is_file() or any(part in IGNORED_DIRS for part in path.parts): continue
         relative=path.relative_to(ROOT).as_posix()
-        if relative in GENERATED or path.suffix in ARCHIVE_SUFFIXES: continue
+        if relative.startswith(('progress/','release/p3-candidate-')) or relative in GENERATED or path.suffix in ARCHIVE_SUFFIXES: continue
         rows.add(relative)
     return rows
 
@@ -31,7 +35,7 @@ def main():
     if missing or extra:
         raise SystemExit('MANIFEST COVERAGE FAILED: missing='+','.join(sorted(missing))+' extra='+','.join(sorted(extra)))
     print('BOOTSTRAP INTEGRITY PASS:',checks,'files')
-    tests=subprocess.run([sys.executable,'-m','unittest','discover','-s','tests','-v'],cwd=ROOT)
+    tests=subprocess.run([sys.executable,'-m','unittest','discover','-s','tests','-v'],check=False,cwd=ROOT)  # nosec B603
     if tests.returncode: raise SystemExit(tests.returncode)
     print('BOOTSTRAP TESTS PASS — PRODUCT IS A CANDIDATE, NOT EXTERNAL_TRANSFER_READY')
 

@@ -1,6 +1,9 @@
 """One-way manifest compatibility gate. A passing check does NOT equal suite qualification."""
-import json, sys, hashlib
+import hashlib
+import json
+import sys
 from pathlib import Path
+
 
 def inspect(*dirs):
     products=[]; routes=[]; contracts=[]
@@ -19,4 +22,6 @@ def inspect(*dirs):
             'next':'Execute actual offline dependency, security, UI, scientific cross-product, auth and OS integration tests; manifest check is NOT full suite success.'}
 if __name__=='__main__':
     try: print(json.dumps(inspect(*sys.argv[1:]),indent=2))
-    except Exception as e: print('NOT READY:',str(e),file=sys.stderr);sys.exit(1)
+    except Exception as e:  # noqa: BLE001 - keep the CLI terse without echoing captured product data.
+        print('NOT READY:', str(e), file=sys.stderr)
+        sys.exit(1)

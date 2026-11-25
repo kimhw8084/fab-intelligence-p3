@@ -6,7 +6,7 @@ from products.p3.engine import fingerprint
 
 
 def seeded_map(seed):
-    rng = random.Random(seed)
+    rng = random.Random(seed)  # nosec B311
     points = []
     for i in range(3):
         points.append({"site_id": f"C{i}", "x": (i - 1) * 0.08, "y": 0.04, "value": rng.uniform(-8, 8)})

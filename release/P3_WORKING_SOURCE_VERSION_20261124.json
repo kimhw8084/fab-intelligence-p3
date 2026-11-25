@@ -1,0 +1,33 @@
+{
+  "archive_sha256_location": "Detached release/p3-candidate-20261124-closure.zip.sha256; archive cannot contain its own digest.",
+  "base_commit": "83a08682a189944adf984fe891353e84485ac381",
+  "based_on_working_source_tree_sha256": "011e11c65d59cf745f983d9b4147efe80f9c81a1909eff9667c755b340613a44",
+  "candidate_archive": "release/p3-candidate-20261124-external-closure.zip",
+  "frozen_baseline": {
+    "archive": "release/p3-candidate-20261123.zip",
+    "archive_sha256": "aa51df3d510c26d2cfa56ce13603b0d7cdb48ee16a6124de75176729df012499",
+    "modified": false,
+    "source_tree_sha256": "9044a31aa5e79480aaa614496d6ee05778ea72862db3df07bc518030d700755f"
+  },
+  "no_company_data_used": true,
+  "product_id": "fab-intelligence-p3",
+  "public_push_performed": false,
+  "qualification_report": "release/P3_FINAL_QUALIFICATION_REPORT.json",
+  "revision": "2026-11-24-final-external-handoff",
+  "schema": "fab-p3-working-source-version/v1",
+  "source_tree_sha256": "011e11c65d59cf745f983d9b4147efe80f9c81a1909eff9667c755b340613a44",
+  "state": "LOCAL_CANDIDATE_NOT_TRANSFER_READY",
+  "verified_states": {
+    "ACCESSIBILITY": "TARGETED_BROWSER_AND_AUTOMATED_CONTRAST_REGRESSION_PASS; FORMAL_WCAG_DESKTOP_AND_ENGINEER_ACCEPTANCE_PENDING",
+    "C03_MULTIPLICITY": "PER_HYPOTHESIS_INTERVALS_EXPLICITLY_EXPLORATORY_AND_UNADJUSTED",
+    "CURRENT_SOURCE_SECURITY": "FRESH_BANDIT_RUNTIME_ZERO; BROADER_66_FILE_SCAN_REVIEWED; CURRENT_NPM_AND_OSV_AUDITS_ZERO; COMPANY_REVIEW_PENDING",
+    "EXTERNAL_TRANSFER_READY": false,
+    "INTERNAL_QUALIFICATION_PENDING": true,
+    "LICENSING": "THIRD_PARTY_ASSETS_INVENTORIED; FIRST_PARTY_RIGHTS_PENDING",
+    "OFFLINE_QUALIFICATION": "MACOS_ARM64_CPTHON_3_11_ONLY; OTHER_TARGETS_UNVERIFIED",
+    "P3_PRODUCT_IMPLEMENTATION_COMPLETE": "SYNTHETIC_SCOPE",
+    "P3_STANDALONE_WORKFLOW_VERIFIED": "REAL_BROWSER_SYNTHETIC_MCP_C01_C05_WITH_HISTORICAL_MAP",
+    "SHARED_SUITE_INTEGRATION_PENDING": true,
+    "SPATIAL_ONBOARDING": "COMPLETE_FOR_REVIEWED_TYPED_MCP_SEMANTIC_CONTRACT; NO_COMPANY_CODE_CHANGE_IN_TESTED_SCHEMAS"
+  }
+}

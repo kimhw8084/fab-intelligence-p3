@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import os
 import platform
-import subprocess
+import subprocess  # nosec B404
 import sys
 import tempfile
 from pathlib import Path
@@ -28,12 +28,12 @@ def qualify_offline_mcp_sdk(root: Path, *, timeout: int = 240) -> dict:
             [str(venv / "bin" / "python"), "-m", "pip", "install", "--no-index", "--disable-pip-version-check",
              "--find-links", str(wheelhouse), "--require-hashes", "-r", str(lock)],
             [str(venv / "bin" / "python"), "-m", "pip", "check"],
-            [str(venv / "bin" / "python"), "-m", "unittest", "tests.test_mcp_client", "tests.test_mcp_adapter", "-v"],
+            [str(venv / "bin" / "python"), "-m", "unittest", "discover", "-s", "tests", "-v"],
         ]
         outputs = []
         env = {**os.environ, "PIP_NO_INDEX": "1", "PIP_DISABLE_PIP_VERSION_CHECK": "1", "PYTHONDONTWRITEBYTECODE": "1"}
         for command in commands:
-            result = subprocess.run(command, cwd=root, env=env, stdout=subprocess.PIPE,
+            result = subprocess.run(command, check=False, cwd=root, env=env, stdout=subprocess.PIPE,  # nosec B603
                                     stderr=subprocess.STDOUT, text=True, timeout=timeout)
             normalized_command = [Path(command[0]).name, *command[1:]]
             normalized_command = [item.replace(str(root), "<P3>").replace(temp, "<MCP_TEMP>")
@@ -43,5 +43,5 @@ def qualify_offline_mcp_sdk(root: Path, *, timeout: int = 240) -> dict:
             if result.returncode:
                 return {"status": "FAIL", "target": "macos-arm64-cp311", "steps": outputs}
     return {"status": "PASS", "target": "macos-arm64-cp311", "steps": outputs,
-            "qualification_scope": "offline install, pip dependency consistency, synthetic official-SDK stdio and Streamable HTTP fixtures",
+            "qualification_scope": "offline install, pip dependency consistency, and complete Python suite including official-SDK stdio/Streamable HTTP adapters, P3 C01-C05 workflow, typed spatial contract, refusal/cancellation, and reference-host acceptance",
             "company_approval": "PENDING_INTERNAL", "windows_linux_native_install": "NOT_RUN"}

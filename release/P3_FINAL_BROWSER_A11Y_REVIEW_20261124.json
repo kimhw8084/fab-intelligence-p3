@@ -1,0 +1,95 @@
+{
+  "automated_contrast_regression": {
+    "measured_ratios": {
+      "eyebrow_on_white": 5.128,
+      "focus_on_f2f5f8": 6.922,
+      "focus_on_white": 7.574,
+      "input_border_on_white": 3.673,
+      "tab_border_on_f7f9fa": 3.478
+    },
+    "result": "PASS",
+    "test": "tests.test_reference_host.ReferenceHostAccessibilityStyleTests.test_small_text_controls_and_keyboard_focus_meet_contrast_thresholds",
+    "thresholds": {
+      "nontext_controls_and_focus": 3.0,
+      "small_text": 4.5
+    }
+  },
+  "browser": "Codex in-app Chromium browser, offline fresh extraction of the release candidate",
+  "browser_assets_sha256": {
+    "products/p3/reference_host/static/assets/SpatialMapRenderer-ROtqW6vd.js": "d82c61a29022d87c5816366b70a8d66aa46c8fa0c9cf2e531e301761240b7f9d",
+    "products/p3/reference_host/static/assets/index-BGaC8E9o.css": "01bead40f8c46614b79ba63fea3259f7ea531b6f934628f7e76e18078e26c919",
+    "products/p3/reference_host/static/assets/index-Mgnqu2pQ.js": "5add770c10a291457090cf2a6f2755c65e98f27f25e7bb9ae39b19a43d67dce5",
+    "products/p3/reference_host/static/index.html": "345636a8d6d86bc8aeda6cf1c3fa8df4a4d0c8bb6828a6b2631f743920791c51"
+  },
+  "final_candidate_source_tree_sha256": "011e11c65d59cf745f983d9b4147efe80f9c81a1909eff9667c755b340613a44",
+  "fresh_extraction": {
+    "final_package_changed_paths_since_browser_test": [
+      "qualification/external_gates.csv",
+      "qualification/supply_chain_audit.py",
+      "qualification/tree_hash.py",
+      "release/BOOTSTRAP_MANIFEST.sha256",
+      "release/NPM_AUDIT_CURRENT_2026-11-24.json",
+      "release/P3_CURRENT_OSV_AUDIT_20261124.json",
+      "release/P3_CURRENT_SOURCE_BANDIT_20261124.json",
+      "release/P3_FINAL_BROWSER_A11Y_REVIEW_20261124.json",
+      "release/P3_FINAL_QUALIFICATION_REPORT.json",
+      "release/P3_FINAL_SECURITY_REVIEW_20261124.json",
+      "release/P3_WORKING_SOURCE_VERSION_20261124.json",
+      "release/SBOM.spdx.json",
+      "release/SUPPLY_CHAIN_AUDIT.json",
+      "release/build_candidate.py"
+    ],
+    "identical_product_files_compared": 34,
+    "installation": "Python 3.11 arm64 hash-locked wheelhouse, --no-index; pip check passed",
+    "same_product_runtime_and_browser_assets_as_final_candidate": true,
+    "same_source_tree_as_final_repackage": false,
+    "source_tree_sha256": "225577158e3e990c36aebdb0fd57dd3c8a086601e0c5bef59935025256302667",
+    "tested_archive": "p3-candidate-20261124-external-closure.zip",
+    "tested_archive_sha256": "202fd64ce93735e6e8e307e88f4bb0c82f9b6344d899f5066a8632a96dbad96e"
+  },
+  "interaction_result": {
+    "bounded_reads": 5,
+    "capabilities": {
+      "C01": "VALID",
+      "C02": "INCONCLUSIVE",
+      "C03": "INCONCLUSIVE",
+      "C04": "INCONCLUSIVE",
+      "C05": "INCONCLUSIVE"
+    },
+    "defect_events": 5,
+    "elapsed_ms": 1198,
+    "evidence_status": "PARTIAL",
+    "explicitly_missing_measurements": 0,
+    "export_sha256": "9ccb5a519644412344757be76a8be883eae7cd3fb0b021bd7af9647de05aef23",
+    "input_rendered_counts_reconcile": true,
+    "observation_count": 5,
+    "unlabeled_events_preserved": 3,
+    "value_types": [
+      "string",
+      "number",
+      "null"
+    ]
+  },
+  "keyboard_and_semantic_review": {
+    "accessible_typed_observation_table_exposes_site_coordinates_kind_value_and_type": true,
+    "capability_tabs_navigable_by_arrow_keys_and_end": true,
+    "provenance_and_evidence_export_controls_exposed": true,
+    "scientific_status_and_limitation_text_exposed": true,
+    "visible_focus_outline_observed": true
+  },
+  "limitations": [
+    "390px mobile-sized viewport was exercised; desktop-sized visual evaluation was unavailable in this environment.",
+    "This is a targeted manual browser review and automated contrast regression, not a formal WCAG audit.",
+    "No real engineer acceptance study was performed.",
+    "Browser ran from fresh extraction SHA-256 202fd64ce93735e6e8e307e88f4bb0c82f9b6344d899f5066a8632a96dbad96e. The later final package refreshed only qualification/release tooling and evidence files; all 34 fabintel/ and products/p3/ files, including browser assets, were byte-identical. The final archive independently passed fresh-extraction suite and offline SDK checks."
+  ],
+  "review_date": "2026-11-24",
+  "scenario": "Synthetic MCP typed defect-event workflow",
+  "schema": "p3-browser-accessibility-review/v1",
+  "source_tree_sha256": "225577158e3e990c36aebdb0fd57dd3c8a086601e0c5bef59935025256302667",
+  "status": "PARTIAL_AUTOMATED_AND_TARGETED_BROWSER_REVIEW; FORMAL_AUDIT_AND_ENGINEER_ACCEPTANCE_PENDING",
+  "viewport_css_px": {
+    "height": "available viewport; no horizontal page overflow observed",
+    "width": 390
+  }
+}

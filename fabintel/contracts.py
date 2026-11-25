@@ -1,6 +1,8 @@
 """Frozen P1-P4 shared evidence contract; no remote dependencies."""
 from __future__ import annotations
-import hashlib, json
+
+import hashlib
+import json
 from typing import Any
 
 CONTRACT_VERSION='1.0.0'

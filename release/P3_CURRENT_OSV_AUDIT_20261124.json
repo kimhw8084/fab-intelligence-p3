@@ -1,0 +1,153 @@
+{
+  "endpoint": "https://api.osv.dev/v1/querybatch",
+  "package_count": 28,
+  "packages": [
+    {
+      "ecosystem": "PyPI",
+      "name": "annotated-types",
+      "version": "0.8.0"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "anyio",
+      "version": "4.16.0"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "attrs",
+      "version": "26.1.0"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "cffi",
+      "version": "2.1.1"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "click",
+      "version": "8.5.1"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "cryptography",
+      "version": "50.0.2"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "h11",
+      "version": "0.16.0"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "httpcore2",
+      "version": "2.16.2"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "httpx2",
+      "version": "2.16.2"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "idna",
+      "version": "3.20"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "jsonschema",
+      "version": "4.26.0"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "jsonschema-specifications",
+      "version": "2025.9.1"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "mcp",
+      "version": "2.3.0"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "mcp-types",
+      "version": "2.3.0"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "opentelemetry-api",
+      "version": "1.45.2"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "pycparser",
+      "version": "3.12"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "pydantic",
+      "version": "2.14.4"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "pydantic_core",
+      "version": "2.50.5"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "PyJWT",
+      "version": "2.15.1"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "python-multipart",
+      "version": "0.0.34"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "referencing",
+      "version": "0.37.0"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "rpds-py",
+      "version": "2026.9.1"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "sse-starlette",
+      "version": "3.7.0"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "starlette",
+      "version": "1.10.0"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "truststore",
+      "version": "0.10.5"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "typing_extensions",
+      "version": "4.16.0"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "typing-inspection",
+      "version": "0.4.5"
+    },
+    {
+      "ecosystem": "PyPI",
+      "name": "uvicorn",
+      "version": "0.54.0"
+    }
+  ],
+  "queried_utc": "2026-11-25T00:43:40Z",
+  "request_sha256": "ee7e5c1956d1da858ece0afe533c3c030a160613f750d56d7999db180e6be1a6",
+  "response_sha256": "a89a84c9e2b8c42ae120aea9bef32e057ae83342983d0be3f6bda846a797239c",
+  "schema": "p3-current-osv-batch-audit/v1",
+  "status": "PASS_NO_MATCHES",
+  "vulnerabilities": [],
+  "vulnerability_count": 0
+}

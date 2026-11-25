@@ -1,5 +1,8 @@
 import unittest
-from fabintel.project import describe, analyze
+
+from fabintel.project import analyze, describe
+
+
 class SpecializedTests(unittest.TestCase):
  def test_edge_center_fixed(self):
   self.assertEqual(describe([{'x':0,'y':0,'value':10},{'x':1,'y':0,'value':12},{'x':-1,'y':0,'value':12}],1)['edge_minus_center'],2)

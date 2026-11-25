@@ -1,0 +1,22 @@
+{
+  "contract_version": "p3-reference-module.v2",
+  "product_id": "p3",
+  "module": "products/p3/reference_host/src/App.tsx",
+  "module_export": "App",
+  "capabilities": ["C01", "C02", "C03", "C04", "C05"],
+  "typed_spatial_contract": "fab-spatial-map.v2",
+  "historical_comparison": {
+    "contract": "fab-spatial-map.v2",
+    "selection": "closest eligible C05 match",
+    "maximum_maps": 1,
+    "observed_sites_only": true,
+    "interpolation": "none",
+    "included_in_evidence_export": true
+  },
+  "evidence_schema_version": "1.0.0",
+  "source_adapter": "fabintel.mcp_adapter.ReadOnlyMCPAdapter",
+  "mcp_transport_owner": "official Model Context Protocol SDK",
+  "host_ownership": "P3 standalone reference host; reusable as an integration fixture without owning another product shell",
+  "visualization": "Apache ECharts 6.1.0",
+  "listen_address": "127.0.0.1"
+}

@@ -1,0 +1,74 @@
+{
+  "assumptions_and_limits": [
+    "synthetic labels are independent ground truth, not production relevance",
+    "profile resemblance is not common root cause",
+    "this is one local process, not a fleet-memory service benchmark"
+  ],
+  "exclusion_oracle": {
+    "incompatible_context_records": 500,
+    "incompatible_context_records_excluded": 500,
+    "invalid_geometry_records": 3,
+    "invalid_geometry_records_excluded": 3
+  },
+  "historical_maps": 15000,
+  "historical_sites": 440000,
+  "incompatible_context_decoys": 500,
+  "independent_relevance_oracle": "60 prior records share the planted radial-sector signature, including changed 24-site masks; 500 product/layer/metric-incompatible records contain the same target signature; 500 same-context decoys contain an opposite radial-sector signature with the same number of elevated cells; all remaining records are null spatial backgrounds",
+  "index": {
+    "build_ms": 4826.415,
+    "build_peak_traced_bytes": 496995364,
+    "estimated_index_incremental_peak_rss_bytes": 601702400,
+    "excluded_maps": 3,
+    "generation_after_refresh": 2,
+    "indexed_maps": 14997,
+    "indexed_sites": 440000,
+    "invalidated_search_reason": "historical index snapshot was invalidated and must be refreshed before search",
+    "invalidated_search_status": "INCONCLUSIVE",
+    "invalidation_status": true,
+    "post_refresh_status": "VALID",
+    "process_peak_rss_after_index_bytes": 797130752,
+    "refresh_full_snapshot_ms": 5059.686
+  },
+  "invalid_geometry_records": 3,
+  "map_layouts": {
+    "complete": 10000,
+    "sparse_24_site": 5000
+  },
+  "query_count": 5,
+  "relevant_pattern_analogs": 60,
+  "resource_bounds": {
+    "max_maps": 15000,
+    "max_total_sites": 500000,
+    "population_within_site_bound": true
+  },
+  "scope": "deterministic synthetic C05 scale qualification; no manufacturing validation",
+  "search": {
+    "direct_index_top5_parity": true,
+    "direct_median_ms": 4726.644,
+    "direct_query_ms": [
+      4827.18,
+      4364.637,
+      4819.33,
+      4345.324,
+      4726.644
+    ],
+    "indexed_median_ms": 1473.621,
+    "indexed_query_ms": [
+      1473.621,
+      1120.637,
+      1649.167,
+      1087.527,
+      1493.805
+    ],
+    "mean_precision_at_5": 1.0,
+    "top5_relevance_by_query": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "seed": 730051,
+  "status": "PASS"
+}

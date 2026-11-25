@@ -1,0 +1,186 @@
+{
+  "accessibility_observations": [
+    "Labeled investigation controls and live status were exposed in the browser accessibility tree.",
+    "C01-C05 were keyboard-exposed tabs with status in their accessible names.",
+    "Measured observations had a semantic table with row/column headers and an explicit input/render count reconciliation caption.",
+    "Source provenance and limitations were available through a disclosure control.",
+    "The responsive layout had no page-level horizontal overflow at the tested 390 px viewport."
+  ],
+  "browser": "ChatGPT in-app browser (real local browser tab)",
+  "cross_step_review": {
+    "exact_common_sites": 5,
+    "mean_delta": 1,
+    "measurement_repeatability": "NOT_SUPPLIED",
+    "registration_residual": 0,
+    "status": "VALID",
+    "unit": "nm"
+  },
+  "evidence_export": {
+    "bounded_reads": 5,
+    "bytes": 20030,
+    "capabilities": [
+      "C01",
+      "C02",
+      "C03",
+      "C04",
+      "C05"
+    ],
+    "downloaded_file": "p3-investigation-SYN-p3-ed5de6252e84 (2).json",
+    "evidence_status": "VALID",
+    "module_contract": "p3-reference-module.v2",
+    "observation_count": 5,
+    "sha256": "eaae2687607fff72a8194fa4e7c0de2bd38819005c917ae918e8aa2afc025e22"
+  },
+  "final_comparison_replay_2026_11_24": {
+    "export_note": "Current result hash was displayed by the host. This replay did not save and independently re-hash a downloaded export.",
+    "host": "http://127.0.0.1:8767/",
+    "observed_at_utc": "2026-11-24T19:11:14Z",
+    "qualification_boundary": "Synthetic review and permissions only; internal source semantics, approval, target platform, security and transfer rights remain pending.",
+    "result_hash_displayed_in_browser": "045ccfd02bc936faecb4be84a270390cd70715e2e0991d2840cb30b1d0068a03",
+    "source": "configured synthetic official-SDK MCP peer; no company data or permissions",
+    "source_tree_sha256": "f6ecff59338b4f5e12615a6934fb608b790fcd73a5a9167aad957e4a6abbd84c",
+    "workflow": {
+      "C03_limitation": "nominal per-hypothesis interval; no family-wise adjustment; selected comparisons explicitly exploratory",
+      "C05_historical_map": {
+        "accessible_typed_observation_table": true,
+        "actual_browser_render_verified": true,
+        "comparison_context_visible": "product, step, time, metric, unit, sampling mask",
+        "measured_sites": 5,
+        "observed_sites_only_no_interpolation": true,
+        "wafer": "SYN-W-HIST"
+      },
+      "analysis_elapsed_ms": 536,
+      "bounded_reads": 5,
+      "capabilities": {
+        "C01": "VALID",
+        "C02": "VALID",
+        "C03": "VALID",
+        "C04": "VALID",
+        "C05": "VALID"
+      },
+      "current_map": "SYN-W-CURRENT; five numeric measured sites",
+      "physical_origin_rendering": "chart bounds use verified origin plus/minus radius; offset-origin regression passes",
+      "status": "PASS"
+    }
+  },
+  "full_investigation": {
+    "bounded_read_rows": [
+      5,
+      5,
+      100,
+      5,
+      100
+    ],
+    "bounded_reads": 5,
+    "browser_reported_elapsed_ms": 77,
+    "capability_ids": [
+      "C01",
+      "C02",
+      "C03",
+      "C04",
+      "C05"
+    ],
+    "capability_statuses": {
+      "C01": "VALID",
+      "C02": "VALID",
+      "C03": "VALID",
+      "C04": "VALID",
+      "C05": "VALID"
+    },
+    "current_map_observations": 5,
+    "evidence_status": "VALID",
+    "input_and_accessible_table_counts_reconcile": true,
+    "plan_ids": [
+      "SYN-WF-CURRENT",
+      "SYN-WF-PREVIOUS",
+      "SYN-WF-BASELINE",
+      "SYN-WF-HISTORY",
+      "SYN-WF-ASSOCIATION"
+    ]
+  },
+  "host": "http://127.0.0.1:8765/",
+  "latest_working_revision_replay": {
+    "browser": "ChatGPT in-app browser, local loopback",
+    "evidence_export": {
+      "canonical_sha256": "540dc12e8aa38fd2437e3a36542458371f1bd56a552856e83682d58f5f96e3e1",
+      "downloaded_bytes": 26420,
+      "downloaded_json_sha256": "540dc12e8aa38fd2437e3a36542458371f1bd56a552856e83682d58f5f96e3e1",
+      "local_download_path": "/Users/haewonkim/Downloads/p3-investigation-SYN-p3-a57b614b2cb5.json",
+      "saved_in_browser": true
+    },
+    "host": "http://127.0.0.1:8767/",
+    "limit": "Synthetic peer and reviewed synthetic configuration only; no company semantics, data, permission, deployment, or engineer qualification.",
+    "observed_at_utc": "2026-11-24T16:56:32Z",
+    "offline_runtime": {
+      "environment": "macOS arm64 CPython 3.11.7 isolated venv",
+      "evidence": "release/MCP_SDK_OFFLINE_QUALIFICATION.json",
+      "installation": "--no-index --require-hashes from bundled wheelhouse",
+      "mcp_sdk": "2.3.0",
+      "pip_check": "PASS"
+    },
+    "source": "Configured read-only MCP UI; configuration and peer are synthetic and locally scoped",
+    "source_tree_sha256": "ea94c58b3c7464cd120ca12c08727f4c860fc5fefbc28dfa62e04961a6d2af1f",
+    "workflow": {
+      "C01": "5 numeric sites; observed edge-center difference +2.00 nm; sampling and measurement-artifact questions visible",
+      "C02": "5 exact observed-site matches; measurement uncertainty not supplied",
+      "C03": "20 holdout wafers from 20 distinct synthetic lots; nominal unadjusted interval, one of 20 hypotheses; association only",
+      "C04": "No wafer-level alert; empirical p=1.0000 at alpha=0.05; rank-floor and single-target limitations visible",
+      "C05": "SYN-W-HIST selected at multiscale distance 0.000; exact observed-site values; no reconstruction or incompatible/future records",
+      "bounded_reads": 5,
+      "capabilities": {
+        "C01": "VALID",
+        "C02": "VALID",
+        "C03": "VALID",
+        "C04": "VALID",
+        "C05": "VALID"
+      },
+      "elapsed_ms": 600,
+      "geometry": "coordinates and nm units shown; coverage denominator unavailable and left explicit",
+      "map_and_accessible_table": "5 observed numeric rows displayed; input/render count reconciliation shown",
+      "observations": {
+        "categorical": 0,
+        "defect_events": 0,
+        "explicit_missing": 0,
+        "numeric": 5
+      },
+      "provenance": "MOCK-SEM-1; MOCK-SNAPSHOT-MAP; five bounded read/audit records; synthetic review only",
+      "status": "PASS"
+    }
+  },
+  "observed_at_utc": "2026-11-23T17:53:39Z",
+  "qualification_boundary": {
+    "company_authorization": "PENDING_INTERNAL",
+    "current_python_only_refinement_after_browser_run": "C01 now analyzes remaining observed values when explicit numeric/categorical null rows exist, reports PARTIAL, and preserves missing-site IDs; that refinement is covered by the current Python/SDK regression suite, not this browser recording.",
+    "shared_p1_route": "SHARED_SUITE_INTEGRATION_PENDING",
+    "synthetic_results_are_not_company_evidence": true
+  },
+  "refusal_cancellation_recovery": {
+    "cancel_action_returned_explicit_no_partial_result_message": true,
+    "configured_source_permission_denial_suppressed_findings": true,
+    "react_console_errors": 0,
+    "successful_investigation_after_cancellation": true
+  },
+  "source": {
+    "company_data_used": false,
+    "mode": "synthetic read-only MCP peer using the official MCP SDK",
+    "read_scope": "read_only",
+    "synthetic_semantic_version": "MOCK-SEM-1",
+    "synthetic_snapshot": "MOCK-SNAPSHOT-MAP"
+  },
+  "state": "PASS_SYNTHETIC_BROWSER_WORKFLOW",
+  "typed_observation_scenarios": {
+    "categorical_arithmetic_refused": true,
+    "categorical_numeric_codes_preserved_as_numbers": true,
+    "categorical_string_values_preserved": true,
+    "explicit_missing_row_rendered_with_null_value": true,
+    "input_rows_reconcile_to_accessible_table": true,
+    "unlabeled_defect_events_rendered_separately_from_missing": true
+  },
+  "viewport": {
+    "document_width_px": 375,
+    "height_px": 844,
+    "measured_table_scrolls_inside_its_own_container": true,
+    "page_level_horizontal_overflow": false,
+    "width_px": 390
+  }
+}

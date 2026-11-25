@@ -3,8 +3,9 @@
   "overall_scope": "external candidate package and reused P1 panel toolchain only; not company target-host security clearance",
   "python_dependencies": {
     "scanner": "pip-audit 2.10.1",
-    "advisory_service": "OSV live API",
-    "queried_on_utc_date": "2026-11-23",
+    "advisory_service": "OSV API",
+    "query_date_utc": "2026-11-23",
+    "scan_command": "pip-audit -s osv -r requirements.lock --no-deps --disable-pip -f json",
     "lockfile": "vendor/mcp-sdk-2.3.0/macos-arm64-cp311/requirements.lock",
     "lockfile_sha256": "91bb6e70d813a23f630db5b3956e2755558dbd5c1b25ca6a17dcc5382fd84de7",
     "packages_scanned": 28,
@@ -14,31 +15,50 @@
   },
   "source_static_analysis": {
     "scanner": "Bandit 1.9.4",
-    "targets": ["fabintel/", "products/p3/engine.py"],
+    "targets": [
+      "fabintel/",
+      "products/p3/engine.py"
+    ],
     "high_findings": 0,
     "medium_findings": 0,
-    "low_findings": 1,
-    "reviewed_finding": {
-      "rule": "B311",
-      "file": "fabintel/catalog.py",
-      "line": 7,
-      "disposition": "Intentional deterministic pseudo-random numbers are used only for synthetic catalog generation. They do not create secrets, credentials, tokens or security-sensitive identifiers."
-    },
-    "status": "PASS_WITH_REVIEWED_LOW_FINDING",
+    "low_findings": 2,
+    "reviewed_findings": [
+      {
+        "rule": "B311",
+        "file": "products/p3/engine.py",
+        "line": 945,
+        "disposition": "A seeded PRNG shuffles whole-wafer indices for the statistical permutation screen; it is not used for cryptography, credentials or security-sensitive identifiers."
+      },
+      {
+        "rule": "B311",
+        "file": "fabintel/catalog.py",
+        "line": 7,
+        "disposition": "Intentional deterministic pseudo-random values are used only for synthetic catalog generation; they do not create secrets or security-sensitive identifiers."
+      }
+    ],
+    "status": "PASS_WITH_REVIEWED_LOW_FINDINGS",
     "machine_report": "release/BANDIT_SOURCE_SCAN.json"
   },
   "reused_p1_ui_dependencies": {
     "scanner": "npm audit",
     "npm_version": "11.20.0",
-    "lockfile": "P1/package-lock.json",
-    "lockfile_sha256": "3ec0e042f1c6d27328e8147947dc62bed15012bbebeaa2ea6fff0a70ccbf3adc",
-    "dependencies_scanned": 123,
-    "known_vulnerabilities": {"info": 0, "low": 0, "moderate": 0, "high": 0, "critical": 0},
-    "status": "PASS"
+    "lockfile": "P1 local snapshot package-lock.json",
+    "lockfile_sha256": "db97d1d2418aa6da6677dad1a00adb952ab0567a41b5b163aae8320aac32f36c",
+    "audit_metadata_dependency_total": 126,
+    "known_vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0
+    },
+    "status": "PASS",
+    "machine_report": "release/P1_NPM_AUDIT.json"
   },
   "limits": [
-    "Advisory results are a point-in-time lookup and the vulnerability database timestamp is not emitted by the scanners.",
-    "The Python scan covers the bundled macOS arm64 CPython 3.11 MCP wheel lock only.",
+    "Advisory responses are point-in-time; scanner outputs do not provide an authoritative vulnerability database timestamp.",
+    "The Python scan covers the exact bundled macOS arm64 CPython 3.11 MCP wheel lock only.",
+    "The npm scan covers the current local P1 package lock snapshot by hash, not a P1 suite-host build or company target image.",
     "Windows/Linux native assets, the unknown company target OS, company host controls and company threat review are not qualified.",
     "Dependency scans do not establish redistribution rights or a first-party source license."
   ],

@@ -6,3 +6,4 @@ synthetic_catalog.json
 company-config.json
 *.secret
 coverage/
+node_modules/

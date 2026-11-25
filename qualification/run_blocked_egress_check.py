@@ -4,9 +4,9 @@ from __future__ import annotations
 import json
 import platform
 import shutil
-import subprocess
+import subprocess  # nosec B404
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -18,15 +18,15 @@ def main() -> None:
     sandbox = shutil.which("sandbox-exec")
     if not sandbox:
         raise SystemExit("sandbox-exec is unavailable; outbound-denial evidence cannot be produced on this host")
-    probe = subprocess.run(
+    probe = subprocess.run(  # nosec B603
         [sandbox, "-p", PROFILE, sys.executable, "-S", "-c",
          "import socket; socket.create_connection(('1.1.1.1', 443), timeout=2)"],
-        cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, timeout=10,
+        check=False, cwd=ROOT, capture_output=True, text=True, timeout=10,
     )
     denied = probe.returncode != 0 and ("Operation not permitted" in probe.stderr or "Permission denied" in probe.stderr)
-    demo = subprocess.run(
+    demo = subprocess.run(  # nosec B603
         [sandbox, "-p", PROFILE, sys.executable, "-S", "-m", "fabintel", "demo"],
-        cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, timeout=30,
+        check=False, cwd=ROOT, capture_output=True, text=True, timeout=30,
     )
     try:
         result = json.loads(demo.stdout)
@@ -41,7 +41,7 @@ def main() -> None:
     )
     report = {
         "state": "CANDIDATE",
-        "created_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+        "created_utc": datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
         "host": {"os": platform.platform(), "architecture": platform.machine(), "python": sys.version},
         "sandbox_profile": PROFILE,
         "outbound_probe": {"exit_code": probe.returncode, "denied_by_os_sandbox": denied,

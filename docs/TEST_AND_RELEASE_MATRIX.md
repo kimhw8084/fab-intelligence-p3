@@ -17,6 +17,8 @@ The following describe expected behaviors **to be implemented and actually execu
 | P3-10 | different layer/metric in cross-step records | **no meaningless subtraction** | measurement type oracle |
 | P3-11 | invalid die-to-wafer outcome identity | **disable yield association** | join approval oracle |
 | P3-12 | train/validation maps share wafer family | **holdout grouped by wafer/lot/time** | leakage fixture |
+| P3-13 | compatible numeric profile drifts over historical time | **abstain when the whole-wafer max-split screen detects a shift; no shift detection is not proof of stationarity** | shared-permutation spatial-profile screen and generated trend challenges |
+| P3-14 | choose the largest association among many hypotheses after inspecting holdout outcomes | **require a complete predeclared family; mark multi-hypothesis intervals exploratory and abstain on post-hoc selection** | independent null selection challenge and source-bound selection metadata |
 
 ## Cross-product external release gates
 | ID | Check | Evidence required |

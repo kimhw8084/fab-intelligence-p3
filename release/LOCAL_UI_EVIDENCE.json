@@ -1,22 +1,27 @@
 {
-  "component_tests": {
-    "node_engine_qualified": true,
+  "component_and_host_tests": {
     "node_version": "v26.13.0",
-    "p1_declared_node_engine": "^22.12.0 || ^24.0.0 || >=26.0.0",
-    "passed": 5,
+    "test_runner": "Vitest 5.1.1",
+    "command": "npm test -- --run",
+    "passed": 23,
     "status": "PASS"
   },
-  "contract": "suite-ui-module.v1",
-  "integration_status": "PENDING_P1_SUITE_HOST_AND_SPATIAL_CHART_EXTENSION",
-  "limitation": "No integrated suite host, production token package, real browser task walkthrough, formal accessibility audit, or engineer usability study was available.",
+  "contract": "suite-ui-module.v1 plus independent p3-reference-module.v2",
+  "limitations": [
+    "Browser evidence is synthetic; formal third-party accessibility audit and engineer usability study remain pending.",
+    "Company authorization, manufacturing validation, target-platform and transfer qualification remain pending."
+  ],
   "module": "products/p3/ui/P3Panel.tsx",
   "observed_checks": [
-    "Source preview and synthetic-only mode render from host supplied props.",
-    "C01-C05 status and evidence provenance are visible.",
-    "Verified wafer sites delegate drawing to the injected shared renderer and remain available in a semantic table.",
-    "Unverified coordinates and refused or inconclusive results withhold spatial rendering.",
-    "Empty evidence remains pending without synthetic result fabrication."
+    "The independent P3 reference host starts and runs the official-SDK synthetic MCP workflow through C01-C05.",
+    "Numeric, categorical, missing and defect-event observations remain typed and visible.",
+    "The C05 panel renders the closest eligible historical analog map with an accessible measured-site table and explicit no-interpolation text.",
+    "Verified physical coordinate bounds honor nonzero wafer origins.",
+    "Capability status, source provenance, sampling, limitations and reproducible evidence export are inspectable.",
+    "Cancellation, permission refusal, error and recovery have executable host/component tests."
   ],
-  "state": "CANDIDATE",
-  "toolchain_owner": "P1 suite host"
+  "reference_host": "products/p3/reference_host/",
+  "standalone_browser_evidence": "release/P3_STANDALONE_BROWSER_EVIDENCE.json",
+  "state": "PASS_P3_STANDALONE_UI_CHECKS",
+  "toolchain_owner": "P3 lockfile"
 }

@@ -10,14 +10,21 @@ import sys
 import time
 import tracemalloc
 from copy import deepcopy
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from tree_hash import current_git_commit, source_tree_sha256
+
 from fabintel.catalog import synthetic_catalog
-from products.p3.engine import SpatialSignatureIndex, detect_anomalies, fingerprint, search_history
+from products.p3.engine import (
+    SpatialSignatureIndex,
+    associate_quality,
+    detect_anomalies,
+    fingerprint,
+    search_history,
+)
 
 SEED = 20261122
 CASE_COUNT = 100
@@ -25,7 +32,7 @@ SITES_PER_CASE = 13
 
 
 def make_case(seed):
-    rng = random.Random(seed)
+    rng = random.Random(seed)  # nosec B311
     points = []
     for i in range(3):
         points.append({"site_id": f"C{i}", "x": (i - 1) * 0.08, "y": 0.04, "value": rng.uniform(-8, 8)})
@@ -83,7 +90,7 @@ RETRIEVAL_PATTERNS = ("uniform", "edge", "center", "gradient", "alternating-sect
 
 
 def _retrieval_points(pattern, seed, *, partial=False):
-    rng = random.Random(seed)
+    rng = random.Random(seed)  # nosec B311
     coordinates = [(0.0, 0.0)]
     for radius in (0.18, 0.52, 0.92):
         for sector in range(8):
@@ -124,7 +131,7 @@ def _retrieval_map(index, pattern, *, partial=False, timestamp=None):
         "product_id": "SYN-PRODUCT-1", "sampling_mask_id": "SYN-MASK-PARTIAL" if partial else "SYN-MASK-FULL",
         "population_signature": "SYN-POP-1", "wafer_id": f"W-INDEX-{index:05d}",
         "lot_id": f"LOT-INDEX-{index:05d}",
-        "measured_at": timestamp or (datetime(2026, 11, 1, tzinfo=timezone.utc)
+        "measured_at": timestamp or (datetime(2026, 11, 1, tzinfo=UTC)
                                       - timedelta(minutes=index)).isoformat().replace("+00:00", "Z"),
         "points": _retrieval_points(pattern, SEED + 910_000 + index, partial=partial),
         "oracle_regime": pattern,
@@ -155,7 +162,7 @@ def retrieval_fixture(map_count=1_000):
     # Future records and same-lot records are explicitly excluded by the retrieval contract.
     for offset in range(20):
         item = _retrieval_map(next_index, RETRIEVAL_PATTERNS[offset % len(RETRIEVAL_PATTERNS)],
-                              timestamp=(datetime(2027, 1, 1, tzinfo=timezone.utc)
+                              timestamp=(datetime(2027, 1, 1, tzinfo=UTC)
                                          + timedelta(minutes=offset)).isoformat().replace("+00:00", "Z"))
         history.append(item)
         next_index += 1
@@ -204,7 +211,7 @@ def _unit_skewed_lognormal(rng):
 def _anomaly_map(replicate, index, family, rng, *, shifted=False):
     data = make_case(SEED + 1_200_000 + replicate * 32 + index)
     current = index == 20
-    when = (datetime(2026, 1, 1, tzinfo=timezone.utc) + timedelta(days=index)).isoformat().replace("+00:00", "Z")
+    when = (datetime(2026, 1, 1, tzinfo=UTC) + timedelta(days=index)).isoformat().replace("+00:00", "Z")
     data.update({"wafer_id": f"CAL-{replicate}-{index}", "lot_id": f"CAL-LOT-{replicate}-{index}",
                  "measured_at": when, "product_id": "CAL-PRODUCT", "population_signature": "CAL-POP",
                  "sampling_mask_id": "CAL-MASK"})
@@ -235,37 +242,267 @@ def anomaly_calibration(repetitions=400):
     families = ("gaussian", "student_t3", "skewed_lognormal")
     rows = []
     for family_index, family in enumerate(families):
-        rng = random.Random(SEED + 1_300_000 + family_index)
+        rng = random.Random(SEED + 1_300_000 + family_index)  # nosec B311
         false_alerts = 0
         detections = 0
+        null_stability_abstentions = 0
+        alternative_stability_abstentions = 0
         for replicate in range(repetitions):
             null_maps = [_anomaly_map(replicate, index, family, rng) for index in range(21)]
             null_result = detect_anomalies(null_maps[-1], null_maps[:-1], holdout_verified=True)
-            if null_result.get("status") != "VALID":
+            if null_result.get("status") == "INCONCLUSIVE" and null_result.get("baseline_temporal_stability", {}).get("status") == "INCONCLUSIVE":
+                null_stability_abstentions += 1
+            elif null_result.get("status") == "VALID":
+                false_alerts += null_result["global_max_t_empirical_p"] <= null_result["alpha"]
+            else:
                 raise AssertionError(f"C04 null calibration refused an eligible generated case: {family}")
-            false_alerts += null_result["global_max_t_empirical_p"] <= null_result["alpha"]
 
             shifted_maps = [_anomaly_map(repetitions + replicate, index, family, rng,
                                          shifted=(index == 20)) for index in range(21)]
             shifted_result = detect_anomalies(shifted_maps[-1], shifted_maps[:-1], holdout_verified=True)
-            if shifted_result.get("status") != "VALID":
+            if shifted_result.get("status") == "INCONCLUSIVE" and shifted_result.get("baseline_temporal_stability", {}).get("status") == "INCONCLUSIVE":
+                alternative_stability_abstentions += 1
+            elif shifted_result.get("status") == "VALID":
+                detections += shifted_result["global_max_t_empirical_p"] <= shifted_result["alpha"]
+            else:
                 raise AssertionError(f"C04 positive calibration refused an eligible generated case: {family}")
-            detections += shifted_result["global_max_t_empirical_p"] <= shifted_result["alpha"]
         rows.append({"noise_family": family, "replicates_per_condition": repetitions,
                      "null_false_alerts": false_alerts, "null_rate": false_alerts / repetitions,
                      "null_wilson_95_interval": _wilson_interval(false_alerts, repetitions),
+                     "null_baseline_shift_abstentions": null_stability_abstentions,
+                     "null_baseline_shift_abstention_rate": null_stability_abstentions / repetitions,
+                     "null_alert_rate_conditional_on_stability_pass": false_alerts / max(1, repetitions - null_stability_abstentions),
                      "alternative_detections": detections, "alternative_rate": detections / repetitions,
                      "alternative_wilson_95_interval": _wilson_interval(detections, repetitions),
+                     "alternative_baseline_shift_abstentions": alternative_stability_abstentions,
+                     "alternative_baseline_shift_abstention_rate": alternative_stability_abstentions / repetitions,
+                     "alternative_detection_rate_conditional_on_stability_pass": detections / max(1, repetitions - alternative_stability_abstentions),
                      "alternative": "predeclared +4 nm edge-site shift; wafer-level max-T decision"})
     # These are broad experiment-sanity bounds, not release or fab thresholds.
     passed = all(row["null_rate"] <= 0.12 and row["alternative_rate"] >= 0.80 for row in rows)
-    return {"method": "leave_one_wafer_out_spatial_maxT_rank_v1", "nominal_alpha": 0.05,
+    shift_result = baseline_shift_challenge()
+    pattern_result = anomaly_pattern_calibration()
+    size_result = baseline_size_calibration()
+    passed = (passed and shift_result["status"] == "PASS"
+              and pattern_result["status"] == "PASS" and size_result["status"] == "PASS")
+    return {"method": "leave_one_wafer_out_spatial_maxT_rank_v1",
+            "baseline_shift_screen": {"method": "whole_wafer_max_split_spatial_profile_permutation_v1",
+                                      "alpha": 0.01, "permutations": 499,
+                                      "interpretation": "screen for an ordered shift in global, radial, sector and populated radial-sector profiles; NO_SHIFT_DETECTED is not proof of stationarity"},
+            "baseline_shift_challenge": shift_result,
+            "site_pattern_challenge": pattern_result,
+            "baseline_size_challenge": size_result, "nominal_alpha": 0.05,
             "independent_unit": "wafer; 20 distinct baseline lots and one target lot per replicate",
             "families": rows, "experiment_sanity_bounds": {"maximum_null_false_alert_rate": 0.12,
                 "minimum_detection_rate_for_strong_synthetic_edge_shift": 0.80},
             "sanity_bounds_are_product_thresholds": False,
             "status": "PASS" if passed else "FAIL",
             "qualification_boundary": "synthetic exchangeable populations only; no production calibration or company alert threshold"}
+
+
+def baseline_shift_challenge(repetitions=200):
+    """Test C04 abstention under synthetic global, radial and abrupt baseline drift."""
+    scenarios = {
+        "subtle_global_linear_0.1_per_wafer": lambda index, point: 0.1 * index,
+        "strong_global_linear_0.2_per_wafer": lambda index, point: 0.2 * index,
+        "subtle_edge_linear_0.1_per_wafer": lambda index, point: 0.1 * index if math.hypot(point["x"], point["y"]) >= 0.8 else 0.0,
+        "strong_edge_linear_0.2_per_wafer": lambda index, point: 0.2 * index if math.hypot(point["x"], point["y"]) >= 0.8 else 0.0,
+        "subtle_abrupt_edge_shift_last_10_wafer_1.5": lambda index, point: 1.5 if index >= 10 and math.hypot(point["x"], point["y"]) >= 0.8 else 0.0,
+        "strong_abrupt_edge_shift_last_10_wafer_2.0": lambda index, point: 2.0 if index >= 10 and math.hypot(point["x"], point["y"]) >= 0.8 else 0.0,
+    }
+    rows = []
+    for scenario_index, (name, shift) in enumerate(scenarios.items()):
+        refusals = 0
+        for replicate in range(repetitions):
+            rng = random.Random(SEED + 1_450_000 + scenario_index * repetitions + replicate)  # nosec B311
+            maps = [_anomaly_map(replicate, index, "gaussian", rng) for index in range(21)]
+            for index, item in enumerate(maps[:-1]):
+                for point in item["points"]:
+                    point["value"] += shift(index, point)
+            result = detect_anomalies(maps[-1], maps[:-1], holdout_verified=True)
+            if result.get("status") == "INCONCLUSIVE" and result.get("baseline_temporal_stability", {}).get("status") == "INCONCLUSIVE":
+                refusals += 1
+            elif result.get("status") != "VALID":
+                raise AssertionError(f"C04 drift fixture failed for an unrelated reason: {name}")
+        rate = refusals / repetitions
+        rows.append({"scenario": name, "replicates": repetitions, "baseline_shift_abstentions": refusals,
+                     "abstention_rate": rate, "wilson_95_interval": _wilson_interval(refusals, repetitions),
+                     "synthetic_only": True})
+    strong_scenarios = [row for row in rows if row["scenario"].startswith("strong_")]
+    passed = all(row["abstention_rate"] >= 0.80 for row in strong_scenarios)
+    return {"scenarios": rows,
+            "experiment_sanity_bounds": {"minimum_abstention_rate_for_declared_strong_drift": 0.80,
+                                          "sanity_bound_is_company_threshold": False},
+            "status": "PASS" if passed else "FAIL",
+            "boundary": "generated independent-lot populations only; weaker shifts are reported without a pass threshold"}
+
+
+def anomaly_pattern_calibration(repetitions=200):
+    """Calibrate global, center, sector, edge and single-site target alternatives."""
+    cases = {
+        "strong_global_shift_4": (lambda point: True, 4.0),
+        "strong_center_shift_4": (lambda point: math.hypot(point["x"], point["y"]) <= 0.2, 4.0),
+        "strong_sector0_shift_4": (lambda point: (int(((math.atan2(point["y"], point["x"]) + 2 * math.pi) % (2 * math.pi) / (math.pi / 4)) % 8) == 0
+                                                     and math.hypot(point["x"], point["y"]) > 0.2), 4.0),
+        "strong_edge_shift_4": (lambda point: math.hypot(point["x"], point["y"]) >= 0.8, 4.0),
+        "probe_single_edge_site_shift_4": (lambda point: point["site_id"] == "E0", 4.0),
+        "subtle_global_shift_1": (lambda point: True, 1.0),
+        "subtle_edge_shift_1": (lambda point: math.hypot(point["x"], point["y"]) >= 0.8, 1.0),
+    }
+    rows = []
+    for scenario_index, (name, (select, magnitude)) in enumerate(cases.items()):
+        detections = 0
+        abstentions = 0
+        for replicate in range(repetitions):
+            rng = random.Random(SEED + 1_500_000 + scenario_index * repetitions + replicate)  # nosec B311
+            maps = [_anomaly_map(replicate, index, "gaussian", rng) for index in range(21)]
+            for point in maps[-1]["points"]:
+                if select(point):
+                    point["value"] += magnitude
+            result = detect_anomalies(maps[-1], maps[:-1], holdout_verified=True)
+            if result.get("status") == "INCONCLUSIVE" and result.get("baseline_temporal_stability", {}).get("status") == "INCONCLUSIVE":
+                abstentions += 1
+            elif result.get("status") == "VALID":
+                detections += result["global_max_t_empirical_p"] <= result["alpha"]
+            else:
+                raise AssertionError(f"C04 site-pattern fixture failed for an unrelated reason: {name}")
+        rows.append({"scenario": name, "replicates": repetitions,
+                     "detections": detections, "unconditional_detection_rate": detections / repetitions,
+                     "detection_wilson_95_interval": _wilson_interval(detections, repetitions),
+                     "baseline_stability_abstentions": abstentions,
+                     "baseline_stability_abstention_rate": abstentions / repetitions,
+                     "synthetic_only": True})
+    required = [row for row in rows if row["scenario"].startswith("strong_")]
+    passed = all(row["unconditional_detection_rate"] >= 0.80 for row in required)
+    return {"scenarios": rows,
+            "experiment_sanity_bounds": {"minimum_detection_for_declared_strong_multi_site_patterns": 0.80,
+                                          "sanity_bound_is_company_threshold": False},
+            "status": "PASS" if passed else "FAIL",
+            "boundary": "one-site and subtle-shift probes have no pass threshold and do not imply site-level significance"}
+
+
+def baseline_size_calibration(repetitions=100):
+    """Compare max-T p-value resolution, null alerts and edge detection at 20/40 lots."""
+    rows = []
+    for baseline_count in (20, 40):
+        null_alerts = detections = stability_abstentions = 0
+        for replicate in range(repetitions):
+            rng = random.Random(SEED + 1_600_000 + baseline_count * repetitions + replicate)  # nosec B311
+            baseline = [_anomaly_map(replicate, index, "gaussian", rng)
+                        for index in range(baseline_count)]
+            null_target = _anomaly_map(repetitions + replicate, baseline_count, "gaussian", rng)
+            null_result = detect_anomalies(null_target, baseline, holdout_verified=True)
+            shifted_target = _anomaly_map(repetitions + replicate, baseline_count, "gaussian", rng)
+            for point in shifted_target["points"]:
+                if math.hypot(point["x"], point["y"]) >= 0.8:
+                    point["value"] += 4.0
+            shifted_result = detect_anomalies(shifted_target, baseline, holdout_verified=True)
+            if null_result.get("status") == "INCONCLUSIVE" and null_result.get("baseline_temporal_stability", {}).get("status") == "INCONCLUSIVE":
+                stability_abstentions += 1
+            elif null_result.get("status") == "VALID":
+                null_alerts += null_result["global_max_t_empirical_p"] <= null_result["alpha"]
+            else:
+                raise AssertionError("C04 baseline-size null fixture failed for an unrelated reason")
+            if shifted_result.get("status") == "INCONCLUSIVE" and shifted_result.get("baseline_temporal_stability", {}).get("status") == "INCONCLUSIVE":
+                stability_abstentions += 1
+            elif shifted_result.get("status") == "VALID":
+                detections += shifted_result["global_max_t_empirical_p"] <= shifted_result["alpha"]
+            else:
+                raise AssertionError("C04 baseline-size positive fixture failed for an unrelated reason")
+        rows.append({"baseline_wafers": baseline_count, "independent_lots": baseline_count,
+                     "minimum_attainable_empirical_p": 1 / (baseline_count + 1),
+                     "null_false_alerts": null_alerts, "null_false_alert_rate": null_alerts / repetitions,
+                     "edge_shift_detections": detections, "edge_shift_detection_rate": detections / repetitions,
+                     "baseline_stability_abstentions_out_of_2_conditions": stability_abstentions,
+                     "replicates_per_condition": repetitions})
+    passed = all(row["null_false_alert_rate"] <= 0.12 and row["edge_shift_detection_rate"] >= 0.80 for row in rows)
+    return {"rows": rows,
+            "experiment_sanity_bounds": {"maximum_null_false_alert_rate": 0.12,
+                                          "minimum_detection_for_strong_synthetic_edge_shift": 0.80,
+                                          "sanity_bounds_are_company_thresholds": False},
+            "status": "PASS" if passed else "FAIL",
+            "boundary": "exchangeable synthetic populations; no production sample size recommendation"}
+
+
+def c03_selection_bias_challenge(repetitions=80, family_size=20):
+    """Show how selecting the largest null association changes nominal interval behavior."""
+    coordinates = [(0.0, 0.0), (1.0, 0.0), (0.0, 0.9), (-0.8, 0.0), (0.0, -0.9)]
+    expected_coordinates = {(round(x, 8), round(y, 8)) for x, y in coordinates}
+    expected_context = {"product_id": "SYN-PRODUCT", "metric": "synthetic_metric",
+                        "measurement_definition_id": "SYN-DEF", "unit": "nm", "layer": "L1",
+                        "population_signature": "SYN-POP", "sampling_mask_id": "SYN-MASK",
+                        "coordinate_system": "wafer_xy_v1", "coordinate_unit": "mm",
+                        "radius": 1.0, "orientation_deg": 0}
+    relationship = {"approved": True, "source_id": "SYN-REL", "grain": "wafer_die",
+                    "coordinate_mapping_verified": True,
+                    "spatial_block_method": "predeclared_block_fixed_effects_v1"}
+    geometry = {"verified": True, "radius": 1.0, "origin": {"x": 0, "y": 0},
+                "orientation_deg": 0, "coordinate_system": "wafer_xy_v1", "coordinate_unit": "mm"}
+    holdout = {"verified": True, "split_method": "out_of_time_by_wafer_and_lot",
+               "grouped_by_wafer": True, "grouped_by_lot": True, "leakage_checked": True}
+    rng = random.Random(SEED + 1_700_000)  # nosec B311
+    all_interval_exclusions = selected_interval_exclusions = posthoc_refusals = 0
+    selected_effects = []
+    for replicate in range(repetitions):
+        outcomes = [[rng.gauss(0, 1) for _ in coordinates] for _ in range(20)]
+        candidates = []
+        for hypothesis in range(family_size):
+            rows = []
+            for wafer in range(20):
+                for site, (x, y) in enumerate(coordinates):
+                    rows.append({"wafer_id": f"W-{replicate}-{wafer}", "lot_id": f"L-{replicate}-{wafer}",
+                                 "die_id": f"D{site}", "cohort": "holdout",
+                                 "feature_at": "2026-01-01T00:00:00Z", "outcome_at": "2026-01-02T00:00:00Z",
+                                 "x": x, "y": y, "spatial_block_id": "A" if site < 3 else "B",
+                                 "feature_value": rng.gauss(0, 1), "outcome_value": outcomes[wafer][site],
+                                 "product_id": expected_context["product_id"], "metric": expected_context["metric"],
+                                 "measurement_definition_id": expected_context["measurement_definition_id"],
+                                 "unit": expected_context["unit"], "layer": expected_context["layer"],
+                                 "population_signature": expected_context["population_signature"],
+                                 "sampling_mask_id": expected_context["sampling_mask_id"]})
+            association = {"relationship": relationship, "context": expected_context, "geometry": geometry,
+                           "holdout": holdout,
+                           "cohort_selection": {"verified": True, "sampling_design": "COMPLETE_ELIGIBLE_FRAME",
+                                                "frame_id": f"SYN-C03-FRAME-{replicate}",
+                                                "eligibility_rule_id": "SYN-C03-CONTEXT-ELIGIBILITY",
+                                                "eligibility_rule_predeclared": True,
+                                                "selection_blind_to_feature_and_outcome": True,
+                                                "eligible_wafer_count": 20, "selected_wafer_count": 20},
+                           "hypothesis_selection": {"hypothesis_id": f"SYN-H{hypothesis}",
+                               "family_size": family_size, "predeclared_before_holdout_outcomes": True,
+                               "family_complete": True},
+                           "observations": rows}
+            result = associate_quality(association, expected_context, expected_coordinates)
+            if result.get("status") != "VALID":
+                raise AssertionError(f"C03 independent-null association failed: {result.get('reason')}")
+            if result["hypothesis_selection"]["confirmatory_single_hypothesis_scope"]:
+                raise AssertionError("C03 multiple-hypothesis family was incorrectly labeled confirmatory")
+            low, high = result["fisher_wafer_95_ci"]
+            interval_excludes_zero = low > 0 or high < 0
+            all_interval_exclusions += interval_excludes_zero
+            candidates.append((abs(result["mean_within_wafer_r"]), result, association))
+        _, winner, winner_input = max(candidates, key=lambda item: item[0])
+        low, high = winner["fisher_wafer_95_ci"]
+        selected_interval_exclusions += low > 0 or high < 0
+        selected_effects.append(abs(winner["mean_within_wafer_r"]))
+        posthoc_input = deepcopy(winner_input)
+        posthoc_input["hypothesis_selection"]["predeclared_before_holdout_outcomes"] = False
+        refused = associate_quality(posthoc_input, expected_context, expected_coordinates)
+        posthoc_refusals += refused.get("status") == "INCONCLUSIVE"
+    candidate_count = repetitions * family_size
+    passed = posthoc_refusals == repetitions
+    return {"method": "independent_wafer_die_null_with_posthoc_max_abs_association_selection_v1",
+            "replicates": repetitions, "family_size": family_size,
+            "candidate_associations": candidate_count,
+            "data_generation": "feature and downstream outcome values are generated independently for every die and wafer; holdout outcomes are then used to select the largest absolute mean association",
+            "per_hypothesis_nominal_95_interval_exclusion_rate": all_interval_exclusions / candidate_count,
+            "selected_max_abs_r_nominal_95_interval_exclusion_rate": selected_interval_exclusions / repetitions,
+            "selected_abs_r_median": statistics.median(selected_effects),
+            "posthoc_selection_refusals": posthoc_refusals,
+            "family_interval_adjustment": "NONE; multi-hypothesis results are explicitly exploratory",
+            "product_sanity_bound": "unadjusted selection rate is reported without a pass threshold; all posthoc-selected associations must abstain",
+            "status": "PASS" if passed else "FAIL",
+            "boundary": "synthetic independent-null challenge only; does not calibrate real yield association or establish causality"}
 
 
 def main():
@@ -299,7 +536,7 @@ def main():
     dense_pass = math.isclose(dense_result["edge_minus_center"], dense_expected, rel_tol=1e-12, abs_tol=1e-12)
     retrieval_queries, retrieval_history = retrieval_fixture()
     retrieval_target = retrieval_queries[0]
-    direct_result = search_history(retrieval_target, retrieval_history, top_k=5)
+    search_history(retrieval_target, retrieval_history, top_k=5)
     tracemalloc.start()
     index_build_start = time.perf_counter_ns()
     retrieval_index = SpatialSignatureIndex(retrieval_history, max_maps=1_000, max_total_sites=30_000)
@@ -360,6 +597,7 @@ def main():
                       and invalidated_search.get("status") == "INCONCLUSIVE" and update_rebuild_parity
                       and refreshed_state["generation"] == 2 and invalidated_state["invalidated"]
                       and not refreshed_state["invalidated"])
+    c03_selection = c03_selection_bias_challenge()
     anomaly_result = anomaly_calibration()
     report = {
         "scope": "synthetic external baseline only",
@@ -402,13 +640,15 @@ def main():
             "index_stats": retrieval_index.stats,
             "status": "PASS" if retrieval_pass else "FAIL",
         },
+        "c03_multiple_hypothesis_selection_challenge": c03_selection,
         "c04_anomaly_calibration": anomaly_result,
         "thresholds": "No absolute latency, memory, ROI or user-time target was invented; set thresholds after target-hardware and real analyst baseline measurement.",
         "company_data_used": False,
         "source_commit": current_git_commit(ROOT),
         "source_tree_sha256": source_tree_sha256(ROOT),
         "overall": "PASS" if all(c["status"] == "PASS" for c in cases) and catalog_pass and dense_pass
-                   and retrieval_pass and anomaly_result["status"] == "PASS" else "FAIL",
+                   and retrieval_pass and c03_selection["status"] == "PASS"
+                   and anomaly_result["status"] == "PASS" else "FAIL",
     }
     out = ROOT / "release" / "SCIENTIFIC_PERFORMANCE_BENCHMARK.json"
     out.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")

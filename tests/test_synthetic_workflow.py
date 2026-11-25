@@ -1,6 +1,6 @@
 import json
-from pathlib import Path
 import unittest
+from pathlib import Path
 
 from products.p3.engine import analyze
 from qualification.generate_synthetic_workflow import build

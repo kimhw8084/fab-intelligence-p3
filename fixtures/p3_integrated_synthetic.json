@@ -1404,6 +1404,16 @@
   ],
   "product_id": "SYN-PRODUCT-1",
   "quality_association": {
+    "cohort_selection": {
+      "eligibility_rule_id": "SYN-C03-ELIGIBILITY-1",
+      "eligibility_rule_predeclared": true,
+      "eligible_wafer_count": 20,
+      "frame_id": "SYN-C03-FRAME-1",
+      "sampling_design": "COMPLETE_ELIGIBLE_FRAME",
+      "selected_wafer_count": 20,
+      "selection_blind_to_feature_and_outcome": true,
+      "verified": true
+    },
     "context": {
       "layer": "L1",
       "measurement_definition_id": "SYN-THICKNESS-1",
@@ -1430,6 +1440,12 @@
       "leakage_checked": true,
       "split_method": "out_of_time_by_wafer_and_lot",
       "verified": true
+    },
+    "hypothesis_selection": {
+      "family_complete": true,
+      "family_size": 20,
+      "hypothesis_id": "SYN-C03-HYPOTHESIS-1",
+      "predeclared_before_holdout_outcomes": true
     },
     "observations": [
       {

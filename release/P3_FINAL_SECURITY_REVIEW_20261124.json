@@ -1,0 +1,62 @@
+{
+  "conclusion": "Fresh Bandit scans found zero issues in product runtime and 16 low-severity flags in the broader 66-file Python set; the flags were manually reviewed as synthetic RNG or fixed-argv subprocess notices with no material externally actionable finding. Current npm and OSV queries reported zero advisories. This is external candidate evidence, not company security clearance or transfer approval.",
+  "current_source_tree_sha256": "011e11c65d59cf745f983d9b4147efe80f9c81a1909eff9667c755b340613a44",
+  "dependency_vulnerability_audits": {
+    "npm": "release/NPM_AUDIT_CURRENT_2026-11-24.json",
+    "python": "release/P3_CURRENT_OSV_AUDIT_20261124.json",
+    "result": "zero reported advisories at recorded query time; point-in-time only; target-host monitoring remains pending"
+  },
+  "qualification_limits": {
+    "company_transport_permissions": "PENDING_INTERNAL",
+    "formal_security_approval": "PENDING_INTERNAL",
+    "ruff": "NOT_RUN; style check only. Tests, TypeScript and exact-source Bandit provide alternative correctness/security evidence for this candidate; no known material control depends on Ruff.",
+    "syft_grype": "NOT_AVAILABLE_LOCALLY",
+    "target_host_review": "PENDING_EXTERNAL",
+    "vulnerability_database": "npm audit (npm 11.20.0) and OSV querybatch were queried 2026-11-24 local / 2026-11-25 UTC: zero advisories reported across the lock-resolved npm graph and 28 pinned Python wheel versions. Point-in-time only; no future guarantee."
+  },
+  "review_date": "2026-11-24",
+  "schema": "p3-current-source-security-review/v1",
+  "security_scan": {
+    "all_runtime_file_hashes_match_current_source": true,
+    "all_scanned_file_hashes_match_current_source": true,
+    "archive_sha256_location": "Detached qualification sidecar; runtime file hashes are embedded in the scan record.",
+    "candidate_archive": "release/p3-candidate-20261124-external-closure.zip",
+    "command": "bandit -r fabintel products/p3/engine.py -f json --severity-level low --confidence-level low",
+    "evidence": "release/P3_CURRENT_SOURCE_BANDIT_20261124.json",
+    "exit_code": 0,
+    "finding_count": 0,
+    "loc": 4849,
+    "scan_source_tree_sha256": "011e11c65d59cf745f983d9b4147efe80f9c81a1909eff9667c755b340613a44",
+    "scanned_first_party_python_files": 66,
+    "scanned_runtime_files": 15,
+    "scanner": "Bandit 1.9.4",
+    "supplemental_findings_reviewed_and_non_actionable": true,
+    "supplemental_loc": 12758,
+    "supplemental_low_severity_findings": 16,
+    "supplemental_medium_or_high_findings": 0
+  },
+  "targeted_manual_review": {
+    "observed_controls": [
+      "HTTPS or constrained loopback HTTP; redirects and ambient proxy use are disabled",
+      "source/tool/semantic/plan identities are hash-bound and revalidated; raw SQL-like inputs are rejected",
+      "bounded read counts, response size and timeouts; schema and coordinate/unit validation fail closed",
+      "credentials are resolved from named environment references and are not copied into qualification reports",
+      "reference host is foreground and IPv4 loopback only; API checks origin, body/plan bounds, path containment, CSP, and no-store behavior",
+      "no remote browser assets, telemetry, automatic update, or external AI runtime"
+    ],
+    "residual_trust_boundaries": [
+      "A configured stdio MCP executable runs with the invoking OpenCode user\u2019s OS privileges; verify executable path, owner, version/hash, arguments, and endpoint with the site administrator before launch. The onboarding skill now states this explicitly.",
+      "The client cannot establish server-side permission grants or truth of company semantics; approval and source audit remain company responsibilities.",
+      "Downloaded evidence may contain manufacturing data; its destination, retention, and removal are governed by site policy.",
+      "Loopback HTTP protects against remote exposure, not other local processes or users with access to the host account."
+    ],
+    "scope": [
+      "MCP transport and configured endpoint boundary",
+      "read-only plan/tool/source approval validation",
+      "secret references and logging",
+      "bounded inputs, responses, cancellation and audit evidence",
+      "reference-host bind address, same-origin/CSP, request limits and path containment",
+      "evidence export handling and local file exposure"
+    ]
+  }
+}

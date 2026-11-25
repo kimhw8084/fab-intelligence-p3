@@ -1,0 +1,40 @@
+{
+  "schema": "p3-c02-sequence-mask-challenge/v1",
+  "oracle": "tests/test_p3_integrated.py::ComparisonTests.test_sequence_cumulative_change_uses_only_full_sequence_exact_sites",
+  "result": "PASS",
+  "cases": {
+    "supported_changed_masks": {
+      "per_transition_minimum_sites": 5,
+      "per_transition_minimum_coverage": 0.5,
+      "exact_sites_common_to_all_steps": 5,
+      "adjacent_comparisons": "all VALID",
+      "cumulative_mean_delta": 5.0,
+      "status": "VALID"
+    },
+    "adjacent_valid_but_no_sequence_wide_sites": {
+      "step_count": 5,
+      "adjacent_comparisons": "all VALID",
+      "exact_sites_common_to_all_steps": 0,
+      "status": "INCONCLUSIVE",
+      "preserved_adjacent_comparisons": 4,
+      "reason": "no exact observed sites are common to every transition; adjacent comparisons remain available"
+    },
+    "endpoint_uncertainty": {
+      "first_step_site_sd": 0.1,
+      "intermediate_step_site_sd": 0.2,
+      "last_step_site_sd": 0.3,
+      "matched_sites": 4,
+      "conditional_mean_endpoint_sd": 0.15811388300841897,
+      "marginal_only_sd_bounds": [0.0, 0.4],
+      "intermediate_uncertainty_in_cumulative_endpoint": "cancels; it is not double-counted"
+    }
+  },
+  "regression": {
+    "python_tests_passed": 139,
+    "critical_cases_passed": "14/14",
+    "compileall": "PASS",
+    "ruff_changed_python": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "scope": "Deterministic independent synthetic fixtures only. The sequence policy uses exact observed coordinates and predeclared site/coverage minima; no interpolation or production validation is implied."
+}

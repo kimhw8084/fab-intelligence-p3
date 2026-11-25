@@ -1,0 +1,25 @@
+{
+  "schema": "p3-spatial-catalog-independent-oracle/v1",
+  "catalog_count": 13000,
+  "oracle_authored_before_candidate_evaluation": true,
+  "candidate_source_expectations": [
+    {"source_id": "SYN-SP-00117", "role": "spatial_measurements", "modality": "continuous", "geometry": "PHYSICAL_VERIFIED"},
+    {"source_id": "SYN-SP-01317", "role": "spatial_measurements", "measurement_profiles": 2, "geometry": "PHYSICAL_VERIFIED"},
+    {"source_id": "SYN-SP-03117", "role": "wafer_geometry", "geometry": "PHYSICAL_VERIFIED"},
+    {"source_id": "SYN-SP-04117", "role": "spatial_measurements", "geometry": "NEEDS_AUTHORIZED_METADATA_RELATION"},
+    {"source_id": "SYN-SP-05117", "role": "spatial_measurements", "modality": "continuous", "geometry": "DIE_GRID_ONLY_NO_PHYSICAL_RADIUS"},
+    {"source_id": "SYN-SP-06117", "role": "spatial_measurements", "modality": "die_bin_categorical", "arithmetic": "REFUSED"},
+    {"source_id": "SYN-SP-07117", "role": "spatial_measurements", "modality": "defect_coordinates", "null_label": "DEFECT_EVENT_NOT_MISSING"},
+    {"source_id": "SYN-SP-08117", "role": "downstream_quality", "grain": "wafer_die", "relationship": "REVIEW_REQUIRED"},
+    {"source_id": "SYN-SP-09117", "role": "reticle_geometry", "reticle_claim": "WITHHELD_WITHOUT_REGISTERED_WAFER_JOIN"},
+    {"source_id": "SYN-SP-10117", "role": "ABSTAIN", "reason": "contradictory radius and coordinate units"},
+    {"source_id": "SYN-SP-11117", "role": "ABSTAIN", "reason": "measurement and value column units disagree"},
+    {"source_id": "SYN-SP-12117", "role": "ABSTAIN", "reason": "modality is undeclared"},
+    {"source_id": "SYN-SP-12317", "role": "ABSTAIN", "reason": "measurement definition is not effective at review time"},
+    {"source_id": "SYN-SP-12417", "role": "ABSTAIN", "reason": "metadata access is restricted"},
+    {"source_id": "SYN-SP-12517", "role": "ABSTAIN", "reason": "source title is misleading and has no semantic role evidence"}
+  ],
+  "authorization_rule": "No source mapping, relationship, bounded plan, or data read is authorized by this oracle. Every proposal requires a separate source-authority and engineer review.",
+  "geometry_rule": "Die-grid coordinates are not physical wafer coordinates. A verified reticle profile alone cannot support wafer-level reticle periodicity.",
+  "data_rule": "Names, descriptions, and table titles are deliberately misleading and must not influence role assignment. Explicit typed roles and versioned metadata are required."
+}

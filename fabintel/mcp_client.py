@@ -7,14 +7,16 @@ The SDK owns stdio and Streamable HTTP protocol behavior; P3's separate
 from __future__ import annotations
 
 import asyncio
-from concurrent.futures import Future, TimeoutError as FutureTimeout
-from dataclasses import dataclass
 import ipaddress
 import math
 import os
 import threading
 import time
-from typing import Any, Mapping, Sequence
+from collections.abc import Mapping
+from concurrent.futures import Future
+from concurrent.futures import TimeoutError as FutureTimeout
+from dataclasses import dataclass
+from typing import Any, Self
 from urllib.parse import urlsplit
 
 
@@ -148,7 +150,7 @@ class MCPClient:
         asyncio.set_event_loop(loop)
         try:
             loop.run_until_complete(self._session_lifecycle())
-        except BaseException as exc:
+        except BaseException as exc:  # noqa: BLE001 - always publish worker startup failure, including cancellation.
             self._startup_error = exc
             self._ready.set()
         finally:
@@ -169,12 +171,12 @@ class MCPClient:
 
             self._close_event = asyncio.Event()
             if self.transport_type == "stdio":
+
                 from mcp.client.stdio import StdioServerParameters, stdio_client
-                import contextlib
-                with open(os.devnull, "w", encoding="utf-8") as server_stderr:
+                with open(os.devnull, "w", encoding="utf-8") as server_stderr:  # noqa: ASYNC230 - SDK requires a text stream for subprocess stderr.
                     server = StdioServerParameters(command=self.command[0], args=list(self.command[1:]),
                                                    env=self.stdio_env or None, cwd=self.cwd)
-                    async with stdio_client(server, errlog=server_stderr) as (read_stream, write_stream):
+                    async with stdio_client(server, errlog=server_stderr) as (read_stream, write_stream):  # noqa: SIM117 - the next context depends on streams from this context.
                         async with ClientSession(read_stream, write_stream, read_timeout_seconds=self.request_timeout) as session:
                             await self._negotiate(session, MCPError)
                             self._sdk_session = session
@@ -183,7 +185,7 @@ class MCPClient:
             else:
                 import httpx2
                 from mcp.client.streamable_http import streamable_http_client
-                async with httpx2.AsyncClient(headers=self.http_headers, timeout=self.request_timeout,
+                async with httpx2.AsyncClient(headers=self.http_headers, timeout=self.request_timeout,  # noqa: SIM117
                                               follow_redirects=False, trust_env=False) as http_client:
                     async with streamable_http_client(self.endpoint or "", http_client=http_client) as streams:
                         read_stream, write_stream = streams[0], streams[1]
@@ -192,7 +194,7 @@ class MCPClient:
                             self._sdk_session = session
                             self._ready.set()
                             await self._close_event.wait()
-        except BaseException as exc:
+        except BaseException as exc:  # noqa: BLE001 - release waiting callers even when the SDK task is cancelled.
             self._startup_error = exc
             self._ready.set()
 
@@ -254,7 +256,9 @@ class MCPClient:
                 return future.result(timeout=min(0.05, remaining))
             except FutureTimeout:
                 continue
-            except BaseException as exc:
+            except MCPClientError:
+                raise
+            except BaseException as exc:  # noqa: BLE001 - relay SDK cancellation and non-Exception worker failures.
                 code = getattr(getattr(exc, "error", None), "code", None)
                 if code is not None:
                     raise MCPRemoteError(code) from None
@@ -298,10 +302,7 @@ class MCPClient:
                 raise MCPToolError(name)
             return payload
 
-        try:
-            return self._submit(invoke(), timeout=float(duration), cancel_event=cancel_event)
-        except MCPToolError:
-            raise
+        return self._submit(invoke(), timeout=float(duration), cancel_event=cancel_event)
 
     def close(self) -> None:
         with self._state_lock:
@@ -314,7 +315,7 @@ class MCPClient:
         if thread is not None and thread is not threading.current_thread():
             thread.join(timeout=min(self.request_timeout + 2, 10))
 
-    def __enter__(self) -> "MCPClient":
+    def __enter__(self) -> Self:
         self.connect()
         return self
 

@@ -1,0 +1,65 @@
+{
+  "limitations": [
+    "Synthetic tool names, sources, review references and semantic truth are not company data or permissions.",
+    "Timing measures local synthetic execution only, not engineer setup or company latency.",
+    "Tool listing and metadata proposals never grant invocation or row-read permission."
+  ],
+  "peer": "official MCP Python SDK against protocol-compatible synthetic stdio server",
+  "pre_discovery_configuration": {
+    "baseline_minimum_approval_records": 8,
+    "human_time_measured": false,
+    "meaning": "Fewer approval/configuration records are needed before source catalog review; final source, relationship, query-plan, and analysis approvals remain required.",
+    "metadata_only_minimum_approval_records": 2,
+    "reduction_percent": 75.0
+  },
+  "qualification": "PASS_SYNTHETIC_ONLY",
+  "scenarios": [
+    {
+      "bounded_analysis_reads": 5,
+      "capabilities": {
+        "anomaly": "VALID",
+        "evolution": "VALID",
+        "fingerprint": "VALID",
+        "quality_association": "VALID",
+        "similarity": "VALID"
+      },
+      "initial_catalog_descriptors": 13000,
+      "initial_metadata_row_reads": 0,
+      "initial_ranked_source_proposals": 14,
+      "scenario": "onboarding-catalog",
+      "scoped_metadata_row_reads": 0,
+      "source_mapping_proposals": 16,
+      "stage_timing_ms": {
+        "c01_c05_analysis": 146.333,
+        "initial_source_discovery": 173.605,
+        "scoped_semantics_and_relationships": 165.888,
+        "tool_catalog": 319.731
+      },
+      "workflow_timing_ms": 808.501
+    },
+    {
+      "bounded_analysis_reads": 5,
+      "capabilities": {
+        "anomaly": "VALID",
+        "evolution": "VALID",
+        "fingerprint": "VALID",
+        "quality_association": "VALID",
+        "similarity": "VALID"
+      },
+      "initial_catalog_descriptors": 13000,
+      "initial_metadata_row_reads": 0,
+      "initial_ranked_source_proposals": 14,
+      "scenario": "onboarding-schema-alt",
+      "scoped_metadata_row_reads": 0,
+      "source_mapping_proposals": 16,
+      "stage_timing_ms": {
+        "c01_c05_analysis": 193.602,
+        "initial_source_discovery": 187.319,
+        "scoped_semantics_and_relationships": 206.867,
+        "tool_catalog": 21.978
+      },
+      "workflow_timing_ms": 613.232
+    }
+  ],
+  "schema": "p3-onboarding-bootstrap-benchmark/v1"
+}

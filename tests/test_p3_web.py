@@ -1,9 +1,9 @@
 import http.client
 import json
-from http.server import ThreadingHTTPServer
-from pathlib import Path
 import threading
 import unittest
+from http.server import ThreadingHTTPServer
+from pathlib import Path
 
 from tests.fixtures.headless_api import _Handler
 
@@ -40,7 +40,7 @@ class HeadlessApiContractFixtureTests(unittest.TestCase):
         self.assertEqual(status, 404)
         self.assertIn(b"not found", body)
         self.assertIn("no-store", headers["Cache-Control"])
-        status, js, _ = self.request("GET", "/app.js")
+        status, _js, _ = self.request("GET", "/app.js")
         self.assertEqual(status, 404)
         status, example, _ = self.request("GET", "/api/example")
         self.assertEqual(status, 200)

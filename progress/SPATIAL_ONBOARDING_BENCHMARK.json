@@ -1,0 +1,123 @@
+{
+  "catalog": {
+    "catalog_generation_ms": 2.84,
+    "classifier_ms_all": [
+      18.766,
+      18.245,
+      17.325,
+      17.207,
+      16.984
+    ],
+    "classifier_ms_median_5": 17.325,
+    "independent_table_descriptors": 13000,
+    "proposal_outcomes": 14,
+    "renamed_catalog_classifier_ms": 17.547,
+    "restricted_descriptors": 15,
+    "source_title_invariance": true
+  },
+  "limits": [
+    "Synthetic semantic roles and approval references do not establish internal authority or source meaning.",
+    "The one-descriptor-one-triage manual baseline is a workload rubric, not measured engineer time.",
+    "No company productivity, deployment, security or manufacturing validation is implied."
+  ],
+  "matched_onboarding_effort_model": {
+    "approval_slots_include": {
+      "logical_tool_bindings": 5,
+      "mapping_reviews": 2,
+      "relationship_review": 1,
+      "server_query_plans": 5,
+      "site_read_only_scope": 1,
+      "source_permissions": 2
+    },
+    "assisted": {
+      "automated_time_to_valid_module_ms": 425.957,
+      "commands_for_cli_rollout": [
+        "mcp-onboard",
+        "mcp-onboard-validate",
+        "mcp-analyze"
+      ],
+      "descriptor_triage_decisions": 14,
+      "final_source_mapping_reviews": 2,
+      "human_time_seconds": null,
+      "local_candidate_screening_decision_reduction_fraction": 0.998923,
+      "mcp_metadata_capture_timing_ms": {
+        "mcp_discovery": 138.92,
+        "relationship_metadata": 0.532,
+        "semantics": 2.318
+      },
+      "relationship_reviews": 1,
+      "required_authorization_reference_slots": 16
+    },
+    "authorization_decisions_removed": 0,
+    "interpretation": "Synthetic workflow counts only. Human labor, productivity and company ROI were not measured.",
+    "manual_baseline": {
+      "basis": "predeclared one triage decision per descriptor; not measured labor",
+      "descriptor_triage_decisions": 13000,
+      "final_source_mapping_reviews": 2,
+      "human_time_seconds": null,
+      "relationship_reviews": 1,
+      "required_authorization_reference_slots": 16
+    }
+  },
+  "oracle": {
+    "authored_before_candidate_evaluation": true,
+    "path": "qualification/fixtures/spatial_catalog_oracle.json"
+  },
+  "oracle_quality": {
+    "correct_candidate_role_or_abstention_cases": 15,
+    "expected_actionable_profiles": 10,
+    "expected_actionable_profiles_recalled": 10,
+    "expected_actionable_roles": 9,
+    "expected_actionable_roles_recalled": 9,
+    "expected_source_cases": 15,
+    "geometry_mismatches": [],
+    "invalid_ready_mappings_accepted": 0,
+    "modality_mismatches": [],
+    "name_based_decision_changes": 0,
+    "positive_negative_pairs": 54,
+    "positive_negative_pairwise_ranking_accuracy": 1.0
+  },
+  "relationship_screening_stress": {
+    "candidate_pairs": 0,
+    "elapsed_ms": 7.707,
+    "pair_output_cap": 200,
+    "status": "PASS",
+    "unrelated_wafer_id_descriptors": 13000
+  },
+  "schema": "p3-spatial-onboarding-benchmark/v1",
+  "source_tree_sha256": "d3d5cf38679c6f8c4c139a7a2bd3e574b74429cae8028fa9dfcdf7580b4f50da",
+  "status": "PASS",
+  "synthetic_sdk_e2e": {
+    "alternate_opaque_schema": {
+      "bounded_read_count": 5,
+      "capability_statuses": {
+        "C01": "VALID",
+        "C02": "VALID",
+        "C03": "VALID",
+        "C04": "VALID",
+        "C05": "VALID"
+      },
+      "evidence_status": "VALID",
+      "metadata_row_reads_before_review": 0,
+      "reads_before_analysis": 0
+    },
+    "automatic_mapping_approvals": 0,
+    "bounded_data_reads_after_review": 5,
+    "capability_statuses": {
+      "C01": "VALID",
+      "C02": "VALID",
+      "C03": "VALID",
+      "C04": "VALID",
+      "C05": "VALID"
+    },
+    "catalog_descriptors": 13000,
+    "data_reads_before_reviewed_config": 0,
+    "evidence_status": "VALID",
+    "metadata_row_reads_before_review": 0,
+    "module_contract": "p3-reference-module.v2",
+    "observation_count": 5,
+    "provenance_bounded_reads": 5,
+    "scenario": "protocol-compatible 13k catalog MCP peer",
+    "simulated_review_only": "SYNTHETIC_REVIEW_ONLY"
+  }
+}

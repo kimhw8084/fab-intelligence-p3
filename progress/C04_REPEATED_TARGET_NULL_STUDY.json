@@ -1,0 +1,110 @@
+{
+  "exchangeability_oracle": {
+    "assumption": "continuous exchangeable null maximum-statistic ranks, complete analyses, and no stability abstentions",
+    "familywise_any_alert_probability": 0.5,
+    "per_target_alert_probability": 0.047619047619047616
+  },
+  "families_per_noise_distribution": 20,
+  "interpretation": "Per-target rank evidence is not a family-wise guarantee when the same baseline is repeatedly searched. The study estimates behavior under the declared synthetic null families only.",
+  "method": "fixed baseline is reused for multiple independent null target wafers; each target runs the unchanged leave-one-wafer-out spatial max-T rank screen",
+  "results": {
+    "gaussian": {
+      "baseline_stability_abstentions": 0,
+      "baseline_wafers_per_family": 20,
+      "complete_families_for_familywise_rate": 20,
+      "complete_families_with_at_least_one_alert": 9,
+      "families_in_per_target_interval": 20,
+      "families_with_shared_fixed_baseline": 20,
+      "family_alert_rate_wilson_95": [
+        0.2581978582556243,
+        0.6579146575496577
+      ],
+      "incomplete_families_with_stability_abstention": 0,
+      "minimum_attainable_p": 0.047619047619047616,
+      "null_targets_per_family": 20,
+      "observed_family_alert_rate": 0.45,
+      "p_value_counts": {
+        "0.047619047619047616": 24,
+        "0.09523809523809523": 15,
+        "0.14285714285714285": 21,
+        "0.19047619047619047": 18,
+        "0.23809523809523808": 20,
+        "0.2857142857142857": 19,
+        "0.3333333333333333": 20,
+        "0.38095238095238093": 16,
+        "0.42857142857142855": 22,
+        "0.47619047619047616": 11,
+        "0.5238095238095238": 14,
+        "0.5714285714285714": 18,
+        "0.6190476190476191": 23,
+        "0.6666666666666666": 20,
+        "0.7142857142857143": 15,
+        "0.7619047619047619": 24,
+        "0.8095238095238095": 20,
+        "0.8571428571428571": 12,
+        "0.9047619047619048": 24,
+        "0.9523809523809523": 27,
+        "1.0": 17
+      },
+      "per_target_alert_rate": 0.06,
+      "per_target_alert_rate_family_cluster_bootstrap_95": [
+        0.027499999999999997,
+        0.09999999999999999
+      ],
+      "per_target_alerts": 24,
+      "per_target_interval_method": "10,000 percentile bootstrap resamples of independent shared-baseline families; targets within each family stay together",
+      "target_alpha": 0.05,
+      "valid_null_target_analyses": 400
+    },
+    "student_t3": {
+      "baseline_stability_abstentions": 0,
+      "baseline_wafers_per_family": 20,
+      "complete_families_for_familywise_rate": 20,
+      "complete_families_with_at_least_one_alert": 11,
+      "families_in_per_target_interval": 20,
+      "families_with_shared_fixed_baseline": 20,
+      "family_alert_rate_wilson_95": [
+        0.34208534245034233,
+        0.7418021417443759
+      ],
+      "incomplete_families_with_stability_abstention": 0,
+      "minimum_attainable_p": 0.047619047619047616,
+      "null_targets_per_family": 20,
+      "observed_family_alert_rate": 0.55,
+      "p_value_counts": {
+        "0.047619047619047616": 28,
+        "0.09523809523809523": 9,
+        "0.14285714285714285": 28,
+        "0.19047619047619047": 26,
+        "0.23809523809523808": 16,
+        "0.2857142857142857": 24,
+        "0.3333333333333333": 16,
+        "0.38095238095238093": 20,
+        "0.42857142857142855": 18,
+        "0.47619047619047616": 17,
+        "0.5238095238095238": 22,
+        "0.5714285714285714": 21,
+        "0.6190476190476191": 19,
+        "0.6666666666666666": 17,
+        "0.7142857142857143": 21,
+        "0.7619047619047619": 10,
+        "0.8095238095238095": 30,
+        "0.8571428571428571": 14,
+        "0.9047619047619048": 16,
+        "0.9523809523809523": 18,
+        "1.0": 10
+      },
+      "per_target_alert_rate": 0.07,
+      "per_target_alert_rate_family_cluster_bootstrap_95": [
+        0.0375,
+        0.10500000000000001
+      ],
+      "per_target_alerts": 28,
+      "per_target_interval_method": "10,000 percentile bootstrap resamples of independent shared-baseline families; targets within each family stay together",
+      "target_alpha": 0.05,
+      "valid_null_target_analyses": 400
+    }
+  },
+  "scope": "independent synthetic C04 repeated-target null study; no manufacturing calibration",
+  "targets_per_family": 20
+}

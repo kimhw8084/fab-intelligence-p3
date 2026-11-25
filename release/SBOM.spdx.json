@@ -1,7 +1,7 @@
 {
   "SPDXID": "SPDXRef-DOCUMENT",
   "creationInfo": {
-    "created": "2026-11-23T05:15:30Z",
+    "created": "2026-11-25T00:49:42Z",
     "creators": [
       "Tool: local-standard-library-supply-chain-audit"
     ]
@@ -89,6 +89,21 @@
       "checksums": [
         {
           "algorithm": "SHA256",
+          "checksumValue": "21d7b33b7520c4527cee74c8f52bd93932e7103e4549e3e77177cb7ea9b391c6"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./.agents/skills/p3-spatial-onboarding/SKILL.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-7",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
           "checksumValue": "26ff84d8c1a32854a690b013a72402b75598e179badebf63529d144c3e4b3e6a"
         }
       ],
@@ -100,7 +115,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-7",
+      "SPDXID": "SPDXRef-File-8",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -115,7 +130,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-8",
+      "SPDXID": "SPDXRef-File-9",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -130,7 +145,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-9",
+      "SPDXID": "SPDXRef-File-10",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -145,7 +160,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-10",
+      "SPDXID": "SPDXRef-File-11",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -160,7 +175,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-11",
+      "SPDXID": "SPDXRef-File-12",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -175,7 +190,22 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-12",
+      "SPDXID": "SPDXRef-File-13",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "21d7b33b7520c4527cee74c8f52bd93932e7103e4549e3e77177cb7ea9b391c6"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./.opencode/skills/p3-spatial-onboarding/SKILL.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-14",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -190,7 +220,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-13",
+      "SPDXID": "SPDXRef-File-15",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -205,7 +235,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-14",
+      "SPDXID": "SPDXRef-File-16",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -220,11 +250,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-15",
+      "SPDXID": "SPDXRef-File-17",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "a1948efdf2ceb20d0e27e171f0c9c5cec318017f5bfaecb6f0753c5d54b5e7ac"
+          "checksumValue": "035aea711899585d0a6b5a45c124fd6c5cbf4b147f579989c8e231aef6623ee3"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -235,7 +265,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-16",
+      "SPDXID": "SPDXRef-File-18",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -250,11 +280,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-17",
+      "SPDXID": "SPDXRef-File-19",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "7ef7da77461d89393565ccd40f2335a399bf48ed076a700d80e3c9cff8333809"
+          "checksumValue": "0b1b2a934d4b675b035c1c6d190296162ea0be1124a4d9878859a51ddfdf51b0"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -265,7 +295,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-18",
+      "SPDXID": "SPDXRef-File-20",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -280,7 +310,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-19",
+      "SPDXID": "SPDXRef-File-21",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -295,7 +325,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-20",
+      "SPDXID": "SPDXRef-File-22",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -310,7 +340,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-21",
+      "SPDXID": "SPDXRef-File-23",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -325,11 +355,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-22",
+      "SPDXID": "SPDXRef-File-24",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "44bcfbe5bb7693486d6d39868e5a85c137279a8d2a599101385e4db2658fa36d"
+          "checksumValue": "308ab51b262eb8e646758c3e5f9b95105c06df3e00678a96e77db92bff615535"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -340,11 +370,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-23",
+      "SPDXID": "SPDXRef-File-25",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "76c2152538666962a951bf56790899c71a1bcd8249a6a3d091817e89b2e4ffe4"
+          "checksumValue": "c2d3663426a6572b6896d17c372c5e433866dc46699ffca316750ec4ec4035a6"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -355,7 +385,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-24",
+      "SPDXID": "SPDXRef-File-26",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -370,11 +400,26 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-25",
+      "SPDXID": "SPDXRef-File-27",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "1c5f88ad698ef502d76a97dc54b8a50e4753577e158c19c57a8a35efeee97eab"
+          "checksumValue": "4b234f191f34cda7afea1cfab3916c59a9fd682749a44b3078dba38882baee6e"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./docs/GOLDEN_NOT_RUN_AUDIT.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-28",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "68942420578b5d82bc1cd621d65c0339b490aca1204bc1aa9ac074abec50eaff"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -385,7 +430,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-26",
+      "SPDXID": "SPDXRef-File-29",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -400,11 +445,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-27",
+      "SPDXID": "SPDXRef-File-30",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "58d587f3f3687547ef5331deff827a5a7b94554fed1ab6dfeb010b5dfc376bef"
+          "checksumValue": "07c0a1ee6e28d8a80acb51ed2eb31cd984eca542a5986c1d20b0cff2003a7310"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -415,7 +460,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-28",
+      "SPDXID": "SPDXRef-File-31",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -430,11 +475,26 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-29",
+      "SPDXID": "SPDXRef-File-32",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "0f5f98c0a3bca9e7a3d8e5d62bfee88dadbf393a9626e3d8605a4f441525d80e"
+          "checksumValue": "d4a31c1276b8d7fa3602abc123ff76a565f3b1e029823a6a1297ddf287726986"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./docs/P1_INTEGRATION_HANDOFF.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-33",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "3aeaf043a63d4570f34c5a706f85f73cfb32236e5823df913cfff01c3fd61e96"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -445,7 +505,22 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-30",
+      "SPDXID": "SPDXRef-File-34",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "ce22c716ba2c6d985beaebbb6b9e4eac6c3036a86e2a8fa3ecf7f768965d50cc"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./docs/P3_REFERENCE_HOST.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-35",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -460,7 +535,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-31",
+      "SPDXID": "SPDXRef-File-36",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -475,7 +550,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-32",
+      "SPDXID": "SPDXRef-File-37",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -490,7 +565,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-33",
+      "SPDXID": "SPDXRef-File-38",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -505,11 +580,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-34",
+      "SPDXID": "SPDXRef-File-39",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "26804102f6319d960c33daa1ed67ac0d410ea8ed72c8087af6fce47537e69a0e"
+          "checksumValue": "51cd4415a72901f212da91ae3ad130f109b37b71b8b82e9cb573a0202fb5dd39"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -520,11 +595,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-35",
+      "SPDXID": "SPDXRef-File-40",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "36510d83f2dc7c318cbc4055b803bcbb994b5b71f9b8d95104d6fe629269c3fc"
+          "checksumValue": "91511a980271bd49bf60f29c3171b377c5bd79db3cfbc7765f256531808f9fe1"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -535,7 +610,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-36",
+      "SPDXID": "SPDXRef-File-41",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -550,11 +625,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-37",
+      "SPDXID": "SPDXRef-File-42",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "a2ee00eed53f0798efba76e6e52dd4a694b3287f22feb5b540d620e73230b059"
+          "checksumValue": "6eb845bcff9f5ab25135dc0f28fe094bdf86c64fccc3583ff45ea326b51fe6dc"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -565,7 +640,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-38",
+      "SPDXID": "SPDXRef-File-43",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -580,11 +655,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-39",
+      "SPDXID": "SPDXRef-File-44",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "cf7390a2508a0fcad4777a4a629fc5212ab655cb45845975995f835676a834e3"
+          "checksumValue": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -595,11 +670,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-40",
+      "SPDXID": "SPDXRef-File-45",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "5d1ec6b292e755cf38a77789ef308310ed42ff5ed9adc2a121c85a8150bd44b0"
+          "checksumValue": "a2ca8546d2de0de43092a11b273d56efcd247682228ee645c24c091561330adb"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -610,11 +685,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-41",
+      "SPDXID": "SPDXRef-File-46",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "257b7d6da51c034578cc884c869fe79f60546b1a887906fec78ff75766597241"
+          "checksumValue": "b49daaec1fa764f25d252a4d849bb29cce193ab730fba6586eb66f898fc514af"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -625,11 +700,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-42",
+      "SPDXID": "SPDXRef-File-47",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "a6cc06200d00bfefccdcdb038786e1bb21fb194eff64d0ed48213619d09c7e1a"
+          "checksumValue": "1ba10dc0fc50a160d4bc6552d01a315e0e36e54f717755d20633e18146529cdc"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -640,11 +715,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-43",
+      "SPDXID": "SPDXRef-File-48",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "7965359f0ef1f47a2cbfe7434e2f05a95233ca2c269e0cc4359d2f4d765aaf1d"
+          "checksumValue": "70653b0c356cadd84b5d07d81d0f423a29b7615bf544c41de5d3b2722de536a4"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -655,11 +730,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-44",
+      "SPDXID": "SPDXRef-File-49",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "113de33f0bd7aab868e8502cebedca9cb3af85c8a7e3d786fccc33114a7c05a7"
+          "checksumValue": "76720611e4cdb9ef8138e4010a3cd91133b67ffdb79fcc1c212b911a02134634"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -670,11 +745,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-45",
+      "SPDXID": "SPDXRef-File-50",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "f20267ae873d02f454d60d34817bcc009bb6069394e44f864d41f3b1c5a2f01e"
+          "checksumValue": "a3cb0599e7d47b99ba45cc3bc2f847102ba3bb7b29b6f58e4b5902d33fef5122"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -685,11 +760,26 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-46",
+      "SPDXID": "SPDXRef-File-51",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "e8e8979c4934bbca9dad6ebf17d10f4cbe198d763cbbb8e3d19c93a29041d213"
+          "checksumValue": "3b8112ee9bfaf8b292f27e45194267691627c8bafd6e5ad3dc42fac205cc7395"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./fabintel/onboarding.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-52",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "7bb81c56cb89fa7ce4ffc8e0210741c4ed92acd08a8cb2e64a731baa70888e0e"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -700,11 +790,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-47",
+      "SPDXID": "SPDXRef-File-53",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "5cf402b86d6ebf03b0e1faa1bbe8491159a18ce0947059941e342fccd3a8c00e"
+          "checksumValue": "3fd4647f96686a916eedec15146bb9fdb16c1ab281182aa4bb5a95d76642ed60"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -715,7 +805,52 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-48",
+      "SPDXID": "SPDXRef-File-54",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "47b3ac80c889574bb138cdf0728631a683d80607da163e7448fc3fe73c0a308b"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./fabintel/reference_host.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-55",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c93ba976764ab4f13305fd728d1e2b5a384c8e75d5ddcf5e243ac27dc6548741"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./fabintel/spatial_observations.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-56",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "6fe7ad1aa515eafb22ef761b1300dbdd698c3f274fd8eb5115185c364c707fa3"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./fabintel/synthetic_mcp.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-57",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -730,7 +865,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-49",
+      "SPDXID": "SPDXRef-File-58",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -745,7 +880,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-50",
+      "SPDXID": "SPDXRef-File-59",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -760,11 +895,26 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-51",
+      "SPDXID": "SPDXRef-File-60",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "83b3010012fe4a8e3913cb8d0bec47f06c3b0f317d322943635571392750e746"
+          "checksumValue": "4b18c4f9e169632e6997cffd44c3982b8e211cd3cd9b01d1d3b2c6b0cbafc879"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./fixtures/p3_engineer_challenge.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-61",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "90fb33f3b7a962429d7164b44920f1de2ab16045f79f378d0fc9e4e68c105127"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -775,11 +925,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-52",
+      "SPDXID": "SPDXRef-File-62",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "04f122e8f82f5d7cc1b94853a1bdfa827744a323bf8a410e96d488c55c24211e"
+          "checksumValue": "46057aef6ac1de751f6870bcbcecc52aa9f55d5d5928e8ac179f94c338499e79"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -790,11 +940,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-53",
+      "SPDXID": "SPDXRef-File-63",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "d05d7daa8fc2990926a453c44083551af11ad99cacfd1876dceb1745d9515fa4"
+          "checksumValue": "5a3e369ba5307cbfe2a6efcd80edc406cfd335fbcb9728b2eaebc268842145ce"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -805,11 +955,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-54",
+      "SPDXID": "SPDXRef-File-64",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "ffb94213d705db3986229b45a4cd93479e3f44551bbbd81d726bace8b9b165ab"
+          "checksumValue": "bb4a98d13daf3e3f1a6d8e465baf87b864757b45e46f5ab7ac03c3985a787b61"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -820,7 +970,37 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-55",
+      "SPDXID": "SPDXRef-File-65",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "fab3478bb04736094b3f3e3e84f93edfb44d667bf7b31c90273dd3b82bd64a5f"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./package-lock.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-66",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "26ff05abd79fda849c2bea170168d84d42396ef28a926610a7d22042290d661c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./package.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-67",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -835,7 +1015,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-56",
+      "SPDXID": "SPDXRef-File-68",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -850,7 +1030,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-57",
+      "SPDXID": "SPDXRef-File-69",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -865,11 +1045,41 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-58",
+      "SPDXID": "SPDXRef-File-70",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "7a9d4ffa7a0a858ccd22e51b33b8a2b644b499763916cd6b02b572f5ff4e34cd"
+          "checksumValue": "311a0bc39f5db481be422648618d9b05deebbacf20bdd33ea557eb5c3943f25e"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./products/p3/contracts/spatial-map.v2.schema.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-71",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "ea838ef5e2b2390b645b966c8a79d0f46a49e36ebcedc6e0db5f50b429a93249"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./products/p3/contracts/spatial-map.v2.ts",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-72",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "b54aab442501b3149a3e16c992d28d834b2203db82224f8adfe97ea0aa40843b"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -880,11 +1090,206 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-59",
+      "SPDXID": "SPDXRef-File-73",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "51b2330cf14e869ede0ce1f769b15e076287df168c3783396bdce50ea3d7a890"
+          "checksumValue": "b1954e70da455853ffaad7e5bb99c482c156e8300b2f5f0807428c74a53490ce"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./products/p3/reference_host/index.html",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-74",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "1a32664ee735e9ee9d5477848505fb23cd2f8657a4ec4c04af004dd618a090c0"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./products/p3/reference_host/module-manifest.v2.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-75",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "e7d7866fab5a238de8c2ac939e9f820d200f4192e837a3301ef710260744bb76"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./products/p3/reference_host/src/App.test.tsx",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-76",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "23d5ef6c22e4040e3a370bd7de0e28f6cd32d127eb2e858f91fccbc350bc87ff"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./products/p3/reference_host/src/App.tsx",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-77",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "93eba10318fd124c50547058e79a645246c82c36dfb69e184529a39a7860ee30"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./products/p3/reference_host/src/SpatialMapRenderer.tsx",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-78",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "657d0e7d288bfe800cc070a139175b1e8854cf1090cfafa2811716853cf3fca5"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./products/p3/reference_host/src/main.tsx",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-79",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "46a15bef84b1298487ae831f23aa3ba58d35481e7fbfcecb19013607dc551a1d"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./products/p3/reference_host/src/spatialAxisBounds.test.tsx",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-80",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c9cc857f31ffa182234404d14b26b8920a5f7b3579744093c8e8814610ac2128"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./products/p3/reference_host/src/spatialAxisBounds.ts",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-81",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "18764f75e09f6dcafe854ec1a665bbab18b3e577dc415936852f3a354c71eb24"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./products/p3/reference_host/src/style.css",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-82",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "d82c61a29022d87c5816366b70a8d66aa46c8fa0c9cf2e531e301761240b7f9d"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./products/p3/reference_host/static/assets/SpatialMapRenderer-ROtqW6vd.js",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-83",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "01bead40f8c46614b79ba63fea3259f7ea531b6f934628f7e76e18078e26c919"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./products/p3/reference_host/static/assets/index-BGaC8E9o.css",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-84",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "5add770c10a291457090cf2a6f2755c65e98f27f25e7bb9ae39b19a43d67dce5"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./products/p3/reference_host/static/assets/index-Mgnqu2pQ.js",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-85",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "345636a8d6d86bc8aeda6cf1c3fa8df4a4d0c8bb6828a6b2631f743920791c51"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./products/p3/reference_host/static/index.html",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-86",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "1352449b8c8d52c14f703011cf350e81dd6313ce12dc231c68303e9a09631098"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -895,11 +1300,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-60",
+      "SPDXID": "SPDXRef-File-87",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "cbf1369303c26a96bdfc27c31d15d070bfd02766e90b9265762ee855e11f309f"
+          "checksumValue": "4dd5091986c51823eba96b29c310a791694586f237955232ad9b3bbfa33a9d4f"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -910,7 +1315,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-61",
+      "SPDXID": "SPDXRef-File-88",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -925,26 +1330,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-62",
+      "SPDXID": "SPDXRef-File-89",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "ce522a4d889aeeaac5e86ba4a390acd8df0d6be17fd69e912c0ce5799c3ec3b0"
-        }
-      ],
-      "copyrightText": "NOASSERTION",
-      "fileName": "./progress/STATE.md",
-      "licenseConcluded": "NOASSERTION",
-      "licenseInfoInFiles": [
-        "NOASSERTION"
-      ]
-    },
-    {
-      "SPDXID": "SPDXRef-File-63",
-      "checksums": [
-        {
-          "algorithm": "SHA256",
-          "checksumValue": "69d2ca73c360459e6041b4a1e62cceabb4995e1d77083f01e4a61a91bfbac68d"
+          "checksumValue": "4692983aa98f8ff7d213574806fede8db5f365839193ca20cc2de000123679dc"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -955,7 +1345,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-64",
+      "SPDXID": "SPDXRef-File-90",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -970,11 +1360,26 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-65",
+      "SPDXID": "SPDXRef-File-91",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "b84c09f4fcfe542fe1ba0950a5eb4113a07d7948507cb0396cd81ec6a1726c3c"
+          "checksumValue": "5229e9f9068d02b89d178a97ef379eebac7d4378faf35ad6d37d5420d57e820c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/build_synthetic_mcp_host_result.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-92",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "ab730f251c3aa6390a280422f39fbeb2bccb8c53bdeedc868a773c53c50a9df0"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -985,11 +1390,26 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-66",
+      "SPDXID": "SPDXRef-File-93",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "3ca17aadcb32f809213a0fd1029d3d24d155479cd5607af5dbe16bcaa421080e"
+          "checksumValue": "c4ed7bc92ec37e9d88f3835d88c6512c65bdade8934b62e65fb5565cf90b14e6"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/engineer_challenge.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-94",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "8cc39317c9f8572f321d90db3f3ad93df584e19c38722f7c8ef90302a51b3acc"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1000,11 +1420,26 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-67",
+      "SPDXID": "SPDXRef-File-95",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "8d5ff8fcc33846d1a98d33383351dbb8a8dd21f7a0509b3e7934b7fd08b1f176"
+          "checksumValue": "5f55caf7b1df171a737e4f6895fd9ee6692051d567953a15f8cde2e2fc658486"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/fixtures/spatial_catalog_oracle.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-96",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "886daabfaf77dc31358ea1a99e357bd6c4ca0eeca41695312665343ba43dab86"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1015,11 +1450,26 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-68",
+      "SPDXID": "SPDXRef-File-97",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "afb58e0a73dd2b828a32622846db953cf8dd4a7f673148286eadf82b6e87a29e"
+          "checksumValue": "9d278056c2ede948188f9b97c4762bca7ebbeda267be582fe279d2138517727f"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/golden-tools.lock",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-98",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "00d813eedb9a93be1ff027fabb2a85a8e9d0485b6450b8f4304a2539d7ea733f"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1030,11 +1480,26 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-69",
+      "SPDXID": "SPDXRef-File-99",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "bea2fd4735054d60e68da399c3f2d9432668cc7e143d76da59e1226799daef60"
+          "checksumValue": "dc96454ca643d7ee8dc64fc7d919fc2c9a1d5099bec929759b23ec9495f880ee"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/onboarding_harness.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-100",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "6d4a717e0b20f33d7a4396f4e272f11d6739c3fd39b7944a9bb4d6c9e59836f6"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1045,11 +1510,176 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-70",
+      "SPDXID": "SPDXRef-File-101",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "23e113469144258f0dbfb4a365d6adf90fa96dcc0e870d415c4765244c58e9a1"
+          "checksumValue": "841c220a60a09360860026f0a53ca7514acf7e50add1d9c612d453c914a50182"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/run_c01_density_benchmark.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-102",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "691ffdff83290467ca8a3b7557220459e5a7da9c58cf6073c18f7f8124faa37c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/run_c01_sampling_artifact_challenge.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-103",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "760e29112866c17f366e5eced0d6117c6d56d5eacc3333e046e0b99647656865"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/run_c02_covariance_benchmark.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-104",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "e6d21b04fe67cf769c447c8cfa9aa861732d9751c7fee823796249f5330a4907"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/run_c03_context_drift_benchmark.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-105",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "e60f2c8bd6cf5665a5143cf53dd7f0b27af98e03794ac09f4bf06f9740e05ffe"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/run_c03_nested_lot_benchmark.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-106",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "fd2ed794b2c92ee6a1fde0113610581b3254929fd19f3d3c47284fcad7e06e5c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/run_c03_selection_bias_benchmark.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-107",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "1ea19c4b48da3928f2b58ca828d35f82e53d5fa620736e16da7923ed2f7008ff"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/run_c03_zone_confound_benchmark.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-108",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "6d7726c11a6d5d46f92ed578a1e817ac8089905205fb80681c30268c5b59a50f"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/run_c04_baseline_contamination_benchmark.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-109",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "9bed6ec08c39eb2549c787ab9c6db7c82f6d3aad9c92a2ad24340e11559ee012"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/run_c04_repeated_target_benchmark.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-110",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "6d241dbcf6d6d8723e5ce367c38e6d0adb33aed8ce8f1f142501bf12b162d107"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/run_c05_joint_profile_benchmark.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-111",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "e1573aada0cdd6bc669e163b07178061cc74286c43bd51714ba3c4312b77310c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/run_c05_scale_benchmark.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-112",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "97e575a6e3c244856d24772c5bf1b7b3f9851f9163cd90451c160183ca663616"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1060,11 +1690,41 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-71",
+      "SPDXID": "SPDXRef-File-113",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "c42074a87cae9130ce16a6fd9eed6b3a11b32ef192754184faaaae367a150f57"
+          "checksumValue": "05d9ad25badbe4e685954a4ce2c808ae8b22dcc1ec96ab4db8ea836787088a7c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/run_onboarding_bootstrap_benchmark.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-114",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f95434521b6ea944a53b4c22e6532c9f08d5684c5c38c3780d04abd7510c41ea"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/run_p1_module_integration.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-115",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c93e483efa22a076d385c54d5fa42b7c739d49f60334791f72c60852525a4958"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1075,11 +1735,41 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-72",
+      "SPDXID": "SPDXRef-File-116",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "e30f2086f8bef67936b9292237698e2eef0f73c4b65dc0a51358f2d2fb632e8b"
+          "checksumValue": "bc7d5a9bd3fe3ffe5bf19ae00c99704dff3e9f8e8bfa0d04e12b9426495663f0"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/run_spatial_onboarding_benchmark.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-117",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "b32342481e46d7e958ca2c1a09cee8233f9666cc0adce6563f8045117424880e"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/spatial_catalog_fixture.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-118",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "b6961a47d71918b5a35f31d370a132086a1806d61b4893d10acc86cbc9d0b1b7"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1090,11 +1780,26 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-73",
+      "SPDXID": "SPDXRef-File-119",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "94dee33822a7e69e6a3cf30470baf5586b5320c8abc4a76a73cc1b756266cee8"
+          "checksumValue": "86c9fab45d03d914e9e648a2c74cdf1935bd63a6d4360575de5559091f3d01b0"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./qualification/synthetic_mcp_peer.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-120",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "baed169033e1eee173f5417d05c710c937324efd3439ee9a424bd5cbf31dd7fc"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1105,11 +1810,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-74",
+      "SPDXID": "SPDXRef-File-121",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "c60f45c75548d819edf6bc48ce6e10c69984bab8a09dc23b8da359102ad6fd66"
+          "checksumValue": "07a1806ea083201cacd0d45b6d8b6932f52a72b4f542bbec5b35011667c3be30"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1120,11 +1825,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-75",
+      "SPDXID": "SPDXRef-File-122",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "1c7a78399c7514e36bd0e9cb0d18a2d8abea6b9a04236bf4eb9e64c975c26f9b"
+          "checksumValue": "d2bbe313d6170cad7d9538e3b308792a643b4651ba3fb006c3c94a29fc73e22f"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1135,11 +1840,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-76",
+      "SPDXID": "SPDXRef-File-123",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "952ad2feb347f86a3d3d93236c06412885f76df919cf8afce64869c58c252583"
+          "checksumValue": "b363042125dcdd292d26c90dd9b51be9fd9b16415334f12a48174b8cd76c8659"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1150,7 +1855,37 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-77",
+      "SPDXID": "SPDXRef-File-124",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./release/GOLDEN_PY003_RUFF_2026-11-23.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-125",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "5be21cfb19348796aa0c131a1b9d963fbe0c7cdb98a9e07f17ee7553cba7636d"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./release/GOLDEN_SEC001_BANDIT_2026-11-23.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-126",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1165,11 +1900,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-78",
+      "SPDXID": "SPDXRef-File-127",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "633c46a351fc50c1ae096b66ad0cdb1902be73bc72150ad613dc1a1503e17018"
+          "checksumValue": "bbe8241608f25d86aa450f4e265059345186ed7f69502a6ea108ea2cf814313a"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1180,11 +1915,26 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-79",
+      "SPDXID": "SPDXRef-File-128",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "e895ff6e5bb722d783f65542763a1e0259dcaea6b5007dc4f4fe9e9be5e2367e"
+          "checksumValue": "81ece6570a8ba758279fc1afca5bad5059d5246a2c3dcb2387cc5c12f0568816"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./release/P1_BROWSER_WORKFLOW_EVIDENCE.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-129",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "5173c0f80da7ea08212e01c77376e506facc870ba37e6c4cebc228d50d868c58"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1195,7 +1945,52 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-80",
+      "SPDXID": "SPDXRef-File-130",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "6bb7a9ba86fb1c225cb206d21e5b0c8605c75de4b61403506386135aad4c54ba"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./release/P1_MODULE_INTEGRATION_EVIDENCE.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-131",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "20bee7c0609091590ac0140c4dd2d358746db33d148fa677c58c52a9eb6f11ab"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./release/P1_NPM_AUDIT.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-132",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "d86a160c49eec5e5a4f0c42116db26b7252f810d23752308ffda4a1db062f534"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./release/P3_WORKING_SOURCE_VERSION_20261124.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-133",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1210,7 +2005,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-81",
+      "SPDXID": "SPDXRef-File-134",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1225,11 +2020,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-82",
+      "SPDXID": "SPDXRef-File-135",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "2ee89c4ef6e564e760bc2247c0d7e7400f5518615992b06de8265cf60ead9448"
+          "checksumValue": "6a1936899d3fa6acd0ff5afbe81146194ee8e139d303e58c9d4701765fb2e9de"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1240,7 +2035,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-83",
+      "SPDXID": "SPDXRef-File-136",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1255,11 +2050,26 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-84",
+      "SPDXID": "SPDXRef-File-137",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "e0b7c2fa887ee86ed70147e15ecadc5935b853b74a9f4ac787f936f0320c9659"
+          "checksumValue": "36c3d7a83559dc52a7c1ad85bda09b01cf9e75094531adafc0a1e459c64af26f"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./release/THIRD_PARTY_NOTICES.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-138",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "53f9c37ab7958781da746f282d0cd9ae9c5a531f8319ea3e8adf0755cd5f985b"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1270,11 +2080,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-85",
+      "SPDXID": "SPDXRef-File-139",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "68f61f4df73e71ea65c6525da5bf14bd6a510cf3d11d07da30ff2c2003461149"
+          "checksumValue": "9992b84189d26255ecbecfcbcd7be297a17c2c4281de7c15bde1c00eb70f9c9f"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1285,7 +2095,82 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-86",
+      "SPDXID": "SPDXRef-File-140",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "5de190d076119b6976be27db4b9c8cd41daa8bc7ff769f7a5375bbf34e146a11"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./release/p3-candidate-20261124-closure.qualification.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-141",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "871fe1a7642ef9b5a8eaa1ff18248c25e9b287bf486d8340a00b0f7de16a03e5"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./release/p3-candidate-20261124-external-closure.qualification.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-142",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "5dc817867e217140c80c59d1566820e62b5e732fa534a523641dcab09a83e2b3"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./release/p3-candidate-20261124-final.qualification.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-143",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "67c47d7ed5ab7dfa2dc3acdf5c2ac42e2f9529c137b9fd9a30882425669956ec"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./release/p3-candidate-20261124-onboarding.qualification.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-144",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "e785b19924624562e25f5d51320f19ef31651ef37a3e619ca84847cff8f890e7"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./release/p3-candidate-20261124-spatial-comparison.qualification.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-145",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1300,7 +2185,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-87",
+      "SPDXID": "SPDXRef-File-146",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1315,11 +2200,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-88",
+      "SPDXID": "SPDXRef-File-147",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "b1b222a5b9ff773ffdf0704ca4a8573e72c3bc475d440766a1cb0293a441c472"
+          "checksumValue": "0bb3e2e15aea117acffb340694d1936434af00f0f4e9c58a52d9497a9881e85b"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1330,7 +2215,52 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-89",
+      "SPDXID": "SPDXRef-File-148",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "9b8a0321b0c23e0180fcf0fc69ee03dfcf59ab58e4b9a5e2fea7d45d62fc0d26"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./requirements/mcp-onboarding-metadata.template.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-149",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "04627307355851e5674315601a7a2bbfaf08ee3d42af6fc2f364c669dde73204"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./requirements/mcp-transport.template.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-150",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "fd003bd14a53bacf72feb49f637f769fb2a40809d3847a435794f86961c0903e"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./requirements/p3-onboarding-review.template.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-151",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1345,7 +2275,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-90",
+      "SPDXID": "SPDXRef-File-152",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1360,7 +2290,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-91",
+      "SPDXID": "SPDXRef-File-153",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1375,11 +2305,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-92",
+      "SPDXID": "SPDXRef-File-154",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "84d5a6a9245a75761efce34296b592a5e45d409b7d8e1b3f2e4d011db0cfe585"
+          "checksumValue": "6580bb52bccd16896590d886eff2dcc5e4cd0f836f5698cf6a329d3eef49a8d0"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1390,11 +2320,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-93",
+      "SPDXID": "SPDXRef-File-155",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "c9901fc4c076c3d1a3f33242ebd965b82ffeb95e8ee71ecb85f99f9216b6f944"
+          "checksumValue": "f784a81b4c15c016953069a8486ea7e9f87982b29264fe817e888e28cf644b75"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1405,7 +2335,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-94",
+      "SPDXID": "SPDXRef-File-156",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1420,11 +2350,41 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-95",
+      "SPDXID": "SPDXRef-File-157",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "c8a195bc0ff702b62daddf9a6b1d0c8ccb25ce3c493309741032b971de1a3783"
+          "checksumValue": "ae1bf32587d104fe03d35f44306fd6090432ea8e9278a629fc1992bb5e7dddc4"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./tests/fixtures/spatial_value_contract.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-158",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "5d32a83438a67cd61ca6d03790f934c6c92f2c5e6618ac6164d7addea0497c3e"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./tests/test_candidate_builder.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-159",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "254115203d03403255a5ba64ed9c60b561c41f245d23da2dd4a4d815d50f811b"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1435,11 +2395,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-96",
+      "SPDXID": "SPDXRef-File-160",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "71d948207f29cf217182d736c5a64ac11e18fdddad5e4387555a87fbf5d84d2e"
+          "checksumValue": "c5c17c171626dae9cc480753a0fbb3ee8c2b6e28ec80c6a58830b1e060c1e0cb"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1450,11 +2410,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-97",
+      "SPDXID": "SPDXRef-File-161",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "79172a1d361dbf2776baf10878ff0bae36745f1183c0c8835f53fdd2dd4b376e"
+          "checksumValue": "497e814660a15d28a54273143655a6d8e087a357f9dc7fefcfa5545495a4320c"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1465,11 +2425,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-98",
+      "SPDXID": "SPDXRef-File-162",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "927813b64c8309f17d4011074a97997f2c1ac5c83933e9004d80b0d9ec846ce9"
+          "checksumValue": "fb0b5e6cb6e530c58fea3de9345430cbf23cecb15e9f30e42a81ae568371e4f0"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1480,11 +2440,26 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-99",
+      "SPDXID": "SPDXRef-File-163",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "d7e441abc2df5a4a7d800ec54d6ff172660871d58b842e2324bd0ddf484f7910"
+          "checksumValue": "a3fa29e6cb22b95a6d68c6ed5c82a940eb8d5634d624a54067c07b714544cf2b"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./tests/test_onboarding.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-164",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "04a18e59042615118f19a451961f17b29b6faf82364eb10bedc1bf4d8e0e08f6"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1495,11 +2470,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-100",
+      "SPDXID": "SPDXRef-File-165",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "e70e3771c06fa1a0d02faaacdce3b00e20fef7e7bdd45752214647c74d2e3f83"
+          "checksumValue": "e03756b55cca367dfd75e4a2c4d188411ef7d8711c90e2fb77f04f99baaf2c69"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1510,11 +2485,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-101",
+      "SPDXID": "SPDXRef-File-166",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "575347d1cdfe35d133fb9cf764119a891bfa769b304ccf90ae1eeab3e4bebc18"
+          "checksumValue": "ba3faf3e4103bcf4821cb8c9e3a8aa02790ae1de553562f728685d375227081b"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1525,11 +2500,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-102",
+      "SPDXID": "SPDXRef-File-167",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "3694cebe18555a5342caada1f5f8ac29a026c0447b2bf087e1c232823c184bc5"
+          "checksumValue": "f949b88b5fd36bf186b3dd4bbe48089fccd4b5c5208475932c2210fd8e00dfdb"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1540,11 +2515,26 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-103",
+      "SPDXID": "SPDXRef-File-168",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "b8c7508d3b36b0a65dd4b2bb7130ab5b331347f5b92884daac9a652ee45c7b71"
+          "checksumValue": "4ca87d595f84e23163f6fcedc33d83f6ef9acac366995eaf95066d250cdd2b11"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./tests/test_reference_host.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-169",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "0bfa607e76eb1488c5f754e40d4bedcfe20250bdd33aff210fb65a1634f53fdf"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1555,11 +2545,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-104",
+      "SPDXID": "SPDXRef-File-170",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "29e4965aa85fe0cfbd4e694cfb8e805c149116ab407cecd051242ccd953f62d9"
+          "checksumValue": "e26fcde2bc24d2f817d9bf09067f6bb4bddcb5770d340b79fdd5e7f8d513fa60"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1570,11 +2560,26 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-105",
+      "SPDXID": "SPDXRef-File-171",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "8616a4bf782b079a47670babb2fcc36123a0bc7a4cc67b5ef0b414f094897e4f"
+          "checksumValue": "1919d61facbbddf695bba425cebde539a3c932bd134f95de29644773636b8ef1"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./tests/test_spatial_observations.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-172",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "88d6de0d3b668d12d4db1829b036f21eab33733427b100a757c33c5a993d9028"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1585,11 +2590,11 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-106",
+      "SPDXID": "SPDXRef-File-173",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "f1cdcf7599b3d7b29420cf053fce93b76e07f2def10754534c091a493b60a73a"
+          "checksumValue": "a13627b2f75cb92b82bb539e85487595e5a66728de5745a51a28f93d17c2def0"
         }
       ],
       "copyrightText": "NOASSERTION",
@@ -1600,7 +2605,37 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-107",
+      "SPDXID": "SPDXRef-File-174",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "ce72812e2e618f0df5d1eadd6271145384f7437737620bf9d94b2a6fe13a5f24"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./tests/test_tree_hash.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-175",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "432f1d3da39c100873dcb06bd570f238c89bbc8e6ecaa1e2c3fca29fe3de3838"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./tsconfig.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-176",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1615,7 +2650,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-108",
+      "SPDXID": "SPDXRef-File-177",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1630,7 +2665,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-109",
+      "SPDXID": "SPDXRef-File-178",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1645,7 +2680,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-110",
+      "SPDXID": "SPDXRef-File-179",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1660,7 +2695,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-111",
+      "SPDXID": "SPDXRef-File-180",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1675,7 +2710,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-112",
+      "SPDXID": "SPDXRef-File-181",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1690,7 +2725,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-113",
+      "SPDXID": "SPDXRef-File-182",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1705,7 +2740,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-114",
+      "SPDXID": "SPDXRef-File-183",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1720,7 +2755,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-115",
+      "SPDXID": "SPDXRef-File-184",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1735,7 +2770,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-116",
+      "SPDXID": "SPDXRef-File-185",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1750,7 +2785,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-117",
+      "SPDXID": "SPDXRef-File-186",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1765,7 +2800,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-118",
+      "SPDXID": "SPDXRef-File-187",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1780,7 +2815,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-119",
+      "SPDXID": "SPDXRef-File-188",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1795,7 +2830,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-120",
+      "SPDXID": "SPDXRef-File-189",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1810,7 +2845,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-121",
+      "SPDXID": "SPDXRef-File-190",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1825,7 +2860,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-122",
+      "SPDXID": "SPDXRef-File-191",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1840,7 +2875,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-123",
+      "SPDXID": "SPDXRef-File-192",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1855,7 +2890,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-124",
+      "SPDXID": "SPDXRef-File-193",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1870,7 +2905,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-125",
+      "SPDXID": "SPDXRef-File-194",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1885,7 +2920,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-126",
+      "SPDXID": "SPDXRef-File-195",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1900,7 +2935,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-127",
+      "SPDXID": "SPDXRef-File-196",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1915,7 +2950,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-128",
+      "SPDXID": "SPDXRef-File-197",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1930,7 +2965,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-129",
+      "SPDXID": "SPDXRef-File-198",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1945,7 +2980,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-130",
+      "SPDXID": "SPDXRef-File-199",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1960,7 +2995,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-131",
+      "SPDXID": "SPDXRef-File-200",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1975,7 +3010,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-132",
+      "SPDXID": "SPDXRef-File-201",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -1990,7 +3025,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-133",
+      "SPDXID": "SPDXRef-File-202",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -2005,7 +3040,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-134",
+      "SPDXID": "SPDXRef-File-203",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -2020,7 +3055,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-135",
+      "SPDXID": "SPDXRef-File-204",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -2035,7 +3070,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-136",
+      "SPDXID": "SPDXRef-File-205",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -2050,7 +3085,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-137",
+      "SPDXID": "SPDXRef-File-206",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -2065,7 +3100,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-138",
+      "SPDXID": "SPDXRef-File-207",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -2080,7 +3115,7 @@
       ]
     },
     {
-      "SPDXID": "SPDXRef-File-139",
+      "SPDXID": "SPDXRef-File-208",
       "checksums": [
         {
           "algorithm": "SHA256",
@@ -2089,6 +3124,21 @@
       ],
       "copyrightText": "NOASSERTION",
       "fileName": "./vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/uvicorn-0.54.0-py3-none-any.whl",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-209",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "0e024592a213bc34063a10b31383046bca56339fbb328af6a1d1a2cf9d6e74b6"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "./vite.config.ts",
       "licenseConcluded": "NOASSERTION",
       "licenseInfoInFiles": [
         "NOASSERTION"
@@ -2779,6 +3829,1830 @@
       "name": "uvicorn",
       "primaryPackagePurpose": "LIBRARY",
       "versionInfo": "0.54.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--adobe-css-tools-4.5.0-238d3e22",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "e8ecdd7713e2a3d52259309e9a9e0df1c60b57664dd677119d5d5c546b6f7bb7613ceb51925791cb1df61900984b00d881a1d4dd448c9bce2d36cbcacd109ad5"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@adobe/css-tools/-/css-tools-4.5.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40adobe/css-tools@4.5.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@adobe/css-tools",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "4.5.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--babel-code-frame-7.29.7-6b8a8b45",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "02ea7b69439fa5b01483644e38937a230e5ff43301973bb4988926fe66a52d014dfd84203b8f300a3d0ac5adec10726f3d5160eec891faa4489f05dddaa8502b"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.29.7.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40babel/code-frame@7.29.7",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@babel/code-frame",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "7.29.7"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--babel-helper-validator-identifier-7.29.7-78632d56",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "a9e8711a4463e7987f7dff0431a27e71887268a947231a980e7ebcdb0403ed1369f54ba3390b07a20dae4b4af6bf3af8a56fac5dff7435e79aca370d697ddf16"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@babel/helper-validator-identifier/-/helper-validator-identifier-7.29.7.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40babel/helper-validator-identifier@7.29.7",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@babel/helper-validator-identifier",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "7.29.7"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--babel-runtime-7.29.15-b0d8c4c3",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "df4e20b1b6c656641cf9c3461f3c07065a9ea587562ca8f7557090046b7f106715ecf50f7ca23b90050d5b515910e0b095088bbd08e0d4911a025450eb5ea1f9"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@babel/runtime/-/runtime-7.29.15.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40babel/runtime@7.29.15",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@babel/runtime",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "7.29.15"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--esbuild-darwin-arm64-0.28.2-bd323057",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "9f82aa90e42badac4725c82333546fc1b8a07d028828956933bc69f8ab318b2512ad17485e7b7bdd586b3c0c747d5e388607e62152a3c4c37d275b798f249593"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@esbuild/darwin-arm64/-/darwin-arm64-0.28.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40esbuild/darwin-arm64@0.28.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@esbuild/darwin-arm64",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--jridgewell-resolve-uri-3.1.3-49e10d76",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "9614ed8eda0402b5818e2b26b5f4bbeb54bd1e5ca7fa7219a8e6556286755e7f363cc34c56793e8e3fcd842e1f017193b3bc9d38d709891e6fc90053303bb6ee"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@jridgewell/resolve-uri/-/resolve-uri-3.1.3.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40jridgewell/resolve-uri@3.1.3",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@jridgewell/resolve-uri",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "3.1.3"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--jridgewell-sourcemap-codec-1.6.0-11d785d1",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "4fb8dffb9ce0b191f0349e25bd0eff69ecdbca4d27357fb32555a998703b558b04c7b6bbaabe5183921bb4916a920cdee58dacaeeab545463c43cdfb39dee217"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.6.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40jridgewell/sourcemap-codec@1.6.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@jridgewell/sourcemap-codec",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "1.6.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--jridgewell-trace-mapping-0.3.31-1e364efb",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "cf3351f9275048327373c8e869e3fc410a0242bf0db98c76748232b65d507811191c9f6e5ba85e6ecad881bcfc849c1441aa374d608cb667d5f0dbb5b7038b03"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@jridgewell/trace-mapping/-/trace-mapping-0.3.31.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40jridgewell/trace-mapping@0.3.31",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@jridgewell/trace-mapping",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "0.3.31"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--rollup-rollup-darwin-arm64-4.68.8-ac7660a5",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "626054363826e5bb23381c8ef87d5315bb8665ef999c7718b4f5d88fdf8bd5cc13bbf046f338ee5333b63c7f4ac12f393f4507f9624349bfa643686a8e9e6e05"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@rollup/rollup-darwin-arm64/-/rollup-darwin-arm64-4.68.8.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40rollup/rollup-darwin-arm64@4.68.8",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@rollup/rollup-darwin-arm64",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "4.68.8"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--testing-library-dom-10.4.2-4e36bb3d",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "cb3af64bd1f2008761cf6ffaa8781bb3aeb943b3ca55c0c5d39bec3a51cfc46d66a37ea02957ac75855e0cb9d781f8c9d370ab291934f249dcebe13ff66f2fd9"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@testing-library/dom/-/dom-10.4.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40testing-library/dom@10.4.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@testing-library/dom",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "10.4.2"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--testing-library-jest-dom-6.9.1-184da177",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "cc870e35afa156d55249ea7d513de3679ae2ce8d81b318320d853b5850f978808113b9e8dfcf351c679bfd09067ec26ce894e4635690853eeb20f0bb7bed279c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@testing-library/jest-dom/-/jest-dom-6.9.1.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40testing-library/jest-dom@6.9.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@testing-library/jest-dom",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "6.9.1"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-dom-accessibility-api-0.6.3-80515a01",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "ed982881e4e78ee1dba3e72dd741bd15fa749a27f5ee2762d08c9635503fc1cc1c9bb34f383fd610754fde7ee7dcc857ab1a08626f1de8cb99a21616219e13df"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/dom-accessibility-api/-/dom-accessibility-api-0.6.3.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/dom-accessibility-api@0.6.3",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "dom-accessibility-api",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "0.6.3"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--testing-library-react-16.3.0-b29f6fb6",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "9054b2c62103c2fd562e5d9f82cabaa4f05bc396962abb18dbf9e88b521dd132b450f6ab485eb6a054051875c8c9a1b8a69dad12e6ff6657a5f9f8e36482c3b3"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@testing-library/react/-/react-16.3.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40testing-library/react@16.3.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@testing-library/react",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "16.3.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--testing-library-user-event-14.6.1-7790a116",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "beaedfbf4ae7b7e4135e03f1af91e3736d74a7a60aab692677388b827b191a02c9f5ee95012871d690022ee46377f012fecafba61011e7c3882297f42e599037"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@testing-library/user-event/-/user-event-14.6.1.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40testing-library/user-event@14.6.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@testing-library/user-event",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "14.6.1"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--types-aria-query-5.0.4-33ede147",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "adf4fddee8f9b343d12fb13371c18cb376eba6585cae08670e8576e8da8a842012d61568f9674db0fbc4ff26fa8a57ebe618b630493a77911625329dc60f2357"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@types/aria-query/-/aria-query-5.0.4.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40types/aria-query@5.0.4",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@types/aria-query",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "5.0.4"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--types-chai-5.2.3-99fa6824",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "330e79f28780f5f15bbfae7fcb8987b570ecf5b3e714c6402ff8f174f154a4e1c72175fdd667201076d2e4b6a1afea7064547c03b19095e456788e9c1850b650"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@types/chai/-/chai-5.2.3.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40types/chai@5.2.3",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@types/chai",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "5.2.3"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--types-deep-eql-4.0.2-b024dab7",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "73d87d75554c8a030f7386f04ef0b9771aada8967040f78fb168cf96948e9e88dba2bea91aa764e78d657c0ec0a8542be6907505176ad23b98f5d6fcd41c3217"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@types/deep-eql/-/deep-eql-4.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40types/deep-eql@4.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@types/deep-eql",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "4.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--types-estree-1.0.10-5b94d692",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "953c8e32739c991073742bfaff8cd4642ac4855d31aea422519059b5571b98b1c15ca2e737cabcf6fff029117f4341dbc15b2a6c81b7a391c3a0597db1db8cfa"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@types/estree/-/estree-1.0.10.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40types/estree@1.0.10",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@types/estree",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "1.0.10"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--types-node-26.6.6-abcdd38c",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "333423fbc2b1dd7238d0e994004e90a21e7c64c36cb4d34cc27da77dddea5ac7deee70cd4aa24dcdeb389e3873e801f0ad21ce7df48bc1753ac9be3be10e1aa2"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@types/node/-/node-26.6.6.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40types/node@26.6.6",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@types/node",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "26.6.6"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--types-react-19.2.2-2300dff8",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "ea60ef1d41528f24f6076c9e371da752033187d2ed396be4848537b9e3e7d88da8c8dca65005f5348b1d82f88ce021fe252ae9d83da1b0cbc93a4c58fb4c0d44"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@types/react/-/react-19.2.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40types/react@19.2.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@types/react",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "19.2.2"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--types-react-dom-19.2.2-278d2b69",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "f4a40fa0eea66428bb8dc212b529e53969f69c417798d9b2af7ac802c1a701b40a61b44bcaa99e49cdfd11582dc575626be2cc4fc8f792764b019021fb12e6af"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@types/react-dom/-/react-dom-19.2.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40types/react-dom@19.2.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@types/react-dom",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "19.2.2"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--types-whatwg-mimetype-3.0.2-f50fed10",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "73600abc34fc4e8c4b20e525379d604e21d77e5b1f2058ac4b8a4eee90cfa0aa2e242112921667132eb6de0c0ff65682cb99672c3030d6f033bb6bccd982ceac"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@types/whatwg-mimetype/-/whatwg-mimetype-3.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40types/whatwg-mimetype@3.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@types/whatwg-mimetype",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "3.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--types-ws-8.18.2-630409d3",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "ebb31097e7e958a5534f53587679a8dd4e2c73fc4fa3fcd00677159c8ef8aa641ad33fdbfb583a898a8d98608f6f13becf3d9a9256f4f1ad281df7a0895774ff"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@types/ws/-/ws-8.18.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40types/ws@8.18.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@types/ws",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "8.18.2"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--vitest-mocker-5.1.1-3e8a1c61",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "6f63a04c1e3edc899621569f5ca6b3257c0b2b043150d9e2c7a6f7c54bd44cc87b4725e5aedce8c5f66bf1a133f7390738c012e0ae65bb74ef156a2255e55342"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@vitest/mocker/-/mocker-5.1.1.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40vitest/mocker@5.1.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@vitest/mocker",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "5.1.1"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM--vitest-spy-5.1.1-fed13e56",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "e8af02e9a9501b5fd873cfd9236da2252ec912cc4f755ceab6a0eafbfc4ce19d26195ca47a63158cb86a332feaebf207606de4283f21292c117a7fd977223dbd"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/@vitest/spy/-/spy-5.1.1.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/%40vitest/spy@5.1.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "@vitest/spy",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "5.1.1"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-ansi-regex-5.0.1-a9b9a5c3",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "aae2505e54d25062f62c7f52517a3c570b18e2ca1a9e1828e8b3529bce04d4b05c13cb373b4c29762473c91f73fd9649325316bf7eea38e6fda5d26531410a15"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/ansi-regex@5.0.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "ansi-regex",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "5.0.1"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-ansi-styles-5.2.0-9d675b59",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "0b1c29b7649f4f34ed5dc7ce97318479ef0ef9cf8c994806acd8817179ee5b1b852477ba6b91f3eeac21c1ee4e81a498234209be42ea597d40486f9c24e90488"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/ansi-styles/-/ansi-styles-5.2.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/ansi-styles@5.2.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "ansi-styles",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "5.2.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-aria-query-5.3.0-5a4b836b",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "6f43f4b193cab72bbc1e479101f0aad087d44592be4aec0c8d8d545c6054dbbc290224f0400225ab9e886c83becad93f2634b57cc475e1e7b958105f2a2e49e8"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/aria-query/-/aria-query-5.3.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/aria-query@5.3.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "Apache-2.0",
+      "name": "aria-query",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "5.3.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-assertion-error-2.0.1-6a2014cb",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "2338bc45071f7ea09e3558058a02a58b5b2c92521ba479c261ce809275c662807a82b26ac9e6f2ee3bf5d895108264c09c80e76dc935bb192c4f87733773d604"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/assertion-error/-/assertion-error-2.0.1.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/assertion-error@2.0.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "assertion-error",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "2.0.1"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-buffer-image-size-0.6.4-aec6c067",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "9c487e91938f635c3e81c08ca1b67a113529f567e26e7767a2c6e9c01d62264ffc1ade591766e14baf81e9b3d8cf8db82adc2c47a45f95cded0b3d7f8215f675"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/buffer-image-size/-/buffer-image-size-0.6.4.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/buffer-image-size@0.6.4",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "buffer-image-size",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "0.6.4"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-chai-6.3.0-2f18c293",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "5d602dc09e8e1cefad8f410a0acd18d946a69f23b1b1e65696d538c76536c21f20e008a0763c2fb548ef2cfdadaa403f6afc4712dcf135aa86abf6063707242a"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/chai/-/chai-6.3.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/chai@6.3.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "chai",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "6.3.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-css.escape-1.5.1-c6a07cf3",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "61489fb175ee9271e552c9a58326343cace03ceafbfc58c278f7c736dd23c66f37c07662e38543310eff7c63648d8dff8d5d4c0bed429996da1f3ba0c9e46da6"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/css.escape/-/css.escape-1.5.1.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/css.escape@1.5.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "css.escape",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "1.5.1"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-csstype-3.2.4-8c4a8a76",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "3e829aa0fcd06a99c4a2a5129c7c75bba5ba92ef0254480ab27a669b35379b59f09227693c143c57f66adbe6d636bb0e2a828bc1319d6f1eb117b0573f5ccb55"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/csstype/-/csstype-3.2.4.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/csstype@3.2.4",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "csstype",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "3.2.4"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-dequal-2.0.3-d9a92ac6",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "d237bea8f28710ca21bdf453084a370ab3c6e9c033018826ccacb1462612483912e9e1897725499bb59a600e4409a003f702c1d93e0411eca603968555c61708"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/dequal/-/dequal-2.0.3.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/dequal@2.0.3",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "dequal",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "2.0.3"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-dom-accessibility-api-0.5.16-08fba7f1",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "5fb049db2125b27389df4a59178b882037c1115805e17101c4bf41c61cba767ae6e61933aa6b161c64e21ea46221336133214bc808969dd2093fb675353b5e0e"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/dom-accessibility-api/-/dom-accessibility-api-0.5.16.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/dom-accessibility-api@0.5.16",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "dom-accessibility-api",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "0.5.16"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-echarts-6.1.0-d1c5b103",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "ab4c9a14f8200bd15476c587e1b95abd15859b176b22875b92828d02326e74023a080f6034fc47b55d917193447a9655964e32bc16243a46e4e87215a48c8764"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/echarts/-/echarts-6.1.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/echarts@6.1.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "Apache-2.0",
+      "name": "echarts",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "6.1.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-entities-7.0.1-5d87f722",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "4d6ae02ce1544131fdf78614ca5d724f8bb26af6399cd0799ae7dff91b566aa3550802b8d3c6f96679db34050458b4c2a6e9bdc3a6ab4fbd22d57750e1478e3c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/entities/-/entities-7.0.1.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/entities@7.0.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "BSD-2-Clause",
+      "name": "entities",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "7.0.1"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-es-module-lexer-2.3.2-813d93a4",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "a681c6a4e4400688c926e72757d29b39abc44d6f250559e98645bbec4479fc1439173ee85d2a0235e93b207def4799d18ddb04cfddba89b1585fc2ad2d099dcb"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/es-module-lexer/-/es-module-lexer-2.3.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/es-module-lexer@2.3.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "es-module-lexer",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "2.3.2"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-esbuild-0.28.2-c0bca85e",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "1ca54b4bc76f208fb1a0a5bd926ab16d12ab9d61177c926bfc56618499a2a880747b4e7740d605a8e068b9330efe4e6c203e0cbc28940afbfc6fd338877db020"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/esbuild/-/esbuild-0.28.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/esbuild@0.28.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "esbuild",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-estree-walker-3.0.3-01468cbc",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "ed150a7d781230c933b7a66e5e6a9aa4ebab2c63cf7e08fa97db9167b9511a896f934cb6ca871cdf92dd731282e4f419767d8332a8a8010d8da1672b4ca9a6ea"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/estree-walker/-/estree-walker-3.0.3.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/estree-walker@3.0.3",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "estree-walker",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "3.0.3"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-expect-type-1.4.0-3781801e",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "29f61b9a9466d156cb8c4bd56bdc86c028bd188df8c6f8bb03f1d761640eeb90920f6bb731ccd4252bb05ca148c651ac801422cd5f6ae49f4d1e3e151b49fea4"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/expect-type/-/expect-type-1.4.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/expect-type@1.4.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "Apache-2.0",
+      "name": "expect-type",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "1.4.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-fdir-6.5.0-2b5fa8f5",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "b486d8b596ee70eb340511aa3c992c84951874bf920c7edd54cf208f2f84469dd60148cb105244fb4da46a7c87b708d63a7c2b298062c0098cd29e242c90275e"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/fdir/-/fdir-6.5.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/fdir@6.5.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "fdir",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "6.5.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-fsevents-2.3.3-e0a54ee2",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "e71a037d7f9f2fb7da0139da82658fa5b16dc21fd1efb5a630caaa1c64bae42defbc1d181eb805f81d58999df8e35b4c8f99fade4d36d765cda09c339617df43"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/fsevents@2.3.3",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "fsevents",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "2.3.3"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-happy-dom-21.0.4-68e7b604",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "b459be19a2c1828ea8d1ac079ef1da368ada568dbba89fb6b5912d67e7086b4f215db7a2b6bc4025a8cb234e61b14cbfdbf61329c523418cc77b998272b68b07"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/happy-dom/-/happy-dom-21.0.4.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/happy-dom@21.0.4",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "happy-dom",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "21.0.4"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-indent-string-4.0.0-76428f1b",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "11d0c366ee00d8ec882bb2ebff6cc6fb0e6399bba4d435419c4c11110bc1ceca412640846d16bc1b153596085871a1890a745689b8c35e5abbefd5f5ff2e71c2"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/indent-string/-/indent-string-4.0.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/indent-string@4.0.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "indent-string",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "4.0.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-js-tokens-4.0.0-0fe19584",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "45d2547e5704ddc5332a232a420b02bb4e853eef5474824ed1b7986cf84737893a6a9809b627dca02b53f5b7313a9601b690f690233a49bce0e026aeb16fcf29"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/js-tokens@4.0.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "js-tokens",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "4.0.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-lz-string-1.5.0-9d7328ca",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "8796e0256a7124db306d4eea0ab574b4829009a4b76e53c3aea296c7e431ceeccbd73194ce28fd5c258bad22ec24fbb9b7e79603fc9c7adcd800ee4838c71601"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/lz-string/-/lz-string-1.5.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/lz-string@1.5.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "lz-string",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "1.5.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-magic-string-1.4.5-b84c4c3d",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "a0b2c2dbe62f4147c06bebf1a2e7c4ff273589c6fceccf625c846a02847fd84844ffc71bdd217ff868b4736072d41fb9573d9edaf42d52f1e2bb5fbadd99e1fb"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/magic-string/-/magic-string-1.4.5.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/magic-string@1.4.5",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "magic-string",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "1.4.5"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-min-indent-1.0.1-bbb290c7",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "23d8f0327d3b4b2fc8c0e8f7cd59158a4d894ef8296b29036448a02fa471e8df4b6cccb0c1448cb71113fbb955a032cb7773b7217c09c2fbae9ecf1407f1de02"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/min-indent/-/min-indent-1.0.1.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/min-indent@1.0.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "min-indent",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "1.0.1"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-nanoid-3.3.20-ef6c34dd",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "b8a760d86dc63422909fd6f260ea716c6aab4f67c63b9291b7927ff1bde9a24f2b4faab119617a871332262118b407fe155c98b83f6145a0ea5f9b8f15827865"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/nanoid/-/nanoid-3.3.20.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/nanoid@3.3.20",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "nanoid",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "3.3.20"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-obug-3.0.0-d07d5c86",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "e6fbc1e7e5bb78fbfea77baac62f91716d570332d6d3f871b77ff85f82dce2a1ee7733a1981881c0e63a0d1a1be169da9c0106bcd70b8c5f8a34eb9fad4a0443"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/obug/-/obug-3.0.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/obug@3.0.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "obug",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "3.0.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-picocolors-1.1.1-704e4df8",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "c5c787dac9e1b5be4cf658aa0ec984c39ea57b7efa993664117fe311bfd1c4d1727a036e97b78db250973fd1438ff2dcbb45fc284c8c71e3f69eda5a1eb0c454"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/picocolors/-/picocolors-1.1.1.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/picocolors@1.1.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "ISC",
+      "name": "picocolors",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "1.1.1"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-picomatch-4.0.7-75ffdfef",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "a9c26ef3c436216a89b030f9dbd24a31dc069bf76f2275b81ef427470887f49b62849bf318eb1c0ed1c4df1d6904a794393cac43c91598b9c9da426eef285c18"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/picomatch/-/picomatch-4.0.7.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/picomatch@4.0.7",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "picomatch",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "4.0.7"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-postcss-8.5.33-0830b7c0",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "4551c453dfcfa751678ebfcca4026c668003ba408a85f222d793ae9c46221a4b489182e43d5bc2d6c8a85a89460d2ed7072313c7d9bf2066eba3426cd77ce19d"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/postcss/-/postcss-8.5.33.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/postcss@8.5.33",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "postcss",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "8.5.33"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-pretty-format-27.5.1-0ab791a3",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "41bd60cb93ab3f9fb30dfd81be7cdd9778ec4dfd6a5d531acdbbc2a0a86d2aa56ce3f60ae28cd7e2029024957235ef9c6a334f9f42a80b4302dc552668758499"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/pretty-format/-/pretty-format-27.5.1.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/pretty-format@27.5.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "pretty-format",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "27.5.1"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-react-19.2.0-c32755ef",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "b666d683a5b7d6d40b781e5c74804e89c2432514762b35ec57bb922bd88d7cb590e5b2197f1b8f107a7b33cc221f21e79f40c3d62ef0dd99a29f416d92bc2809"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/react/-/react-19.2.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/react@19.2.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "react",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "19.2.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-react-dom-19.2.0-d5a4b102",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "5256d1bb87008866887b090fca2446264d229833764f726389e4fab29a0bd947927f9a1de27e4b07f990e1e8e6c610854f5b587bc22f685ba5cf29d6a2fb0415"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/react-dom/-/react-dom-19.2.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/react-dom@19.2.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "react-dom",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "19.2.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-react-is-17.0.2-083c4f82",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "c361accae90beb62099e569f7ff9d17a03d047de02fd75da9af3169921d1278cbb4ecff8a1c1919931ef3acf0f484ea90777563ab0ff9ee7ae539b1db81b10e3"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/react-is@17.0.2",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "react-is",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "17.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-redent-3.0.0-9c5927a2",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "ead0c0f20f7c59ed337741af55e313f5aac43a74f0f6a334dcbf5c2576828eb8a9d4e3bbeb844304b05fac1e1cc333460e3e4e0398a8ca60bd1a48b381624352"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/redent/-/redent-3.0.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/redent@3.0.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "redent",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "3.0.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-rollup-4.68.8-b24e8340",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "207c780de7931a1a003e47baa755a5834244405c90a194108c47b5883fa784411193b7a87872bdcf23a9549886739e19d4c0a023deab375b43ed3b6e6fc5f23c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/rollup/-/rollup-4.68.8.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/rollup@4.68.8",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "rollup",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "4.68.8"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-scheduler-0.27.0-7bf6cc1c",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "78dbfe5ab55b2aed5fdef6d8253ff1b62179b320391cf20cb5ff48818fe72a0d2c5aacc0504bea63fc66ece71973fa9a7cbc7f88ef4580e99e480a78bf9b62fd"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/scheduler/-/scheduler-0.27.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/scheduler@0.27.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "scheduler",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "0.27.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-source-map-js-1.2.4-c447b62b",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "27b66332f1ddf4ed5f713ff9574f5059a69297605b5b1dc5e8ed3cb2975ef3635a99ff540741b145520f88d6d5b1d2a4a22cc7892a53a1da37be9d9b032f7530"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/source-map-js/-/source-map-js-1.2.4.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/source-map-js@1.2.4",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "BSD-3-Clause",
+      "name": "source-map-js",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "1.2.4"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-std-env-4.3.0-a29779af",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "3ad53f1204359089b92b0a90a410ba644317ad946e8b5d70f3381f4d6a7c71d3bd07c39a3ec6c0f1b4c73b63fe1cda3556551318c541c0f87276eea9a1e5e26a"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/std-env/-/std-env-4.3.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/std-env@4.3.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "std-env",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "4.3.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-strip-indent-3.0.0-94d612e4",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "95a2536b725bf95429682e83b1e1e117b75756a1d37c93c24436846e277f76b3a1822b60624bbf95eb4c52a397168595d3320851b8e9747dadfad623e1b40c45"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/strip-indent/-/strip-indent-3.0.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/strip-indent@3.0.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "strip-indent",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "3.0.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-tinybench-6.2.4-c1bd6a98",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "490e768c49dc5f16cc0b326e63603f8c621b6c0bba358b01596ee0af3da9344f849f341da066a805fa64e2a0bfa2913baa251c1a61a0686233e44a07752d4ef7"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/tinybench/-/tinybench-6.2.4.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/tinybench@6.2.4",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "tinybench",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "6.2.4"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-tinyexec-1.3.1-e02b1882",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "182bc1ddaa32b3de88b8314131c4c1e3a24e47a99d32d013a2ac225bc2655a1b288759a11e2ff19fdb2cfc383b379e791a227212ddaace81bf3470b033a87510"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/tinyexec/-/tinyexec-1.3.1.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/tinyexec@1.3.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "tinyexec",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "1.3.1"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-tinyglobby-0.2.17-e2eef8d8",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "c1747f758a5ca8a99f5a911d66388a24ec023459dd0f40cc9eb5bf7188d51adb449017d581c2c51e836b963e3b9a339589cf72c8dbbae5a96c805e0d4324dada"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/tinyglobby/-/tinyglobby-0.2.17.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/tinyglobby@0.2.17",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "tinyglobby",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "0.2.17"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-tslib-2.3.0-7e89d502",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "37cda8a32c55366ea1d6b88b0a8c92f5eddfb89dc0306db3219b3619dd404dc4858d2036dd0d1fce38d97a1d236c9bd65436747094fcc9a34d69a5c7cee78d8e"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/tslib/-/tslib-2.3.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/tslib@2.3.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "0BSD",
+      "name": "tslib",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "2.3.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-typescript-5.9.3-ab4a5bf0",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "8e5d6f6733c38a72ebf5e52ddc9feded5e8580d130f508ef04f772b33f4a7d00c3e357d0ac2d98e2f290762694a454f86d795bd511e12e9a7cc2d9ba3394e04b"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/typescript/-/typescript-5.9.3.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/typescript@5.9.3",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "Apache-2.0",
+      "name": "typescript",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "5.9.3"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-undici-types-8.9.0-caa71619",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "2930f2453617f2c5a629702290f1c74b273adc244f11331cb728ca16ea5c0ba3812d74f7c6c3747bd685ee6fa6217bad156a545ee79db68c06ee22cece9d2442"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/undici-types/-/undici-types-8.9.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/undici-types@8.9.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "undici-types",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "8.9.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-vite-7.3.8-bae53136",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "ded4e2efc3002a1564f61f986555cc43c3ce9a7789b84f7b4143c05ad260847ce11fb040ca2a90382d8a661d4358eb2efd4481d9c4578739cf07269a6ef6177f"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/vite/-/vite-7.3.8.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/vite@7.3.8",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "vite",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "7.3.8"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-vitest-5.1.1-ea239ee4",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "b6b566cd414e4ab68265c237b9920c0f916a061e1ab45902fd7b893ff214eeab7241acb4142b3721afb4422436249c06c961bfc6b701a0935e976f8eee4119d2"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/vitest/-/vitest-5.1.1.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/vitest@5.1.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "vitest",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "5.1.1"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-whatwg-mimetype-3.0.0-a5a0d607",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "9edf8dd9dcc8bad551c40471d678213ca1afd711e2914ec729d7da7ca90b34b8a77663d4fdc877537d4d38218603f7663dc99bd559687ced2f9ca01cb26d28fd"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/whatwg-mimetype/-/whatwg-mimetype-3.0.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/whatwg-mimetype@3.0.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "whatwg-mimetype",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "3.0.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-why-is-node-running-3.2.1-4981b02b",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "4dbd85521078bd4b064257d2aae40b62402992e3c01505c6173c562871ee995cf674af97d51526fc79c80f8f937c819827591373039a0a4fdbb9808426be988d"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/why-is-node-running/-/why-is-node-running-3.2.1.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/why-is-node-running@3.2.1",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "why-is-node-running",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "3.2.1"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-ws-8.23.0-d987b46b",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "c029265fc40c3ab2a380ef075b65b20db4d219eaa4a1cc600f34bd891efdac401ec6dcbaff6ab38a5c77020f13a9ff72928a778ab2ca95ed0cb559f9aa3567a1"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/ws/-/ws-8.23.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/ws@8.23.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "ws",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "8.23.0"
+    },
+    {
+      "SPDXID": "SPDXRef-NPM-zrender-6.1.0-4ee38fa6",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "a0418c0c1ea938fd92e8ec114783dd56feb5d33ae39c0dc187e267486d767d826504a8ed340a046f97d252808e3883651fde88d9f537f3f03652944ab3aef161"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://registry.npmjs.org/zrender/-/zrender-6.1.0.tgz",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceLocator": "pkg:npm/zrender@6.1.0",
+          "referenceType": "purl"
+        }
+      ],
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "BSD-3-Clause",
+      "name": "zrender",
+      "primaryPackagePurpose": "LIBRARY",
+      "versionInfo": "6.1.0"
     }
   ],
   "relationships": [
@@ -2924,6 +5798,386 @@
     },
     {
       "relatedSpdxElement": "SPDXRef-Python-uvicorn-0.54.0",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--adobe-css-tools-4.5.0-238d3e22",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--babel-code-frame-7.29.7-6b8a8b45",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--babel-helper-validator-identifier-7.29.7-78632d56",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--babel-runtime-7.29.15-b0d8c4c3",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--esbuild-darwin-arm64-0.28.2-bd323057",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--jridgewell-resolve-uri-3.1.3-49e10d76",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--jridgewell-sourcemap-codec-1.6.0-11d785d1",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--jridgewell-trace-mapping-0.3.31-1e364efb",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--rollup-rollup-darwin-arm64-4.68.8-ac7660a5",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--testing-library-dom-10.4.2-4e36bb3d",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--testing-library-jest-dom-6.9.1-184da177",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-dom-accessibility-api-0.6.3-80515a01",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--testing-library-react-16.3.0-b29f6fb6",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--testing-library-user-event-14.6.1-7790a116",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--types-aria-query-5.0.4-33ede147",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--types-chai-5.2.3-99fa6824",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--types-deep-eql-4.0.2-b024dab7",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--types-estree-1.0.10-5b94d692",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--types-node-26.6.6-abcdd38c",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--types-react-19.2.2-2300dff8",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--types-react-dom-19.2.2-278d2b69",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--types-whatwg-mimetype-3.0.2-f50fed10",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--types-ws-8.18.2-630409d3",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--vitest-mocker-5.1.1-3e8a1c61",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM--vitest-spy-5.1.1-fed13e56",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-ansi-regex-5.0.1-a9b9a5c3",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-ansi-styles-5.2.0-9d675b59",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-aria-query-5.3.0-5a4b836b",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-assertion-error-2.0.1-6a2014cb",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-buffer-image-size-0.6.4-aec6c067",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-chai-6.3.0-2f18c293",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-css.escape-1.5.1-c6a07cf3",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-csstype-3.2.4-8c4a8a76",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-dequal-2.0.3-d9a92ac6",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-dom-accessibility-api-0.5.16-08fba7f1",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-echarts-6.1.0-d1c5b103",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-entities-7.0.1-5d87f722",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-es-module-lexer-2.3.2-813d93a4",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-esbuild-0.28.2-c0bca85e",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-estree-walker-3.0.3-01468cbc",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-expect-type-1.4.0-3781801e",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-fdir-6.5.0-2b5fa8f5",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-fsevents-2.3.3-e0a54ee2",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-happy-dom-21.0.4-68e7b604",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-indent-string-4.0.0-76428f1b",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-js-tokens-4.0.0-0fe19584",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-lz-string-1.5.0-9d7328ca",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-magic-string-1.4.5-b84c4c3d",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-min-indent-1.0.1-bbb290c7",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-nanoid-3.3.20-ef6c34dd",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-obug-3.0.0-d07d5c86",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-picocolors-1.1.1-704e4df8",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-picomatch-4.0.7-75ffdfef",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-postcss-8.5.33-0830b7c0",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-pretty-format-27.5.1-0ab791a3",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-react-19.2.0-c32755ef",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-react-dom-19.2.0-d5a4b102",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-react-is-17.0.2-083c4f82",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-redent-3.0.0-9c5927a2",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-rollup-4.68.8-b24e8340",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-scheduler-0.27.0-7bf6cc1c",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-source-map-js-1.2.4-c447b62b",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-std-env-4.3.0-a29779af",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-strip-indent-3.0.0-94d612e4",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-tinybench-6.2.4-c1bd6a98",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-tinyexec-1.3.1-e02b1882",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-tinyglobby-0.2.17-e2eef8d8",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-tslib-2.3.0-7e89d502",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-typescript-5.9.3-ab4a5bf0",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-undici-types-8.9.0-caa71619",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-vite-7.3.8-bae53136",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-vitest-5.1.1-ea239ee4",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-whatwg-mimetype-3.0.0-a5a0d607",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-why-is-node-running-3.2.1-4981b02b",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-ws-8.23.0-d987b46b",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Package-P3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-NPM-zrender-6.1.0-4ee38fa6",
       "relationshipType": "CONTAINS",
       "spdxElementId": "SPDXRef-Package-P3"
     }

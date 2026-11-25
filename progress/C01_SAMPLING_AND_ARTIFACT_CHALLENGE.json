@@ -1,0 +1,43 @@
+{
+  "company_data_used": false,
+  "independent_design": {
+    "center_sample_radius_fraction": 0.1,
+    "edge_sampling_layouts": [
+      0.81,
+      0.99
+    ],
+    "expected_observation_weighted_contrasts_nm": [
+      1.42,
+      1.78
+    ],
+    "latent_worlds_with_identical_observations": [
+      "physical thickness field",
+      "flat material plus metrology radial bias"
+    ],
+    "true_field": "value(r) = 10 + 2*r nm for every world"
+  },
+  "oracle_authored_before_run": true,
+  "results": {
+    "analysis_equal_between_latent_worlds": true,
+    "exported_limitations_include_sampling_warning": true,
+    "inner_layout_edge_minus_center_nm": 1.4200000000000017,
+    "layout_induced_contrast_change_nm": 0.35999999999999943,
+    "measurement_attribution_assessment": {
+      "limitation": "The same observed spatial values can arise from physical structure or measurement-system artifact; this analysis consumes no independent calibration or repeat-measurement evidence.",
+      "review_question": "Does the pattern reproduce on an independent calibrated measurement path, or do approved calibration diagnostics identify a measurement artifact?",
+      "status": "NOT_IDENTIFIABLE_FROM_A_SINGLE_SPATIAL_MAP"
+    },
+    "observed_payload_identical_between_latent_worlds": true,
+    "outer_layout_edge_minus_center_nm": 1.7800000000000011,
+    "sampling_assessment": {
+      "area_weighted_estimate": "NOT_COMPUTED",
+      "limitation": "Observed-site means and category counts are not area-weighted; site density and explicit missingness can change summaries without a wafer-wide physical change.",
+      "review_question": "Would the conclusion persist on a fixed common sampling mask or under an independently validated sampling-design weighting model?",
+      "summary_weighting": "EQUAL_WEIGHT_PER_OBSERVED_RECORD"
+    }
+  },
+  "schema": "p3-c01-sampling-artifact-challenge/v1",
+  "scope": "Deterministic identifiability counterexample. It does not estimate manufacturing bias, sampling error, or production accuracy.",
+  "source_tree_sha256": "e5446a8a5bdc33051031786f3018d19d2927e90571b3ef2040a3a3467d6ae375",
+  "status": "PASS"
+}

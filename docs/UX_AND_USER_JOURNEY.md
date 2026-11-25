@@ -1,16 +1,18 @@
 # Concrete engineer experience and acceptance walkthrough — FAB Spatial & Yield Intelligence
 
-P3 contributes `products/p3/ui/P3Panel.tsx` to the P1-owned shared workspace. The panel renders source preview, evidence, capability status, provenance, and an optional verified wafer-map model. The host owns authentication, shell, design tokens, requests, cancellation, export, and shared rendering. P3 has no standalone site.
+P3 owns C01–C05 and now operates independently through `products/p3/reference_host/`. The small loopback host composes the official SDK adapter, the typed spatial-map v2 boundary, P3 analysis, locally bundled React/ECharts visualization, and reproducible evidence export. It is a reference host, not a competing suite framework. The separate `products/p3/ui/P3Panel.tsx` remains an embeddable module for future product-neutral suite integration.
 
-**Current integration state:** P3 supplies a headless panel and tested host props. It does not include a P3-owned selection/upload form or route. P1 suite-host integration and the additive spatial-map/C01–C05 capability contract remain pending, so the end-to-end interaction requirements below describe acceptance criteria rather than a completed host walkthrough.
+**Current integration state:** P3 is not runtime-dependent on P1. Its standalone host renders C01–C05 and typed numeric, categorical, defect-event, and missing observations. It displays sampling counts, limitations, provenance and read audits; users can inspect each capability and export a canonical evidence file with SHA-256. The P1 snapshot remains read-only and its converter still fails categorical/event preservation acceptance; therefore P1 integration is pending. A fresh standalone browser workflow and formal engineer study must be recorded separately.
 
-## Minimum user journey
+## Independent P3 user journey
 1. One wafer-centric workspace with actual measured points, wafer geometry/orientation and visible sampling mask. Legend separates observed vs inferred/unobserved values.
 2. Overlay spatial features (ring, edge, gradient, localized cluster); inspect per-region counts and uncertainty.
 3. Anomaly drawer shows baseline population, distance/score, false-alert calibration, spatial region and coverage.
 4. Historical neighbors gallery shows same map convention, meaningful comparison metrics, associated verified history and distinct “similar shape is not same root cause” notice.
 5. Cross-step before/after view with registration quality; disable when geometries are incomparable. Outcome pane shows only valid downstream links and observational language.
 6. Keyboard and tabular text alternative, point selection, export with coordinate metadata and all exclusions/transformations.
+
+The reference host implements source mode/plan selection, bounded MCP reads, C01–C05 execution, site coverage, typed site table, history/evolution and association detail, source audit inspection, cancellation, refusal/error recovery, and evidence export. The synthetic end-to-end path is qualified against a protocol-compatible peer; it is not evidence of company authorization.
 
 
 ## Actual interaction acceptance

@@ -12,17 +12,19 @@ import os
 import re
 import threading
 import uuid
+from collections.abc import Mapping
 from copy import deepcopy
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from math import isfinite
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any
 
 from fabintel.mcp_client import MCPClient, MCPToolError
 
 MAX_CONFIG_BYTES = 256 * 1024
 DEFAULT_LIMITS = {"max_rows": 1000, "max_bytes": 4 * 1024 * 1024, "max_seconds": 30}
 REQUIRED_OPERATIONS = ("discover", "semantics", "relationships", "read_bounded", "audit")
+METADATA_OPERATIONS = ("discover", "semantics", "relationships")
 FORBIDDEN_QUERY_KEYS = {"sql", "query", "raw_sql", "statement", "table", "table_name", "query_string"}
 
 
@@ -86,13 +88,114 @@ def tool_definition_sha256(tool: Mapping[str, Any]) -> str:
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
+def tool_catalog_from_descriptors(tools: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Serialize tool descriptors as untrusted hints; this grants no invocation rights."""
+    if not isinstance(tools, list) or len(tools) > 512:
+        raise MCPDataError("MCP tool inventory exceeds the 512-tool onboarding limit")
+    result = []
+    seen = set()
+    for tool in tools:
+        if not isinstance(tool, dict) or not isinstance(tool.get("name"), str) or not tool["name"]:
+            raise MCPDataError("MCP tool inventory contains an invalid descriptor")
+        name = tool["name"]
+        if name in seen:
+            raise MCPDataError("MCP server advertised duplicate tool names")
+        seen.add(name)
+        annotations = tool.get("annotations")
+        annotations = annotations if isinstance(annotations, dict) else {}
+        schema = tool.get("inputSchema")
+        result.append({
+            "name": name,
+            "description": str(tool.get("description", ""))[:2048],
+            "tool_definition_sha256": tool_definition_sha256(tool),
+            "input_schema": deepcopy(schema) if isinstance(schema, dict) else None,
+            "read_only_hint": annotations.get("readOnlyHint") is True,
+            "destructive_hint": annotations.get("destructiveHint"),
+            "invocation_authorized": False,
+        })
+    if _json_size(result) > 512 * 1024:
+        raise MCPDataError("MCP tool catalog exceeds the 512 KiB onboarding limit")
+    return result
+
+
+def capture_mcp_tool_catalog(client: MCPClient) -> dict[str, Any]:
+    """List protocol metadata only; does not invoke any server tool."""
+    server = client.connect()
+    if "tools" not in server.capabilities:
+        raise MCPPolicyError("MCP server did not advertise the required tools capability")
+    tools = client.list_tools()
+    return {
+        "schema": "p3-mcp-tool-catalog/v1",
+        "status": "TOOL_REVIEW_REQUIRED",
+        "server_info": dict(server.server_info),
+        "protocol_version": server.protocol_version,
+        "protocol_era": server.era,
+        "tool_catalog": tool_catalog_from_descriptors(tools),
+        "tool_invocations": 0,
+        "invocation_authorization": "NOT_INFERRED_FROM_LISTING_OR_ANNOTATIONS",
+    }
+
+
+def load_transport_config(path: str | Path) -> dict[str, Any]:
+    target = Path(path)
+    if target.stat().st_size > MAX_CONFIG_BYTES:
+        raise ValueError("MCP transport config exceeds 256 KiB")
+    try:
+        config = json.loads(target.read_text(encoding="utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise ValueError("MCP transport config must be UTF-8 JSON") from exc
+    if not isinstance(config, dict) or config.get("schema_version") != "p3-mcp-transport-config-v1":
+        raise ValueError("unsupported MCP transport config schema")
+    if not isinstance(config.get("transport"), dict) or config["transport"].get("type") not in ("stdio", "streamable_http"):
+        raise ValueError("transport must be configured as MCP stdio or Streamable HTTP")
+    auth = config.get("auth_provider", {})
+    if not isinstance(auth, dict) or auth.get("type", "none") not in ("none", "environment"):
+        raise ValueError("unsupported MCP authentication provider")
+    limits = config.get("limits", {"max_seconds": 30})
+    if not isinstance(limits, dict):
+        raise ValueError("MCP transport timeout limit must be an object")
+    _positive_int(limits.get("max_seconds", 30), "max_seconds")
+    return config
+
+
+def create_mcp_client(config: Mapping[str, Any], *, request_timeout: float | None = None) -> MCPClient:
+    """Create the official-SDK client from either transport-only or adapter config."""
+    if (request_timeout is not None
+            and (type(request_timeout) not in (int, float) or not isfinite(request_timeout)
+                 or not 0.05 <= request_timeout <= 300)):
+        raise ValueError("request_timeout must be finite and between 0.05 and 300 seconds")
+    transport_cfg = config.get("transport")
+    if not isinstance(transport_cfg, dict) or transport_cfg.get("type") not in ("stdio", "streamable_http"):
+        raise ValueError("transport must be configured as MCP stdio or Streamable HTTP")
+    auth_cfg = config.get("auth_provider", {})
+    if not isinstance(auth_cfg, dict) or auth_cfg.get("type", "none") not in ("none", "environment"):
+        raise ValueError("unsupported MCP authentication provider")
+    auth = (EnvironmentCredentialProvider(stdio_env=auth_cfg.get("stdio_env", {}),
+                                          http_headers=auth_cfg.get("http_headers", {}))
+            if auth_cfg.get("type") == "environment" else CredentialProvider())
+    if transport_cfg["type"] == "stdio":
+        cwd = transport_cfg.get("cwd")
+        if cwd is not None and (not isinstance(cwd, str) or not Path(cwd).is_absolute()):
+            raise ValueError("stdio server cwd must be an absolute path")
+        client_transport = {"type": "stdio", "command": transport_cfg.get("command"), "cwd": cwd}
+    else:
+        client_transport = {"type": "streamable_http", "endpoint": transport_cfg.get("endpoint")}
+    limits = config.get("limits", {})
+    if not isinstance(limits, Mapping):
+        raise ValueError("MCP client timeout limits must be an object")
+    default_timeout = min(30, _positive_int(limits.get("max_seconds", 30), "max_seconds"))
+    timeout = float(request_timeout) if request_timeout is not None else float(default_timeout)
+    return MCPClient(client_transport, stdio_env=auth.stdio_environment(),
+                     http_headers=auth.http_headers(), request_timeout=timeout)
+
+
 def approved_query_plan_sha256(plan: Mapping[str, Any]) -> str:
     canonical = json.dumps(dict(plan), ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False)
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
 def _utc_now() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def _json_size(value: Any) -> int:
@@ -141,11 +244,17 @@ def load_config(path: str | Path) -> dict[str, Any]:
 
 def validate_config_before_start(config: Mapping[str, Any]) -> None:
     """Reject placeholders and unapproved configs before launching any MCP process."""
+    access_mode = config.get("access_mode", "analysis")
+    if not isinstance(access_mode, str) or access_mode not in {"analysis", "metadata_only"}:
+        raise MCPPolicyError("unsupported MCP adapter access mode")
     approval = config.get("read_only_approval")
-    if not isinstance(approval, dict) or approval.get("approved") is not True or not approval.get("reference"):
+    if (not isinstance(approval, dict) or approval.get("approved") is not True
+            or not isinstance(approval.get("reference"), str) or not approval["reference"].strip()):
         raise MCPPolicyError("site read-only approval is missing; MCP process was not started")
+    if access_mode == "metadata_only" and approval.get("scope") != "metadata_only":
+        raise MCPPolicyError("metadata-only onboarding requires an explicitly metadata-scoped authorization")
     sources = config.get("approved_sources")
-    if not isinstance(sources, list) or not sources:
+    if not isinstance(sources, list) or (access_mode == "analysis" and not sources) or (access_mode == "metadata_only" and sources):
         raise MCPPolicyError("approved source mappings are missing; MCP process was not started")
     for source in sources:
         if (not isinstance(source, dict) or source.get("approved") is not True
@@ -153,8 +262,23 @@ def validate_config_before_start(config: Mapping[str, Any]) -> None:
                 or not isinstance(source.get("semantic_version"), str) or not source["semantic_version"]
                 or not source.get("approval_reference")):
             raise MCPPolicyError("approved source mapping is incomplete; MCP process was not started")
+    metadata_sources = config.get("metadata_sources", [])
+    if not isinstance(metadata_sources, list):
+        raise MCPPolicyError("metadata source scopes must be an explicit list")
+    if access_mode == "metadata_only":
+        seen_metadata_sources = set()
+        for source in metadata_sources:
+            if (not isinstance(source, dict) or source.get("approved") is not True
+                    or not isinstance(source.get("source_id"), str) or not source["source_id"].strip()
+                    or not isinstance(source.get("semantic_version"), str) or not source["semantic_version"].strip()
+                    or not isinstance(source.get("approval_reference"), str) or not source["approval_reference"].strip()
+                    or source["source_id"] in seen_metadata_sources):
+                raise MCPPolicyError("each metadata source scope requires a unique source, semantic version and approval reference")
+            seen_metadata_sources.add(source["source_id"])
+    elif metadata_sources:
+        raise MCPPolicyError("analysis configs cannot carry metadata-only source scopes")
     plans = config.get("approved_plans")
-    if not isinstance(plans, list) or not plans:
+    if not isinstance(plans, list) or (access_mode == "analysis" and not plans) or (access_mode == "metadata_only" and plans):
         raise MCPPolicyError("site-approved bounded read plans are missing; MCP process was not started")
     source_versions = {source["source_id"]: source["semantic_version"] for source in sources if isinstance(source, dict)}
     seen_plan_ids = set()
@@ -174,7 +298,13 @@ def validate_config_before_start(config: Mapping[str, Any]) -> None:
     operations = config.get("operations")
     if not isinstance(operations, dict):
         raise MCPPolicyError("logical operation mappings are missing; MCP process was not started")
-    for name in REQUIRED_OPERATIONS:
+    required_operations = set(REQUIRED_OPERATIONS if access_mode == "analysis" else ("discover",))
+    allowed_operations = set(REQUIRED_OPERATIONS if access_mode == "analysis" else METADATA_OPERATIONS)
+    if (not required_operations.issubset(operations) or not set(operations).issubset(allowed_operations)
+            or (access_mode == "metadata_only" and metadata_sources
+                and not {"semantics", "relationships"}.issubset(operations))):
+        raise MCPPolicyError("operation mappings exceed or omit the explicitly permitted access profile")
+    for name in operations:
         binding = operations.get(name)
         approval = binding.get("approval") if isinstance(binding, dict) else None
         argument_mapping = binding.get("argument_mapping") if isinstance(binding, dict) else None
@@ -187,7 +317,7 @@ def validate_config_before_start(config: Mapping[str, Any]) -> None:
             raise MCPPolicyError(f"approved {name!r} tool mapping is incomplete; MCP process was not started")
     limits = config.get("limits")
     if not isinstance(limits, dict):
-        raise ValueError("bounded MCP limits are required; MCP process was not started")
+        raise ValueError("bounded MCP limits are required; MCP process was not started")  # noqa: TRY004 - invalid configuration is part of the documented ValueError contract.
     for name in DEFAULT_LIMITS:
         _positive_int(limits.get(name), name)
 
@@ -201,12 +331,14 @@ class ReadOnlyMCPAdapter:
         validate_config_before_start(config)
         self.client = client
         self.config = dict(config)
+        self.access_mode = self.config.get("access_mode", "analysis")
         self.approval = self.config.get("read_only_approval")
         if (not isinstance(self.approval, dict) or self.approval.get("approved") is not True
                 or not isinstance(self.approval.get("reference"), str) or not self.approval["reference"].strip()):
             raise MCPPolicyError("a site-provided read-only approval record is required")
-        sources = self.config.get("approved_sources")
-        if not isinstance(sources, list) or not sources:
+        sources = (self.config.get("metadata_sources", []) if self.access_mode == "metadata_only"
+                   else self.config.get("approved_sources"))
+        if not isinstance(sources, list) or (self.access_mode == "analysis" and not sources):
             raise MCPPolicyError("explicit site-approved source IDs and semantic versions are required")
         self.sources: dict[str, dict[str, Any]] = {}
         for source in sources:
@@ -226,15 +358,16 @@ class ReadOnlyMCPAdapter:
                                             "plan_sha256": record["plan_sha256"]}
         limits = self.config.get("limits")
         if not isinstance(limits, dict):
-            raise ValueError("bounded query limits are required")
+            raise ValueError("bounded query limits are required")  # noqa: TRY004 - invalid configuration is part of the documented ValueError contract.
         self.limits = {
             "max_rows": min(_positive_int(limits.get("max_rows"), "max_rows"), DEFAULT_LIMITS["max_rows"]),
             "max_bytes": min(_positive_int(limits.get("max_bytes"), "max_bytes"), DEFAULT_LIMITS["max_bytes"]),
             "max_seconds": min(_positive_int(limits.get("max_seconds"), "max_seconds"), DEFAULT_LIMITS["max_seconds"]),
         }
         bindings = self.config.get("operations")
-        if not isinstance(bindings, dict) or any(not isinstance(bindings.get(name), dict) for name in REQUIRED_OPERATIONS):
-            raise ValueError("explicit tool bindings for all logical read operations are required")
+        required_bindings = REQUIRED_OPERATIONS if self.access_mode == "analysis" else ("discover",)
+        if not isinstance(bindings, dict) or any(not isinstance(bindings.get(name), dict) for name in required_bindings):
+            raise ValueError("explicit tool bindings for the configured MCP access profile are required")
         self.bindings = bindings
         self._tool_inventory: dict[str, dict[str, Any]] | None = None
         self._active: dict[str, threading.Event] = {}
@@ -243,31 +376,9 @@ class ReadOnlyMCPAdapter:
         self._discovery: dict[str, Any] | None = None
 
     @classmethod
-    def from_config(cls, path: str | Path, *, request_timeout: float | None = None) -> "ReadOnlyMCPAdapter":
+    def from_config(cls, path: str | Path, *, request_timeout: float | None = None) -> ReadOnlyMCPAdapter:
         config = load_config(path)
-        if (request_timeout is not None
-                and (type(request_timeout) not in (int, float) or not isfinite(request_timeout)
-                     or not 0.05 <= request_timeout <= 300)):
-            raise ValueError("request_timeout must be finite and between 0.05 and 300 seconds")
-        transport_cfg = config.get("transport")
-        if not isinstance(transport_cfg, dict) or transport_cfg.get("type") not in ("stdio", "streamable_http"):
-            raise ValueError("transport must be configured as MCP stdio or Streamable HTTP")
-        auth_cfg = config.get("auth_provider", {})
-        if not isinstance(auth_cfg, dict) or auth_cfg.get("type", "none") not in ("none", "environment"):
-            raise ValueError("unsupported MCP authentication provider")
-        auth = (EnvironmentCredentialProvider(stdio_env=auth_cfg.get("stdio_env", {}),
-                                              http_headers=auth_cfg.get("http_headers", {}))
-                if auth_cfg.get("type") == "environment" else CredentialProvider())
-        if transport_cfg["type"] == "stdio":
-            cwd = transport_cfg.get("cwd")
-            if cwd is not None and (not isinstance(cwd, str) or not Path(cwd).is_absolute()):
-                raise ValueError("stdio server cwd must be an absolute path")
-            client_transport = {"type": "stdio", "command": transport_cfg.get("command"), "cwd": cwd}
-        else:
-            client_transport = {"type": "streamable_http", "endpoint": transport_cfg.get("endpoint")}
-        timeout = float(request_timeout) if request_timeout is not None else float(min(30, config["limits"]["max_seconds"]))
-        client = MCPClient(client_transport, stdio_env=auth.stdio_environment(),
-                           http_headers=auth.http_headers(), request_timeout=timeout)
+        client = create_mcp_client(config, request_timeout=request_timeout)
         try:
             return cls(client, config)
         except BaseException:
@@ -287,6 +398,11 @@ class ReadOnlyMCPAdapter:
                 result[tool["name"]] = tool
             self._tool_inventory = result
         return self._tool_inventory
+
+    def tool_catalog(self) -> list[dict[str, Any]]:
+        """Return bounded MCP tool metadata; listing tools grants no invocation rights."""
+        tools = self._tools()
+        return tool_catalog_from_descriptors([tools[name] for name in sorted(tools)])
 
     def _tool_for(self, logical_name: str) -> tuple[str, dict[str, str]]:
         binding = self.bindings.get(logical_name)
@@ -354,8 +470,23 @@ class ReadOnlyMCPAdapter:
         if (not isinstance(payload["tool_versions"], dict) or not isinstance(payload["semantic_versions"], list)
                 or not isinstance(payload["limits"], dict) or payload["audit_support"] is not True):
             raise MCPDataError("MCP discovery returned invalid tool, semantic, bounded-query, or audit capabilities")
+        source_catalog = payload.get("source_catalog")
+        if source_catalog is not None:
+            if not isinstance(source_catalog, list) or len(source_catalog) > 20_000:
+                raise MCPDataError("MCP source catalog must be a bounded list of at most 20,000 descriptors")
+            catalog_ids = [item.get("source_id") if isinstance(item, dict) else None for item in source_catalog]
+            if (any(not isinstance(source_id, str) or not source_id for source_id in catalog_ids)
+                    or len(catalog_ids) != len(set(catalog_ids))
+                    or not set(catalog_ids).issubset(set(payload["source_ids"]))):
+                raise MCPDataError("MCP source catalog has invalid or duplicate source identities")
+        advertised_semantics = payload["semantic_versions"]
+        reviewed_semantics = {source["semantic_version"] for source in self.sources.values()}
+        if (any(not isinstance(version, str) or not version for version in advertised_semantics)
+                or not reviewed_semantics.issubset(set(advertised_semantics))):
+            raise MCPPolicyError("MCP server does not advertise every site-reviewed semantic version")
         self._discovery = {
-            "status": "CONFIGURED_READ_ONLY_UNQUALIFIED",
+            "status": ("METADATA_ONLY_REVIEW_REQUIRED" if self.access_mode == "metadata_only"
+                       else "CONFIGURED_READ_ONLY_UNQUALIFIED"),
             "protocol_version": server.protocol_version,
             "protocol_era": server.era,
             "server_info": dict(server.server_info),
@@ -363,12 +494,18 @@ class ReadOnlyMCPAdapter:
             "tool_versions": payload["tool_versions"],
             "semantic_versions": payload["semantic_versions"],
             "limits": payload["limits"],
+            "discovered_source_count": len(payload["source_ids"]),
             "auth_scopes": ["read_only"],
             "audit_support": payload["audit_support"],
-            "approved_source_ids": sorted(self.sources),
+            "approved_source_ids": sorted(self.sources) if self.access_mode == "analysis" else [],
+            "metadata_source_ids": sorted(self.sources) if self.access_mode == "metadata_only" else [],
             "approval_reference": self.approval["reference"],
             "external_internal_qualification": "PENDING_INTERNAL",
         }
+        if source_catalog is not None:
+            self._discovery["source_catalog"] = deepcopy(source_catalog)
+            self._discovery["source_catalog_version"] = payload.get("source_catalog_version")
+            self._discovery["source_catalog_count"] = len(source_catalog)
         return self._discovery
 
     def semantics(self, source_ids: list[str], semantic_version: str) -> dict[str, Any]:
@@ -395,6 +532,10 @@ class ReadOnlyMCPAdapter:
                     or any(not isinstance(column, dict) or not isinstance(column.get("name"), str) or not column["name"]
                            for column in item["column_definitions"])):
                 raise MCPDataError("semantics response is incomplete or unapproved")
+            approved_source_version = self.sources[item["source_id"]].get("source_version")
+            if (approved_source_version is not None
+                    and item.get("source_version") != approved_source_version):
+                raise MCPDataError("semantics response source version differs from the site-reviewed source version")
             if item["source_id"] in seen:
                 raise MCPDataError("semantics response repeats a source definition")
             seen.add(item["source_id"])
@@ -426,6 +567,8 @@ class ReadOnlyMCPAdapter:
     def read_bounded(self, approved_plan: Mapping[str, Any], permission_context: Mapping[str, Any],
                      limits: Mapping[str, Any] | None = None, *, operation_id: str | None = None,
                      cancel_event: threading.Event | None = None) -> dict[str, Any]:
+        if self.access_mode != "analysis":
+            raise MCPPolicyError("metadata-only adapter cannot perform bounded data reads")
         self.discover()
         if not isinstance(approved_plan, Mapping) or not isinstance(permission_context, Mapping):
             raise TypeError("read requires an approved query plan and permission context")
@@ -477,9 +620,14 @@ class ReadOnlyMCPAdapter:
             raise MCPDataError("bounded MCP read omitted its audit ID")
         if not isinstance(payload.get("source_versions"), dict) or payload.get("truncation") not in (True, False):
             raise MCPDataError("bounded MCP read omitted source versions or truncation status")
-        if (not payload["source_versions"] or not set(payload["source_versions"]).issubset({source_id})
-                or not isinstance(payload.get("audit_id"), str) or not payload["audit_id"]):
+        if (set(payload["source_versions"]) != {source_id}
+                or any(not isinstance(version, str) or not version
+                       for version in payload["source_versions"].values())):
             raise MCPDataError("bounded MCP read source versions or audit record do not match the approved source")
+        approved_source_version = self.sources[source_id].get("source_version")
+        if (approved_source_version is not None
+                and payload["source_versions"][source_id] != approved_source_version):
+            raise MCPDataError("bounded MCP read source version drifted from the site-reviewed source version")
         if any("source_id" in row and row["source_id"] != source_id for row in rows):
             raise MCPPolicyError("bounded MCP read returned a row from outside the selected source")
         trace = {"operation_id": operation_id, "permission_scope": "read_only",
@@ -509,13 +657,20 @@ class ReadOnlyMCPAdapter:
                 "confirmed_stopped": False, "reason": "cancellation notification sent; remote stop not acknowledged"}
 
     def audit(self, operation_id: str) -> dict[str, Any]:
+        if self.access_mode != "analysis":
+            raise MCPPolicyError("metadata-only adapter cannot request data-access audit records")
         payload = self._invoke("audit", {"operation_id": operation_id})
         if (payload.get("permission_scope") != "read_only" or not isinstance(payload.get("sources"), list)
                 or not isinstance(payload.get("timestamps"), dict) or not isinstance(payload.get("query_hash"), str)
                 or not re.fullmatch(r"[a-fA-F0-9]{64}", payload.get("query_hash", ""))
                 or not isinstance(payload.get("audit_id"), str) or not payload["audit_id"]
+                or not isinstance(payload.get("source_versions"), dict)
                 or any(not isinstance(source, str) or source not in self.sources for source in payload.get("sources", []))):
             raise MCPDataError("MCP audit response is missing required lineage fields")
+        if (set(payload["source_versions"]) != set(payload["sources"])
+                or any(not isinstance(version, str) or not version
+                       for version in payload["source_versions"].values())):
+            raise MCPDataError("MCP audit source versions do not match its source lineage")
         return payload
 
     @property
@@ -534,8 +689,8 @@ def _valid_time_window(value: Mapping[str, Any]) -> bool:
     if set(value) != {"start", "end"}:
         return False
     try:
-        start = datetime.fromisoformat(str(value["start"]).replace("Z", "+00:00"))
-        end = datetime.fromisoformat(str(value["end"]).replace("Z", "+00:00"))
+        start = datetime.fromisoformat(str(value["start"]))
+        end = datetime.fromisoformat(str(value["end"]))
         return (start.tzinfo is not None and end.tzinfo is not None
                 and start.utcoffset() is not None and end.utcoffset() is not None and end > start)
     except (TypeError, ValueError):

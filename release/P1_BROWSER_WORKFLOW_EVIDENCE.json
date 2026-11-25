@@ -1,0 +1,45 @@
+{
+  "state": "LOCAL_SYNTHETIC_BROWSER_OBSERVATION",
+  "observed_on": "2026-11-23",
+  "host": "P1 shared FAB Intelligence suite",
+  "route": "/fab-intelligence/p3",
+  "origin": "http://127.0.0.1:8765",
+  "company_data_used": false,
+  "route_snapshot_matches_current_p3_source": false,
+  "route_snapshot_source_hashes": {
+    "p1_engine_sha256": "7113b825d14f399efebd140a31d450d720e4702a553491e80a458834c4423140",
+    "current_p3_engine_sha256": "e75b6b8862c3579a359d72bf6f202a47a17d90e086b9cdee495411fc1d4f85ad",
+    "p1_panel_sha256": "9128c812767a11898abdfceaead0b0555c11c18b824364e7a6bf494942ffa1e7",
+    "current_p3_panel_sha256": "d852a786f5d2ff6600caa8dba6f1fd948458fd074c0709ab422e6d3779ff2103",
+    "p1_fixture_sha256": "7843120c45abfcc08d217986153db7f3fbf99393f53381d9ecc6775c8023d460",
+    "current_p3_fixture_sha256": "7843120c45abfcc08d217986153db7f3fbf99393f53381d9ecc6775c8023d460"
+  },
+  "observations": {
+    "positive_investigation": {
+      "host_request": "COMPLETED",
+      "evidence_status": "VALID",
+      "capabilities": {"C01": "VALID", "C02": "VALID", "C03": "VALID", "C04": "VALID", "C05": "VALID"},
+      "measured_site_count": 5,
+      "shared_renderer_mounted": true,
+      "accessible_table_rows_excluding_header": 5,
+      "source_provenance_and_sampling_visible": true,
+      "no_interpolation_displayed": true
+    },
+    "permission_refusal": {
+      "host_request": "REFUSED",
+      "fixture_values_suppressed": true,
+      "positive_findings_suppressed": true,
+      "capability_status": "NOT_AVAILABLE"
+    },
+    "evidence_export": {
+      "host_owned_export_action": "Export evidence",
+      "browser_download_event_observed": true,
+      "downloaded_file_contents_independently_inspected": false
+    }
+  },
+  "limits": [
+    "This browser run used P1's local synthetic fixture and P1's local P3 source snapshot, not the latest P3 engine or panel source and not an authorized company source.",
+    "The official-SDK MCP-to-module result was separately mounted into P3Panel and P1's actual shared renderer by qualification/run_p1_module_integration.py; that React test is not a browser execution.",
+    "The browser observation is not an automated Golden UI-002 run, formal WCAG audit, engineer study, or company acceptance."
+  ]
+}

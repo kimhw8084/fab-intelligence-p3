@@ -1,0 +1,25 @@
+{
+  "schema": "p3-c02-browser-acceptance/v1",
+  "scope": "Local standalone browser inspection with synthetic SDK-backed MCP data; no company data or manufacturing claim.",
+  "host": "http://127.0.0.1:8799/",
+  "source_mode": "synthetic official-SDK MCP peer",
+  "bounded_reads": 5,
+  "c02": {
+    "capability_status": "VALID",
+    "common_observed_sites_per_transition": 44,
+    "coverage_percent_by_transition": [[91.7, 100.0], [100.0, 91.7]],
+    "propagated_standard_uncertainty_nm_per_transition": 0.038,
+    "covariance_between_steps": "NOT_SUPPLIED",
+    "covariance_across_sites": "NOT_SUPPLIED",
+    "conditional_on_independent_errors": true,
+    "assumption_visible_next_to_step_changes": true,
+    "assumption_included_inline_with_each_uncertainty_value": true,
+    "rendered_uncertainty_text": "conditional 1σ assuming independent errors: 0.038 nm",
+    "exact_observed_sites_only": true,
+    "interpolation": false
+  },
+  "canonical_evidence_sha256_displayed": "718ad486212b4c198c886ba7d8d812ff4f6e2bbc482507203e604a7cf0f67ca5",
+  "measurement_label": "Measurement uncertainty",
+  "internal_qualification": "PENDING",
+  "external_transfer": "NOT_QUALIFIED"
+}

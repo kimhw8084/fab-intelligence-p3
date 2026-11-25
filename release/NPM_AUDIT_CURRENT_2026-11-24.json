@@ -1,0 +1,26 @@
+{
+  "command": "npm audit --json",
+  "dependency_scope": {
+    "dev": 123,
+    "optional": 53,
+    "peer": 11,
+    "peerOptional": 0,
+    "prod": 4,
+    "total": 126
+  },
+  "executed_utc": "2026-11-25T00:44:42Z",
+  "lockfile": "package-lock.json",
+  "lockfile_sha256": "fab3478bb04736094b3f3e3e84f93edfb44d667bf7b31c90273dd3b82bd64a5f",
+  "npm_version": "11.20.0",
+  "raw_audit_sha256": "20bee7c0609091590ac0140c4dd2d358746db33d148fa677c58c52a9eb6f11ab",
+  "schema": "p3-current-npm-audit/v1",
+  "status": "PASS_NO_REPORTED_ADVISORIES",
+  "vulnerabilities": {
+    "critical": 0,
+    "high": 0,
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "total": 0
+  }
+}

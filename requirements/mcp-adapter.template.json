@@ -1,5 +1,6 @@
 {
   "schema_version": "p3-mcp-adapter-config-v1",
+  "access_mode": "analysis",
   "transport": {
     "type": "stdio",
     "command": [
@@ -20,7 +21,15 @@
     "approved": false,
     "reference": ""
   },
-  "approved_sources": [],
+  "approved_sources": [
+    {
+      "approved": false,
+      "source_id": "REPLACE_WITH_ADMINISTRATOR_APPROVED_SOURCE_ID",
+      "semantic_version": "REPLACE_WITH_APPROVED_SEMANTIC_VERSION",
+      "source_version": "REPLACE_WITH_APPROVED_IMMUTABLE_SNAPSHOT_VERSION",
+      "approval_reference": ""
+    }
+  ],
   "approved_plans": [],
   "limits": {
     "max_rows": 1000,
@@ -87,5 +96,5 @@
       }
     }
   },
-  "notes": "Template only. It contains no company endpoint, tool name, source mapping, approval, or credential. Replace values only from authorized site discovery and keep secrets in the approved runtime environment."
+  "notes": "Analysis profile template only. It contains no company endpoint, tool name, source mapping, approval, or credential. Use p3-mcp-transport-config-v1 and the metadata-only onboarding template to discover candidates first. The integrated mcp-analyze workflow requires each source_version to match semantic metadata, bounded reads, and remote audit evidence. Replace values only from authorized site discovery and keep secrets in the approved runtime environment."
 }

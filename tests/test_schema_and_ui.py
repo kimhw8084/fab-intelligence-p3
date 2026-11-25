@@ -1,5 +1,8 @@
-import unittest,json
+import json
+import unittest
 from pathlib import Path
+
+
 class SourceContractTests(unittest.TestCase):
  def test_schema_files_identify_version(self):
   root=Path(__file__).resolve().parent.parent

@@ -1,0 +1,31 @@
+{
+  "schema": "p3-c04-browser-acceptance/v1",
+  "scope": "Synthetic local browser proof only; no company source or manufacturing claim.",
+  "host": "http://127.0.0.1:8799/",
+  "source_mode": "synthetic official-SDK MCP peer",
+  "request_latency_ms": 533,
+  "bounded_reads": 5,
+  "overall_evidence_status": "PARTIAL",
+  "capabilities": {
+    "C01": "VALID",
+    "C02": "VALID",
+    "C03": "VALID",
+    "C04": "INCONCLUSIVE",
+    "C05": "VALID"
+  },
+  "c04": {
+    "family_id": "SYN-C04-FAMILY-2",
+    "family_size": 2,
+    "selection_rule_id": "SYN-FIXED-TARGET-ROSTER",
+    "caller_attested_predeclared_complete": true,
+    "baseline_distinct_lots": 20,
+    "bonferroni_alpha": 0.025,
+    "minimum_empirical_p": 0.047619047619047616,
+    "decision": "ABSTAIN_BECAUSE_RANK_RESOLUTION_IS_INSUFFICIENT",
+    "ui_discloses_source_registry_is_not_audited": true,
+    "other_capabilities_remained_available": true
+  },
+  "canonical_evidence_sha256_displayed": "49895a34d476261e576ada824b5009ddabfc3f47c9abcadb81ed7e51d70051c7",
+  "internal_qualification": "PENDING",
+  "external_transfer": "NOT_QUALIFIED"
+}

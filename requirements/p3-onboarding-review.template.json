@@ -1,0 +1,24 @@
+{
+  "schema": "p3-onboarding-review/v1",
+  "proposal_sha256": "",
+  "reviewer_id": "",
+  "authority_reference": "",
+  "synthetic_simulation": false,
+  "selected_proposal_ids": [],
+  "source_decisions": [
+    {
+      "proposal_id": "",
+      "decision": "",
+      "approval_reference": ""
+    }
+  ],
+  "selected_relationship_proposal_id": "",
+  "relationship_decisions": [
+    {
+      "relationship_proposal_id": "",
+      "decision": "",
+      "approval_reference": ""
+    }
+  ],
+  "notes": "Template only. Blank review fields grant no source, relationship, query-plan or data-read permission. Obtain each reference from the authorized site review process."
+}

@@ -1,10 +1,11 @@
 """Deterministic synthetic catalog. This is NEVER a real Fab Insight MCP."""
 import random
 
+
 def synthetic_catalog(n=13000, seed=20261122):
     if not 1 <= n <= 100000:
         raise ValueError('n must be 1..100000')
-    rng=random.Random(seed)
+    rng=random.Random(seed)  # nosec B311
     areas=('MET','PHOTO','ETCH','DEP','DIFF','IMPL','CMP','WAT','SORT')
     out=[]
     for i in range(n):

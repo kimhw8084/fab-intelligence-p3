@@ -1,112 +1,181 @@
 {
-  "created_utc": "2026-11-23T05:15:30Z",
+  "created_utc": "2026-11-25T00:49:42Z",
   "file_sha256": {
     ".agents/skills/golden-manufacturing-data/SKILL.md": "8f0e46234aaa5c95a2cc88048e2f6a551fadb466eee474cc99fb4db9f0f72d3c",
     ".agents/skills/golden-mcp/SKILL.md": "becd0e2d4403b99e40ddd9fc8e0469efcc66c3b9341d8aad18b3d4474992c35c",
     ".agents/skills/golden-offline-toolchain/SKILL.md": "1cab74af2bdd18c1d42e1f75ee9679c1d73ea940c0ad610fb56d40fabff78954",
     ".agents/skills/golden-react/SKILL.md": "f1edeaf3c350833a54c0c870c2962ea0a6fdc4427d7862790abe309aa16c1f6f",
     ".agents/skills/golden-release/SKILL.md": "2ca9aee3a2c84811e142ce49f0b37ae7a04479ae8e8958121ca84f78cdf65cfd",
+    ".agents/skills/p3-spatial-onboarding/SKILL.md": "21d7b33b7520c4527cee74c8f52bd93932e7103e4549e3e77177cb7ea9b391c6",
     ".gitignore": "26ff84d8c1a32854a690b013a72402b75598e179badebf63529d144c3e4b3e6a",
     ".opencode/skills/golden-manufacturing-data/SKILL.md": "3028c9cd075335bd6fabfe17681dcfa9d9b0d97aa054e0aa86c6465f9c91de51",
     ".opencode/skills/golden-mcp/SKILL.md": "4f9fc1214060bc868722e56104e63730ef4129352d9d7ced09b22f109f8f72b0",
     ".opencode/skills/golden-offline-toolchain/SKILL.md": "7748789803f326d9e9df67f117035485737ff570b1a57c32b2fb5ab146056ca3",
     ".opencode/skills/golden-react/SKILL.md": "be88e909bd41b55712d3372cfe2c5d0a7a9212c6aa2909e70431a0cb768a8336",
     ".opencode/skills/golden-release/SKILL.md": "54e09768743cb119ad0dfa3a92b614489ce144e3c3f614fc53067b305b72e11a",
+    ".opencode/skills/p3-spatial-onboarding/SKILL.md": "21d7b33b7520c4527cee74c8f52bd93932e7103e4549e3e77177cb7ea9b391c6",
     "AGENTS.md": "b534becbfb070f822b857870498f8ec8323d8153afede0c7f0c6964e1b889578",
     "COPY_PASTE_GOAL.txt": "d0a44a2edba0b810c6b2b381ffe567f6cf00800d03213fb20abffcb30fedec77",
     "GOAL.md": "e279b4dfc02127b02ce751d892abbc278e1980851993575db2640e15bd536863",
-    "README.md": "a1948efdf2ceb20d0e27e171f0c9c5cec318017f5bfaecb6f0753c5d54b5e7ac",
+    "README.md": "035aea711899585d0a6b5a45c124fd6c5cbf4b147f579989c8e231aef6623ee3",
     "START_HERE.md": "d8ae7f01259c0f672ddd4989a81f0e434ded217d79ae86f9251aa1fb9932c10b",
-    "bootstrap_check.py": "7ef7da77461d89393565ccd40f2335a399bf48ed076a700d80e3c9cff8333809",
+    "bootstrap_check.py": "0b1b2a934d4b675b035c1c6d190296162ea0be1124a4d9878859a51ddfdf51b0",
     "contracts/SHARED_ARCHITECTURE.md": "bd88276779573435164831bcf5d2036cc3d09a3d641635b0df8f95186ec18382",
     "contracts/adapter-operations.v1.json": "546ffe9a3a04d1d039c112908b684e72de258408c18ca5d51e60787a02e2210c",
     "contracts/evidence.v1.schema.json": "9c77d5239687396ddd978b89e67bbee4aa9187c6aeb031cecc8b5d22a307a4a8",
     "contracts/product-manifest.v1.schema.json": "6c9758be247756afb0c80316b361412687c643e947418e2b598ccc148ba7d4d3",
-    "docs/ARCHITECTURE_REUSE_DECISIONS.md": "44bcfbe5bb7693486d6d39868e5a85c137279a8d2a599101385e4db2658fa36d",
-    "docs/AUTONOMOUS_IMPLEMENTATION_BACKLOG.md": "76c2152538666962a951bf56790899c71a1bcd8249a6a3d091817e89b2e4ffe4",
+    "docs/ARCHITECTURE_REUSE_DECISIONS.md": "308ab51b262eb8e646758c3e5f9b95105c06df3e00678a96e77db92bff615535",
+    "docs/AUTONOMOUS_IMPLEMENTATION_BACKLOG.md": "c2d3663426a6572b6896d17c372c5e433866dc46699ffca316750ec4ec4035a6",
     "docs/ENGINEERING_ROI_AND_USER_RESEARCH.md": "d22668ce9a5b6a927a47a3f0329ef54ecb7ce2d194980d029bb243d8803f60b9",
-    "docs/GOLDEN_REUSE_MAPPING.md": "1c5f88ad698ef502d76a97dc54b8a50e4753577e158c19c57a8a35efeee97eab",
+    "docs/GOLDEN_NOT_RUN_AUDIT.md": "4b234f191f34cda7afea1cfab3916c59a9fd682749a44b3078dba38882baee6e",
+    "docs/GOLDEN_REUSE_MAPPING.md": "68942420578b5d82bc1cd621d65c0339b490aca1204bc1aa9ac074abec50eaff",
     "docs/INTERNAL_COMPANY_FIRST_RUN.md": "f028d8628d09497a3a9e3d3b8fde4e4e523e0081c6e8bde1bfe180bbfbf9bec7",
-    "docs/MCP_ADAPTER.md": "58d587f3f3687547ef5331deff827a5a7b94554fed1ab6dfeb010b5dfc376bef",
+    "docs/MCP_ADAPTER.md": "07c0a1ee6e28d8a80acb51ed2eb31cd984eca542a5986c1d20b0cff2003a7310",
     "docs/OSS_TOURNAMENT_AND_DECISION_POLICY.md": "3c1d281232833624f02f459e1b843ecf2b04a8e05c2a2473d78394a5f33f18b5",
-    "docs/P3_IMPLEMENTATION_DECISIONS.md": "0f5f98c0a3bca9e7a3d8e5d62bfee88dadbf393a9626e3d8605a4f441525d80e",
+    "docs/P1_INTEGRATION_HANDOFF.md": "d4a31c1276b8d7fa3602abc123ff76a565f3b1e029823a6a1297ddf287726986",
+    "docs/P3_IMPLEMENTATION_DECISIONS.md": "3aeaf043a63d4570f34c5a706f85f73cfb32236e5823df913cfff01c3fd61e96",
+    "docs/P3_REFERENCE_HOST.md": "ce22c716ba2c6d985beaebbb6b9e4eac6c3036a86e2a8fa3ecf7f768965d50cc",
     "docs/PARALLEL_INTEGRATION_PROTOCOL.md": "ed9d4ae351a0c41aafa5b09e266b0c4c3bbc6a915de739fda75de6a9f5ca9164",
     "docs/PRODUCT_RISK_REGISTER.md": "9f5d4adee1db0cf530428dc179340913f51343806d2100a74230510feeb76e1a",
     "docs/PRODUCT_SPEC.md": "675b71c0b10986d714bec425440376c8b53ad3761e756420708d4dc123dd547e",
     "docs/RELEASE_EVIDENCE_CONTRACT.md": "fd7783e2117cc44f9b15db4c3857df15cd1dc52767b82d9b2a3b1a35a473c7e3",
-    "docs/SCIENCE_AND_METHODS.md": "26804102f6319d960c33daa1ed67ac0d410ea8ed72c8087af6fce47537e69a0e",
-    "docs/TEST_AND_RELEASE_MATRIX.md": "36510d83f2dc7c318cbc4055b803bcbb994b5b71f9b8d95104d6fe629269c3fc",
+    "docs/SCIENCE_AND_METHODS.md": "51cd4415a72901f212da91ae3ad130f109b37b71b8b82e9cb573a0202fb5dd39",
+    "docs/TEST_AND_RELEASE_MATRIX.md": "91511a980271bd49bf60f29c3171b377c5bd79db3cfbc7765f256531808f9fe1",
     "docs/THREAT_MODEL_AND_OFFLINE.md": "cbfb1c2e346c5d6c09a64879e5d0deb80f79aa68ae173607cba85b093cd9c30e",
-    "docs/UX_AND_USER_JOURNEY.md": "a2ee00eed53f0798efba76e6e52dd4a694b3287f22feb5b540d620e73230b059",
+    "docs/UX_AND_USER_JOURNEY.md": "6eb845bcff9f5ab25135dc0f28fe094bdf86c64fccc3583ff45ea326b51fe6dc",
     "fabintel/__init__.py": "1701050bc6b2245204dd74ba9829f6216b6d6689bf5ae78305ab0bbd1b0cf288",
-    "fabintel/__main__.py": "cf7390a2508a0fcad4777a4a629fc5212ab655cb45845975995f835676a834e3",
-    "fabintel/catalog.py": "5d1ec6b292e755cf38a77789ef308310ed42ff5ed9adc2a121c85a8150bd44b0",
-    "fabintel/cli.py": "257b7d6da51c034578cc884c869fe79f60546b1a887906fec78ff75766597241",
-    "fabintel/contracts.py": "a6cc06200d00bfefccdcdb038786e1bb21fb194eff64d0ed48213619d09c7e1a",
-    "fabintel/mcp_adapter.py": "7965359f0ef1f47a2cbfe7434e2f05a95233ca2c269e0cc4359d2f4d765aaf1d",
-    "fabintel/mcp_client.py": "113de33f0bd7aab868e8502cebedca9cb3af85c8a7e3d786fccc33114a7c05a7",
-    "fabintel/mcp_workflow.py": "f20267ae873d02f454d60d34817bcc009bb6069394e44f864d41f3b1c5a2f01e",
-    "fabintel/preflight.py": "e8e8979c4934bbca9dad6ebf17d10f4cbe198d763cbbb8e3d19c93a29041d213",
-    "fabintel/project.py": "5cf402b86d6ebf03b0e1faa1bbe8491159a18ce0947059941e342fccd3a8c00e",
+    "fabintel/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+    "fabintel/catalog.py": "a2ca8546d2de0de43092a11b273d56efcd247682228ee645c24c091561330adb",
+    "fabintel/cli.py": "b49daaec1fa764f25d252a4d849bb29cce193ab730fba6586eb66f898fc514af",
+    "fabintel/contracts.py": "1ba10dc0fc50a160d4bc6552d01a315e0e36e54f717755d20633e18146529cdc",
+    "fabintel/mcp_adapter.py": "70653b0c356cadd84b5d07d81d0f423a29b7615bf544c41de5d3b2722de536a4",
+    "fabintel/mcp_client.py": "76720611e4cdb9ef8138e4010a3cd91133b67ffdb79fcc1c212b911a02134634",
+    "fabintel/mcp_workflow.py": "a3cb0599e7d47b99ba45cc3bc2f847102ba3bb7b29b6f58e4b5902d33fef5122",
+    "fabintel/onboarding.py": "3b8112ee9bfaf8b292f27e45194267691627c8bafd6e5ad3dc42fac205cc7395",
+    "fabintel/preflight.py": "7bb81c56cb89fa7ce4ffc8e0210741c4ed92acd08a8cb2e64a731baa70888e0e",
+    "fabintel/project.py": "3fd4647f96686a916eedec15146bb9fdb16c1ab281182aa4bb5a95d76642ed60",
+    "fabintel/reference_host.py": "47b3ac80c889574bb138cdf0728631a683d80607da163e7448fc3fe73c0a308b",
+    "fabintel/spatial_observations.py": "c93ba976764ab4f13305fd728d1e2b5a384c8e75d5ddcf5e243ac27dc6548741",
+    "fabintel/synthetic_mcp.py": "6fe7ad1aa515eafb22ef761b1300dbdd698c3f274fd8eb5115185c364c707fa3",
     "fixtures/case_negative.json": "0d61aba02cf20765807481e67d91f8176e248d18c3640fdb8c142c39c7e7746f",
     "fixtures/case_positive.json": "b0b0471d2ac339109caeca8b955e61b5eaf9a466f4e45f0c33369f10fb0a47fe",
     "fixtures/independent_oracle.json": "71cd629c7ab4e55603ab0eb0484fa276b8145bbe72a4596cf9bae6ca99a40eb0",
-    "fixtures/p3_integrated_synthetic.json": "83b3010012fe4a8e3913cb8d0bec47f06c3b0f317d322943635571392750e746",
-    "golden.project.json": "04f122e8f82f5d7cc1b94853a1bdfa827744a323bf8a410e96d488c55c24211e",
-    "integration/check_product_manifests.py": "d05d7daa8fc2990926a453c44083551af11ad99cacfd1876dceb1745d9515fa4",
-    "integration/p3-suite-ui-module.v1.json": "ffb94213d705db3986229b45a4cd93479e3f44551bbbd81d726bace8b9b165ab",
+    "fixtures/p3_engineer_challenge.json": "4b18c4f9e169632e6997cffd44c3982b8e211cd3cd9b01d1d3b2c6b0cbafc879",
+    "fixtures/p3_integrated_synthetic.json": "90fb33f3b7a962429d7164b44920f1de2ab16045f79f378d0fc9e4e68c105127",
+    "golden.project.json": "46057aef6ac1de751f6870bcbcecc52aa9f55d5d5928e8ac179f94c338499e79",
+    "integration/check_product_manifests.py": "5a3e369ba5307cbfe2a6efcd80edc406cfd335fbcb9728b2eaebc268842145ce",
+    "integration/p3-suite-ui-module.v1.json": "bb4a98d13daf3e3f1a6d8e465baf87b864757b45e46f5ab7ac03c3985a787b61",
+    "package-lock.json": "fab3478bb04736094b3f3e3e84f93edfb44d667bf7b31c90273dd3b82bd64a5f",
+    "package.json": "26ff05abd79fda849c2bea170168d84d42396ef28a926610a7d22042290d661c",
     "product.json": "7c7dd16872fb19600ca3e42d03d69f2b78e6b82e53d4c11bb852399ae67dc2c5",
     "products/__init__.py": "976078ea12aa10b94020421ff38a07f835828431ee2c4c0658a325f36df1eb6e",
     "products/p3/__init__.py": "4451db1476259ee70e30fbfc26e713d13235887665d44bf15366afa160cc1a43",
-    "products/p3/engine.py": "7a9d4ffa7a0a858ccd22e51b33b8a2b644b499763916cd6b02b572f5ff4e34cd",
-    "products/p3/ui/P3Panel.test.tsx": "51b2330cf14e869ede0ce1f769b15e076287df168c3783396bdce50ea3d7a890",
-    "products/p3/ui/P3Panel.tsx": "cbf1369303c26a96bdfc27c31d15d070bfd02766e90b9265762ee855e11f309f",
+    "products/p3/contracts/spatial-map.v2.schema.json": "311a0bc39f5db481be422648618d9b05deebbacf20bdd33ea557eb5c3943f25e",
+    "products/p3/contracts/spatial-map.v2.ts": "ea838ef5e2b2390b645b966c8a79d0f46a49e36ebcedc6e0db5f50b429a93249",
+    "products/p3/engine.py": "b54aab442501b3149a3e16c992d28d834b2203db82224f8adfe97ea0aa40843b",
+    "products/p3/reference_host/index.html": "b1954e70da455853ffaad7e5bb99c482c156e8300b2f5f0807428c74a53490ce",
+    "products/p3/reference_host/module-manifest.v2.json": "1a32664ee735e9ee9d5477848505fb23cd2f8657a4ec4c04af004dd618a090c0",
+    "products/p3/reference_host/src/App.test.tsx": "e7d7866fab5a238de8c2ac939e9f820d200f4192e837a3301ef710260744bb76",
+    "products/p3/reference_host/src/App.tsx": "23d5ef6c22e4040e3a370bd7de0e28f6cd32d127eb2e858f91fccbc350bc87ff",
+    "products/p3/reference_host/src/SpatialMapRenderer.tsx": "93eba10318fd124c50547058e79a645246c82c36dfb69e184529a39a7860ee30",
+    "products/p3/reference_host/src/main.tsx": "657d0e7d288bfe800cc070a139175b1e8854cf1090cfafa2811716853cf3fca5",
+    "products/p3/reference_host/src/spatialAxisBounds.test.tsx": "46a15bef84b1298487ae831f23aa3ba58d35481e7fbfcecb19013607dc551a1d",
+    "products/p3/reference_host/src/spatialAxisBounds.ts": "c9cc857f31ffa182234404d14b26b8920a5f7b3579744093c8e8814610ac2128",
+    "products/p3/reference_host/src/style.css": "18764f75e09f6dcafe854ec1a665bbab18b3e577dc415936852f3a354c71eb24",
+    "products/p3/reference_host/static/assets/SpatialMapRenderer-ROtqW6vd.js": "d82c61a29022d87c5816366b70a8d66aa46c8fa0c9cf2e531e301761240b7f9d",
+    "products/p3/reference_host/static/assets/index-BGaC8E9o.css": "01bead40f8c46614b79ba63fea3259f7ea531b6f934628f7e76e18078e26c919",
+    "products/p3/reference_host/static/assets/index-Mgnqu2pQ.js": "5add770c10a291457090cf2a6f2755c65e98f27f25e7bb9ae39b19a43d67dce5",
+    "products/p3/reference_host/static/index.html": "345636a8d6d86bc8aeda6cf1c3fa8df4a4d0c8bb6828a6b2631f743920791c51",
+    "products/p3/ui/P3Panel.test.tsx": "1352449b8c8d52c14f703011cf350e81dd6313ce12dc231c68303e9a09631098",
+    "products/p3/ui/P3Panel.tsx": "4dd5091986c51823eba96b29c310a791694586f237955232ad9b3bbfa33a9d4f",
     "products/p3/ui/package.json": "294ececca35fb51dcd651c836c046702309b682ea11ae743a760aa988d82294e",
-    "progress/STATE.md": "ce522a4d889aeeaac5e86ba4a390acd8df0d6be17fd69e912c0ce5799c3ec3b0",
-    "proposals/CHANGE-002-p3-spatial-map-and-capability-extension.md": "69d2ca73c360459e6041b4a1e62cceabb4995e1d77083f01e4a61a91bfbac68d",
+    "proposals/CHANGE-002-p3-spatial-map-and-capability-extension.md": "4692983aa98f8ff7d213574806fede8db5f365839193ca20cc2de000123679dc",
     "qualification/BENCHMARK_AND_ROI_TEMPLATE.md": "8cd939b39afded4e3bebd85bdb677fadbcc49f1d4fa4f6ac73db397cb49f9670",
-    "qualification/critical_cases.json": "b84c09f4fcfe542fe1ba0950a5eb4113a07d7948507cb0396cd81ec6a1726c3c",
-    "qualification/external_gates.csv": "3ca17aadcb32f809213a0fd1029d3d24d155479cd5607af5dbe16bcaa421080e",
-    "qualification/generate_synthetic_workflow.py": "8d5ff8fcc33846d1a98d33383351dbb8a8dd21f7a0509b3e7934b7fd08b1f176",
-    "qualification/mcp_sdk_offline.py": "afb58e0a73dd2b828a32622846db953cf8dd4a7f673148286eadf82b6e87a29e",
-    "qualification/run_blocked_egress_check.py": "bea2fd4735054d60e68da399c3f2d9432668cc7e143d76da59e1226799daef60",
-    "qualification/run_local_qualification.py": "23e113469144258f0dbfb4a365d6adf90fa96dcc0e870d415c4765244c58e9a1",
-    "qualification/run_scientific_benchmark.py": "c42074a87cae9130ce16a6fd9eed6b3a11b32ef192754184faaaae367a150f57",
-    "qualification/supply_chain_audit.py": "e30f2086f8bef67936b9292237698e2eef0f73c4b65dc0a51358f2d2fb632e8b",
-    "qualification/tree_hash.py": "94dee33822a7e69e6a3cf30470baf5586b5320c8abc4a76a73cc1b756266cee8",
-    "qualification/verify_critical_cases.py": "c60f45c75548d819edf6bc48ce6e10c69984bab8a09dc23b8da359102ad6fd66",
-    "qualification/write_bootstrap_manifest.py": "1c7a78399c7514e36bd0e9cb0d18a2d8abea6b9a04236bf4eb9e64c975c26f9b",
-    "release/BANDIT_SOURCE_SCAN.json": "952ad2feb347f86a3d3d93236c06412885f76df919cf8afce64869c58c252583",
+    "qualification/build_synthetic_mcp_host_result.py": "5229e9f9068d02b89d178a97ef379eebac7d4378faf35ad6d37d5420d57e820c",
+    "qualification/critical_cases.json": "ab730f251c3aa6390a280422f39fbeb2bccb8c53bdeedc868a773c53c50a9df0",
+    "qualification/engineer_challenge.py": "c4ed7bc92ec37e9d88f3835d88c6512c65bdade8934b62e65fb5565cf90b14e6",
+    "qualification/external_gates.csv": "8cc39317c9f8572f321d90db3f3ad93df584e19c38722f7c8ef90302a51b3acc",
+    "qualification/fixtures/spatial_catalog_oracle.json": "5f55caf7b1df171a737e4f6895fd9ee6692051d567953a15f8cde2e2fc658486",
+    "qualification/generate_synthetic_workflow.py": "886daabfaf77dc31358ea1a99e357bd6c4ca0eeca41695312665343ba43dab86",
+    "qualification/golden-tools.lock": "9d278056c2ede948188f9b97c4762bca7ebbeda267be582fe279d2138517727f",
+    "qualification/mcp_sdk_offline.py": "00d813eedb9a93be1ff027fabb2a85a8e9d0485b6450b8f4304a2539d7ea733f",
+    "qualification/onboarding_harness.py": "dc96454ca643d7ee8dc64fc7d919fc2c9a1d5099bec929759b23ec9495f880ee",
+    "qualification/run_blocked_egress_check.py": "6d4a717e0b20f33d7a4396f4e272f11d6739c3fd39b7944a9bb4d6c9e59836f6",
+    "qualification/run_c01_density_benchmark.py": "841c220a60a09360860026f0a53ca7514acf7e50add1d9c612d453c914a50182",
+    "qualification/run_c01_sampling_artifact_challenge.py": "691ffdff83290467ca8a3b7557220459e5a7da9c58cf6073c18f7f8124faa37c",
+    "qualification/run_c02_covariance_benchmark.py": "760e29112866c17f366e5eced0d6117c6d56d5eacc3333e046e0b99647656865",
+    "qualification/run_c03_context_drift_benchmark.py": "e6d21b04fe67cf769c447c8cfa9aa861732d9751c7fee823796249f5330a4907",
+    "qualification/run_c03_nested_lot_benchmark.py": "e60f2c8bd6cf5665a5143cf53dd7f0b27af98e03794ac09f4bf06f9740e05ffe",
+    "qualification/run_c03_selection_bias_benchmark.py": "fd2ed794b2c92ee6a1fde0113610581b3254929fd19f3d3c47284fcad7e06e5c",
+    "qualification/run_c03_zone_confound_benchmark.py": "1ea19c4b48da3928f2b58ca828d35f82e53d5fa620736e16da7923ed2f7008ff",
+    "qualification/run_c04_baseline_contamination_benchmark.py": "6d7726c11a6d5d46f92ed578a1e817ac8089905205fb80681c30268c5b59a50f",
+    "qualification/run_c04_repeated_target_benchmark.py": "9bed6ec08c39eb2549c787ab9c6db7c82f6d3aad9c92a2ad24340e11559ee012",
+    "qualification/run_c05_joint_profile_benchmark.py": "6d241dbcf6d6d8723e5ce367c38e6d0adb33aed8ce8f1f142501bf12b162d107",
+    "qualification/run_c05_scale_benchmark.py": "e1573aada0cdd6bc669e163b07178061cc74286c43bd51714ba3c4312b77310c",
+    "qualification/run_local_qualification.py": "97e575a6e3c244856d24772c5bf1b7b3f9851f9163cd90451c160183ca663616",
+    "qualification/run_onboarding_bootstrap_benchmark.py": "05d9ad25badbe4e685954a4ce2c808ae8b22dcc1ec96ab4db8ea836787088a7c",
+    "qualification/run_p1_module_integration.py": "f95434521b6ea944a53b4c22e6532c9f08d5684c5c38c3780d04abd7510c41ea",
+    "qualification/run_scientific_benchmark.py": "c93e483efa22a076d385c54d5fa42b7c739d49f60334791f72c60852525a4958",
+    "qualification/run_spatial_onboarding_benchmark.py": "bc7d5a9bd3fe3ffe5bf19ae00c99704dff3e9f8e8bfa0d04e12b9426495663f0",
+    "qualification/spatial_catalog_fixture.py": "b32342481e46d7e958ca2c1a09cee8233f9666cc0adce6563f8045117424880e",
+    "qualification/supply_chain_audit.py": "b6961a47d71918b5a35f31d370a132086a1806d61b4893d10acc86cbc9d0b1b7",
+    "qualification/synthetic_mcp_peer.py": "86c9fab45d03d914e9e648a2c74cdf1935bd63a6d4360575de5559091f3d01b0",
+    "qualification/tree_hash.py": "baed169033e1eee173f5417d05c710c937324efd3439ee9a424bd5cbf31dd7fc",
+    "qualification/verify_critical_cases.py": "07a1806ea083201cacd0d45b6d8b6932f52a72b4f542bbec5b35011667c3be30",
+    "qualification/write_bootstrap_manifest.py": "d2bbe313d6170cad7d9538e3b308792a643b4651ba3fb006c3c94a29fc73e22f",
+    "release/BANDIT_SOURCE_SCAN.json": "b363042125dcdd292d26c90dd9b51be9fd9b16415334f12a48174b8cd76c8659",
+    "release/GOLDEN_PY003_RUFF_2026-11-23.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "release/GOLDEN_SEC001_BANDIT_2026-11-23.json": "5be21cfb19348796aa0c131a1b9d963fbe0c7cdb98a9e07f17ee7553cba7636d",
     "release/INTERNAL_QUALIFICATION_REPORT_TEMPLATE.json": "92435a4633ab801117985807b985badb724abf897ffaaf07f208d7a544509437",
-    "release/OFFLINE_RUNTIME_EVIDENCE.json": "633c46a351fc50c1ae096b66ad0cdb1902be73bc72150ad613dc1a1503e17018",
-    "release/P1_HOST_INTEGRATION_AUDIT.json": "e895ff6e5bb722d783f65542763a1e0259dcaea6b5007dc4f4fe9e9be5e2367e",
+    "release/OFFLINE_RUNTIME_EVIDENCE.json": "bbe8241608f25d86aa450f4e265059345186ed7f69502a6ea108ea2cf814313a",
+    "release/P1_BROWSER_WORKFLOW_EVIDENCE.json": "81ece6570a8ba758279fc1afca5bad5059d5246a2c3dcb2387cc5c12f0568816",
+    "release/P1_HOST_INTEGRATION_AUDIT.json": "5173c0f80da7ea08212e01c77376e506facc870ba37e6c4cebc228d50d868c58",
+    "release/P1_MODULE_INTEGRATION_EVIDENCE.json": "6bb7a9ba86fb1c225cb206d21e5b0c8605c75de4b61403506386135aad4c54ba",
+    "release/P1_NPM_AUDIT.json": "20bee7c0609091590ac0140c4dd2d358746db33d148fa677c58c52a9eb6f11ab",
+    "release/P3_WORKING_SOURCE_VERSION_20261124.json": "d86a160c49eec5e5a4f0c42116db26b7252f810d23752308ffda4a1db062f534",
     "release/PIP_AUDIT_OSV.json": "e334a0b2ecd58638d207f9b041900538147b6fe217d0588af8cecc5233b21bcc",
     "release/REUSE_COMPARISON_EVIDENCE.json": "578e88e5ac39273893f9020bdd6e855c94058e388a81dd33bcecbbfc6d686c8c",
-    "release/RUNBOOK_ROLLBACK_KILL_SWITCH.md": "2ee89c4ef6e564e760bc2247c0d7e7400f5518615992b06de8265cf60ead9448",
+    "release/RUNBOOK_ROLLBACK_KILL_SWITCH.md": "6a1936899d3fa6acd0ff5afbe81146194ee8e139d303e58c9d4701765fb2e9de",
     "release/TARGET_OFFLINE_QUALIFICATION_TEMPLATE.md": "fad539886b5d79bcd9c7ee45e8f5b7a521cb40727143b01877795508cc00f4b6",
-    "release/THIRD_PARTY_SECURITY_SCAN_EVIDENCE.json": "e0b7c2fa887ee86ed70147e15ecadc5935b853b74a9f4ac787f936f0320c9659",
-    "release/build_candidate.py": "68f61f4df73e71ea65c6525da5bf14bd6a510cf3d11d07da30ff2c2003461149",
+    "release/THIRD_PARTY_NOTICES.md": "36c3d7a83559dc52a7c1ad85bda09b01cf9e75094531adafc0a1e459c64af26f",
+    "release/THIRD_PARTY_SECURITY_SCAN_EVIDENCE.json": "53f9c37ab7958781da746f282d0cd9ae9c5a531f8319ea3e8adf0755cd5f985b",
+    "release/build_candidate.py": "9992b84189d26255ecbecfcbcd7be297a17c2c4281de7c15bde1c00eb70f9c9f",
+    "release/p3-candidate-20261124-closure.qualification.json": "5de190d076119b6976be27db4b9c8cd41daa8bc7ff769f7a5375bbf34e146a11",
+    "release/p3-candidate-20261124-external-closure.qualification.json": "871fe1a7642ef9b5a8eaa1ff18248c25e9b287bf486d8340a00b0f7de16a03e5",
+    "release/p3-candidate-20261124-final.qualification.json": "5dc817867e217140c80c59d1566820e62b5e732fa534a523641dcab09a83e2b3",
+    "release/p3-candidate-20261124-onboarding.qualification.json": "67c47d7ed5ab7dfa2dc3acdf5c2ac42e2f9529c137b9fd9a30882425669956ec",
+    "release/p3-candidate-20261124-spatial-comparison.qualification.json": "e785b19924624562e25f5d51320f19ef31651ef37a3e619ca84847cff8f890e7",
     "requirements/AUTHORITY_AND_GAPS.md": "825436eaa72989256c9933d997269f01ecfd8a292063c9c897561c6c2ec1e4c2",
     "requirements/company-config.template.json": "bba882abe2015fd91762fa260a833910d4cbbc9a1b7cb9d1b6a160efed231a56",
-    "requirements/mcp-adapter.template.json": "b1b222a5b9ff773ffdf0704ca4a8573e72c3bc475d440766a1cb0293a441c472",
+    "requirements/mcp-adapter.template.json": "0bb3e2e15aea117acffb340694d1936434af00f0f4e9c58a52d9497a9881e85b",
+    "requirements/mcp-onboarding-metadata.template.json": "9b8a0321b0c23e0180fcf0fc69ee03dfcf59ab58e4b9a5e2fea7d45d62fc0d26",
+    "requirements/mcp-transport.template.json": "04627307355851e5674315601a7a2bbfaf08ee3d42af6fc2f364c669dde73204",
+    "requirements/p3-onboarding-review.template.json": "fd003bd14a53bacf72feb49f637f769fb2a40809d3847a435794f86961c0903e",
     "requirements/selection_weights.json": "096b2d0a732f8cb25f521e0c6439862ccd2deeed24b9c3626a84fb375ddd712c",
     "research/SOURCES_TO_REVERIFY.md": "3d5bc2a0610cb76de19446f76e35b97e7fa1c642010b45da70dc7df18a76cabf",
     "tests/fixtures/__init__.py": "69e15656aa67c4979e9e96d9fdc703dc3f5fcc9fe934f655201e195a9bc63436",
-    "tests/fixtures/headless_api.py": "84d5a6a9245a75761efce34296b592a5e45d409b7d8e1b3f2e4d011db0cfe585",
-    "tests/fixtures/mcp_mock_server.py": "c9901fc4c076c3d1a3f33242ebd965b82ffeb95e8ee71ecb85f99f9216b6f944",
+    "tests/fixtures/headless_api.py": "6580bb52bccd16896590d886eff2dcc5e4cd0f836f5698cf6a329d3eef49a8d0",
+    "tests/fixtures/mcp_mock_server.py": "f784a81b4c15c016953069a8486ea7e9f87982b29264fe817e888e28cf644b75",
     "tests/fixtures/mock_mcp.py": "e72fe85913b9f87d138f5fe0b480b6eaff1d289b099a9600c4f823eed2d46f2e",
-    "tests/test_contracts.py": "c8a195bc0ff702b62daddf9a6b1d0c8ccb25ce3c493309741032b971de1a3783",
-    "tests/test_engine.py": "71d948207f29cf217182d736c5a64ac11e18fdddad5e4387555a87fbf5d84d2e",
-    "tests/test_mcp_adapter.py": "79172a1d361dbf2776baf10878ff0bae36745f1183c0c8835f53fdd2dd4b376e",
-    "tests/test_mcp_client.py": "927813b64c8309f17d4011074a97997f2c1ac5c83933e9004d80b0d9ec846ce9",
-    "tests/test_p3_integrated.py": "d7e441abc2df5a4a7d800ec54d6ff172660871d58b842e2324bd0ddf484f7910",
-    "tests/test_p3_seeded_oracles.py": "e70e3771c06fa1a0d02faaacdce3b00e20fef7e7bdd45752214647c74d2e3f83",
-    "tests/test_p3_web.py": "575347d1cdfe35d133fb9cf764119a891bfa769b304ccf90ae1eeab3e4bebc18",
-    "tests/test_preflight.py": "3694cebe18555a5342caada1f5f8ac29a026c0447b2bf087e1c232823c184bc5",
-    "tests/test_schema_and_ui.py": "b8c7508d3b36b0a65dd4b2bb7130ab5b331347f5b92884daac9a652ee45c7b71",
-    "tests/test_scientific_baseline.py": "29e4965aa85fe0cfbd4e694cfb8e805c149116ab407cecd051242ccd953f62d9",
-    "tests/test_supply_chain_audit.py": "8616a4bf782b079a47670babb2fcc36123a0bc7a4cc67b5ef0b414f094897e4f",
-    "tests/test_synthetic_workflow.py": "f1cdcf7599b3d7b29420cf053fce93b76e07f2def10754534c091a493b60a73a",
+    "tests/fixtures/spatial_value_contract.json": "ae1bf32587d104fe03d35f44306fd6090432ea8e9278a629fc1992bb5e7dddc4",
+    "tests/test_candidate_builder.py": "5d32a83438a67cd61ca6d03790f934c6c92f2c5e6618ac6164d7addea0497c3e",
+    "tests/test_contracts.py": "254115203d03403255a5ba64ed9c60b561c41f245d23da2dd4a4d815d50f811b",
+    "tests/test_engine.py": "c5c17c171626dae9cc480753a0fbb3ee8c2b6e28ec80c6a58830b1e060c1e0cb",
+    "tests/test_mcp_adapter.py": "497e814660a15d28a54273143655a6d8e087a357f9dc7fefcfa5545495a4320c",
+    "tests/test_mcp_client.py": "fb0b5e6cb6e530c58fea3de9345430cbf23cecb15e9f30e42a81ae568371e4f0",
+    "tests/test_onboarding.py": "a3fa29e6cb22b95a6d68c6ed5c82a940eb8d5634d624a54067c07b714544cf2b",
+    "tests/test_p3_integrated.py": "04a18e59042615118f19a451961f17b29b6faf82364eb10bedc1bf4d8e0e08f6",
+    "tests/test_p3_seeded_oracles.py": "e03756b55cca367dfd75e4a2c4d188411ef7d8711c90e2fb77f04f99baaf2c69",
+    "tests/test_p3_web.py": "ba3faf3e4103bcf4821cb8c9e3a8aa02790ae1de553562f728685d375227081b",
+    "tests/test_preflight.py": "f949b88b5fd36bf186b3dd4bbe48089fccd4b5c5208475932c2210fd8e00dfdb",
+    "tests/test_reference_host.py": "4ca87d595f84e23163f6fcedc33d83f6ef9acac366995eaf95066d250cdd2b11",
+    "tests/test_schema_and_ui.py": "0bfa607e76eb1488c5f754e40d4bedcfe20250bdd33aff210fb65a1634f53fdf",
+    "tests/test_scientific_baseline.py": "e26fcde2bc24d2f817d9bf09067f6bb4bddcb5770d340b79fdd5e7f8d513fa60",
+    "tests/test_spatial_observations.py": "1919d61facbbddf695bba425cebde539a3c932bd134f95de29644773636b8ef1",
+    "tests/test_supply_chain_audit.py": "88d6de0d3b668d12d4db1829b036f21eab33733427b100a757c33c5a993d9028",
+    "tests/test_synthetic_workflow.py": "a13627b2f75cb92b82bb539e85487595e5a66728de5745a51a28f93d17c2def0",
+    "tests/test_tree_hash.py": "ce72812e2e618f0df5d1eadd6271145384f7437737620bf9d94b2a6fe13a5f24",
+    "tsconfig.json": "432f1d3da39c100873dcb06bd570f238c89bbc8e6ecaa1e2c3fca29fe3de3838",
     "vendor/mcp-sdk-2.3.0/README.md": "13c474050cf968e5620737d54b807e923eeaac58f0c32ec54d0419c302aad178",
     "vendor/mcp-sdk-2.3.0/candidate-manifest.json": "fb480e6acada5ef4eaad00874dcf4db90495376ee45b170a0c628a1d77590cd7",
     "vendor/mcp-sdk-2.3.0/macos-arm64-cp311/cyclonedx.cdx.json": "690db79fe6e457b7decf668287b6532e253425479b72d5688de814e0fdd6ed3b",
@@ -139,12 +208,22 @@
     "vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/truststore-0.10.5-py3-none-any.whl": "9aaaedaefaf06d8b206278cf8b5012bc897f485a874503501e12d776df78951c",
     "vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/typing_extensions-4.16.0-py3-none-any.whl": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
     "vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/typing_inspection-0.4.5-py3-none-any.whl": "bc210535442b39e1bf2805e0c7a17dfd6a4ace760c84c7f7d16245d23a6b1c39",
-    "vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/uvicorn-0.54.0-py3-none-any.whl": "505bdb0f318731d45f1f712071fc781a8981f6847a31c902c9f5e652d4f67faf"
+    "vendor/mcp-sdk-2.3.0/macos-arm64-cp311/wheelhouse/uvicorn-0.54.0-py3-none-any.whl": "505bdb0f318731d45f1f712071fc781a8981f6847a31c902c9f5e652d4f67faf",
+    "vite.config.ts": "0e024592a213bc34063a10b31383046bca56339fbb328af6a1d1a2cf9d6e74b6"
   },
-  "files_in_sbom": 139,
+  "files_in_sbom": 209,
   "license_review": {
-    "bundled_optional_package_count": 28,
+    "bundled_optional_python_package_count": 28,
     "first_party_license": "NOASSERTION",
+    "installed_npm_dependency_count": 76,
+    "installed_npm_license_summary": {
+      "0BSD": 1,
+      "Apache-2.0": 4,
+      "BSD-2-Clause": 1,
+      "BSD-3-Clause": 2,
+      "ISC": 1,
+      "MIT": 67
+    },
     "license_expression_derivations": [
       {
         "basis": "verified embedded MIT license text",
@@ -168,11 +247,564 @@
         "version": "2.3.0"
       }
     ],
+    "locked_but_not_installed_target_packages": [
+      {
+        "cpu": [
+          "ppc64"
+        ],
+        "lock_path": "node_modules/@esbuild/aix-ppc64",
+        "optional": true,
+        "os": [
+          "aix"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "arm"
+        ],
+        "lock_path": "node_modules/@esbuild/android-arm",
+        "optional": true,
+        "os": [
+          "android"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "arm64"
+        ],
+        "lock_path": "node_modules/@esbuild/android-arm64",
+        "optional": true,
+        "os": [
+          "android"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "x64"
+        ],
+        "lock_path": "node_modules/@esbuild/android-x64",
+        "optional": true,
+        "os": [
+          "android"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "x64"
+        ],
+        "lock_path": "node_modules/@esbuild/darwin-x64",
+        "optional": true,
+        "os": [
+          "darwin"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "arm64"
+        ],
+        "lock_path": "node_modules/@esbuild/freebsd-arm64",
+        "optional": true,
+        "os": [
+          "freebsd"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "x64"
+        ],
+        "lock_path": "node_modules/@esbuild/freebsd-x64",
+        "optional": true,
+        "os": [
+          "freebsd"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "arm"
+        ],
+        "lock_path": "node_modules/@esbuild/linux-arm",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "arm64"
+        ],
+        "lock_path": "node_modules/@esbuild/linux-arm64",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "ia32"
+        ],
+        "lock_path": "node_modules/@esbuild/linux-ia32",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "loong64"
+        ],
+        "lock_path": "node_modules/@esbuild/linux-loong64",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "mips64el"
+        ],
+        "lock_path": "node_modules/@esbuild/linux-mips64el",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "ppc64"
+        ],
+        "lock_path": "node_modules/@esbuild/linux-ppc64",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "riscv64"
+        ],
+        "lock_path": "node_modules/@esbuild/linux-riscv64",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "s390x"
+        ],
+        "lock_path": "node_modules/@esbuild/linux-s390x",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "x64"
+        ],
+        "lock_path": "node_modules/@esbuild/linux-x64",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "arm64"
+        ],
+        "lock_path": "node_modules/@esbuild/netbsd-arm64",
+        "optional": true,
+        "os": [
+          "netbsd"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "x64"
+        ],
+        "lock_path": "node_modules/@esbuild/netbsd-x64",
+        "optional": true,
+        "os": [
+          "netbsd"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "arm64"
+        ],
+        "lock_path": "node_modules/@esbuild/openbsd-arm64",
+        "optional": true,
+        "os": [
+          "openbsd"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "x64"
+        ],
+        "lock_path": "node_modules/@esbuild/openbsd-x64",
+        "optional": true,
+        "os": [
+          "openbsd"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "arm64"
+        ],
+        "lock_path": "node_modules/@esbuild/openharmony-arm64",
+        "optional": true,
+        "os": [
+          "openharmony"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "x64"
+        ],
+        "lock_path": "node_modules/@esbuild/sunos-x64",
+        "optional": true,
+        "os": [
+          "sunos"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "arm64"
+        ],
+        "lock_path": "node_modules/@esbuild/win32-arm64",
+        "optional": true,
+        "os": [
+          "win32"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "ia32"
+        ],
+        "lock_path": "node_modules/@esbuild/win32-ia32",
+        "optional": true,
+        "os": [
+          "win32"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "x64"
+        ],
+        "lock_path": "node_modules/@esbuild/win32-x64",
+        "optional": true,
+        "os": [
+          "win32"
+        ],
+        "version": "0.28.2"
+      },
+      {
+        "cpu": [
+          "arm"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-android-arm-eabi",
+        "optional": true,
+        "os": [
+          "android"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "arm64"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-android-arm64",
+        "optional": true,
+        "os": [
+          "android"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "x64"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-android-x64",
+        "optional": true,
+        "os": [
+          "android"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "x64"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-darwin-x64",
+        "optional": true,
+        "os": [
+          "darwin"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "arm64"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-freebsd-arm64",
+        "optional": true,
+        "os": [
+          "freebsd"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "x64"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-freebsd-x64",
+        "optional": true,
+        "os": [
+          "freebsd"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "arm"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-linux-arm-gnueabihf",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "arm"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-linux-arm-musleabihf",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "arm64"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-linux-arm64-gnu",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "arm64"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-linux-arm64-musl",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "loong64"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-linux-loong64-gnu",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "loong64"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-linux-loong64-musl",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "ppc64"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-linux-ppc64-gnu",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "ppc64"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-linux-ppc64-musl",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "riscv64"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-linux-riscv64-gnu",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "riscv64"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-linux-riscv64-musl",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "s390x"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-linux-s390x-gnu",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "x64"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-linux-x64-gnu",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "x64"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-linux-x64-musl",
+        "optional": true,
+        "os": [
+          "linux"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "x64"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-openbsd-x64",
+        "optional": true,
+        "os": [
+          "openbsd"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "arm64"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-openharmony-arm64",
+        "optional": true,
+        "os": [
+          "openharmony"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "arm64"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-win32-arm64-msvc",
+        "optional": true,
+        "os": [
+          "win32"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "ia32"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-win32-ia32-msvc",
+        "optional": true,
+        "os": [
+          "win32"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "x64"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-win32-x64-gnu",
+        "optional": true,
+        "os": [
+          "win32"
+        ],
+        "version": "4.68.8"
+      },
+      {
+        "cpu": [
+          "x64"
+        ],
+        "lock_path": "node_modules/@rollup/rollup-win32-x64-msvc",
+        "optional": true,
+        "os": [
+          "win32"
+        ],
+        "version": "4.68.8"
+      }
+    ],
     "root_license_files": [],
     "status": "PENDING_RIGHTS_REVIEW",
     "third_party_runtime_dependencies": [
       "mcp==2.3.0 optional candidate; hash-locked wheel closure"
     ],
+    "unresolved_npm_package_licenses": [],
     "unresolved_package_licenses": [],
     "verified_bundled_wheels": 28,
     "verified_embedded_license_files": 28
@@ -180,13 +812,19 @@
   "limitations": [
     "The target Python distribution and operating-system libraries are not bundled or pinned here.",
     "No root source license was supplied; SPDX uses NOASSERTION and does not grant redistribution rights.",
-    "No local Syft/Grype vulnerability database was available; this is not a vulnerability scan."
+    "Point-in-time pip-audit and npm audit results do not replace an independent target-host security review.",
+    "Syft and Grype binaries were not available locally."
   ],
-  "package_components_in_sbom": 28,
+  "npm_package_components_in_sbom": 76,
+  "package_components_in_sbom": 104,
+  "python_package_components_in_sbom": 28,
   "runtime": {
     "base_dependencies": "Python standard library",
-    "bundled_ui_assets": false,
+    "bundled_ui_assets": true,
+    "bundled_ui_entrypoint": "products/p3/reference_host/static/index.html",
     "minimum_python": "3.10",
+    "npm_installed_target_packages": 76,
+    "npm_lockfile": "package-lock.json",
     "optional_mcp_dependency": {
       "activated_by": "mcp-discover",
       "bundled_hash_locked_wheelhouse": true,
@@ -196,6 +834,9 @@
       "wheel_count": 28
     },
     "remote_asset_findings": {
+      "external_font_or_image_references": [],
+      "external_runtime_api_references": [],
+      "external_script_or_style_references": [],
       "remote_font_or_image_reference": false,
       "remote_runtime_api_reference": false,
       "remote_script_or_style_reference": false
@@ -205,14 +846,27 @@
       "mcp",
       "mcp_types"
     ],
-    "ui_runtime": "React peer supplied by the P1 suite host; no UI shell or chart engine is bundled"
+    "ui_runtime": "React 19 production bundle and Apache ECharts 6.1.0 assets bundled locally for the standalone reference host"
   },
   "scan_scope": "local source tree only; no network access",
   "state": "CANDIDATE",
   "vulnerability_review": {
     "grype_available": false,
-    "status": "PENDING_SCANNER_AND_CURRENT_DATABASE",
+    "npm_audit_report": "release/NPM_AUDIT_PRODUCTION_2026-11-23.json",
+    "npm_audit_status": "NO_ADVISORIES_REPORTED",
+    "npm_production_vulnerabilities": {
+      "critical": 0,
+      "high": 0,
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "total": 0
+    },
+    "pip_audit_executed_at_utc": "2026-11-23T18:36:01Z",
+    "pip_audit_report": "release/PIP_AUDIT_RUN_2026-11-23.json",
+    "pip_vulnerability_count": 0,
+    "status": "PENDING_INDEPENDENT_TARGET_HOST_REVIEW",
     "syft_available": false,
-    "vulnerability_database": "not available locally"
+    "vulnerability_database": "OSV queried online; scanner report is point-in-time"
   }
 }

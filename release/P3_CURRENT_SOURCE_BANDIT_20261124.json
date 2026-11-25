@@ -1,0 +1,267 @@
+{
+  "candidate_archive": "release/p3-candidate-20261124-external-closure.zip",
+  "candidate_source_tree_sha256": "011e11c65d59cf745f983d9b4147efe80f9c81a1909eff9667c755b340613a44",
+  "company_security_approval": "PENDING_INTERNAL",
+  "dependency_advisory_evidence": [
+    "release/NPM_AUDIT_CURRENT_2026-11-24.json",
+    "release/P3_CURRENT_OSV_AUDIT_20261124.json"
+  ],
+  "python": "3.11.7",
+  "review_date": "2026-11-24",
+  "runtime_scan": {
+    "command": "bandit -r fabintel products/p3/engine.py -f json --severity-level low --confidence-level low",
+    "exit_code": 0,
+    "finding_count": 0,
+    "metrics": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 4849,
+      "nosec": 0,
+      "skipped_tests": 2
+    },
+    "scanned_file_sha256": {
+      "fabintel/__init__.py": "1701050bc6b2245204dd74ba9829f6216b6d6689bf5ae78305ab0bbd1b0cf288",
+      "fabintel/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+      "fabintel/catalog.py": "a2ca8546d2de0de43092a11b273d56efcd247682228ee645c24c091561330adb",
+      "fabintel/cli.py": "b49daaec1fa764f25d252a4d849bb29cce193ab730fba6586eb66f898fc514af",
+      "fabintel/contracts.py": "1ba10dc0fc50a160d4bc6552d01a315e0e36e54f717755d20633e18146529cdc",
+      "fabintel/mcp_adapter.py": "70653b0c356cadd84b5d07d81d0f423a29b7615bf544c41de5d3b2722de536a4",
+      "fabintel/mcp_client.py": "76720611e4cdb9ef8138e4010a3cd91133b67ffdb79fcc1c212b911a02134634",
+      "fabintel/mcp_workflow.py": "a3cb0599e7d47b99ba45cc3bc2f847102ba3bb7b29b6f58e4b5902d33fef5122",
+      "fabintel/onboarding.py": "3b8112ee9bfaf8b292f27e45194267691627c8bafd6e5ad3dc42fac205cc7395",
+      "fabintel/preflight.py": "7bb81c56cb89fa7ce4ffc8e0210741c4ed92acd08a8cb2e64a731baa70888e0e",
+      "fabintel/project.py": "3fd4647f96686a916eedec15146bb9fdb16c1ab281182aa4bb5a95d76642ed60",
+      "fabintel/reference_host.py": "47b3ac80c889574bb138cdf0728631a683d80607da163e7448fc3fe73c0a308b",
+      "fabintel/spatial_observations.py": "c93ba976764ab4f13305fd728d1e2b5a384c8e75d5ddcf5e243ac27dc6548741",
+      "fabintel/synthetic_mcp.py": "6fe7ad1aa515eafb22ef761b1300dbdd698c3f274fd8eb5115185c364c707fa3",
+      "products/p3/engine.py": "b54aab442501b3149a3e16c992d28d834b2203db82224f8adfe97ea0aa40843b"
+    },
+    "scope": "All product runtime modules and C01-C05 engine."
+  },
+  "scanner": "Bandit 1.9.4",
+  "schema": "p3-current-source-security-scan/v2",
+  "supplemental_first_party_scan": {
+    "command": "bandit -r fabintel products/p3 qualification release tests -f json --severity-level low --confidence-level low",
+    "exit_code": 0,
+    "finding_summary": {
+      "B311": 14,
+      "B603": 2
+    },
+    "loc": 12758,
+    "low_findings": [
+      {
+        "filename": "qualification/engineer_challenge.py",
+        "issue_confidence": "HIGH",
+        "issue_severity": "LOW",
+        "issue_text": "Standard pseudo-random generators are not suitable for security/cryptographic purposes.",
+        "line_number": 77,
+        "test_id": "B311"
+      },
+      {
+        "filename": "qualification/engineer_challenge.py",
+        "issue_confidence": "HIGH",
+        "issue_severity": "LOW",
+        "issue_text": "Standard pseudo-random generators are not suitable for security/cryptographic purposes.",
+        "line_number": 128,
+        "test_id": "B311"
+      },
+      {
+        "filename": "qualification/engineer_challenge.py",
+        "issue_confidence": "HIGH",
+        "issue_severity": "LOW",
+        "issue_text": "Standard pseudo-random generators are not suitable for security/cryptographic purposes.",
+        "line_number": 236,
+        "test_id": "B311"
+      },
+      {
+        "filename": "qualification/engineer_challenge.py",
+        "issue_confidence": "HIGH",
+        "issue_severity": "LOW",
+        "issue_text": "Standard pseudo-random generators are not suitable for security/cryptographic purposes.",
+        "line_number": 252,
+        "test_id": "B311"
+      },
+      {
+        "filename": "qualification/run_c02_covariance_benchmark.py",
+        "issue_confidence": "HIGH",
+        "issue_severity": "LOW",
+        "issue_text": "Standard pseudo-random generators are not suitable for security/cryptographic purposes.",
+        "line_number": 54,
+        "test_id": "B311"
+      },
+      {
+        "filename": "qualification/run_c03_context_drift_benchmark.py",
+        "issue_confidence": "HIGH",
+        "issue_severity": "LOW",
+        "issue_text": "Standard pseudo-random generators are not suitable for security/cryptographic purposes.",
+        "line_number": 52,
+        "test_id": "B311"
+      },
+      {
+        "filename": "qualification/run_c03_nested_lot_benchmark.py",
+        "issue_confidence": "HIGH",
+        "issue_severity": "LOW",
+        "issue_text": "Standard pseudo-random generators are not suitable for security/cryptographic purposes.",
+        "line_number": 118,
+        "test_id": "B311"
+      },
+      {
+        "filename": "qualification/run_c03_selection_bias_benchmark.py",
+        "issue_confidence": "HIGH",
+        "issue_severity": "LOW",
+        "issue_text": "Standard pseudo-random generators are not suitable for security/cryptographic purposes.",
+        "line_number": 60,
+        "test_id": "B311"
+      },
+      {
+        "filename": "qualification/run_c03_zone_confound_benchmark.py",
+        "issue_confidence": "HIGH",
+        "issue_severity": "LOW",
+        "issue_text": "Standard pseudo-random generators are not suitable for security/cryptographic purposes.",
+        "line_number": 50,
+        "test_id": "B311"
+      },
+      {
+        "filename": "qualification/run_c04_repeated_target_benchmark.py",
+        "issue_confidence": "HIGH",
+        "issue_severity": "LOW",
+        "issue_text": "Standard pseudo-random generators are not suitable for security/cryptographic purposes.",
+        "line_number": 23,
+        "test_id": "B311"
+      },
+      {
+        "filename": "qualification/run_c05_joint_profile_benchmark.py",
+        "issue_confidence": "HIGH",
+        "issue_severity": "LOW",
+        "issue_text": "Standard pseudo-random generators are not suitable for security/cryptographic purposes.",
+        "line_number": 72,
+        "test_id": "B311"
+      },
+      {
+        "filename": "qualification/run_c05_scale_benchmark.py",
+        "issue_confidence": "HIGH",
+        "issue_severity": "LOW",
+        "issue_text": "Standard pseudo-random generators are not suitable for security/cryptographic purposes.",
+        "line_number": 62,
+        "test_id": "B311"
+      },
+      {
+        "filename": "qualification/run_c05_scale_benchmark.py",
+        "issue_confidence": "HIGH",
+        "issue_severity": "LOW",
+        "issue_text": "Standard pseudo-random generators are not suitable for security/cryptographic purposes.",
+        "line_number": 90,
+        "test_id": "B311"
+      },
+      {
+        "filename": "qualification/run_c05_scale_benchmark.py",
+        "issue_confidence": "HIGH",
+        "issue_severity": "LOW",
+        "issue_text": "Standard pseudo-random generators are not suitable for security/cryptographic purposes.",
+        "line_number": 146,
+        "test_id": "B311"
+      },
+      {
+        "filename": "release/build_candidate.py",
+        "issue_confidence": "HIGH",
+        "issue_severity": "LOW",
+        "issue_text": "subprocess call - check for execution of untrusted input.",
+        "line_number": 111,
+        "test_id": "B603"
+      },
+      {
+        "filename": "tests/test_onboarding.py",
+        "issue_confidence": "HIGH",
+        "issue_severity": "LOW",
+        "issue_text": "subprocess call - check for execution of untrusted input.",
+        "line_number": 51,
+        "test_id": "B603"
+      }
+    ],
+    "review_disposition": {
+      "B311": "14 findings are in seeded synthetic benchmark or fixture generators; random.Random is used only for reproducible synthetic measurements and never for secrets, tokens, or security decisions.",
+      "B603": "Two direct argv subprocess calls use sys.executable and fixed CLI arguments in archive qualification and a local test. No shell is invoked; archive paths are validated and test paths are temporary. Manual review found no untrusted command construction.",
+      "material_externally_actionable_findings": 0
+    },
+    "scanned_file_sha256": {
+      "fabintel/__init__.py": "1701050bc6b2245204dd74ba9829f6216b6d6689bf5ae78305ab0bbd1b0cf288",
+      "fabintel/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+      "fabintel/catalog.py": "a2ca8546d2de0de43092a11b273d56efcd247682228ee645c24c091561330adb",
+      "fabintel/cli.py": "b49daaec1fa764f25d252a4d849bb29cce193ab730fba6586eb66f898fc514af",
+      "fabintel/contracts.py": "1ba10dc0fc50a160d4bc6552d01a315e0e36e54f717755d20633e18146529cdc",
+      "fabintel/mcp_adapter.py": "70653b0c356cadd84b5d07d81d0f423a29b7615bf544c41de5d3b2722de536a4",
+      "fabintel/mcp_client.py": "76720611e4cdb9ef8138e4010a3cd91133b67ffdb79fcc1c212b911a02134634",
+      "fabintel/mcp_workflow.py": "a3cb0599e7d47b99ba45cc3bc2f847102ba3bb7b29b6f58e4b5902d33fef5122",
+      "fabintel/onboarding.py": "3b8112ee9bfaf8b292f27e45194267691627c8bafd6e5ad3dc42fac205cc7395",
+      "fabintel/preflight.py": "7bb81c56cb89fa7ce4ffc8e0210741c4ed92acd08a8cb2e64a731baa70888e0e",
+      "fabintel/project.py": "3fd4647f96686a916eedec15146bb9fdb16c1ab281182aa4bb5a95d76642ed60",
+      "fabintel/reference_host.py": "47b3ac80c889574bb138cdf0728631a683d80607da163e7448fc3fe73c0a308b",
+      "fabintel/spatial_observations.py": "c93ba976764ab4f13305fd728d1e2b5a384c8e75d5ddcf5e243ac27dc6548741",
+      "fabintel/synthetic_mcp.py": "6fe7ad1aa515eafb22ef761b1300dbdd698c3f274fd8eb5115185c364c707fa3",
+      "products/p3/__init__.py": "4451db1476259ee70e30fbfc26e713d13235887665d44bf15366afa160cc1a43",
+      "products/p3/engine.py": "b54aab442501b3149a3e16c992d28d834b2203db82224f8adfe97ea0aa40843b",
+      "qualification/build_synthetic_mcp_host_result.py": "5229e9f9068d02b89d178a97ef379eebac7d4378faf35ad6d37d5420d57e820c",
+      "qualification/engineer_challenge.py": "c4ed7bc92ec37e9d88f3835d88c6512c65bdade8934b62e65fb5565cf90b14e6",
+      "qualification/generate_synthetic_workflow.py": "886daabfaf77dc31358ea1a99e357bd6c4ca0eeca41695312665343ba43dab86",
+      "qualification/mcp_sdk_offline.py": "00d813eedb9a93be1ff027fabb2a85a8e9d0485b6450b8f4304a2539d7ea733f",
+      "qualification/onboarding_harness.py": "dc96454ca643d7ee8dc64fc7d919fc2c9a1d5099bec929759b23ec9495f880ee",
+      "qualification/run_blocked_egress_check.py": "6d4a717e0b20f33d7a4396f4e272f11d6739c3fd39b7944a9bb4d6c9e59836f6",
+      "qualification/run_c01_density_benchmark.py": "841c220a60a09360860026f0a53ca7514acf7e50add1d9c612d453c914a50182",
+      "qualification/run_c01_sampling_artifact_challenge.py": "691ffdff83290467ca8a3b7557220459e5a7da9c58cf6073c18f7f8124faa37c",
+      "qualification/run_c02_covariance_benchmark.py": "760e29112866c17f366e5eced0d6117c6d56d5eacc3333e046e0b99647656865",
+      "qualification/run_c03_context_drift_benchmark.py": "e6d21b04fe67cf769c447c8cfa9aa861732d9751c7fee823796249f5330a4907",
+      "qualification/run_c03_nested_lot_benchmark.py": "e60f2c8bd6cf5665a5143cf53dd7f0b27af98e03794ac09f4bf06f9740e05ffe",
+      "qualification/run_c03_selection_bias_benchmark.py": "fd2ed794b2c92ee6a1fde0113610581b3254929fd19f3d3c47284fcad7e06e5c",
+      "qualification/run_c03_zone_confound_benchmark.py": "1ea19c4b48da3928f2b58ca828d35f82e53d5fa620736e16da7923ed2f7008ff",
+      "qualification/run_c04_baseline_contamination_benchmark.py": "6d7726c11a6d5d46f92ed578a1e817ac8089905205fb80681c30268c5b59a50f",
+      "qualification/run_c04_repeated_target_benchmark.py": "9bed6ec08c39eb2549c787ab9c6db7c82f6d3aad9c92a2ad24340e11559ee012",
+      "qualification/run_c05_joint_profile_benchmark.py": "6d241dbcf6d6d8723e5ce367c38e6d0adb33aed8ce8f1f142501bf12b162d107",
+      "qualification/run_c05_scale_benchmark.py": "e1573aada0cdd6bc669e163b07178061cc74286c43bd51714ba3c4312b77310c",
+      "qualification/run_local_qualification.py": "97e575a6e3c244856d24772c5bf1b7b3f9851f9163cd90451c160183ca663616",
+      "qualification/run_onboarding_bootstrap_benchmark.py": "05d9ad25badbe4e685954a4ce2c808ae8b22dcc1ec96ab4db8ea836787088a7c",
+      "qualification/run_p1_module_integration.py": "f95434521b6ea944a53b4c22e6532c9f08d5684c5c38c3780d04abd7510c41ea",
+      "qualification/run_scientific_benchmark.py": "c93e483efa22a076d385c54d5fa42b7c739d49f60334791f72c60852525a4958",
+      "qualification/run_spatial_onboarding_benchmark.py": "bc7d5a9bd3fe3ffe5bf19ae00c99704dff3e9f8e8bfa0d04e12b9426495663f0",
+      "qualification/spatial_catalog_fixture.py": "b32342481e46d7e958ca2c1a09cee8233f9666cc0adce6563f8045117424880e",
+      "qualification/supply_chain_audit.py": "b6961a47d71918b5a35f31d370a132086a1806d61b4893d10acc86cbc9d0b1b7",
+      "qualification/synthetic_mcp_peer.py": "86c9fab45d03d914e9e648a2c74cdf1935bd63a6d4360575de5559091f3d01b0",
+      "qualification/tree_hash.py": "baed169033e1eee173f5417d05c710c937324efd3439ee9a424bd5cbf31dd7fc",
+      "qualification/verify_critical_cases.py": "07a1806ea083201cacd0d45b6d8b6932f52a72b4f542bbec5b35011667c3be30",
+      "qualification/write_bootstrap_manifest.py": "d2bbe313d6170cad7d9538e3b308792a643b4651ba3fb006c3c94a29fc73e22f",
+      "release/build_candidate.py": "9992b84189d26255ecbecfcbcd7be297a17c2c4281de7c15bde1c00eb70f9c9f",
+      "tests/fixtures/__init__.py": "69e15656aa67c4979e9e96d9fdc703dc3f5fcc9fe934f655201e195a9bc63436",
+      "tests/fixtures/headless_api.py": "6580bb52bccd16896590d886eff2dcc5e4cd0f836f5698cf6a329d3eef49a8d0",
+      "tests/fixtures/mcp_mock_server.py": "f784a81b4c15c016953069a8486ea7e9f87982b29264fe817e888e28cf644b75",
+      "tests/fixtures/mock_mcp.py": "e72fe85913b9f87d138f5fe0b480b6eaff1d289b099a9600c4f823eed2d46f2e",
+      "tests/test_candidate_builder.py": "5d32a83438a67cd61ca6d03790f934c6c92f2c5e6618ac6164d7addea0497c3e",
+      "tests/test_contracts.py": "254115203d03403255a5ba64ed9c60b561c41f245d23da2dd4a4d815d50f811b",
+      "tests/test_engine.py": "c5c17c171626dae9cc480753a0fbb3ee8c2b6e28ec80c6a58830b1e060c1e0cb",
+      "tests/test_mcp_adapter.py": "497e814660a15d28a54273143655a6d8e087a357f9dc7fefcfa5545495a4320c",
+      "tests/test_mcp_client.py": "fb0b5e6cb6e530c58fea3de9345430cbf23cecb15e9f30e42a81ae568371e4f0",
+      "tests/test_onboarding.py": "a3fa29e6cb22b95a6d68c6ed5c82a940eb8d5634d624a54067c07b714544cf2b",
+      "tests/test_p3_integrated.py": "04a18e59042615118f19a451961f17b29b6faf82364eb10bedc1bf4d8e0e08f6",
+      "tests/test_p3_seeded_oracles.py": "e03756b55cca367dfd75e4a2c4d188411ef7d8711c90e2fb77f04f99baaf2c69",
+      "tests/test_p3_web.py": "ba3faf3e4103bcf4821cb8c9e3a8aa02790ae1de553562f728685d375227081b",
+      "tests/test_preflight.py": "f949b88b5fd36bf186b3dd4bbe48089fccd4b5c5208475932c2210fd8e00dfdb",
+      "tests/test_reference_host.py": "4ca87d595f84e23163f6fcedc33d83f6ef9acac366995eaf95066d250cdd2b11",
+      "tests/test_schema_and_ui.py": "0bfa607e76eb1488c5f754e40d4bedcfe20250bdd33aff210fb65a1634f53fdf",
+      "tests/test_scientific_baseline.py": "e26fcde2bc24d2f817d9bf09067f6bb4bddcb5770d340b79fdd5e7f8d513fa60",
+      "tests/test_spatial_observations.py": "1919d61facbbddf695bba425cebde539a3c932bd134f95de29644773636b8ef1",
+      "tests/test_supply_chain_audit.py": "88d6de0d3b668d12d4db1829b036f21eab33733427b100a757c33c5a993d9028",
+      "tests/test_synthetic_workflow.py": "a13627b2f75cb92b82bb539e85487595e5a66728de5745a51a28f93d17c2def0",
+      "tests/test_tree_hash.py": "ce72812e2e618f0df5d1eadd6271145384f7437737620bf9d94b2a6fe13a5f24"
+    },
+    "scanned_python_files": 66,
+    "severity_summary": {
+      "HIGH": 0,
+      "LOW": 16,
+      "MEDIUM": 0
+    }
+  }
+}

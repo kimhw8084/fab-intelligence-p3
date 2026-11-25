@@ -1,0 +1,41 @@
+{
+  "schema": "p3-spatial-onboarding-browser-acceptance/v1",
+  "date": "2026-11-24",
+  "host": "P3 existing loopback reference host",
+  "source_mode": "configured read-only MCP",
+  "configuration": "/tmp/p3-reviewed-synthetic.json",
+  "configuration_review": "synthetic simulated mapping and relationship review only",
+  "synthetic_peer": "official SDK stdio peer, onboarding-catalog scenario",
+  "browser_run_ms": 516,
+  "evidence_status": "VALID",
+  "capabilities_visible": {
+    "C01": "VALID",
+    "C02": "VALID",
+    "C03": "VALID",
+    "C04": "VALID",
+    "C05": "VALID"
+  },
+  "workflow_observations": {
+    "wafer": "SYN-W-CURRENT",
+    "measurement": "film_thickness / nm / continuous",
+    "observed_sites": 5,
+    "accessible_observation_rows": 5,
+    "missing_measurements": 0,
+    "interpolation": "none",
+    "bounded_reads": 5,
+    "permission_scope": "read_only",
+    "semantic_version": "MOCK-SEM-1",
+    "source_snapshot": "MOCK-SNAPSHOT-MAP",
+    "C01": "mean observed edge-minus-center +2.00 nm; no local group met the descriptive screening rule",
+    "C02": "5 exact common sites; mean observed delta +1 nm; repeatability covariance not supplied",
+    "C03": "mean within-wafer r=1.000 with wafer-level interval; UI states observational, not causal",
+    "C05": "closest eligible synthetic analog SYN-W-HIST at multiscale distance 0.000; no reconstruction"
+  },
+  "evidence_export": {
+    "control_clicked": "Export reproducible evidence",
+    "ui_feedback": "Evidence export saved",
+    "canonical_sha256": "d029f841bb935039f7cb6b55b3e34b6804f035f742039b1ca0eb0e42dcd8acc7",
+    "note": "Browser UI confirmed the downloadable canonical export and hash; the browser download file itself was not separately re-opened or re-hashed."
+  },
+  "company_qualification": "PENDING_INTERNAL"
+}
